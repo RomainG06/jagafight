@@ -1,0 +1,44 @@
+[
+  {
+    "id": "collectifs-debutants",
+    "titre": "Cours collectifs débutants",
+    "description": "Découvrez les bases du Muay Thaï dans un cadre bienveillant. Technique, condition physique, respect — l'essentiel pour bien démarrer.",
+    "niveau": "Débutant",
+    "public": "Tout public"
+  },
+  {
+    "id": "collectifs-avances",
+    "titre": "Cours collectifs avancés / compétition",
+    "description": "Poussez vos limites avec un entraînement intensif orienté performance et compétition. Pour ceux qui veulent franchir un cap.",
+    "niveau": "Avancé",
+    "public": "Ados & adultes"
+  },
+  {
+    "id": "cours-particuliers",
+    "titre": "Cours particuliers",
+    "description": "Un suivi individualisé et personnalisé avec Hicham. Progression rapide, objectifs sur-mesure, disponibilité et écoute totale.",
+    "niveau": "Tous niveaux",
+    "public": "Tout public"
+  },
+  {
+    "id": "stages-intensifs",
+    "titre": "Stages intensifs",
+    "description": "Des immersions courtes et intenses pour décupler vos capacités. Idéal pour les compétiteurs ou les ambitieux qui veulent progresser vite.",
+    "niveau": "Intermédiaire / Avancé",
+    "public": "Ados & adultes"
+  },
+  {
+    "id": "preparation-physique",
+    "titre": "Coaching préparation physique",
+    "description": "Force, endurance, explosivité. Un programme physique complet inspiré des méthodes des combattants professionnels.",
+    "niveau": "Tous niveaux",
+    "public": "Tout public"
+  },
+  {
+    "id": "formation-diplomante",
+    "titre": "Accompagnement vers formation diplômante",
+    "description": "Devenez entraîneur ou éducateur sportif avec un accompagnement de A à Z : CQP, BPJEPS, DEJEPS. Hicham vous guide tout au long du parcours.",
+    "niveau": "Projet professionnel",
+    "public": "Jeunes & adultes en insertion"
+  }
+]

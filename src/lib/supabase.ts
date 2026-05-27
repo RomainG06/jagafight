@@ -7,7 +7,7 @@ if (!supabaseUrl || !supabaseAnonKey) {
   console.warn('Variables Supabase manquantes dans .env.local')
 }
 
-export const supabase = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null
+export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 export type Preinscription = {
   id?: string

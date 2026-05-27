@@ -25,6 +25,7 @@ export default function HeroSection() {
                 <h1 className="font-title text-6xl sm:text-8xl lg:text-[10rem] leading-none text-[#F5F5F0] mb-6">
                     JAGA<br />
                     <span className="text-[#8B0020]">FIGHT</span>
+
                 </h1>
 
                 {/* Sous-titre */}

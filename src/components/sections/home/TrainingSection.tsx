@@ -44,7 +44,7 @@ export default function TrainingSection() {
                             <div key={item.title} className="flex gap-4">
                                 <div className="w-1 bg-[#8B0020] flex-shrink-0 rounded-full mt-1" />
                                 <div>
-                                    <h3 className="font-semibold text-[#F5F5F0] mb-1">{item.title}</h3>
+                                    <h3 className="text-[#F5F5F0] mb-1">{item.title}</h3>
                                     <p className="text-sm text-[#F5F5F0]/60 leading-relaxed">{item.desc}</p>
                                 </div>
                             </div>

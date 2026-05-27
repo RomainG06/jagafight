@@ -1,5 +1,5 @@
 const sportStats = [
-    { value: '32 ans', label: 'de pratique' },
+    { value: '+20 ans', label: 'de pratique' },
     { value: '18 ans', label: 'intensifs' },
     { value: '40', label: 'combats amateurs' },
     { value: '27', label: 'combats professionnels' },

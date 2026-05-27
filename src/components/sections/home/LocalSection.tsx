@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom'
 
 const partners = [
-  'Ville de Cagnes-sur-Mer',
-  'AFMT',
-  'FFBDA',
-  'Ministère des Sports',
-  'CGR Cinémas',
+  { name: 'Ville de Cagnes-sur-Mer', url: 'https://ville.cagnes.fr/' },
+  { name: 'AFMT', url: 'https://www.afmt.fr/' },
+  { name: 'FFKMDA', url: 'https://www.ffkmda.com/' },
+  { name: 'Ministère des Sports', url: 'https://www.sports.gouv.fr/' },
 ]
 
 export default function LocalSection() {
@@ -29,12 +28,15 @@ export default function LocalSection() {
         {/* Partenaires */}
         <div className="flex flex-wrap justify-center gap-4 mb-16">
           {partners.map((p) => (
-            <span
-              key={p}
+            <a
+              key={p.name}
+              href={p.url}
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-5 py-2.5 border border-white/10 text-[#F5F5F0]/60 text-sm font-medium tracking-wide hover:border-[#8B0020]/50 hover:text-[#F5F5F0] transition-colors"
             >
-              {p}
-            </span>
+              {p.name}
+            </a>
           ))}
         </div>
 

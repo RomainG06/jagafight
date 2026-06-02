@@ -1,3 +1,5 @@
+import coachImg from '../../../assets/coach.jpg'
+
 const sportStats = [
     { value: '+20 ans', label: 'de pratique' },
     { value: '18 ans', label: 'intensifs' },
@@ -24,13 +26,14 @@ export default function CoachHero() {
         <section className="py-24 bg-[#0d0d0d]">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-                    {/* Photo placeholder */}
+                    {/* Photo du coach */}
                     <div className="relative">
-                        <div className="aspect-[3/4] bg-white/5 border border-white/10 flex items-center justify-center">
-                            <div className="text-center text-[#F5F5F0]/20 px-8">
-                                <div className="font-title text-8xl mb-4">HK</div>
-                                <p className="text-sm tracking-widest uppercase">Photo de Hicham<br />à venir</p>
-                            </div>
+                        <div className="aspect-[3/4] overflow-hidden border border-white/10">
+                            <img
+                                src={coachImg}
+                                alt="Hicham Kilic — coach Jaga Fight"
+                                className="w-full h-full object-cover object-top"
+                            />
                         </div>
                         <div className="absolute -bottom-3 -right-3 w-full h-full border border-[#8B0020]/20 -z-10" />
                     </div>

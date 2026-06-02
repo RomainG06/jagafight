@@ -1,45 +1,52 @@
 const activities = [
     {
+        number: '01',
         title: 'Cours de Muay Thaï',
-        public: 'Enfants, ados, adultes',
+        public: 'Enfants · Ados · Adultes',
         objective: 'Apprentissage, discipline, confiance en soi',
-        color: 'border-[#8B0020]',
+        tag: 'Pratique principale',
     },
     {
+        number: '02',
         title: 'Self-défense',
         public: 'Femmes victimes de violences',
         objective: 'Sécurité, reconstruction',
-        color: 'border-white/20',
+        tag: 'Accompagnement',
     },
     {
+        number: '03',
         title: 'Ateliers bien-être',
         public: 'Personnes âgées',
         objective: 'Mobilité, lien social, santé',
-        color: 'border-white/20',
+        tag: 'Bien-être',
     },
     {
+        number: '04',
         title: "Stages d'aguerrissement",
-        public: 'Forces de l\'ordre / pros sécurité',
+        public: "Forces de l'ordre · Pros sécurité",
         objective: 'Renforcement physique et mental',
-        color: 'border-white/20',
+        tag: 'Pro & Élite',
     },
     {
+        number: '05',
         title: 'Remobilisation par le sport',
         public: 'Jeunes en difficulté',
         objective: 'Prévention, repères, encadrement',
-        color: 'border-white/20',
+        tag: 'Social',
     },
     {
+        number: '06',
         title: 'Parcours de formation diplômante',
-        public: 'Jeunes, adultes en insertion',
+        public: 'Jeunes · Adultes en insertion',
         objective: 'Qualification, professionnalisation',
-        color: 'border-white/20',
+        tag: 'Formation',
     },
     {
+        number: '07',
         title: 'Événements sportifs',
         public: 'Grand public',
         objective: 'Rayonnement local',
-        color: 'border-white/20',
+        tag: 'Événementiel',
     },
 ]
 
@@ -56,19 +63,35 @@ export default function ActivitiesSection() {
                     </h2>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {activities.map((activity, i) => (
+                <div className="border-t border-white/10">
+                    {activities.map((activity) => (
                         <div
                             key={activity.title}
-                            className={`border-l-2 ${activity.color} bg-white/5 p-6 hover:bg-white/8 transition-colors ${i === 0 ? 'md:col-span-2 lg:col-span-1' : ''}`}
+                            className="group relative border-b border-white/10 py-6 flex items-center gap-6 sm:gap-10 hover:bg-white/[0.03] transition-colors duration-200 px-2"
                         >
-                            <h3 className="font-title text-xl text-[#F5F5F0] mb-3">{activity.title}</h3>
-                            <div className="space-y-1">
-                                <p className="text-xs text-[#8B0020] font-medium tracking-wide uppercase">
-                                    {activity.public}
-                                </p>
-                                <p className="text-sm text-[#F5F5F0]/60">{activity.objective}</p>
+                            {/* Barre rouge au hover */}
+                            <div className="absolute left-0 top-0 h-full w-0.5 bg-[#8B0020] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
+
+                            {/* Numéro */}
+                            <span className="font-title text-3xl sm:text-4xl text-white/10 group-hover:text-[#8B0020]/40 transition-colors duration-300 w-12 shrink-0 text-right select-none">
+                                {activity.number}
+                            </span>
+
+                            {/* Titre */}
+                            <h3 className="font-title text-lg sm:text-2xl text-[#F5F5F0] group-hover:text-white transition-colors duration-200 flex-1 min-w-0 leading-tight">
+                                {activity.title}
+                            </h3>
+
+                            {/* Méta */}
+                            <div className="hidden md:flex flex-col items-end gap-1 shrink-0 text-right">
+                                <span className="text-xs text-[#F5F5F0]/40 leading-snug">{activity.public}</span>
+                                <span className="text-xs text-[#F5F5F0]/60 leading-snug">{activity.objective}</span>
                             </div>
+
+                            {/* Tag */}
+                            <span className="hidden lg:block text-[10px] font-semibold tracking-[0.15em] uppercase text-[#8B0020] border border-[#8B0020]/40 px-2.5 py-1 shrink-0">
+                                {activity.tag}
+                            </span>
                         </div>
                     ))}
                 </div>

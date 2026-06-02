@@ -48,12 +48,6 @@ export default function HeroSection() {
                         Découvrir le coaching
                     </Link>
                 </div>
-
-                {/* Scroll indicator */}
-                <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[#F5F5F0]/30 text-xs tracking-widest">
-                    <span>DÉFILER</span>
-                    <div className="w-px h-12 bg-gradient-to-b from-[#F5F5F0]/30 to-transparent" />
-                </div>
             </div>
         </section>
     )

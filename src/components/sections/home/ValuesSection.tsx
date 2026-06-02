@@ -1,28 +1,39 @@
+import respectImg from '../../../assets/respect.jpg'
+import disciplineImg from '../../../assets/hichKnee.jpg'
+import solidariteImg from '../../../assets/solidarite.jpg'
+import inclusionImg from '../../../assets/inclusion.jpg'
+import engagementImg from '../../../assets/engagement.jpg'
+
 const values = [
     {
-        icon: '🤝',
         title: 'Respect',
         description: "Le respect de soi, de l'adversaire et du collectif est le premier enseignement du Muay Thaï.",
+        img: respectImg,
+        imgPosition: 'object-center',
     },
     {
-        icon: '⚔️',
         title: 'Discipline',
-        description: 'La régularité et l\'effort construit le caractère. Chaque session est un pas vers la meilleure version de soi.',
+        description: "La régularité et l'effort construit le caractère. Chaque session est un pas vers la meilleure version de soi.",
+        img: disciplineImg,
+        imgPosition: 'object-center',
     },
     {
-        icon: '🫂',
         title: 'Solidarité',
-        description: 'On progresse ensemble. L\'entraide et la bienveillance sont au cœur de notre pratique quotidienne.',
+        description: "On progresse ensemble. L'entraide et la bienveillance sont au cœur de notre pratique quotidienne.",
+        img: solidariteImg,
+        imgPosition: 'object-top',
     },
     {
-        icon: '🌍',
         title: 'Inclusion',
         description: 'Peu importe l\'âge, le niveau ou le parcours — Jaga Fight est ouvert à tous, sans exception.',
+        img: inclusionImg,
+        imgPosition: 'object-center',
     },
     {
-        icon: '🔥',
         title: 'Engagement',
         description: "S'engager, c'est se dépasser. Nous accompagnons chaque pratiquant dans ses objectifs avec exigence et bienveillance.",
+        img: engagementImg,
+        imgPosition: 'object-center',
     },
 ]
 
@@ -43,15 +54,30 @@ export default function ValuesSection() {
                     {values.map((value) => (
                         <div
                             key={value.title}
-                            className="group border border-white/10 p-6 hover:border-[#8B0020]/60 transition-colors"
+                            className="group overflow-hidden border border-white/10 hover:border-[#8B0020]/60 transition-all duration-300 "
                         >
-                            <span className="text-3xl mb-4 block">{value.icon}</span>
-                            <h3 className="font-title text-2xl text-[#F5F5F0] mb-3 group-hover:text-[#8B0020] transition-colors">
-                                {value.title}
-                            </h3>
-                            <p className="text-sm text-[#F5F5F0]/50 leading-relaxed">
-                                {value.description}
-                            </p>
+                            {/* Image header */}
+                            <div className="relative h-44 overflow-hidden">
+                                <img
+                                    src={value.img}
+                                    alt=""
+                                    className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${value.imgPosition}`}
+                                />
+                                {/* Gradient overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent" />
+                                {/* Red tint on hover */}
+                                <div className="absolute inset-0 bg-[#8B0020]/0 group-hover:bg-[#8B0020]/20 transition-colors duration-300" />
+                            </div>
+
+                            {/* Text content */}
+                            <div className="p-5 pt-4">
+                                <h3 className="font-title text-xl text-[#F5F5F0] mb-2 group-hover:text-[#8B0020] transition-colors duration-300">
+                                    {value.title}
+                                </h3>
+                                <p className="text-xs text-[#F5F5F0]/50 leading-relaxed">
+                                    {value.description}
+                                </p>
+                            </div>
                         </div>
                     ))}
                 </div>

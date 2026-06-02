@@ -18,14 +18,14 @@ export default function Coaching() {
             </Helmet>
 
             {/* Hero page */}
-            <section className="py-16 bg-[#0a0a0a] border-b border-white/10">
+            {/*             <section className="py-16 bg-[#0a0a0a] border-b border-white/10">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <span className="text-[#8B0020] text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">
                         Page 2
                     </span>
                     <h1 className="font-title text-6xl sm:text-8xl text-[#F5F5F0]">MES COACHINGS</h1>
                 </div>
-            </section>
+            </section> */}
 
             <CoachHero />
             <ProfessionalExperience />

@@ -41,7 +41,7 @@ export default function ProfessionalExperience() {
                             className="border border-white/10 p-6 hover:border-[#8B0020]/40 transition-colors"
                         >
                             <div className="w-8 h-0.5 bg-[#8B0020] mb-4" />
-                            <h3 className="font-semibold text-[#F5F5F0] text-sm mb-3">{exp.title}</h3>
+                            <h3 className="text-[#F5F5F0] text-sm mb-3">{exp.title}</h3>
                             <p className="text-sm text-[#F5F5F0]/50 leading-relaxed">{exp.desc}</p>
                         </div>
                     ))}

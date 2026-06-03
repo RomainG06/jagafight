@@ -19,6 +19,6 @@ export type Preinscription = {
   activites?: string[]
   message?: string
   rgpd: boolean
-  date?: string
+  created_at?: string
   status?: string
 }

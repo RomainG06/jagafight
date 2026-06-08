@@ -7,7 +7,7 @@ export default function TrainingSection() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     {/* Certifications badges */}
                     <div>
-                        <span className="text-[#8B0020] text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">
+                        <span className="text-[#eb0071] text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">
                             Formation professionnelle
                         </span>
                         <h2 className="font-title text-5xl sm:text-6xl text-[#F5F5F0] mb-6">
@@ -17,7 +17,7 @@ export default function TrainingSection() {
                             {certifications.map((cert) => (
                                 <span
                                     key={cert}
-                                    className="px-4 py-2 border border-[#8B0020] text-[#8B0020] font-title text-lg tracking-wider"
+                                    className="px-4 py-2 border border-[#eb0071] text-[#eb0071] font-title text-lg tracking-wider"
                                 >
                                     {cert}
                                 </span>
@@ -42,7 +42,7 @@ export default function TrainingSection() {
                             },
                         ].map((item) => (
                             <div key={item.title} className="flex gap-4">
-                                <div className="w-1 bg-[#8B0020] flex-shrink-0 rounded-full mt-1" />
+                                <div className="w-1 bg-[#eb0071] flex-shrink-0 rounded-full mt-1" />
                                 <div>
                                     <h3 className="text-[#F5F5F0] mb-1">{item.title}</h3>
                                     <p className="text-sm text-[#F5F5F0]/60 leading-relaxed">{item.desc}</p>

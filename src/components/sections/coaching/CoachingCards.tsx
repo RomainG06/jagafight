@@ -16,7 +16,7 @@ export default function CoachingCards() {
         <section className="py-24 bg-[#0d0d0d]">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
-                    <span className="text-[#8B0020] text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">
+                    <span className="text-[#eb0071] text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">
                         Formules
                     </span>
                     <h2 className="font-title text-5xl sm:text-6xl text-[#F5F5F0] mb-4">
@@ -31,10 +31,10 @@ export default function CoachingCards() {
                     {formulas.map((formula) => (
                         <div
                             key={formula.id}
-                            className="flex flex-col border border-white/10 p-6 hover:border-[#8B0020]/40 transition-colors"
+                            className="flex flex-col border border-white/10 p-6 hover:border-[#eb0071]/40 transition-colors"
                         >
                             <div>
-                                <span className="inline-block px-2 py-0.5 bg-[#8B0020]/20 text-[#8B0020] text-xs font-medium tracking-wide rounded mb-3">
+                                <span className="inline-block px-2 py-0.5 bg-[#eb0071]/20 text-[#eb0071] text-xs font-medium tracking-wide rounded mb-3">
                                     {formula.niveau}
                                 </span>
                                 <h3 className="font-title text-xl text-[#F5F5F0] mb-2">{formula.titre}</h3>
@@ -43,7 +43,7 @@ export default function CoachingCards() {
                             </div>
                             <Link
                                 to="/preinscription"
-                                className="mt-6 block text-center px-4 py-2.5 border border-[#8B0020] text-[#8B0020] text-sm font-semibold tracking-wide hover:bg-[#8B0020] hover:text-[#F5F5F0] transition-colors rounded"
+                                className="mt-6 block text-center px-4 py-2.5 border border-[#eb0071] text-[#eb0071] text-sm font-semibold tracking-wide hover:bg-[#eb0071] hover:text-[#F5F5F0] transition-colors rounded"
                             >
                                 Me préinscrire
                             </Link>

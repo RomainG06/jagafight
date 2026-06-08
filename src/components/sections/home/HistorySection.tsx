@@ -3,7 +3,7 @@ export default function HistorySection() {
         <section className="py-24 bg-[#0a0a0a]">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
-                    <span className="text-[#8B0020] text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">
+                    <span className="text-[#eb0071] text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">
                         Notre histoire
                     </span>
                     <h2 className="font-title text-5xl sm:text-6xl text-[#F5F5F0]">
@@ -13,7 +13,7 @@ export default function HistorySection() {
 
                 <div className="max-w-3xl mx-auto">
                     {/* Timeline */}
-                    <div className="space-y-10 relative before:absolute before:left-4 before:top-2 before:bottom-2 before:w-px before:bg-[#8B0020]/30">
+                    <div className="space-y-10 relative before:absolute before:left-4 before:top-2 before:bottom-2 before:w-px before:bg-[#eb0071]/30">
                         {[
                             {
                                 year: 'Fondation',
@@ -29,11 +29,11 @@ export default function HistorySection() {
                             },
                         ].map((item) => (
                             <div key={item.year} className="flex gap-8 pl-12 relative">
-                                <div className="absolute left-0 top-1 w-8 h-8 rounded-full border-2 border-[#8B0020] bg-[#0a0a0a] flex items-center justify-center flex-shrink-0">
-                                    <div className="w-2 h-2 rounded-full bg-[#8B0020]" />
+                                <div className="absolute left-0 top-1 w-8 h-8 rounded-full border-2 border-[#eb0071] bg-[#0a0a0a] flex items-center justify-center flex-shrink-0">
+                                    <div className="w-2 h-2 rounded-full bg-[#eb0071]" />
                                 </div>
                                 <div>
-                                    <span className="font-title text-sm text-[#8B0020] tracking-widest block mb-1">{item.year}</span>
+                                    <span className="font-title text-sm text-[#eb0071] tracking-widest block mb-1">{item.year}</span>
                                     <p className="text-[#F5F5F0]/70 text-base leading-relaxed">{item.text}</p>
                                 </div>
                             </div>
@@ -41,8 +41,8 @@ export default function HistorySection() {
                     </div>
 
                     {/* Citation Oualid */}
-                    <blockquote className="mt-16 border border-[#8B0020]/40 p-8 relative">
-                        <div className="font-title text-6xl text-[#8B0020]/20 absolute top-4 left-6 leading-none">"</div>
+                    <blockquote className="mt-16 border border-[#eb0071]/40 p-8 relative">
+                        <div className="font-title text-6xl text-[#eb0071]/20 absolute top-4 left-6 leading-none">"</div>
                         <p className="font-title text-2xl sm:text-3xl text-[#F5F5F0] leading-tight pl-6">
                             Polir son esprit pour être fier de ce que l'on voit dans son miroir.
                         </p>

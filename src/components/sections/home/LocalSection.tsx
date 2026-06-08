@@ -13,7 +13,7 @@ export default function LocalSection() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Ancrage */}
         <div className="text-center mb-16">
-          <span className="text-[#8B0020] text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">
+          <span className="text-[#eb0071] text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">
             Ancrage local
           </span>
           <h2 className="font-title text-5xl sm:text-6xl text-[#F5F5F0] mb-4">
@@ -33,7 +33,7 @@ export default function LocalSection() {
               href={p.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-5 py-2.5 border border-white/10 text-[#F5F5F0]/60 text-sm font-medium tracking-wide hover:border-[#8B0020]/50 hover:text-[#F5F5F0] transition-colors"
+              className="px-5 py-2.5 border border-white/10 text-[#F5F5F0]/60 text-sm font-medium tracking-wide hover:border-[#eb0071]/50 hover:text-[#F5F5F0] transition-colors"
             >
               {p.name}
             </a>
@@ -41,7 +41,7 @@ export default function LocalSection() {
         </div>
 
         {/* CTA final */}
-        <div className="text-center bg-[#8B0020]/10 border border-[#8B0020]/30 p-10 sm:p-16">
+        <div className="text-center bg-[#eb0071]/10 border border-[#eb0071]/30 p-10 sm:p-16">
           <h3 className="font-title text-4xl sm:text-5xl text-[#F5F5F0] mb-4">
             L'ÉCOLE OUVRE BIENTÔT
           </h3>
@@ -50,7 +50,7 @@ export default function LocalSection() {
           </p>
           <Link
             to="/preinscription"
-            className="inline-flex items-center px-8 py-4 bg-[#8B0020] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm rounded hover:bg-[#a3002a] transition-colors"
+            className="inline-flex items-center px-8 py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm rounded hover:bg-[#eb0071] transition-colors"
           >
             Me préinscrire maintenant
           </Link>

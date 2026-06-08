@@ -82,7 +82,7 @@ export default function AdminDashboard() {
             <div className="px-6 py-6">
                 {loading && (
                     <div className="flex justify-center py-20">
-                        <div className="w-8 h-8 border-2 border-[#8B0020] border-t-transparent rounded-full animate-spin" />
+                        <div className="w-8 h-8 border-2 border-[#eb0071] border-t-transparent rounded-full animate-spin" />
                     </div>
                 )}
 
@@ -126,7 +126,7 @@ export default function AdminDashboard() {
                                         <td className="py-3 px-3">
                                             <a
                                                 href={`mailto:${row.email}`}
-                                                className="text-[#8B0020] hover:text-[#a3002a] transition-colors"
+                                                className="text-[#eb0071] hover:text-[#ff0096] transition-colors"
                                             >
                                                 {row.email}
                                             </a>

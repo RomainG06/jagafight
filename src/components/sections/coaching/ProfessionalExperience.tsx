@@ -26,7 +26,7 @@ export default function ProfessionalExperience() {
         <section className="py-24 bg-[#0a0a0a]">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
-                    <span className="text-[#8B0020] text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">
+                    <span className="text-[#eb0071] text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">
                         Parcours
                     </span>
                     <h2 className="font-title text-5xl sm:text-6xl text-[#F5F5F0]">
@@ -38,9 +38,9 @@ export default function ProfessionalExperience() {
                     {experiences.map((exp) => (
                         <div
                             key={exp.title}
-                            className="border border-white/10 p-6 hover:border-[#8B0020]/40 transition-colors"
+                            className="border border-white/10 p-6 hover:border-[#eb0071]/40 transition-colors"
                         >
-                            <div className="w-8 h-0.5 bg-[#8B0020] mb-4" />
+                            <div className="w-8 h-0.5 bg-[#eb0071] mb-4" />
                             <h3 className="text-[#F5F5F0] text-sm mb-3">{exp.title}</h3>
                             <p className="text-sm text-[#F5F5F0]/50 leading-relaxed">{exp.desc}</p>
                         </div>

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
+import logo from '../../assets/white_logo_jaga.png';
 
 export default function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false)
@@ -20,9 +21,7 @@ export default function Navbar() {
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
                     <Link to="/" className="flex-shrink-0">
-                        <span className="font-title text-2xl tracking-widest text-[#F5F5F0] hover:text-[#8B0020] transition-colors">
-                            JAGA<span className="text-[#8B0020]"> FIGHT</span>
-                        </span>
+                        <img src={logo} alt="Jaga Fight" className="h-12 w-auto" />
                     </Link>
 
                     {/* Desktop nav */}
@@ -32,8 +31,8 @@ export default function Navbar() {
                                 key={link.to}
                                 to={link.to}
                                 className={`text-sm font-medium tracking-wide transition-colors ${isActive(link.to)
-                                        ? 'text-[#8B0020]'
-                                        : 'text-[#F5F5F0]/70 hover:text-[#F5F5F0]'
+                                    ? 'text-[#eb0071]'
+                                    : 'text-[#F5F5F0]/70 hover:text-[#F5F5F0]'
                                     }`}
                             >
                                 {link.label}
@@ -45,7 +44,7 @@ export default function Navbar() {
                     <div className="flex items-center gap-4">
                         <Link
                             to="/preinscription"
-                            className="hidden sm:inline-flex items-center px-5 py-2 bg-[#8B0020] text-[#F5F5F0] text-sm font-semibold tracking-wide rounded hover:bg-[#a3002a] transition-colors"
+                            className="hidden sm:inline-flex items-center px-5 py-2 bg-[#eb0071] text-[#F5F5F0] text-sm font-semibold tracking-wide rounded hover:bg-[#eb0071] transition-colors"
                         >
                             Me préinscrire
                         </Link>
@@ -72,7 +71,7 @@ export default function Navbar() {
                                     key={link.to}
                                     to={link.to}
                                     onClick={() => setMenuOpen(false)}
-                                    className={`text-base font-medium tracking-wide transition-colors ${isActive(link.to) ? 'text-[#8B0020]' : 'text-[#F5F5F0]/70'
+                                    className={`text-base font-medium tracking-wide transition-colors ${isActive(link.to) ? 'text-[#eb0071]' : 'text-[#F5F5F0]/70'
                                         }`}
                                 >
                                     {link.label}
@@ -81,7 +80,7 @@ export default function Navbar() {
                             <Link
                                 to="/preinscription"
                                 onClick={() => setMenuOpen(false)}
-                                className="inline-flex items-center justify-center px-5 py-2.5 bg-[#8B0020] text-[#F5F5F0] text-sm font-semibold tracking-wide rounded hover:bg-[#a3002a] transition-colors mt-2"
+                                className="inline-flex items-center justify-center px-5 py-2.5 bg-[#eb0071] text-[#F5F5F0] text-sm font-semibold tracking-wide rounded hover:bg-[#eb0071] transition-colors mt-2"
                             >
                                 Me préinscrire
                             </Link>

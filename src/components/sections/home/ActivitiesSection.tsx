@@ -55,7 +55,7 @@ export default function ActivitiesSection() {
         <section className="py-24 bg-[#0d0d0d]">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
-                    <span className="text-[#8B0020] text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">
+                    <span className="text-[#eb0071] text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">
                         Activités
                     </span>
                     <h2 className="font-title text-5xl sm:text-6xl text-[#F5F5F0]">
@@ -70,10 +70,10 @@ export default function ActivitiesSection() {
                             className="group relative border-b border-white/10 py-6 flex items-center gap-6 sm:gap-10 hover:bg-white/[0.03] transition-colors duration-200 px-2"
                         >
                             {/* Barre rouge au hover */}
-                            <div className="absolute left-0 top-0 h-full w-0.5 bg-[#8B0020] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
+                            <div className="absolute left-0 top-0 h-full w-0.5 bg-[#eb0071] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
 
                             {/* Numéro */}
-                            <span className="font-title text-3xl sm:text-4xl text-white/10 group-hover:text-[#8B0020]/40 transition-colors duration-300 w-12 shrink-0 text-right select-none">
+                            <span className="font-title text-3xl sm:text-4xl text-white/10 group-hover:text-[#ff0096]/40 transition-colors duration-300 w-12 shrink-0 text-right select-none">
                                 {activity.number}
                             </span>
 
@@ -89,7 +89,7 @@ export default function ActivitiesSection() {
                             </div>
 
                             {/* Tag */}
-                            <span className="hidden lg:block text-[10px] font-semibold tracking-[0.15em] uppercase text-[#8B0020] border border-[#8B0020]/40 px-2.5 py-1 shrink-0">
+                            <span className="hidden lg:block text-[10px] font-semibold tracking-[0.15em] uppercase text-[#eb0071] border border-[#eb0071]/40 px-2.5 py-1 shrink-0">
                                 {activity.tag}
                             </span>
                         </div>

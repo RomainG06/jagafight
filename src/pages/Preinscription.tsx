@@ -14,21 +14,21 @@ export default function Preinscription() {
       </Helmet>
 
       {/* Hero */}
-      <section className="py-20 bg-[#8B0020]/10 border-b border-[#8B0020]/20 relative overflow-hidden">
+      <section className="py-20 bg-[#eb0071]/10 border-b border-[#eb0071]/20 relative overflow-hidden">
         <div
           className="absolute inset-0 opacity-5"
           style={{
-            backgroundImage: 'linear-gradient(#8B0020 1px, transparent 1px), linear-gradient(90deg, #8B0020 1px, transparent 1px)',
+            backgroundImage: 'linear-gradient(#eb0071 1px, transparent 1px), linear-gradient(90deg, #eb0071 1px, transparent 1px)',
             backgroundSize: '40px 40px',
           }}
         />
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="inline-block px-4 py-1.5 border border-[#8B0020]/60 text-[#8B0020] text-xs font-semibold tracking-[0.2em] uppercase mb-6 rounded-sm">
+          <span className="inline-block px-4 py-1.5 border border-[#eb0071]/60 text-[#eb0071] text-xs font-semibold tracking-[0.2em] uppercase mb-6 rounded-sm">
             Ouverture prochaine
           </span>
           <h1 className="font-title text-5xl sm:text-7xl text-[#F5F5F0] mb-6 leading-tight">
             L'ÉCOLE OUVRE SES PORTES —<br />
-            <span className="text-[#8B0020]">SOIS DES PREMIERS.</span>
+            <span className="text-[#eb0071]">SOIS DES PREMIERS.</span>
           </h1>
           <p className="text-[#F5F5F0]/60 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
             Jaga Fight arrive à Cagnes-sur-Mer. Laisse-nous tes coordonnées et nous te contactons en priorité à l'ouverture.

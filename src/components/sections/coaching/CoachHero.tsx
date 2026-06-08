@@ -35,18 +35,18 @@ export default function CoachHero() {
                                 className="w-full h-full object-cover object-top"
                             />
                         </div>
-                        <div className="absolute -bottom-3 -right-3 w-full h-full border border-[#8B0020]/20 -z-10" />
+                        <div className="absolute -bottom-3 -right-3 w-full h-full border border-[#eb0071]/20 -z-10" />
                     </div>
 
                     {/* Infos coach */}
                     <div>
-                        <span className="text-[#8B0020] text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">
+                        <span className="text-[#eb0071] text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">
                             Votre coach
                         </span>
                         <h1 className="font-title text-5xl sm:text-6xl text-[#F5F5F0] leading-tight mb-2">
                             HICHAM KILIC
                         </h1>
-                        <p className="font-title text-xl text-[#8B0020] tracking-wide mb-8">
+                        <p className="font-title text-xl text-[#eb0071] tracking-wide mb-8">
                             Champion d'Europe de Muay Thaï
                         </p>
 
@@ -54,7 +54,7 @@ export default function CoachHero() {
                         <div className="grid grid-cols-2 gap-4 mb-10">
                             {sportStats.map((s) => (
                                 <div key={s.label} className="border border-white/10 p-4">
-                                    <p className="font-title text-3xl text-[#8B0020]">{s.value}</p>
+                                    <p className="font-title text-3xl text-[#eb0071]">{s.value}</p>
                                     <p className="text-xs text-[#F5F5F0]/50 mt-1 tracking-wide">{s.label}</p>
                                 </div>
                             ))}
@@ -66,7 +66,7 @@ export default function CoachHero() {
                             <ul className="space-y-2">
                                 {titles.map((t) => (
                                     <li key={t} className="flex gap-3 items-start text-sm text-[#F5F5F0]/70">
-                                        <span className="text-[#8B0020] mt-0.5 flex-shrink-0">▸</span>
+                                        <span className="text-[#eb0071] mt-0.5 flex-shrink-0">▸</span>
                                         {t}
                                     </li>
                                 ))}
@@ -79,7 +79,7 @@ export default function CoachHero() {
                             <ul className="space-y-2">
                                 {qualifications.map((q) => (
                                     <li key={q} className="flex gap-3 items-start text-sm text-[#F5F5F0]/70">
-                                        <span className="text-[#8B0020] mt-0.5 flex-shrink-0">▸</span>
+                                        <span className="text-[#eb0071] mt-0.5 flex-shrink-0">▸</span>
                                         {q}
                                     </li>
                                 ))}

@@ -3,8 +3,11 @@
 
 @theme {
   --color-jaga-black: #0a0a0a;
+  --color-jaga-rose: #F04E98;
   --color-jaga-red: #8B0020;
-  --color-jaga-red-hover: #a3002a;
+  --color-jaga-rose-intermediate: #aa0060;
+  --color-jaga-rose-226: #eb0071;
+  --color-jaga-rose-226-hover: #ff0096;
   --color-jaga-white: #F5F5F0;
   --font-title: 'Bebas Neue', sans-serif;
   --font-body: 'Inter', sans-serif;

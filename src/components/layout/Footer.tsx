@@ -10,7 +10,7 @@ export default function Footer() {
                     {/* Logo & baseline */}
                     <div>
                         <span className="font-title text-2xl tracking-widest text-[#F5F5F0]">
-                            JAGA<span className="text-[#8B0020]"> FIGHT</span>
+                            JAGA<span className="text-[#eb0071]"> FIGHT</span>
                         </span>
                         <p className="mt-3 text-sm text-[#F5F5F0]/50 leading-relaxed">
                             École de Muay Thaï à Cagnes-sur-Mer.<br />
@@ -56,7 +56,7 @@ export default function Footer() {
                                     href="https://instagram.com"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="hover:text-[#8B0020] transition-colors"
+                                    className="hover:text-[#ff0096] transition-colors"
                                     aria-label="Instagram Jaga Fight"
                                 >
                                     Instagram
@@ -65,7 +65,7 @@ export default function Footer() {
                                     href="https://facebook.com"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="hover:text-[#8B0020] transition-colors"
+                                    className="hover:text-[#ff0096] transition-colors"
                                     aria-label="Facebook Jaga Fight"
                                 >
                                     Facebook

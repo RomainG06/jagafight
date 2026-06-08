@@ -44,7 +44,7 @@ export default function AdminLogin() {
                             autoComplete="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#8B0020] transition-colors placeholder:text-white/20"
+                            className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#eb0071] transition-colors placeholder:text-white/20"
                             placeholder="admin@jagafight.fr"
                         />
                     </div>
@@ -60,7 +60,7 @@ export default function AdminLogin() {
                             autoComplete="current-password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#8B0020] transition-colors placeholder:text-white/20"
+                            className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#eb0071] transition-colors placeholder:text-white/20"
                             placeholder="••••••••"
                         />
                     </div>
@@ -74,7 +74,7 @@ export default function AdminLogin() {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full py-4 bg-[#8B0020] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm hover:bg-[#a3002a] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm hover:bg-[#eb0071] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {loading ? 'Connexion…' : 'Se connecter'}
                     </button>

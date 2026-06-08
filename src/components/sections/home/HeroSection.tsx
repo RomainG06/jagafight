@@ -10,21 +10,21 @@ export default function HeroSection() {
             <div
                 className="absolute inset-0 opacity-5"
                 style={{
-                    backgroundImage: 'linear-gradient(#8B0020 1px, transparent 1px), linear-gradient(90deg, #8B0020 1px, transparent 1px)',
+                    backgroundImage: 'linear-gradient(#eb0071 1px, transparent 1px), linear-gradient(90deg, #eb0071 1px, transparent 1px)',
                     backgroundSize: '60px 60px',
                 }}
             />
 
             <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-24">
                 {/* Badge */}
-                <span className="inline-block px-4 py-1.5 border border-[#8B0020]/60 text-[#8B0020] text-xs font-semibold tracking-[0.2em] uppercase mb-8 rounded-sm">
+                <span className="inline-block px-4 py-1.5 border border-[#eb0071]/60 text-[#eb0071] text-xs font-semibold tracking-[0.2em] uppercase mb-8 rounded-sm">
                     École de Muay Thaï — Cagnes-sur-Mer
                 </span>
 
                 {/* Titre */}
                 <h1 className="font-title text-6xl sm:text-8xl lg:text-[10rem] leading-none text-[#F5F5F0] mb-6">
                     JAGA<br />
-                    <span className="text-[#8B0020]">FIGHT</span>
+                    <span className="text-[#eb0071]">FIGHT</span>
 
                 </h1>
 
@@ -37,7 +37,7 @@ export default function HeroSection() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Link
                         to="/preinscription"
-                        className="px-8 py-4 bg-[#8B0020] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm rounded hover:bg-[#a3002a] transition-colors"
+                        className="px-8 py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm rounded hover:bg-[#eb0071] transition-colors"
                     >
                         Me préinscrire
                     </Link>

@@ -75,7 +75,7 @@ export default function PolitiqueConfidentialite() {
                         </ul>
                         <p className="mt-3">
                             Pour exercer ces droits, contactez-nous à :{' '}
-                            <a href="mailto:contact@jagafight.fr" className="text-[#8B0020] hover:underline">
+                            <a href="mailto:contact@jagafight.fr" className="text-[#eb0071] hover:underline">
                                 contact@jagafight.fr
                             </a>
                         </p>
@@ -97,7 +97,7 @@ export default function PolitiqueConfidentialite() {
                                 href="https://www.cnil.fr"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-[#8B0020] hover:underline"
+                                className="text-[#eb0071] hover:underline"
                             >
                                 CNIL (Commission Nationale de l'Informatique et des Libertés)
                             </a>.

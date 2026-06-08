@@ -83,8 +83,8 @@ export default function PreinscriptionForm() {
     if (status === 'success') {
         return (
             <div className="max-w-xl mx-auto text-center py-16 px-4">
-                <div className="w-16 h-16 border-2 border-[#8B0020] rounded-full flex items-center justify-center mx-auto mb-6">
-                    <svg className="w-8 h-8 text-[#8B0020]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="w-16 h-16 border-2 border-[#eb0071] rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg className="w-8 h-8 text-[#eb0071]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                 </div>
@@ -94,7 +94,7 @@ export default function PreinscriptionForm() {
                 </p>
                 <button
                     onClick={() => setStatus('idle')}
-                    className="mt-8 text-sm text-[#8B0020] hover:text-[#a3002a] transition-colors underline underline-offset-4"
+                    className="mt-8 text-sm text-[#eb0071] hover:text-[#ff0096] transition-colors underline underline-offset-4"
                 >
                     Faire une autre préinscription
                 </button>
@@ -118,7 +118,7 @@ export default function PreinscriptionForm() {
                             autoComplete="given-name"
                             value={form.prenom}
                             onChange={(e) => setForm({ ...form, prenom: e.target.value })}
-                            className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#8B0020] transition-colors placeholder:text-white/20"
+                            className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#eb0071] transition-colors placeholder:text-white/20"
                             placeholder="Votre prénom"
                         />
                     </div>
@@ -133,7 +133,7 @@ export default function PreinscriptionForm() {
                             autoComplete="family-name"
                             value={form.nom}
                             onChange={(e) => setForm({ ...form, nom: e.target.value })}
-                            className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#8B0020] transition-colors placeholder:text-white/20"
+                            className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#eb0071] transition-colors placeholder:text-white/20"
                             placeholder="Votre nom"
                         />
                     </div>
@@ -151,7 +151,7 @@ export default function PreinscriptionForm() {
                         autoComplete="email"
                         value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
-                        className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#8B0020] transition-colors placeholder:text-white/20"
+                        className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#eb0071] transition-colors placeholder:text-white/20"
                         placeholder="votre@email.com"
                     />
                 </div>
@@ -167,7 +167,7 @@ export default function PreinscriptionForm() {
                         autoComplete="tel"
                         value={form.tel}
                         onChange={(e) => setForm({ ...form, tel: e.target.value })}
-                        className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#8B0020] transition-colors placeholder:text-white/20"
+                        className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#eb0071] transition-colors placeholder:text-white/20"
                         placeholder="06 00 00 00 00"
                     />
                 </div>
@@ -181,7 +181,7 @@ export default function PreinscriptionForm() {
                         id="age"
                         value={form.age}
                         onChange={(e) => setForm({ ...form, age: e.target.value })}
-                        className="w-full bg-[#0a0a0a] border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#8B0020] transition-colors"
+                        className="w-full bg-[#0a0a0a] border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#eb0071] transition-colors"
                     >
                         <option value="">Sélectionner</option>
                         {AGE_OPTIONS.map((o) => (
@@ -200,7 +200,7 @@ export default function PreinscriptionForm() {
                             <label
                                 key={act.id}
                                 className={`flex items-center gap-2 px-3 py-2.5 border cursor-pointer transition-colors text-sm ${form.activites.includes(act.id)
-                                    ? 'border-[#8B0020] text-[#F5F5F0] bg-[#8B0020]/10'
+                                    ? 'border-[#eb0071] text-[#F5F5F0] bg-[#eb0071]/10'
                                     : 'border-white/10 text-[#F5F5F0]/60 hover:border-white/30'
                                     }`}
                             >
@@ -211,7 +211,7 @@ export default function PreinscriptionForm() {
                                     onChange={() => toggleActivity(act.id)}
                                 />
                                 <span
-                                    className={`w-3.5 h-3.5 border flex-shrink-0 flex items-center justify-center ${form.activites.includes(act.id) ? 'border-[#8B0020] bg-[#8B0020]' : 'border-white/30'
+                                    className={`w-3.5 h-3.5 border flex-shrink-0 flex items-center justify-center ${form.activites.includes(act.id) ? 'border-[#eb0071] bg-[#eb0071]' : 'border-white/30'
                                         }`}
                                 >
                                     {form.activites.includes(act.id) && (
@@ -236,7 +236,7 @@ export default function PreinscriptionForm() {
                         rows={4}
                         value={form.message}
                         onChange={(e) => setForm({ ...form, message: e.target.value })}
-                        className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#8B0020] transition-colors placeholder:text-white/20 resize-none"
+                        className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#eb0071] transition-colors placeholder:text-white/20 resize-none"
                         placeholder="Un projet particulier, une question…"
                     />
                 </div>
@@ -246,7 +246,7 @@ export default function PreinscriptionForm() {
                     <label className="flex items-start gap-3 cursor-pointer">
                         <div
                             onClick={() => setForm({ ...form, rgpd: !form.rgpd })}
-                            className={`w-4 h-4 border flex-shrink-0 mt-0.5 flex items-center justify-center cursor-pointer transition-colors ${form.rgpd ? 'border-[#8B0020] bg-[#8B0020]' : 'border-white/30'
+                            className={`w-4 h-4 border flex-shrink-0 mt-0.5 flex items-center justify-center cursor-pointer transition-colors ${form.rgpd ? 'border-[#eb0071] bg-[#eb0071]' : 'border-white/30'
                                 }`}
                         >
                             {form.rgpd && (
@@ -282,7 +282,7 @@ export default function PreinscriptionForm() {
                 <button
                     type="submit"
                     disabled={status === 'loading'}
-                    className="w-full py-4 bg-[#8B0020] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm rounded hover:bg-[#a3002a] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm rounded hover:bg-[#eb0071] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                     {status === 'loading' ? 'Envoi en cours…' : "M'inscrire sur la liste"}
                 </button>

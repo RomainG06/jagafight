@@ -42,7 +42,7 @@ export default function ValuesSection() {
         <section className="py-24 bg-[#0a0a0a]">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
-                    <span className="text-[#8B0020] text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">
+                    <span className="text-[#eb0071] text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">
                         Nos valeurs
                     </span>
                     <h2 className="font-title text-5xl sm:text-6xl text-[#F5F5F0]">
@@ -54,7 +54,7 @@ export default function ValuesSection() {
                     {values.map((value) => (
                         <div
                             key={value.title}
-                            className="group overflow-hidden border border-white/10 hover:border-[#8B0020]/60 transition-all duration-300 "
+                            className="group overflow-hidden border border-white/10 hover:border-[#eb0071]/60 transition-all duration-300 "
                         >
                             {/* Image header */}
                             <div className="relative h-44 overflow-hidden">
@@ -66,12 +66,12 @@ export default function ValuesSection() {
                                 {/* Gradient overlay */}
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent" />
                                 {/* Red tint on hover */}
-                                <div className="absolute inset-0 bg-[#8B0020]/0 group-hover:bg-[#8B0020]/20 transition-colors duration-300" />
+                                <div className="absolute inset-0 bg-[#eb0071]/0 group-hover:bg-[#eb0071]/20 transition-colors duration-300" />
                             </div>
 
                             {/* Text content */}
                             <div className="p-5 pt-4">
-                                <h3 className="font-title text-xl text-[#F5F5F0] mb-2 group-hover:text-[#8B0020] transition-colors duration-300">
+                                <h3 className="font-title text-xl text-[#F5F5F0] mb-2 group-hover:text-[#ff0096] transition-colors duration-300">
                                     {value.title}
                                 </h3>
                                 <p className="text-xs text-[#F5F5F0]/50 leading-relaxed">

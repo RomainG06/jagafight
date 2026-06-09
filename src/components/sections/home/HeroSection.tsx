@@ -29,7 +29,7 @@ export default function HeroSection() {
                 </h1>
 
                 {/* Sous-titre */}
-                <p className="text-lg sm:text-xl text-[#F5F5F0]/70 max-w-xl mx-auto mb-10 font-light tracking-wide">
+                <p className="text-lg sm:text-xl text-[#eb0071]/70 max-w-xl mx-auto mb-10 font-light tracking-wide">
                     Sport, éducation, transformation. À Cagnes-sur-Mer.
                 </p>
 

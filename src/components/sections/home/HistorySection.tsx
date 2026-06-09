@@ -21,11 +21,11 @@ export default function HistorySection() {
                             },
                             {
                                 year: 'Transmission',
-                                text: "Après le décès d'Oualid, Hicham KILIC reprend le flambeau et porte le projet à Cagnes-sur-Mer. L'esprit, les valeurs et la vision restent intacts.",
+                                text: "Après le décès de Oualid, Hicham KILIC reprend le flambeau et porte le projet à Cagnes-sur-Mer. L'esprit, les valeurs et la vision restent intacts.",
                             },
                             {
                                 year: '2025–2026',
-                                text: "Jaga Fight ouvre ses portes à Cagnes-sur-Mer, avec le soutien de la Ville, de l'AFMT, de la FFBDA, du Ministère des Sports et de CGR Cinémas.",
+                                text: "Jaga Fight ouvre ses portes à Cagnes-sur-Mer, avec le soutien de la Ville, de l'AFMT, de la FFKMDA et du Ministère des Sports.",
                             },
                         ].map((item) => (
                             <div key={item.year} className="flex gap-8 pl-12 relative">

@@ -32,7 +32,7 @@ export default function Footer() {
                                 <li key={link.to}>
                                     <Link
                                         to={link.to}
-                                        className="text-sm text-[#F5F5F0]/50 hover:text-[#F5F5F0] transition-colors"
+                                        className="text-sm text-[#F5F5F0]/50 hover:text-[#eb0071] transition-colors"
                                     >
                                         {link.label}
                                     </Link>
@@ -46,7 +46,7 @@ export default function Footer() {
                         <h3 className="font-title text-lg tracking-wider text-[#F5F5F0] mb-4">Contact & Réseaux</h3>
                         <ul className="space-y-2 text-sm text-[#F5F5F0]/50">
                             <li>
-                                <a href="mailto:contact@jagafight.fr" className="hover:text-[#F5F5F0] transition-colors">
+                                <a href="mailto:contact@jagafight.fr" className="hover:text-[#eb0071] transition-colors">
                                     contact@jagafight.fr
                                 </a>
                             </li>
@@ -78,11 +78,11 @@ export default function Footer() {
                 <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-[#F5F5F0]/30">
                     <p>© {year} Jaga Fight — Tous droits réservés</p>
                     <p>
-                        <Link to="/mentions-legales" className="hover:text-[#F5F5F0]/60 transition-colors">
+                        <Link to="/mentions-legales" className="hover:text-[#eb0071]/60 transition-colors">
                             Mentions légales
                         </Link>
                         {' · '}
-                        <Link to="/politique-confidentialite" className="hover:text-[#F5F5F0]/60 transition-colors">
+                        <Link to="/politique-confidentialite" className="hover:text-[#eb0071]/60 transition-colors">
                             RGPD
                         </Link>
                     </p>

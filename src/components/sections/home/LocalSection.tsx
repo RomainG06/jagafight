@@ -5,6 +5,8 @@ const partners = [
   { name: 'AFMT', url: 'https://www.afmt.fr/' },
   { name: 'FFKMDA', url: 'https://www.ffkmda.com/' },
   { name: 'Ministère des Sports', url: 'https://www.sports.gouv.fr/' },
+  { name: 'UFSC', url: 'https://ufsc-france.fr/' },
+  { name: 'ASPTT', url: 'https://asptt.com//' },
 ]
 
 export default function LocalSection() {

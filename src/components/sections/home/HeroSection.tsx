@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import logoWhite from '../../../assets/white_logo_jaga.png'
 
 export default function HeroSection() {
     return (
@@ -22,11 +23,11 @@ export default function HeroSection() {
                 </span>
 
                 {/* Titre */}
-                <h1 className="font-title text-6xl sm:text-8xl lg:text-[10rem] leading-none text-[#F5F5F0] mb-6">
-                    JAGA<br />
-                    <span className="text-[#eb0071]">FIGHT</span>
-
-                </h1>
+                <img
+                    src={logoWhite}
+                    alt="JAGA FIGHT"
+                    className="h-48 sm:h-64 lg:h-80 mb-6 mx-auto"
+                />
 
                 {/* Sous-titre */}
                 <p className="text-lg sm:text-xl text-[#eb0071]/70 max-w-xl mx-auto mb-10 font-light tracking-wide">

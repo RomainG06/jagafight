@@ -9,7 +9,8 @@ export default function Navbar() {
     const navLinks = [
         { to: '/', label: "L'École" },
         { to: '/coaching', label: 'Coaching' },
-        { to: '/preinscription', label: 'Préinscription' },
+        { to: '/formations', label: 'Formations' },
+        { to: '/notre-adn', label: 'Notre ADN' },
     ]
 
     const isActive = (to: string) =>
@@ -26,7 +27,7 @@ export default function Navbar() {
 
                     {/* Desktop nav */}
                     <nav className="hidden md:flex items-center gap-8">
-                        {navLinks.slice(0, 2).map(link => (
+                        {navLinks.map(link => (
                             <NavLink
                                 key={link.to}
                                 to={link.to}
@@ -42,13 +43,6 @@ export default function Navbar() {
 
                     {/* CTA + burger */}
                     <div className="flex items-center gap-4">
-                        <Link
-                            to="/preinscription"
-                            className="hidden sm:inline-flex items-center px-5 py-2 bg-[#eb0071] text-[#F5F5F0] text-sm font-semibold tracking-wide rounded hover:bg-[#eb0071] transition-colors"
-                        >
-                            Me préinscrire
-                        </Link>
-
                         {/* Burger mobile */}
                         <button
                             className="md:hidden p-2 text-[#F5F5F0]"
@@ -77,13 +71,6 @@ export default function Navbar() {
                                     {link.label}
                                 </NavLink>
                             ))}
-                            <Link
-                                to="/preinscription"
-                                onClick={() => setMenuOpen(false)}
-                                className="inline-flex items-center justify-center px-5 py-2.5 bg-[#eb0071] text-[#F5F5F0] text-sm font-semibold tracking-wide rounded hover:bg-[#eb0071] transition-colors mt-2"
-                            >
-                                Me préinscrire
-                            </Link>
                         </nav>
                     </div>
                 )}

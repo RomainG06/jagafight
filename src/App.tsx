@@ -4,6 +4,8 @@ import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import Home from './pages/Home'
 import Coaching from './pages/Coaching'
+import Formations from './pages/Formations'
+import NotreAdn from './pages/NotreAdn'
 import Preinscription from './pages/Preinscription'
 import MentionsLegales from './pages/MentionsLegales'
 import PolitiqueConfidentialite from './pages/PolitiqueConfidentialite'
@@ -26,6 +28,8 @@ function App() {
                   <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/coaching" element={<Coaching />} />
+                    <Route path="/formations" element={<Formations />} />
+                    <Route path="/notre-adn" element={<NotreAdn />} />
                     <Route path="/preinscription" element={<Preinscription />} />
                     <Route path="/mentions-legales" element={<MentionsLegales />} />
                     <Route path="/politique-confidentialite" element={<PolitiqueConfidentialite />} />

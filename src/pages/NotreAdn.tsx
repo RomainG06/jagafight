@@ -48,7 +48,7 @@ export default function NotreAdn() {
                         </h2>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-1 gap-12 max-w-4xl mx-auto">
                         {/* Hicham */}
                         <div className="border border-white/10 p-8 hover:border-[#eb0071]/60 transition-colors">
                             <h3 className="font-title text-3xl text-[#F5F5F0] mb-2">Hicham KILIC</h3>
@@ -60,20 +60,6 @@ export default function NotreAdn() {
                             </p>
                             <p className="text-[#F5F5F0]/60 text-sm leading-relaxed">
                                 Expert en accompagnement de publics variés (forces de l'ordre, jeunes en difficulté, sportifs de haut niveau), il porte une approche exigeante et bienveillante de la transmission.
-                            </p>
-                        </div>
-
-                        {/* Oualid (fondateur) */}
-                        <div className="border border-white/10 p-8 hover:border-[#eb0071]/60 transition-colors">
-                            <h3 className="font-title text-3xl text-[#F5F5F0] mb-2">Oualid OUMERZOUK</h3>
-                            <span className="text-[#eb0071] text-sm font-semibold tracking-wide block mb-4">
-                                Fondateur de Jaga Fight
-                            </span>
-                            <p className="text-[#F5F5F0]/70 leading-relaxed mb-4">
-                                Ancien légionnaire du 2e REP, Champion du monde Nokento Full Fight 2017. Oualid a fondé Jaga Fight à Perpignan avec une vision exigeante : former des pratiquants complets, techniquement affûtés et mentalement solides.
-                            </p>
-                            <p className="text-[#F5F5F0]/60 text-sm leading-relaxed italic">
-                                « Polir son esprit pour être fier de ce que l'on voit dans son miroir. »
                             </p>
                         </div>
                     </div>

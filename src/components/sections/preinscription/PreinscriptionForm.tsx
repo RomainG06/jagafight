@@ -255,13 +255,7 @@ export default function PreinscriptionForm() {
                                 </svg>
                             )}
                         </div>
-                        <input
-                            type="checkbox"
-                            className="sr-only"
-                            checked={form.rgpd}
-                            onChange={(e) => setForm({ ...form, rgpd: e.target.checked })}
-                            required
-                        />
+
                         <span className="text-xs text-[#F5F5F0]/50 leading-relaxed">
                             J'accepte que mes données soient utilisées pour être recontacté(e) par Jaga Fight. *{' '}
                             <a href="/politique-confidentialite" className="underline hover:text-[#F5F5F0]">

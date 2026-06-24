@@ -85,7 +85,10 @@ export default function ActivitiesSection() {
                     {activities.map((activity, index) => (
                         <React.Fragment key={index}>
                             <div
-                                onMouseEnter={() => setActiveActivity(index)}
+                                onMouseEnter={() => {
+                                    setActiveActivity(index);
+                                    console.log(`Hovered over activity: ${activity.title}`);
+                                }}
                                 onMouseLeave={() => setActiveActivity(null)}
                                 onClick={() =>
                                     setActiveActivity(activeActivity === index ? null : index)
@@ -118,7 +121,7 @@ export default function ActivitiesSection() {
 
                             </div>
                             {activeActivity === index && (
-                                <p className="px-6 py-4 text-center text-sm text-[#F5F5F0]/60 leading-snug">
+                                <p className="px-6 py-4 text-center text-sm text-[#F5F5F0]/60 leading-snug pointer-events-none">
                                     {activity.description}
                                 </p>
                             )}

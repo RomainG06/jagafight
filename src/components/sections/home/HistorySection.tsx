@@ -17,7 +17,7 @@ export default function HistorySection() {
                         {[
                             {
                                 year: 'Fondation',
-                                text: "Fondée à Perpignan par Oualid OUMERZOUK, Hicham, Mohamed et Julien. Oualid, ancien légionnaire du 2e REP et champion du monde Nokento Full Fight 2017, insuffle dès le départ une vision exigeante. L'école attire plus de 120 licenciés dès sa création.",
+                                text: "Fondée à Perpignan par Oualid OUMERZOUK, Hicham, Mohamed et Julien. Oualid, ancien légionnaire du 2e REP et champion du monde Nokento Full Fight 2017, insuffle dès le départ une vision exigeante. L'école attire plus de 120 préinscrits dès sa création.",
                             },
                             {
                                 year: 'Transmission',

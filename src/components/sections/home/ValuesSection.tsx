@@ -10,30 +10,35 @@ const values = [
         description: "Le respect de soi, de l'adversaire et du collectif est le premier enseignement du Muay Thaï.",
         img: respectImg,
         imgPosition: 'object-center',
+        alt: 'Respect et salut traditionnel en Muay Thaï - Valeur Jaga Fight',
     },
     {
         title: 'Discipline',
         description: "La régularité et l'effort construit le caractère. Chaque session est un pas vers la meilleure version de soi.",
         img: disciplineImg,
         imgPosition: 'object-center',
+        alt: 'Entraînement discipline Muay Thaï Cagnes-sur-Mer',
     },
     {
         title: 'Solidarité',
         description: "On progresse ensemble. L'entraide et la bienveillance sont au cœur de notre pratique quotidienne.",
         img: solidariteImg,
         imgPosition: 'object-top',
+        alt: 'Esprit d\'équipe et solidarité boxe thaï Jaga Fight',
     },
     {
         title: 'Inclusion',
         description: 'Peu importe l\'âge, le niveau ou le parcours — Jaga Fight est ouvert à tous, sans exception.',
         img: inclusionImg,
         imgPosition: 'object-center',
+        alt: 'Cours Muay Thaï accessibles à tous - Inclusion Cagnes',
     },
     {
         title: 'Engagement',
         description: "S'engager, c'est se dépasser. Nous accompagnons chaque pratiquant dans ses objectifs avec exigence et bienveillance.",
         img: engagementImg,
         imgPosition: 'object-center',
+        alt: 'Dépassement de soi et engagement Muay Thaï Côte d\'Azur',
     },
 ]
 
@@ -60,7 +65,7 @@ export default function ValuesSection() {
                             <div className="relative h-44 overflow-hidden">
                                 <img
                                     src={value.img}
-                                    alt=""
+                                    alt={value.alt}
                                     className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${value.imgPosition}`}
                                 />
                                 {/* Gradient overlay */}

@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom'
-
 export default function ProfileSelector() {
     const profiles = [
         {
@@ -43,9 +41,9 @@ export default function ProfileSelector() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {profiles.map((profile) => (
-                        <Link
+                        <a
                             key={profile.title}
-                            to={profile.to}
+                            href={profile.to}
                             onClick={handleScrollToActivities}
                             className="group border border-white/10 p-8 hover:border-[#eb0071] transition-all duration-300 hover:scale-105"
                         >
@@ -66,7 +64,7 @@ export default function ProfileSelector() {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                 </svg>
                             </div>
-                        </Link>
+                        </a>
                     ))}
                 </div>
             </div>

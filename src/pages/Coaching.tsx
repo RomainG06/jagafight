@@ -10,10 +10,63 @@ export default function Coaching() {
                 <title>Coaching Muay Thaï — Hicham KILIC | Jaga Fight Cagnes-sur-Mer</title>
                 <meta
                     name="description"
-                    content="Hicham KILIC, Champion d'Europe de Muay Thaï, vous accompagne. Cours collectifs, particuliers, stages intensifs et formation diplômante à Cagnes-sur-Mer."
+                    content="Hicham KILIC, Champion d'Europe de Muay Thaï, vous accompagne à Cagnes-sur-Mer et Nice. Cours collectifs, particuliers, stages intensifs et formation diplômante."
                 />
-                <meta name="keywords" content="coaching Muay Thaï Cagnes, cours boxe thaï 06, Hicham Kilic coach, formation BPJEPS Muay Thaï" />
+                <meta name="keywords" content="coaching Muay Thaï Cagnes, coach boxe thai Nice, cours boxe thaï 06, Hicham Kilic champion, formation BPJEPS Muay Thaï, coaching boxe antibes" />
                 <link rel="canonical" href="https://www.jagafight.fr/coaching" />
+
+                {/* Open Graph */}
+                <meta property="og:title" content="Hicham KILIC — Champion d'Europe Muay Thaï | Jaga Fight" />
+                <meta property="og:description" content="Coaching professionnel avec Hicham KILIC, Champion d'Europe. Cours collectifs et particuliers à Cagnes-sur-Mer." />
+                <meta property="og:type" content="profile" />
+                <meta property="og:url" content="https://www.jagafight.fr/coaching" />
+                <meta property="og:image" content="https://www.jagafight.fr/og-coaching.jpg" />
+
+                {/* Twitter Card */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Hicham KILIC — Champion d'Europe Muay Thaï" />
+                <meta name="twitter:description" content="Coaching professionnel avec un champion. Cagnes-sur-Mer, Côte d'Azur." />
+                <meta name="twitter:image" content="https://www.jagafight.fr/og-coaching.jpg" />
+
+                {/* Structured Data - Person */}
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Person",
+                        "name": "Hicham KILIC",
+                        "jobTitle": "Coach professionnel Muay Thaï",
+                        "description": "Champion d'Europe de Muay Thaï, coach professionnel diplômé BPJEPS et formateur. Spécialiste du coaching individuel et collectif.",
+                        "url": "https://www.jagafight.fr/coaching",
+                        "image": "https://www.jagafight.fr/coach-hicham.jpg",
+                        "award": [
+                            "Champion d'Europe Muay Thaï",
+                            "Diplôme BPJEPS AF mention Boxe Thaï",
+                            "Diplôme BMF (Brevet Moniteur Fédéral)"
+                        ],
+                        "knowsAbout": [
+                            "Muay Thaï",
+                            "Boxe Thaïlandaise",
+                            "Self-défense",
+                            "Préparation physique",
+                            "Formation professionnelle"
+                        ],
+                        "worksFor": {
+                            "@type": "SportsActivityLocation",
+                            "name": "Jaga Fight",
+                            "address": {
+                                "@type": "PostalAddress",
+                                "addressLocality": "Cagnes-sur-Mer",
+                                "addressRegion": "Alpes-Maritimes",
+                                "postalCode": "06800",
+                                "addressCountry": "FR"
+                            }
+                        },
+                        "alumniOf": {
+                            "@type": "EducationalOrganization",
+                            "name": "Formation BPJEPS Activités de la Forme mention Boxe Thaï"
+                        }
+                    })}
+                </script>
             </Helmet>
 
             {/* Hero page */}

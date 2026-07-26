@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom'
-
 const partners = [
   { name: 'Ville de Cagnes-sur-Mer', url: 'https://ville.cagnes.fr/' },
   { name: 'AFMT', url: 'https://www.afmt.fr/' },
@@ -50,12 +48,12 @@ export default function LocalSection() {
           <p className="text-[#F5F5F0]/60 mb-8 max-w-md mx-auto">
             Sois parmi les premiers à rejoindre Jaga Fight. Laisse-nous tes coordonnées et nous te contactons en priorité.
           </p>
-          <Link
-            to="/preinscription"
+          <a
+            href="/preinscription"
             className="inline-flex items-center px-8 py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm rounded hover:bg-[#eb0071] transition-colors"
           >
             Me préinscrire maintenant
-          </Link>
+          </a>
         </div>
       </div>
     </section>

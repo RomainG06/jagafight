@@ -12,10 +12,83 @@ export default function Home() {
                 <title>Jaga Fight — École de Muay Thaï à Cagnes-sur-Mer</title>
                 <meta
                     name="description"
-                    content="Jaga Fight, école de Muay Thaï à Cagnes-sur-Mer. Cours collectifs, self-défense, stages, formation diplômante. Sport, éducation, transformation."
+                    content="Jaga Fight, école de Muay Thaï à Cagnes-sur-Mer près de Nice. Cours collectifs, self-défense, stages, formation diplômante. Sport, éducation, transformation pour toute la Côte d'Azur."
                 />
-                <meta name="keywords" content="Muay Thaï Cagnes-sur-Mer, cours boxe Cagnes, self-défense 06, école boxe thaïlandaise, Jaga Fight" />
+                <meta name="keywords" content="Muay Thaï Cagnes-sur-Mer, boxe thaï Nice, cours boxe Cagnes, muay thai antibes, boxe thai 06, école boxe thaïlandaise côte d'azur, club boxe alpes maritimes, self-défense Cagnes, Jaga Fight" />
                 <link rel="canonical" href="https://www.jagafight.fr/" />
+
+                {/* Open Graph */}
+                <meta property="og:title" content="Jaga Fight — École de Muay Thaï à Cagnes-sur-Mer" />
+                <meta property="og:description" content="École de Muay Thaï à Cagnes-sur-Mer près de Nice. Cours, stages, formations diplômantes. Desservant toute la Côte d'Azur." />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://www.jagafight.fr/" />
+                <meta property="og:image" content="https://www.jagafight.fr/og-image.jpg" />
+                <meta property="og:locale" content="fr_FR" />
+
+                {/* Twitter Card */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Jaga Fight — École de Muay Thaï à Cagnes-sur-Mer" />
+                <meta name="twitter:description" content="École de Muay Thaï à Cagnes-sur-Mer près de Nice. Cours, stages, formations diplômantes." />
+                <meta name="twitter:image" content="https://www.jagafight.fr/og-image.jpg" />
+
+                {/* Structured Data - LocalBusiness */}
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": ["SportsActivityLocation", "LocalBusiness"],
+                        "name": "Jaga Fight",
+                        "description": "École de Muay Thaï à Cagnes-sur-Mer proposant des cours collectifs, self-défense, stages et formations diplômantes",
+                        "url": "https://www.jagafight.fr",
+                        "logo": "https://www.jagafight.fr/logo.png",
+                        "image": "https://www.jagafight.fr/og-image.jpg",
+                        "address": {
+                            "@type": "PostalAddress",
+                            "addressLocality": "Cagnes-sur-Mer",
+                            "addressRegion": "Alpes-Maritimes",
+                            "postalCode": "06800",
+                            "addressCountry": "FR"
+                        },
+                        "geo": {
+                            "@type": "GeoCoordinates",
+                            "latitude": "43.6633",
+                            "longitude": "7.1481"
+                        },
+                        "telephone": "+33-XXX-XXX-XXX",
+                        "email": "contact@jagafight.fr",
+                        "openingHoursSpecification": {
+                            "@type": "OpeningHoursSpecification",
+                            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                            "opens": "09:00",
+                            "closes": "21:00"
+                        },
+                        "priceRange": "€€",
+                        "areaServed": [
+                            {
+                                "@type": "City",
+                                "name": "Cagnes-sur-Mer"
+                            },
+                            {
+                                "@type": "City",
+                                "name": "Nice"
+                            },
+                            {
+                                "@type": "City",
+                                "name": "Antibes"
+                            }
+                        ],
+                        "founder": {
+                            "@type": "Person",
+                            "name": "Oualid OUMERZOUK",
+                            "award": "Champion du monde Nokento Full Fight 2017"
+                        },
+                        "employee": {
+                            "@type": "Person",
+                            "name": "Hicham KILIC",
+                            "jobTitle": "Coach principal",
+                            "award": "Champion d'Europe Muay Thaï"
+                        }
+                    })}
+                </script>
             </Helmet>
 
             <HeroSection />

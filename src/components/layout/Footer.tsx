@@ -1,10 +1,45 @@
-import { Link } from 'react-router-dom'
-
 export default function Footer() {
     const year = new Date().getFullYear()
 
+    // Structured Data - Organization
+    const organizationSchema = {
+        "@context": "https://schema.org",
+        "@type": "SportsOrganization",
+        "name": "Jaga Fight",
+        "url": "https://www.jagafight.fr",
+        "logo": "https://www.jagafight.fr/logo.png",
+        "description": "École de Muay Thaï à Cagnes-sur-Mer proposant cours collectifs, coaching individuel, stages et formations diplômantes",
+        "email": "contact@jagafight.fr",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Cagnes-sur-Mer",
+            "addressRegion": "Alpes-Maritimes",
+            "postalCode": "06800",
+            "addressCountry": "FR"
+        },
+        "areaServed": [
+            "Cagnes-sur-Mer",
+            "Nice",
+            "Antibes",
+            "Villeneuve-Loubet",
+            "Saint-Laurent-du-Var",
+            "Côte d'Azur",
+            "Alpes-Maritimes"
+        ],
+        "founder": {
+            "@type": "Person",
+            "name": "Oualid OUMERZOUK"
+        },
+        "foundingDate": "2025",
+        "slogan": "Sport, éducation, transformation"
+    }
+
     return (
         <footer className="bg-[#0a0a0a] border-t border-white/10 mt-auto">
+            {/* Structured Data */}
+            <script type="application/ld+json">
+                {JSON.stringify(organizationSchema)}
+            </script>
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                     {/* Logo & baseline */}
@@ -15,6 +50,12 @@ export default function Footer() {
                         <p className="mt-3 text-sm text-[#F5F5F0]/50 leading-relaxed">
                             École de Muay Thaï à Cagnes-sur-Mer.<br />
                             Sport, éducation, transformation.
+                        </p>
+                        <p className="mt-3 text-xs text-[#F5F5F0]/40 leading-relaxed">
+                            <strong className="text-[#F5F5F0]/60">Zone desservie :</strong><br />
+                            Cagnes-sur-Mer · Nice · Antibes<br />
+                            Villeneuve-Loubet · Saint-Laurent-du-Var<br />
+                            Toute la Côte d'Azur (06)
                         </p>
                     </div>
 
@@ -30,12 +71,12 @@ export default function Footer() {
                                 { to: '/politique-confidentialite', label: 'Politique de confidentialité' },
                             ].map(link => (
                                 <li key={link.to}>
-                                    <Link
-                                        to={link.to}
+                                    <a
+                                        href={link.to}
                                         className="text-sm text-[#F5F5F0]/50 hover:text-[#eb0071] transition-colors"
                                     >
                                         {link.label}
-                                    </Link>
+                                    </a>
                                 </li>
                             ))}
                         </ul>
@@ -78,13 +119,13 @@ export default function Footer() {
                 <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-[#F5F5F0]/30">
                     <p>© {year} Jaga Fight — Tous droits réservés</p>
                     <p>
-                        <Link to="/mentions-legales" className="hover:text-[#eb0071]/60 transition-colors">
+                        <a href="/mentions-legales" className="hover:text-[#eb0071]/60 transition-colors">
                             Mentions légales
-                        </Link>
+                        </a>
                         {' · '}
-                        <Link to="/politique-confidentialite" className="hover:text-[#eb0071]/60 transition-colors">
+                        <a href="/politique-confidentialite" className="hover:text-[#eb0071]/60 transition-colors">
                             RGPD
-                        </Link>
+                        </a>
                     </p>
                 </div>
             </div>

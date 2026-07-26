@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import logoWhite from '../../../assets/white_logo_jaga.png'
 
 export default function HeroSection() {
@@ -22,10 +21,15 @@ export default function HeroSection() {
                     École de Muay Thaï — Cagnes-sur-Mer
                 </span>
 
-                {/* Titre */}
+                {/* Titre H1 pour SEO */}
+                <h1 className="sr-only">
+                    Jaga Fight — École de Muay Thaï à Cagnes-sur-Mer, Côte d'Azur
+                </h1>
+
+                {/* Logo visuel */}
                 <img
                     src={logoWhite}
-                    alt="JAGA FIGHT"
+                    alt="Logo Jaga Fight - École Muay Thaï Cagnes-sur-Mer"
                     className="h-48 sm:h-64 lg:h-80 mb-6 mx-auto"
                 />
 
@@ -36,18 +40,18 @@ export default function HeroSection() {
 
                 {/* CTAs */}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Link
-                        to="/preinscription"
+                    <a
+                        href="/preinscription"
                         className="px-8 py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm rounded hover:bg-[#eb0071] transition-colors"
                     >
                         Me préinscrire
-                    </Link>
-                    <Link
-                        to="/coaching"
+                    </a>
+                    <a
+                        href="/coaching"
                         className="px-8 py-4 border border-[#F5F5F0]/30 text-[#F5F5F0]/80 font-semibold tracking-widest uppercase text-sm rounded hover:border-[#F5F5F0]/60 hover:text-[#F5F5F0] transition-colors"
                     >
                         Découvrir le coaching
-                    </Link>
+                    </a>
                 </div>
             </div>
         </section>

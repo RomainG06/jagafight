@@ -1,5 +1,4 @@
 import { Helmet } from 'react-helmet-async'
-import { Link } from 'react-router-dom'
 import TrainingSection from '../components/sections/home/TrainingSection'
 import LocalSection from '../components/sections/home/LocalSection'
 
@@ -10,10 +9,90 @@ export default function Formations() {
                 <title>Formations diplômantes — Jaga Fight</title>
                 <meta
                     name="description"
-                    content="Devenez coach de Muay Thaï avec Jaga Fight. Parcours certifiants CQP, BPJEPS, BMF, DEJEPS et DESJEPS. Accompagnement complet et partenariats fédéraux."
+                    content="Devenez coach de Muay Thaï avec Jaga Fight à Cagnes-sur-Mer. Parcours certifiants CQP, BPJEPS, BMF, DEJEPS et DESJEPS. Formation reconnue Alpes-Maritimes et PACA."
                 />
-                <meta name="keywords" content="formation coach Muay Thaï, CQP boxe thaï, BPJEPS sports de combat, devenir coach boxe, formation diplômante Cagnes-sur-Mer" />
+                <meta name="keywords" content="formation coach Muay Thaï, CQP boxe thaï, BPJEPS sports de combat Nice, devenir coach boxe, formation diplômante Cagnes-sur-Mer, formation muay thai alpes maritimes, BPJEPS 06" />
                 <link rel="canonical" href="https://www.jagafight.fr/formations" />
+
+                {/* Open Graph */}
+                <meta property="og:title" content="Formations diplômantes Muay Thaï — Jaga Fight" />
+                <meta property="og:description" content="Devenez coach professionnel de Muay Thaï. Formations CQP, BPJEPS, DEJEPS à Cagnes-sur-Mer." />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://www.jagafight.fr/formations" />
+                <meta property="og:image" content="https://www.jagafight.fr/og-formations.jpg" />
+
+                {/* Twitter Card */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Formations diplômantes Muay Thaï — Jaga Fight" />
+                <meta name="twitter:description" content="Devenez coach professionnel. CQP, BPJEPS, DEJEPS à Cagnes-sur-Mer." />
+                <meta name="twitter:image" content="https://www.jagafight.fr/og-formations.jpg" />
+
+                {/* Structured Data - Course */}
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Course",
+                        "name": "Formation professionnelle Coach Muay Thaï",
+                        "description": "Parcours complet pour devenir coach professionnel de Muay Thaï, du CQP au DESJEPS. Formations diplômantes reconnues par le Ministère des Sports et les fédérations.",
+                        "provider": {
+                            "@type": "SportsActivityLocation",
+                            "name": "Jaga Fight",
+                            "address": {
+                                "@type": "PostalAddress",
+                                "addressLocality": "Cagnes-sur-Mer",
+                                "addressRegion": "Alpes-Maritimes",
+                                "postalCode": "06800",
+                                "addressCountry": "FR"
+                            }
+                        },
+                        "courseCode": "CQP / BPJEPS / BMF / DEJEPS / DESJEPS",
+                        "educationalCredentialAwarded": [
+                            {
+                                "@type": "EducationalOccupationalCredential",
+                                "credentialCategory": "CQP",
+                                "name": "Certificat de Qualification Professionnelle Moniteur Arts Martiaux"
+                            },
+                            {
+                                "@type": "EducationalOccupationalCredential",
+                                "credentialCategory": "BPJEPS",
+                                "name": "Brevet Professionnel de la Jeunesse, de l'Éducation Populaire et du Sport mention Boxe Thaï"
+                            },
+                            {
+                                "@type": "EducationalOccupationalCredential",
+                                "credentialCategory": "BMF",
+                                "name": "Brevet Moniteur Fédéral"
+                            },
+                            {
+                                "@type": "EducationalOccupationalCredential",
+                                "credentialCategory": "DEJEPS",
+                                "name": "Diplôme d'État de la Jeunesse, de l'Éducation Populaire et du Sport"
+                            },
+                            {
+                                "@type": "EducationalOccupationalCredential",
+                                "credentialCategory": "DESJEPS",
+                                "name": "Diplôme d'État Supérieur de la Jeunesse, de l'Éducation Populaire et du Sport"
+                            }
+                        ],
+                        "hasCourseInstance": {
+                            "@type": "CourseInstance",
+                            "courseMode": "Blended",
+                            "courseWorkload": "Variable selon le diplôme",
+                            "instructor": {
+                                "@type": "Person",
+                                "name": "Hicham KILIC",
+                                "jobTitle": "Formateur diplômé BPJEPS",
+                                "award": "Champion d'Europe Muay Thaï"
+                            }
+                        },
+                        "occupationalCredentialAwarded": "Coach professionnel de Muay Thaï",
+                        "about": [
+                            "Muay Thaï",
+                            "Boxe Thaïlandaise",
+                            "Pédagogie sportive",
+                            "Formation professionnelle"
+                        ]
+                    })}
+                </script>
             </Helmet>
 
             {/* Hero section */}
@@ -86,12 +165,12 @@ export default function Formations() {
                     <p className="text-[#F5F5F0]/70 mb-8 leading-relaxed">
                         Contactez-nous pour échanger sur votre projet professionnel et construire ensemble votre parcours de formation.
                     </p>
-                    <Link
-                        to="/preinscription"
+                    <a
+                        href="/preinscription"
                         className="inline-flex items-center px-8 py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-wide rounded hover:bg-[#d60066] transition-colors"
                     >
                         Candidater maintenant
-                    </Link>
+                    </a>
                 </div>
             </section>
         </>

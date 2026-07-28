@@ -7,6 +7,6 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    vike({ prerender: true }) // Active le pre-rendering pour SSG
+    vike() // Pre-rendering configuré dans renderer/+config.ts
   ],
 })

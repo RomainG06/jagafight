@@ -175,11 +175,6 @@ async function generateSitemap() {
     const xml = createSitemapXml();
 
     await writeFile(outputPath, xml, "utf8");
-
-    console.log("✅ Sitemap généré avec succès");
-    console.log(`📄 ${pages.length} pages incluses`);
-    console.log(`📍 ${outputPath}`);
-    console.log(`🌐 ${BASE_URL}/sitemap.xml`);
 }
 
 generateSitemap().catch((error) => {

@@ -19,6 +19,11 @@ export default defineConfig({
     }),
   ],
 
+  // Configuration esbuild pour la minification
+  esbuild: {
+    drop: ['console', 'debugger'], // Supprime console.log et debugger en production
+  },
+
   build: {
     // Optimisations pour la production
     rollupOptions: {
@@ -36,14 +41,8 @@ export default defineConfig({
         },
       },
     },
-    // Minification avec terser (meilleur que esbuild pour production)
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true, // Supprime console.log en production
-        drop_debugger: true,
-      },
-    },
+    // Minification avec esbuild (rapide et efficace)
+    minify: 'esbuild',
     // Pas de sourcemap en production pour réduire la taille
     sourcemap: false,
     // Optimisation des chunks

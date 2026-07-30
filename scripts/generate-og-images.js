@@ -218,7 +218,6 @@ function createTextOverlay(title, subtitle) {
  * Génère toutes les images Open Graph.
  */
 async function generateOpenGraphImages() {
-    console.log("🎨 Génération des images Open Graph...\n");
 
     for (const config of images) {
         const outputPath = join(publicDir, config.name);
@@ -249,7 +248,6 @@ async function generateOpenGraphImages() {
                 })
                 .toFile(outputPath);
 
-            console.log(`✅ ${config.name} créée avec succès`);
         } catch (error) {
             console.error(
                 `❌ Erreur lors de la génération de ${config.name}:`,
@@ -287,7 +285,6 @@ async function generatePublicImages() {
             })
             .toFile(join(publicDir, "logo.png"));
 
-        console.log("✅ logo.png créé avec succès");
     } catch (error) {
         console.error(
             "❌ Erreur lors de la création de logo.png :",
@@ -309,7 +306,6 @@ async function generatePublicImages() {
             })
             .toFile(join(publicDir, "coach-hicham.jpg"));
 
-        console.log("✅ coach-hicham.jpg créé avec succès");
     } catch (error) {
         console.error(
             "❌ Erreur lors de la création de coach-hicham.jpg :",
@@ -334,7 +330,6 @@ async function generatePublicImages() {
             })
             .toFile(join(publicDir, "favicon-32x32.png"));
 
-        console.log("✅ favicon-32x32.png créé avec succès");
     } catch (error) {
         console.error(
             "❌ Erreur lors de la création du favicon :",
@@ -359,9 +354,6 @@ async function generatePublicImages() {
             })
             .toFile(join(publicDir, "apple-touch-icon.png"));
 
-        console.log(
-            "✅ apple-touch-icon.png créé avec succès"
-        );
     } catch (error) {
         console.error(
             "❌ Erreur lors de la création de l’Apple Touch Icon :",
@@ -378,14 +370,8 @@ async function generateImages() {
         recursive: true,
     });
 
-    console.log("📁 Dossier de sortie :", publicDir);
-    console.log("📁 Dossier des sources :", assetsDir);
-    console.log("");
-
     await generateOpenGraphImages();
     await generatePublicImages();
-
-    console.log("\n✨ Génération terminée !");
 }
 
 generateImages().catch((error) => {

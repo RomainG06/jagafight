@@ -87,7 +87,6 @@ export default function ActivitiesSection() {
                             <div
                                 onMouseEnter={() => {
                                     setActiveActivity(index);
-                                    console.log(`Hovered over activity: ${activity.title}`);
                                 }}
                                 onMouseLeave={() => setActiveActivity(null)}
                                 onClick={() =>

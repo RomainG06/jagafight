@@ -1,10 +1,17 @@
 import { Helmet } from 'react-helmet-async'
+import Breadcrumb from '../components/common/Breadcrumb'
 import TrainingSection from '../components/sections/home/TrainingSection'
 import LocalSection from '../components/sections/home/LocalSection'
 
 export default function Formations() {
     return (
         <>
+            <Breadcrumb
+                items={[
+                    { name: 'Formations diplômantes', url: 'https://www.jagafight.fr/formations' }
+                ]}
+            />
+
             <Helmet>
                 <title>Formations diplômantes — Jaga Fight</title>
                 <meta

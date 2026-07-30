@@ -5,6 +5,7 @@ export default function NotFound() {
         <>
             <Helmet>
                 <title>Page introuvable — Jaga Fight</title>
+                <meta name="description" content="La page que vous recherchez n'existe pas. Retournez à l'accueil pour découvrir notre école de Muay Thaï à Cagnes-sur-Mer." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
 

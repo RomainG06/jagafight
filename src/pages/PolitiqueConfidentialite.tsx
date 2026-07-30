@@ -5,6 +5,7 @@ export default function PolitiqueConfidentialite() {
         <>
             <Helmet>
                 <title>Politique de confidentialité — Jaga Fight</title>
+                <meta name="description" content="Politique de confidentialité et traitement des données personnelles de Jaga Fight. Conformité RGPD." />
                 <meta name="robots" content="noindex" />
             </Helmet>
 

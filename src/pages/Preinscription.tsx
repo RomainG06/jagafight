@@ -1,9 +1,16 @@
 import { Helmet } from 'react-helmet-async'
+import Breadcrumb from '../components/common/Breadcrumb'
 import PreinscriptionForm from '../components/sections/preinscription/PreinscriptionForm'
 
 export default function Preinscription() {
   return (
     <>
+      <Breadcrumb
+        items={[
+          { name: 'Préinscription', url: 'https://www.jagafight.fr/preinscription' }
+        ]}
+      />
+
       <Helmet>
         <title>Préinscription — Jaga Fight Cagnes-sur-Mer</title>
         <meta

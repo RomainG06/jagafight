@@ -1,4 +1,4 @@
-import coachImg from '../../../assets/coach.jpg'
+import OptimizedImage from '../../common/OptimizedImage'
 
 const sportStats = [
     { value: '+20 ans', label: 'de pratique' },
@@ -29,9 +29,11 @@ export default function CoachHero() {
                     {/* Photo du coach */}
                     <div className="relative">
                         <div className="aspect-[3/4] overflow-hidden border border-white/10">
-                            <img
-                                src={coachImg}
-                                alt="Hicham Kilic — coach Jaga Fight"
+                            <OptimizedImage
+                                src="/coach-hicham.jpg"
+                                alt="Hicham Kilic — coach principal de Jaga Fight"
+                                width={800}
+                                height={800}
                                 className="w-full h-full object-cover object-top"
                             />
                         </div>

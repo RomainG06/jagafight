@@ -1,4 +1,5 @@
 import logoWhite from '../../../assets/white_logo_jaga.png'
+import OptimizedImage from '../../common/OptimizedImage'
 
 export default function HeroSection() {
     return (
@@ -27,10 +28,15 @@ export default function HeroSection() {
                 </h1>
 
                 {/* Logo visuel */}
-                <img
+                <OptimizedImage
                     src={logoWhite}
                     alt="Logo Jaga Fight - École Muay Thaï Cagnes-sur-Mer"
-                    className="h-48 sm:h-64 lg:h-80 mb-6 mx-auto"
+                    width={640}
+                    height={320}
+                    priority
+                    sizes="(max-width: 639px) 192px, (max-width: 1023px) 256px, 320px"
+                    pictureClassName="block"
+                    className="mx-auto mb-6 h-48 w-auto object-contain sm:h-64 lg:h-80"
                 />
 
                 {/* Sous-titre */}

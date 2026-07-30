@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vike dev",
-    "build": "tsc -b && vike build",
+    "build": "npm run generate:og && npm run generate:sitemap && tsc -b && vike build",
+    "generate:og": "node scripts/generate-og-images.js",
+    "generate:sitemap": "node scripts/generate-sitemap.js",
     "lint": "eslint .",
     "preview": "vike preview"
   },
@@ -29,9 +31,11 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
+    "sharp": "^0.33.5",
     "tailwindcss": "^4.3.0",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.59.2",
-    "vite": "^8.0.12"
+    "vite": "^8.0.12",
+    "vite-plugin-image-optimizer": "^1.1.8"
   }
 }

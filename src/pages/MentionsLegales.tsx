@@ -5,6 +5,7 @@ export default function MentionsLegales() {
         <>
             <Helmet>
                 <title>Mentions légales — Jaga Fight</title>
+                <meta name="description" content="Informations légales du site Jaga Fight : éditeur, hébergement, propriété intellectuelle et responsabilité." />
                 <meta name="robots" content="noindex" />
             </Helmet>
 

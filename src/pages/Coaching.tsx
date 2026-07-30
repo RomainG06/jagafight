@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async'
+import Breadcrumb from '../components/common/Breadcrumb'
 import CoachHero from '../components/sections/coaching/CoachHero'
 import ProfessionalExperience from '../components/sections/coaching/ProfessionalExperience'
 import CoachingCards from '../components/sections/coaching/CoachingCards'
@@ -6,6 +7,12 @@ import CoachingCards from '../components/sections/coaching/CoachingCards'
 export default function Coaching() {
     return (
         <>
+            <Breadcrumb
+                items={[
+                    { name: 'Coaching', url: 'https://www.jagafight.fr/coaching' }
+                ]}
+            />
+
             <Helmet>
                 <title>Coaching Muay Thaï — Hicham KILIC | Jaga Fight Cagnes-sur-Mer</title>
                 <meta

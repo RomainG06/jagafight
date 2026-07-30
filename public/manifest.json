@@ -1,0 +1,22 @@
+{
+    "name": "Jaga Fight",
+    "short_name": "Jaga Fight",
+    "description": "École de Muay Thaï à Cagnes-sur-Mer",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0a0a0a",
+    "theme_color": "#0a0a0a",
+    "lang": "fr",
+    "icons": [
+        {
+            "src": "/apple-touch-icon.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        },
+        {
+            "src": "/logo.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

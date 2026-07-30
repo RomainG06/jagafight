@@ -1,10 +1,17 @@
 import { Helmet } from 'react-helmet-async'
+import Breadcrumb from '../components/common/Breadcrumb'
 import HistorySection from '../components/sections/home/HistorySection'
 import ValuesSection from '../components/sections/home/ValuesSection'
 
 export default function NotreAdn() {
     return (
         <>
+            <Breadcrumb 
+                items={[
+                    { name: 'Notre ADN', url: 'https://www.jagafight.fr/notre-adn' }
+                ]} 
+            />
+            
             <Helmet>
                 <title>Notre ADN — Histoire, valeurs et équipe | Jaga Fight</title>
                 <meta

@@ -6,19 +6,18 @@ import ValuesSection from '../components/sections/home/ValuesSection'
 export default function NotreAdn() {
     return (
         <>
-            <Breadcrumb 
+            <Breadcrumb
                 items={[
                     { name: 'Notre ADN', url: 'https://www.jagafight.fr/notre-adn' }
-                ]} 
+                ]}
             />
-            
+
             <Helmet>
-                <title>Notre ADN — Histoire, valeurs et équipe | Jaga Fight</title>
+                <title>Notre ADN | Club de Boxe Thaï (Muay Thaï) à Cagnes-sur-Mer - Jaga Fight</title>
                 <meta
                     name="description"
-                    content="Découvrez l'histoire de Jaga Fight, nos 5 valeurs fondatrices et l'équipe qui porte le projet. De Perpignan à Cagnes-sur-Mer, une vision exigeante du Muay Thaï."
+                    content="Découvrez l'histoire de Jaga Fight, club de Boxe Thaï (Muay Thaï) à Cagnes-sur-Mer dans les Alpes-Maritimes (06). Nos valeurs, notre équipe et notre vision du sport, de l'éducation et de la transmission."
                 />
-                <meta name="keywords" content="histoire Jaga Fight, Oualid OUMERZOUK, Hicham KILIC, valeurs Muay Thaï, école sports de combat Cagnes" />
                 <link rel="canonical" href="https://www.jagafight.fr/notre-adn" />
             </Helmet>
 
@@ -26,10 +25,10 @@ export default function NotreAdn() {
             <section className="relative min-h-[50vh] flex items-center justify-center bg-gradient-to-b from-[#0a0a0a] via-[#0d0d0d] to-[#0a0a0a]">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-20">
                     <span className="text-[#eb0071] text-xs font-semibold tracking-[0.2em] uppercase mb-6 block">
-                        Qui sommes-nous
+                        Notre histoire • Nos valeurs
                     </span>
                     <h1 className="font-title text-6xl sm:text-7xl lg:text-8xl text-[#F5F5F0] mb-6">
-                        NOTRE<br />ADN
+                        L'ADN DE JAGA FIGHT
                     </h1>
                     <p className="text-lg text-[#F5F5F0]/70 max-w-2xl mx-auto leading-relaxed">
                         Une histoire, des valeurs et une vision. Jaga Fight porte l'héritage de son fondateur Oualid et continue de transmettre une pratique exigeante et transformatrice.

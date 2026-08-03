@@ -12,10 +12,10 @@ export default function Preinscription() {
       />
 
       <Helmet>
-        <title>Préinscription — Jaga Fight Cagnes-sur-Mer</title>
+        <title>Préinscription | Club de Boxe Thaï (Muay Thaï) à Cagnes-sur-Mer (06) - Jaga Fight</title>
         <meta
           name="description"
-          content="Inscris-toi avant l'ouverture de Jaga Fight à Cagnes-sur-Mer. Laisse tes coordonnées et sois contacté(e) en priorité."
+          content="Préinscris-toi au futur club de Boxe Thaï (Muay Thaï) Jaga Fight à Cagnes-sur-Mer dans les Alpes-Maritimes (06). Sois contacté(e) en priorité dès l'ouverture des inscriptions."
         />
         <link rel="canonical" href="https://www.jagafight.fr/preinscription" />
       </Helmet>
@@ -34,11 +34,13 @@ export default function Preinscription() {
             Ouverture prochaine
           </span>
           <h1 className="font-title text-5xl sm:text-7xl text-[#F5F5F0] mb-6 leading-tight">
-            L'ÉCOLE OUVRE SES PORTES —<br />
-            <span className="text-[#eb0071]">SOIS DES PREMIERS.</span>
+            PRÉINSCRIPTION<br />
+            <span className="text-[#eb0071]">JAGA FIGHT</span>
           </h1>
-          <p className="text-[#F5F5F0]/60 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
-            Jaga Fight arrive à Cagnes-sur-Mer. Laisse-nous tes coordonnées et nous te contactons en priorité à l'ouverture.
+          <p className="text-[#F5F5F0]/60 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+            Préinscris-toi dès maintenant à nos cours de Boxe Thaï (Muay Thaï), cours particuliers,
+            séances de self-défense, stages intensifs ou formations diplômantes à Cagnes-sur-Mer.
+            Nous te contacterons en priorité dès l'ouverture.
           </p>
         </div>
       </section>

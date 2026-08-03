@@ -9,17 +9,17 @@ export default function Home() {
     return (
         <>
             <Helmet>
-                <title>Jaga Fight — École de Muay Thaï à Cagnes-sur-Mer</title>
+                <title>Club de Boxe Thaï (Muay Thaï) à Cagnes-sur-Mer (06) | Jaga Fight</title>
                 <meta
                     name="description"
-                    content="Jaga Fight, école de Muay Thaï à Cagnes-sur-Mer près de Nice. Cours collectifs, self-défense, stages, formation diplômante. Sport, éducation, transformation pour toute la Côte d'Azur."
+                    content="Jaga Fight est un club de Boxe Thaï (Muay Thaï) à Cagnes-sur-Mer dans les Alpes-Maritimes (06), proche de Nice. Cours adultes, enfants, débutants et compétiteurs, self-défense, stages et formation."
                 />
                 <meta name="keywords" content="Muay Thaï Cagnes-sur-Mer, boxe thaï Nice, cours boxe Cagnes, muay thai antibes, boxe thai 06, école boxe thaïlandaise côte d'azur, club boxe alpes maritimes, self-défense Cagnes, Jaga Fight" />
                 <link rel="canonical" href="https://www.jagafight.fr/" />
 
                 {/* Open Graph */}
-                <meta property="og:title" content="Jaga Fight — École de Muay Thaï à Cagnes-sur-Mer" />
-                <meta property="og:description" content="École de Muay Thaï à Cagnes-sur-Mer près de Nice. Cours, stages, formations diplômantes. Desservant toute la Côte d'Azur." />
+                <meta property="og:title" content="Club de Boxe Thaï (Muay Thaï) à Cagnes-sur-Mer (06) | Jaga Fight" />
+                <meta property="og:description" content="Cours de Boxe Thaï et Muay Thaï dans les Alpes-Maritimes (06)." />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://www.jagafight.fr/" />
                 <meta property="og:image" content="https://www.jagafight.fr/og-image.jpg" />
@@ -27,8 +27,8 @@ export default function Home() {
 
                 {/* Twitter Card */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Jaga Fight — École de Muay Thaï à Cagnes-sur-Mer" />
-                <meta name="twitter:description" content="École de Muay Thaï à Cagnes-sur-Mer près de Nice. Cours, stages, formations diplômantes." />
+                <meta name="twitter:title" content="Club de Boxe Thaï (Muay Thaï) à Cagnes-sur-Mer (06) | Jaga Fight" />
+                <meta name="twitter:description" content="Club de Boxe Thaï (Muay Thaï) à Cagnes-sur-Mer dans les Alpes-Maritimes (06), proche de Nice. Cours adultes, enfants, débutants et compétiteurs, self-défense, stages et formation." />
                 <meta name="twitter:image" content="https://www.jagafight.fr/og-image.jpg" />
 
                 {/* Structured Data - LocalBusiness */}

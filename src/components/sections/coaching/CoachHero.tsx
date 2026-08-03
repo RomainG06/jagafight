@@ -46,7 +46,7 @@ export default function CoachHero() {
                             Votre coach
                         </span>
                         <h1 className="font-title text-5xl sm:text-6xl text-[#F5F5F0] leading-tight mb-2">
-                            HICHAM KILIC
+                            Coaching Boxe Thaï avec Hicham KILIC
                         </h1>
                         <p className="font-title text-xl text-[#eb0071] tracking-wide mb-8">
                             Champion d'Europe de Muay Thaï

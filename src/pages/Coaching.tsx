@@ -14,25 +14,25 @@ export default function Coaching() {
             />
 
             <Helmet>
-                <title>Coaching Muay Thaï — Hicham KILIC | Jaga Fight Cagnes-sur-Mer</title>
+                <title>Coaching Boxe Thaï (Muay Thaï) à Cagnes-sur-Mer (06) | Hicham KILIC - Jaga Fight</title>
                 <meta
                     name="description"
-                    content="Hicham KILIC, Champion d'Europe de Muay Thaï, vous accompagne à Cagnes-sur-Mer et Nice. Cours collectifs, particuliers, stages intensifs et formation diplômante."
+                    content="Coaching de Boxe Thaï (Muay Thaï) à Cagnes-sur-Mer dans les Alpes-Maritimes (06) avec Hicham KILIC, Champion d'Europe. Cours particuliers, coaching personnalisé, stages et préparation compétition près de Nice."
                 />
                 <meta name="keywords" content="coaching Muay Thaï Cagnes, coach boxe thai Nice, cours boxe thaï 06, Hicham Kilic champion, formation BPJEPS Muay Thaï, coaching boxe antibes" />
                 <link rel="canonical" href="https://www.jagafight.fr/coaching" />
 
                 {/* Open Graph */}
-                <meta property="og:title" content="Hicham KILIC — Champion d'Europe Muay Thaï | Jaga Fight" />
-                <meta property="og:description" content="Coaching professionnel avec Hicham KILIC, Champion d'Europe. Cours collectifs et particuliers à Cagnes-sur-Mer." />
+                <meta property="og:title" content="Coaching Boxe Thaï (Muay Thaï) à Cagnes-sur-Mer (06) | Hicham KILIC - Jaga Fight" />
+                <meta property="og:description" content="Coaching de Boxe Thaï (Muay Thaï) à Cagnes-sur-Mer dans les Alpes-Maritimes (06) avec Hicham KILIC, Champion d'Europe. Cours particuliers, coaching personnalisé, stages et préparation compétition près de Nice." />
                 <meta property="og:type" content="profile" />
                 <meta property="og:url" content="https://www.jagafight.fr/coaching" />
                 <meta property="og:image" content="https://www.jagafight.fr/og-coaching.jpg" />
 
                 {/* Twitter Card */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Hicham KILIC — Champion d'Europe Muay Thaï" />
-                <meta name="twitter:description" content="Coaching professionnel avec un champion. Cagnes-sur-Mer, Côte d'Azur." />
+                <meta name="twitter:title" content="Coaching Boxe Thaï (Muay Thaï) à Cagnes-sur-Mer (06) | Hicham KILIC - Jaga Fight" />
+                <meta name="twitter:description" content="Coaching de Boxe Thaï (Muay Thaï) à Cagnes-sur-Mer dans les Alpes-Maritimes (06) avec Hicham KILIC, Champion d'Europe. Cours particuliers, coaching personnalisé, stages et préparation compétition près de Nice." />
                 <meta name="twitter:image" content="https://www.jagafight.fr/og-coaching.jpg" />
 
                 {/* Structured Data - Person */}
@@ -75,17 +75,6 @@ export default function Coaching() {
                     })}
                 </script>
             </Helmet>
-
-            {/* Hero page */}
-            {/*             <section className="py-16 bg-[#0a0a0a] border-b border-white/10">
-                <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <span className="text-[#eb0071] text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">
-                        Page 2
-                    </span>
-                    <h1 className="font-title text-6xl sm:text-8xl text-[#F5F5F0]">MES COACHINGS</h1>
-                </div>
-            </section> */}
-
             <CoachHero />
             <ProfessionalExperience />
 

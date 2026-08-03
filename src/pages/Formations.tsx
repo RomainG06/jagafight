@@ -13,25 +13,39 @@ export default function Formations() {
             />
 
             <Helmet>
-                <title>Formations diplômantes — Jaga Fight</title>
+                <title>Formation Coach Boxe Thaï (Muay Thaï) à Cagnes-sur-Mer (06) | BPJEPS, CQP - Jaga Fight</title>
                 <meta
                     name="description"
-                    content="Devenez coach de Muay Thaï avec Jaga Fight à Cagnes-sur-Mer. Parcours certifiants CQP, BPJEPS, BMF, DEJEPS et DESJEPS. Formation reconnue Alpes-Maritimes et PACA."
+                    content="Devenez coach de Boxe Thaï (Muay Thaï) avec Jaga Fight à Cagnes-sur-Mer dans les Alpes-Maritimes (06). Formations CQP, BPJEPS, BMF, DEJEPS et DESJEPS reconnues pour enseigner les sports de combat."
                 />
-                <meta name="keywords" content="formation coach Muay Thaï, CQP boxe thaï, BPJEPS sports de combat Nice, devenir coach boxe, formation diplômante Cagnes-sur-Mer, formation muay thai alpes maritimes, BPJEPS 06" />
+                <meta
+                    name="keywords"
+                    content="formation coach boxe thaï, formation coach muay thaï, BPJEPS sports de combat, CQP boxe thaï, devenir coach boxe thaï, formation BPJEPS Alpes-Maritimes, formation BPJEPS 06, Cagnes-sur-Mer, Nice"
+                />
                 <link rel="canonical" href="https://www.jagafight.fr/formations" />
 
                 {/* Open Graph */}
-                <meta property="og:title" content="Formations diplômantes Muay Thaï — Jaga Fight" />
-                <meta property="og:description" content="Devenez coach professionnel de Muay Thaï. Formations CQP, BPJEPS, DEJEPS à Cagnes-sur-Mer." />
+                <meta property="og:title" content="Formation Coach Boxe Thaï (Muay Thaï) | Jaga Fight" />
+                <meta
+                    property="og:description"
+                    content="Formez-vous au métier de coach de Boxe Thaï (Muay Thaï) à Cagnes-sur-Mer. CQP, BPJEPS, DEJEPS et DESJEPS."
+                />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://www.jagafight.fr/formations" />
                 <meta property="og:image" content="https://www.jagafight.fr/og-formations.jpg" />
 
                 {/* Twitter Card */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Formations diplômantes Muay Thaï — Jaga Fight" />
-                <meta name="twitter:description" content="Devenez coach professionnel. CQP, BPJEPS, DEJEPS à Cagnes-sur-Mer." />
+                <meta name="twitter:title" content="Formation Coach Boxe Thaï (Muay Thaï) | Jaga Fight" />
+                <meta
+                    name="twitter:title"
+                    content="Formation Coach Boxe Thaï (Muay Thaï) | Jaga Fight"
+                />
+
+                <meta
+                    name="twitter:description"
+                    content="Devenez coach professionnel de Boxe Thaï (Muay Thaï) grâce aux formations Jaga Fight à Cagnes-sur-Mer."
+                />
                 <meta name="twitter:image" content="https://www.jagafight.fr/og-formations.jpg" />
 
                 {/* Structured Data - Course */}
@@ -109,10 +123,11 @@ export default function Formations() {
                         Votre parcours professionnel
                     </span>
                     <h1 className="font-title text-6xl sm:text-7xl lg:text-8xl text-[#F5F5F0] mb-6">
-                        FORMATIONS<br />DIPLÔMANTES
+                        FORMATION COACH<br />
+                        BOXE THAÏ
                     </h1>
                     <p className="text-lg text-[#F5F5F0]/70 max-w-2xl mx-auto leading-relaxed">
-                        Transformez votre passion en métier. Jaga Fight vous accompagne vers les certifications reconnues pour devenir coach professionnel de Muay Thaï et sports de combat.
+                        CQP • BPJEPS • BMF • DEJEPS • DESJEPS à Cagnes-sur-Mer (Alpes-Maritimes - 06)
                     </p>
                 </div>
             </section>

@@ -17,7 +17,6 @@ export default function Navbar({ pathname = '/' }: NavbarProps) {
 
     const isActive = (to: string) =>
         to === '/' ? pathname === '/' : pathname.startsWith(to)
-
     return (
         <header className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a]/95 backdrop-blur-sm border-b border-white/10">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -33,8 +32,13 @@ export default function Navbar({ pathname = '/' }: NavbarProps) {
                             <a
                                 key={link.to}
                                 href={link.to}
+                                onClick={(e) => {
+                                    if (isActive(link.to)) {
+                                        e.preventDefault()
+                                    }
+                                }}
                                 className={`text-sm font-medium tracking-wide transition-colors ${isActive(link.to)
-                                    ? 'text-[#eb0071]'
+                                    ? 'text-[#eb0071] cursor-default'
                                     : 'text-[#F5F5F0]/70 hover:text-[#F5F5F0]'
                                     }`}
                             >
@@ -66,8 +70,14 @@ export default function Navbar({ pathname = '/' }: NavbarProps) {
                                 <a
                                     key={link.to}
                                     href={link.to}
-                                    onClick={() => setMenuOpen(false)}
-                                    className={`text-base font-medium tracking-wide transition-colors ${isActive(link.to) ? 'text-[#eb0071]' : 'text-[#F5F5F0]/70'
+                                    onClick={(e) => {
+                                        if (isActive(link.to)) {
+                                            e.preventDefault()
+                                        } else {
+                                            setMenuOpen(false)
+                                        }
+                                    }}
+                                    className={`text-base font-medium tracking-wide transition-colors ${isActive(link.to) ? 'text-[#eb0071] cursor-default' : 'text-[#F5F5F0]/70'
                                         }`}
                                 >
                                     {link.label}

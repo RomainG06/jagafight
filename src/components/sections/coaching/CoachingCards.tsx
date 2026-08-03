@@ -32,13 +32,13 @@ export default function CoachingCards() {
                             key={formula.id}
                             className="flex flex-col border border-white/10 p-6 hover:border-[#eb0071]/40 transition-colors"
                         >
-                            <div>
+                            <div className="flex-1">
                                 <span className="inline-block px-2 py-0.5 bg-[#eb0071]/20 text-[#eb0071] text-xs font-medium tracking-wide rounded mb-3">
                                     {formula.niveau}
                                 </span>
                                 <h3 className="font-title text-xl text-[#F5F5F0] mb-2">{formula.titre}</h3>
                                 <p className="text-xs text-[#F5F5F0]/40 tracking-wide mb-4">{formula.public}</p>
-                                <p className="text-sm text-[#F5F5F0]/60 leading-relaxed flex-1">{formula.description}</p>
+                                <p className="text-sm text-[#F5F5F0]/60 leading-relaxed">{formula.description}</p>
                             </div>
                             <a
                                 href="/preinscription"

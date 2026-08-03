@@ -16,14 +16,8 @@ export default function HeroSection() {
             />
 
             <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-24">
-                {/* Badge */}
-                <span className="inline-block px-4 py-1.5 border border-[#eb0071]/60 text-[#eb0071] text-xs font-semibold tracking-[0.2em] uppercase mb-8 rounded-sm">
-                    École de Muay Thaï — Cagnes-sur-Mer
-                </span>
-
-                {/* Titre H1 pour SEO */}
-                <h1 className="sr-only">
-                    Jaga Fight — École de Muay Thaï à Cagnes-sur-Mer, Côte d'Azur
+                <h1 className="inline-block px-4 py-1.5 border border-[#eb0071]/60 text-[#eb0071] text-xs font-semibold tracking-[0.2em] uppercase mb-8 rounded-sm">
+                    Club de Boxe Thaï (Muay Thaï) à Cagnes-sur-Mer • Alpes-Maritimes (06)
                 </h1>
 
                 {/* Logo visuel */}

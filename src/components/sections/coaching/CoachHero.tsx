@@ -31,7 +31,7 @@ export default function CoachHero() {
                         <div className="aspect-[3/4] overflow-hidden border border-white/10">
                             <OptimizedImage
                                 src="/coach-hicham.jpg"
-                                alt="Hicham Kilic — coach principal de Jaga Fight"
+                                alt="Hicham — coach principal de Jaga Fight"
                                 width={800}
                                 height={800}
                                 className="w-full h-full object-cover object-top"
@@ -46,7 +46,7 @@ export default function CoachHero() {
                             Votre coach
                         </span>
                         <h1 className="font-title text-5xl sm:text-6xl text-[#F5F5F0] leading-tight mb-2">
-                            Coaching Boxe Thaï avec Hicham KILIC
+                            Coaching Boxe Thaï avec Hicham
                         </h1>
                         <p className="font-title text-xl text-[#eb0071] tracking-wide mb-8">
                             Champion d'Europe de Muay Thaï

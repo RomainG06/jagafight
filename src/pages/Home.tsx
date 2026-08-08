@@ -83,7 +83,7 @@ export default function Home() {
                         },
                         "employee": {
                             "@type": "Person",
-                            "name": "Hicham KILIC",
+                            "name": "Hicham",
                             "jobTitle": "Coach principal",
                             "award": "Champion d'Europe Muay Thaï"
                         }
@@ -114,7 +114,7 @@ export default function Home() {
                                 Fondée à Perpignan par Oualid OUMERZOUK, ancien légionnaire du 2e REP et champion du monde Nokento Full Fight 2017, Jaga Fight a été créée avec une vision exigeante : former des pratiquants complets, techniquement affûtés et mentalement solides.
                             </p>
                             <p className="text-[#F5F5F0]/60 text-sm leading-relaxed mb-6">
-                                Après le décès de Oualid, Hicham KILIC a repris le flambeau pour poursuivre cette mission. En 2025, Jaga Fight ouvre ses portes à Cagnes-sur-Mer avec le soutien de la Ville, de l'AFMT, de la FFKMDA et du Ministère des Sports.
+                                Après le décès de Oualid, Hicham a repris le flambeau pour poursuivre cette mission. En 2025, Jaga Fight ouvre ses portes à Cagnes-sur-Mer avec le soutien de la Ville, de l'AFMT, de la FFKMDA et du Ministère des Sports.
                             </p>
                             <blockquote className="border-l-2 border-[#eb0071] pl-4 italic text-[#F5F5F0]/60 text-sm">
                                 « Polir son esprit pour être fier de ce que l'on voit dans son miroir. »

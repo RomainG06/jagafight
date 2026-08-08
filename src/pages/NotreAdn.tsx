@@ -57,7 +57,7 @@ export default function NotreAdn() {
                     <div className="grid grid-cols-1 md:grid-cols-1 gap-12 max-w-4xl mx-auto">
                         {/* Hicham */}
                         <div className="border border-white/10 p-8 hover:border-[#eb0071]/60 transition-colors">
-                            <h3 className="font-title text-3xl text-[#F5F5F0] mb-2">Hicham KILIC</h3>
+                            <h3 className="font-title text-3xl text-[#F5F5F0] mb-2">Hicham</h3>
                             <span className="text-[#eb0071] text-sm font-semibold tracking-wide block mb-4">
                                 Directeur technique & Coach principal
                             </span>

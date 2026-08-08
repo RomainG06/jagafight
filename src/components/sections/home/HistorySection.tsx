@@ -21,7 +21,7 @@ export default function HistorySection() {
                             },
                             {
                                 year: 'Transmission',
-                                text: "Après le décès de Oualid, Hicham KILIC reprend le flambeau et porte le projet à Cagnes-sur-Mer. L'esprit, les valeurs et la vision restent intacts.",
+                                text: "Après le décès de Oualid, Hicham reprend le flambeau et porte le projet à Cagnes-sur-Mer. L'esprit, les valeurs et la vision restent intacts.",
                             },
                             {
                                 year: '2025–2026',

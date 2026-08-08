@@ -100,7 +100,7 @@ export default function Formations() {
                             "courseWorkload": "Variable selon le diplôme",
                             "instructor": {
                                 "@type": "Person",
-                                "name": "Hicham KILIC",
+                                "name": "Hicham",
                                 "jobTitle": "Formateur diplômé BPJEPS",
                                 "award": "Champion d'Europe Muay Thaï"
                             }

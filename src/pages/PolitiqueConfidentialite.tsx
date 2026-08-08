@@ -16,7 +16,7 @@ export default function PolitiqueConfidentialite() {
                     <section>
                         <h2 className="font-title text-2xl text-[#F5F5F0] mb-3">Responsable du traitement</h2>
                         <p>
-                            <strong className="text-[#F5F5F0]">Jaga Fighting Team</strong> — Hicham KILIC<br />
+                            <strong className="text-[#F5F5F0]">Jaga Fighting Team</strong> — Hicham<br />
                             Email : contact@jagafight.fr
                         </p>
                     </section>

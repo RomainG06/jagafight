@@ -17,7 +17,7 @@ export default function MentionsLegales() {
                         <h2 className="font-title text-2xl text-[#F5F5F0] mb-3">Éditeur du site</h2>
                         <p>
                             <strong className="text-[#F5F5F0]">Jaga Fighting Team</strong><br />
-                            Responsable de publication : Hicham KILIC<br />
+                            Responsable de publication : Hicham<br />
                             Adresse : Cagnes-sur-Mer, Alpes-Maritimes (06)<br />
                             Email : contact@jagafight.fr<br />
                             Site web : www.jagafight.fr

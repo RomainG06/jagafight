@@ -62,7 +62,7 @@ export default function CoachHero() {
         <section>
             <img 
                 src={coachImage} 
-                alt="Hicham Kilic — coach Jaga Fight"
+                alt="Hicham — coach Jaga Fight"
                 className="w-full h-96 object-cover"
             />
         </section>
@@ -80,7 +80,7 @@ export default function CoachHero() {
         <section>
             <OptimizedImage
                 src={coachImage}
-                alt="Hicham Kilic — coach Jaga Fight Champion d'Europe Muay Thaï"
+                alt="Hicham — coach Jaga Fight Champion d'Europe Muay Thaï"
                 width={1200}
                 height={800}
                 priority={true} // Image above-the-fold, pas de lazy loading

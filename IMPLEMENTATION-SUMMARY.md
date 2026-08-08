@@ -170,7 +170,7 @@ import OptimizedImage from '../../common/OptimizedImage'
 
 <OptimizedImage
   src={coachImage}
-  alt="Hicham Kilic — Champion d'Europe Muay Thaï"
+  alt="Hicham — Champion d'Europe Muay Thaï"
   width={1200}
   height={800}
   priority={true}

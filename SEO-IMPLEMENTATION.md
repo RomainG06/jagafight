@@ -57,7 +57,7 @@ import OptimizedImage from '../components/common/OptimizedImage'
 
 <OptimizedImage
   src="/images/coach.jpg"
-  alt="Hicham Kilic - Coach Muay Thaï"
+  alt="Hicham - Coach Muay Thaï"
   width={800}
   height={600}
   priority={false} // true pour images above-the-fold

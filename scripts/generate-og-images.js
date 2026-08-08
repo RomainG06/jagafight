@@ -43,7 +43,7 @@ const images = [
     {
         name: "og-coaching.jpg",
         title: "COACHING PERSONNALISÉ",
-        subtitle: "Hicham Kilic — Champion d’Europe",
+        subtitle: "Hicham — Champion d’Europe",
         baseImage: join(assetsDir, "coach.jpg"),
         position: "center",
     },

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { supabase, type Preinscription } from '../lib/supabase'
+import AdminLayout from '../components/layout/AdminLayout'
 
 const STATUS_OPTIONS = ['nouveau', 'contacté', 'traité', 'annulé']
 
@@ -45,9 +46,7 @@ export default function AdminDashboard() {
         }
     }
 
-    async function handleSignOut() {
-        await supabase.auth.signOut()
-    }
+
 
     function formatDate(dateStr?: string) {
         if (!dateStr) return '—'
@@ -61,25 +60,14 @@ export default function AdminDashboard() {
     }
 
     return (
-        <div className="min-h-screen bg-[#0a0a0a] text-[#F5F5F0]">
-            {/* Header */}
-            <div className="border-b border-white/10 px-6 py-4 flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                    <h1 className="font-title text-xl tracking-widest uppercase">Admin — Jaga Fight</h1>
+        <AdminLayout>
+            <div className="px-6 py-6">
+                <div className="flex items-center gap-4 mb-6">
+                    <h1 className="font-title text-xl tracking-widest uppercase">Pré-inscriptions</h1>
                     <span className="text-xs text-[#F5F5F0]/40 border border-white/10 px-2 py-0.5">
                         {rows.length} préinscription{rows.length !== 1 ? 's' : ''}
                     </span>
                 </div>
-                <button
-                    onClick={handleSignOut}
-                    className="text-xs text-[#F5F5F0]/40 hover:text-[#F5F5F0] transition-colors tracking-widest uppercase"
-                >
-                    Déconnexion
-                </button>
-            </div>
-
-            {/* Content */}
-            <div className="px-6 py-6">
                 {loading && (
                     <div className="flex justify-center py-20">
                         <div className="w-8 h-8 border-2 border-[#eb0071] border-t-transparent rounded-full animate-spin" />
@@ -172,6 +160,6 @@ export default function AdminDashboard() {
                     </div>
                 )}
             </div>
-        </div>
+        </AdminLayout>
     )
 }

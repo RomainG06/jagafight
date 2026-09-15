@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import logo from '../../assets/white_logo_jaga.png';
+import { useAuth } from '../../contexts/AuthContext'
 
 interface NavbarProps {
     pathname?: string
@@ -7,6 +8,7 @@ interface NavbarProps {
 
 export default function Navbar({ pathname = '/' }: NavbarProps) {
     const [menuOpen, setMenuOpen] = useState(false)
+    const { session, isAdmin } = useAuth()
 
     const navLinks = [
         { to: '/', label: "L'École" },
@@ -49,6 +51,29 @@ export default function Navbar({ pathname = '/' }: NavbarProps) {
 
                     {/* CTA + burger */}
                     <div className="flex items-center gap-4">
+                        {/* Auth CTA — desktop */}
+                        <div className="hidden md:flex items-center gap-3">
+                            {session && !isAdmin ? (
+                                <a
+                                    href="/espace-membre"
+                                    className="text-sm font-medium text-[#eb0071] border border-[#eb0071]/40 px-4 py-1.5 hover:bg-[#eb0071]/10 transition-colors"
+                                >
+                                    Mon espace
+                                </a>
+                            ) : !session ? (
+                                <>
+                                    <a href="/connexion" className="text-sm text-[#F5F5F0]/60 hover:text-[#F5F5F0] transition-colors">
+                                        Connexion
+                                    </a>
+                                    <a
+                                        href="/inscription"
+                                        className="text-sm font-medium text-[#F5F5F0] bg-[#eb0071] px-4 py-1.5 hover:opacity-90 transition-opacity rounded"
+                                    >
+                                        S'inscrire
+                                    </a>
+                                </>
+                            ) : null}
+                        </div>
                         {/* Burger mobile */}
                         <button
                             className="md:hidden p-2 text-[#F5F5F0]"
@@ -83,6 +108,21 @@ export default function Navbar({ pathname = '/' }: NavbarProps) {
                                     {link.label}
                                 </a>
                             ))}
+                            {/* Auth links — mobile */}
+                            {session && !isAdmin ? (
+                                <a href="/espace-membre" className="text-base font-medium text-[#eb0071]" onClick={() => setMenuOpen(false)}>
+                                    Mon espace
+                                </a>
+                            ) : !session ? (
+                                <>
+                                    <a href="/connexion" className="text-base font-medium text-[#F5F5F0]/70" onClick={() => setMenuOpen(false)}>
+                                        Connexion
+                                    </a>
+                                    <a href="/inscription" className="text-base font-medium text-[#eb0071]" onClick={() => setMenuOpen(false)}>
+                                        S'inscrire
+                                    </a>
+                                </>
+                            ) : null}
                         </nav>
                     </div>
                 )}

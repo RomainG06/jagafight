@@ -5,9 +5,10 @@ import { supabase } from '../lib/supabase'
 type AuthContextType = {
     session: Session | null
     loading: boolean
+    isAdmin: boolean
 }
 
-const AuthContext = createContext<AuthContextType>({ session: null, loading: true })
+const AuthContext = createContext<AuthContextType>({ session: null, loading: true, isAdmin: false })
 
 export function AuthProvider({ children }: { children: ReactNode }) {
     const [session, setSession] = useState<Session | null>(null)
@@ -26,8 +27,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return () => listener.subscription.unsubscribe()
     }, [])
 
+    // Seuls les comptes avec role === 'admin' ont accès admin
+    const isAdmin = session?.user?.user_metadata?.role === 'admin'
+
     return (
-        <AuthContext.Provider value={{ session, loading }}>
+        <AuthContext.Provider value={{ session, loading, isAdmin }}>
             {children}
         </AuthContext.Provider>
     )

@@ -8,6 +8,6 @@ export default {
     prerender: true,
 
     // Passe le pageContext au client
-    passToClient: ['pageProps', 'urlPathname'],
+    passToClient: ['pageProps', 'urlPathname', 'routeParams'],
 } satisfies Config
 

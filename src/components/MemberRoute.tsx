@@ -3,14 +3,12 @@ import { navigate } from 'vike/client/router'
 import { useAuth } from '../contexts/AuthContext'
 import type { ReactNode } from 'react'
 
-export default function ProtectedRoute({ children }: { children: ReactNode }) {
-    const { session, loading, isAdmin } = useAuth()
+export default function MemberRoute({ children }: { children: ReactNode }) {
+    const { session, loading } = useAuth()
 
     useEffect(() => {
-        if (loading) return
-        if (!session) navigate('/admin/login')
-        else if (!isAdmin) navigate('/espace-membre')
-    }, [loading, session, isAdmin])
+        if (!loading && !session) navigate('/connexion')
+    }, [loading, session])
 
     if (loading) {
         return (
@@ -20,7 +18,7 @@ export default function ProtectedRoute({ children }: { children: ReactNode }) {
         )
     }
 
-    if (!session || !isAdmin) return null
+    if (!session) return null
 
     return <>{children}</>
 }

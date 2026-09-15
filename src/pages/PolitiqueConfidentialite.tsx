@@ -101,7 +101,7 @@ export default function PolitiqueConfidentialite() {
                                 className="text-[#eb0071] hover:underline"
                             >
                                 CNIL (Commission Nationale de l'Informatique et des Libertés)
-                            </a>.
+                            </a>
                         </p>
                     </section>
 

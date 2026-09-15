@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { navigate } from 'vike/client/router'
 import { supabase } from '../lib/supabase'
 
 export default function AdminLogin() {
@@ -7,7 +7,6 @@ export default function AdminLogin() {
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
-    const navigate = useNavigate()
 
     async function handleSubmit(e: FormEvent) {
         e.preventDefault()

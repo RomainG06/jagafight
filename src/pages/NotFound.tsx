@@ -12,7 +12,7 @@ export default function NotFound() {
             <div className="min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center px-4 bg-[#0a0a0a] text-white">
                 <div className="text-center max-w-2xl">
                     {/* Code erreur */}
-                    <h1 className="text-8xl md:text-9xl font-bold text-[#d4af37] mb-4">
+                    <h1 className="text-8xl md:text-9xl font-bold text-[#eb0071] mb-4">
                         404
                     </h1>
 
@@ -31,14 +31,14 @@ export default function NotFound() {
                     <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                         <a
                             href="/"
-                            className="px-8 py-3 bg-[#d4af37] text-black font-semibold rounded hover:bg-[#c4a137] transition-colors"
+                            className="px-8 py-3 bg-[#eb0071] text-black font-semibold rounded hover:bg-[#cb0066] transition-colors"
                         >
                             Retour à l'accueil
                         </a>
 
                         <a
                             href="/coaching"
-                            className="px-8 py-3 border border-white/20 rounded hover:border-[#d4af37] hover:text-[#d4af37] transition-colors"
+                            className="px-8 py-3 border border-white/20 rounded hover:border-[#eb0071] hover:text-[#eb0071] transition-colors"
                         >
                             Découvrir le coaching
                         </a>
@@ -48,18 +48,18 @@ export default function NotFound() {
                     <div className="mt-12 pt-8 border-t border-white/10">
                         <p className="text-sm text-gray-500 mb-4">Liens utiles :</p>
                         <nav className="flex flex-wrap gap-6 justify-center text-sm">
-                            <a href="/formations" className="hover:text-[#d4af37] transition-colors">
+                            <a href="/formations" className="hover:text-[#eb0071] transition-colors">
                                 Formations
                             </a>
-                            <a href="/notre-adn" className="hover:text-[#d4af37] transition-colors">
+                            <a href="/notre-adn" className="hover:text-[#eb0071] transition-colors">
                                 Notre ADN
                             </a>
-                            <a href="/preinscription" className="hover:text-[#d4af37] transition-colors">
+                            <a href="/preinscription" className="hover:text-[#eb0071] transition-colors">
                                 Pré-inscription
                             </a>
                             <a
                                 href="mailto:contact@jagafight.fr"
-                                className="hover:text-[#d4af37] transition-colors"
+                                className="hover:text-[#eb0071] transition-colors"
                             >
                                 Contact
                             </a>

@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
+import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
 import type { Session } from '@supabase/supabase-js'
 import { supabase } from '../lib/supabase'
 
@@ -30,8 +30,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // Seuls les comptes avec role === 'admin' ont accès admin
     const isAdmin = session?.user?.user_metadata?.role === 'admin'
 
+    const value = useMemo(() => ({ session, loading, isAdmin }), [session, loading, isAdmin])
+
     return (
-        <AuthContext.Provider value={{ session, loading, isAdmin }}>
+        <AuthContext.Provider value={value}>
             {children}
         </AuthContext.Provider>
     )

@@ -7,6 +7,7 @@ import React from 'react'
 import { escapeInject, dangerouslySkipEscape } from 'vike/server'
 import { HelmetProvider } from 'react-helmet-async'
 import type { OnRenderHtmlAsync } from 'vike/types'
+import Head from './Head'
 import Layout from './Layout'
 
 const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRenderHtmlAsync> => {
@@ -14,19 +15,12 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
 
     if (!Page) throw new Error('Page component is undefined')
 
-    // Création du contexte Helmet
     const helmetContext: { helmet?: any } = {}
 
-    // Premier rendu pour peupler le contexte Helmet
-    ReactDOMServer.renderToString(
-        <HelmetProvider context={helmetContext}>
-            <Layout pathname={urlPathname}>
-                <Page />
-            </Layout>
-        </HelmetProvider>
+    const headHtml = ReactDOMServer.renderToStaticMarkup(
+        <Head />
     )
 
-    // Deuxième rendu pour obtenir le HTML final avec les valeurs Helmet correctes
     const pageHtml = ReactDOMServer.renderToString(
         <HelmetProvider context={helmetContext}>
             <Layout pathname={urlPathname}>
@@ -35,7 +29,6 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
         </HelmetProvider>
     )
 
-    // Extraction des meta tags de Helmet après le rendu
     const { helmet } = helmetContext
 
     const documentHtml = escapeInject`<!DOCTYPE html>
@@ -56,6 +49,7 @@ const onRenderHtml: OnRenderHtmlAsync = async (pageContext): ReturnType<OnRender
         ${helmet ? dangerouslySkipEscape(helmet.meta?.toString() || '') : ''}
         ${helmet ? dangerouslySkipEscape(helmet.link?.toString() || '') : ''}
         ${helmet ? dangerouslySkipEscape(helmet.script?.toString() || '') : ''}
+        ${dangerouslySkipEscape(headHtml)}
       </head>
       <body>
         <div id="root">${dangerouslySkipEscape(pageHtml)}</div>

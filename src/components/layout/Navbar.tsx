@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import logo from '../../assets/white_logo_jaga.png';
 import { useAuth } from '../../contexts/AuthContext'
 
@@ -6,16 +6,16 @@ interface NavbarProps {
     pathname?: string
 }
 
-export default function Navbar({ pathname = '/' }: NavbarProps) {
+const navLinks = [
+    { to: '/', label: "L'École" },
+    { to: '/coaching', label: 'Coaching' },
+    { to: '/formations', label: 'Formations' },
+    { to: '/notre-adn', label: 'Notre ADN' },
+]
+
+const Navbar = memo(function Navbar({ pathname = '/' }: NavbarProps) {
     const [menuOpen, setMenuOpen] = useState(false)
     const { session, isAdmin } = useAuth()
-
-    const navLinks = [
-        { to: '/', label: "L'École" },
-        { to: '/coaching', label: 'Coaching' },
-        { to: '/formations', label: 'Formations' },
-        { to: '/notre-adn', label: 'Notre ADN' },
-    ]
 
     const isActive = (to: string) =>
         to === '/' ? pathname === '/' : pathname.startsWith(to)
@@ -60,6 +60,7 @@ export default function Navbar({ pathname = '/' }: NavbarProps) {
                                 >
                                     Mon espace
                                 </a>
+
                             ) : !session ? (
                                 <>
                                     <a href="/connexion" className="text-sm text-[#F5F5F0]/60 hover:text-[#F5F5F0] transition-colors">
@@ -129,4 +130,6 @@ export default function Navbar({ pathname = '/' }: NavbarProps) {
             </div>
         </header>
     )
-}
+})
+
+export default Navbar

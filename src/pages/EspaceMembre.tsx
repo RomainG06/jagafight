@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from 'react'
+import { navigate } from 'vike/client/router'
 import { Helmet } from 'react-helmet-async'
 import { supabase } from '../lib/supabase'
 import type { Membre, Adhesion, Document, Saison } from '../lib/supabase'
@@ -50,21 +51,20 @@ function EspaceMembreInner() {
 
     const fetchData = useCallback(async () => {
         const [membreRes, saisonsRes] = await Promise.all([
-            supabase.from('membres').select('*').eq('user_id', userId).maybeSingle(),
+            supabase.from('membres').select('*, adhesions(*), documents(*)').eq('user_id', userId).maybeSingle(),
             supabase.from('saisons').select('*').order('date_debut', { ascending: false }),
         ])
 
-        const m = membreRes.data as Membre | null
+        const raw = membreRes.data as (Membre & { adhesions: Adhesion[]; documents: Document[] }) | null
+        const m: Membre | null = raw ? (({ adhesions: _a, documents: _d, ...rest }) => rest)(raw) as Membre : null
         setMembre(m)
         setSaisons((saisonsRes.data ?? []) as Saison[])
 
-        if (m?.id) {
-            const [adhRes, docRes] = await Promise.all([
-                supabase.from('adhesions').select('*').eq('membre_id', m.id).order('created_at', { ascending: false }).limit(1).maybeSingle(),
-                supabase.from('documents').select('*').eq('membre_id', m.id),
-            ])
-            setAdhesion(adhRes.data as Adhesion | null)
-            setDocuments((docRes.data ?? []) as Document[])
+        if (raw) {
+            const adhesions = (raw.adhesions ?? []) as Adhesion[]
+            adhesions.sort((a, b) => (b.created_at ?? '').localeCompare(a.created_at ?? ''))
+            setAdhesion(adhesions[0] ?? null)
+            setDocuments((raw.documents ?? []) as Document[])
         }
 
         setLoading(false)
@@ -97,6 +97,7 @@ function EspaceMembreInner() {
 
     async function handleSignOut() {
         await supabase.auth.signOut()
+        await navigate('/')
     }
 
     return (
@@ -120,7 +121,7 @@ function EspaceMembreInner() {
                     </div>
                     <button
                         onClick={handleSignOut}
-                        className="text-xs text-[#F5F5F0]/40 hover:text-[#F5F5F0] transition-colors tracking-widest uppercase"
+                        className="text-xs text-[#eb0071] hover:text-[#eb0071] transition-colors tracking-widest uppercase cursor-pointer"
                     >
                         Déconnexion
                     </button>
@@ -179,7 +180,7 @@ function EspaceMembreInner() {
                     </nav>
 
                     {/* Section content */}
-                    <main className="flex-1 px-6 py-8 max-w-2xl">
+                    <main className="flex-1 px-6 py-8 max-w-4xl mx-auto">
                         <h2 className="font-title text-2xl tracking-widest uppercase text-[#F5F5F0] mb-6">
                             {SECTIONS.find(s => s.id === activeSection)?.label}
                         </h2>

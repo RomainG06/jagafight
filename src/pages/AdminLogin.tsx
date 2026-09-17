@@ -26,7 +26,7 @@ export default function AdminLogin() {
 
     return (
         <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4">
-            <div className="w-full max-w-sm">
+            <div className="w-full max-w-3xl">
                 <h1 className="font-title text-3xl text-[#F5F5F0] tracking-widest uppercase mb-8 text-center">
                     Admin
                 </h1>

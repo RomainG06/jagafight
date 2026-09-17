@@ -7,17 +7,17 @@ export default function TrainingSection() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     {/* Certifications badges */}
                     <div>
-                        <span className="text-[#eb0071] text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">
+                        <span className="text-[#eb0071] text-xs font-semibold tracking-[0.2em] text-center uppercase mb-4 block">
                             Formation professionnelle
                         </span>
-                        <h2 className="font-title text-5xl sm:text-6xl text-[#F5F5F0] mb-6">
+                        <h2 className="font-title text-5xl sm:text-6xl text-[#F5F5F0] mb-6 text-center">
                             DEVENEZ<br />ENTRAÎNEUR
                         </h2>
-                        <div className="flex flex-wrap gap-3">
+                        <div className="flex flex-wrap gap-2 justify-center">
                             {certifications.map((cert) => (
                                 <span
                                     key={cert}
-                                    className="px-4 py-2 border border-[#eb0071] text-[#eb0071] font-title text-lg tracking-wider"
+                                    className="px-4 py-2 border border-[#eb0071] text-[#eb0071] font-title text-lg tracking-wider justify-center"
                                 >
                                     {cert}
                                 </span>

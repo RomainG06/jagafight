@@ -54,9 +54,6 @@ export default function NotFound() {
                             <a href="/notre-adn" className="hover:text-[#eb0071] transition-colors">
                                 Notre ADN
                             </a>
-                            <a href="/preinscription" className="hover:text-[#eb0071] transition-colors">
-                                Pré-inscription
-                            </a>
                             <a
                                 href="mailto:contact@jagafight.fr"
                                 className="hover:text-[#eb0071] transition-colors"

@@ -22,10 +22,10 @@ export default function HeroSection() {
                 {/* CTAs */}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <a
-                        href="/preinscription"
+                        href="/inscription"
                         className="px-8 py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm rounded hover:bg-[#eb0071] transition-colors"
                     >
-                        Me préinscrire
+                        S'inscrire
                     </a>
                     <a
                         href="/coaching"

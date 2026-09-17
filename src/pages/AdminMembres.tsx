@@ -109,7 +109,7 @@ export default function AdminMembres() {
                     </h1>
                     <button
                         onClick={exportCSV}
-                        className="text-xs px-4 py-2 border border-white/20 text-[#F5F5F0]/60 hover:text-[#F5F5F0] hover:border-white/40 transition-colors tracking-widest uppercase"
+                        className="text-xs px-4 py-2 border border-white/20 text-[#F5F5F0]/60 hover:text-[#F5F5F0] hover:border-white/40 transition-colors tracking-widest uppercase cursor-pointer"
                     >
                         Exporter CSV
                     </button>

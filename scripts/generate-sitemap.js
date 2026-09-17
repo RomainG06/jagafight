@@ -48,10 +48,6 @@ const pages = [
         lastmod: "2026-07-29",
     },
     {
-        path: "/preinscription",
-        lastmod: "2026-07-29",
-    },
-    {
         path: "/mentions-legales",
         lastmod: "2026-07-29",
     },

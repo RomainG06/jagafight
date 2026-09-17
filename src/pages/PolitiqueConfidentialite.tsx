@@ -23,7 +23,7 @@ export default function PolitiqueConfidentialite() {
 
                     <section>
                         <h2 className="font-title text-2xl text-[#F5F5F0] mb-3">Données collectées</h2>
-                        <p>Dans le cadre du formulaire de préinscription, nous collectons :</p>
+                        <p>Dans le cadre du formulaire d'inscription et d'adhésion, nous collectons :</p>
                         <ul className="list-disc pl-5 mt-2 space-y-1">
                             <li>Prénom et nom</li>
                             <li>Adresse email</li>

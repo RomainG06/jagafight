@@ -1,3 +1,7 @@
 export { Page }
-import AdminDashboard from '../../src/pages/AdminDashboard'
-function Page() { return <AdminDashboard /> }
+import { useEffect } from 'react'
+import { navigate } from 'vike/client/router'
+function Page() {
+    useEffect(() => { navigate('/admin/membres') }, [])
+    return null
+}

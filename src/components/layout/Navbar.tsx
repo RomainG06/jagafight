@@ -72,6 +72,14 @@ const Navbar = memo(function Navbar() {
                                     </a>
                                 </>
                             ) : null}
+                            {isAdmin && (
+                                <a
+                                    href="/admin"
+                                    className="text-sm font-medium text-[#F5F5F0] bg-[#eb0071] px-4 py-1.5 hover:opacity-90 transition-opacity rounded"
+                                >
+                                    Admin
+                                </a>
+                            )}
                         </div>
                         {/* Burger mobile */}
                         <button

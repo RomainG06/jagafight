@@ -223,13 +223,13 @@ export default function AdminFicheMembre() {
                     <div className="flex gap-3 mb-4">
                         <button
                             onClick={() => setShowPaiementForm(v => !v)}
-                            className="text-xs px-4 py-2 border border-white/20 text-[#F5F5F0]/60 hover:text-[#F5F5F0] hover:border-white/40 transition-colors tracking-widest uppercase"
+                            className="text-xs px-4 py-2 border border-white/20 text-[#F5F5F0]/60 hover:text-[#F5F5F0] hover:border-white/40 transition-colors tracking-widest uppercase cursor-pointer"
                         >
                             + Ajouter un paiement
                         </button>
                         <button
                             onClick={generatePDF}
-                            className="text-xs px-4 py-2 border border-white/20 text-[#F5F5F0]/60 hover:text-[#F5F5F0] hover:border-white/40 transition-colors tracking-widest uppercase"
+                            className="text-xs px-4 py-2 border border-white/20 text-[#F5F5F0]/60 hover:text-[#F5F5F0] hover:border-white/40 transition-colors tracking-widest uppercase cursor-pointer"
                         >
                             Générer reçu PDF
                         </button>
@@ -310,7 +310,7 @@ export default function AdminFicheMembre() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
     return (
         <div className="mb-8">
-            <h2 className="text-xs font-semibold tracking-widest uppercase text-[#F5F5F0]/40 border-b border-white/10 pb-2 mb-4">
+            <h2 className="text-s tracking-widest uppercase text-[#F5F5F0] border-b border-white/10 pb-2 mb-4">
                 {title}
             </h2>
             <div className="space-y-2">{children}</div>

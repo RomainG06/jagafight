@@ -9,20 +9,6 @@ if (!supabaseUrl || !supabaseAnonKey) {
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
-export type Preinscription = {
-  id?: string
-  nom: string
-  prenom: string
-  email: string
-  tel?: string
-  age?: string
-  activites?: string[]
-  message?: string
-  rgpd: boolean
-  created_at?: string
-  status?: string
-}
-
 export type Membre = {
   id?: string
   user_id: string

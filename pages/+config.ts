@@ -9,5 +9,4 @@ export default {
     prerender: true,
     clientRouting: true,
 
-    // passToClient: ['pageProps', 'urlPathname', 'routeParams'],
 } satisfies Config

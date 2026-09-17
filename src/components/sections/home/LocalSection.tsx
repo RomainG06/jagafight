@@ -49,10 +49,10 @@ export default function LocalSection() {
             Sois parmi les premiers à rejoindre Jaga Fight. Laisse-nous tes coordonnées et nous te contactons en priorité.
           </p>
           <a
-            href="/preinscription"
+            href="/inscription"
             className="inline-flex items-center px-8 py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm rounded hover:bg-[#eb0071] transition-colors"
           >
-            Me préinscrire maintenant
+            S'inscrire maintenant
           </a>
         </div>
       </div>

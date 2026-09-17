@@ -4,7 +4,6 @@ import type { ReactNode } from 'react'
 import ProtectedRoute from '../ProtectedRoute'
 
 const NAV = [
-    { to: '/admin', label: 'Membres', exact: true },
     { to: '/admin/membres', label: 'Adhérents' },
     { to: '/admin/paiements', label: 'Paiements' },
     { to: '/admin/saisons', label: 'Saisons' },
@@ -13,9 +12,8 @@ const NAV = [
 function AdminLayoutInner({ children }: { children: ReactNode }) {
     const { urlPathname: pathname } = usePageContext()
 
-    function isActive(to: string, exact?: boolean) {
-        return exact ? pathname === to : pathname.startsWith(to) && to !== '/admin'
-            || (to === '/admin' && (pathname === '/admin' || pathname === '/admin/'))
+    function isActive(to: string) {
+        return pathname.startsWith(to)
     }
 
     return (
@@ -25,9 +23,10 @@ function AdminLayoutInner({ children }: { children: ReactNode }) {
                 <span className="font-title text-sm tracking-widest uppercase text-[#F5F5F0]/60">
                     Jaga Fight — Admin
                 </span>
+
                 <button
                     onClick={() => supabase.auth.signOut()}
-                    className="text-xs text-[#F5F5F0]/40 hover:text-[#F5F5F0] transition-colors tracking-widest uppercase"
+                    className="text-xs text-[#eb0071] hover:text-[#eb0071] transition-colors tracking-widest uppercase cursor-pointer"
                 >
                     Déconnexion
                 </button>
@@ -41,9 +40,9 @@ function AdminLayoutInner({ children }: { children: ReactNode }) {
                             <li key={n.to}>
                                 <a
                                     href={n.to}
-                                    className={`block px-3 py-2.5 text-sm transition-colors ${isActive(n.to, n.exact)
-                                            ? 'text-[#F5F5F0] bg-white/5 border-l-2 border-[#eb0071]'
-                                            : 'text-[#F5F5F0]/50 hover:text-[#F5F5F0] hover:bg-white/3'
+                                    className={`block px-3 py-2.5 text-sm transition-colors ${isActive(n.to)
+                                        ? 'text-[#F5F5F0] bg-white/5 border-l-2 border-[#eb0071]'
+                                        : 'text-[#F5F5F0]/50 hover:text-[#F5F5F0] hover:bg-white/3'
                                         }`}
                                 >
                                     {n.label}

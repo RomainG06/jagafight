@@ -81,7 +81,7 @@ export default function Inscription() {
             </Helmet>
 
             <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4 py-20">
-                <div className="w-full max-w-sm">
+                <div className="w-full max-w-3xl">
                     <h1 className="font-title text-3xl text-[#F5F5F0] tracking-widest uppercase mb-2 text-center">
                         Créer un compte
                     </h1>

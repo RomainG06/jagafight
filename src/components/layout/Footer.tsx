@@ -66,7 +66,6 @@ export default function Footer() {
                             {[
                                 { to: '/', label: "L'École" },
                                 { to: '/coaching', label: 'Coaching' },
-                                { to: '/preinscription', label: 'Préinscription' },
                                 { to: '/mentions-legales', label: 'Mentions légales' },
                                 { to: '/politique-confidentialite', label: 'Politique de confidentialité' },
                             ].map(link => (

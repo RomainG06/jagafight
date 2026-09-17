@@ -41,10 +41,10 @@ export default function CoachingCards() {
                                 <p className="text-sm text-[#F5F5F0]/60 leading-relaxed">{formula.description}</p>
                             </div>
                             <a
-                                href="/preinscription"
+                                href="/inscription"
                                 className="mt-6 block text-center px-4 py-2.5 border border-[#eb0071] text-[#eb0071] text-sm font-semibold tracking-wide hover:bg-[#eb0071] hover:text-[#F5F5F0] transition-colors rounded"
                             >
-                                Me préinscrire
+                                S'inscrire
                             </a>
                         </div>
                     ))}

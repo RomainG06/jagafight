@@ -4,7 +4,7 @@ import type { ReactNode } from 'react'
 import ProtectedRoute from '../ProtectedRoute'
 
 const NAV = [
-    { to: '/admin', label: 'Pré-inscriptions', exact: true },
+    { to: '/admin', label: 'Membres', exact: true },
     { to: '/admin/membres', label: 'Adhérents' },
     { to: '/admin/paiements', label: 'Paiements' },
     { to: '/admin/saisons', label: 'Saisons' },

@@ -15,19 +15,45 @@ export default function Connexion() {
         setError('')
         setLoading(true)
 
-        const { error: authError, data } = await supabase.auth.signInWithPassword({ email, password })
-        setLoading(false)
+        const { error: authError, data } = await supabase.auth.signInWithPassword({
+            email,
+            password,
+        })
 
         if (authError) {
+            setLoading(false)
             setError('Email ou mot de passe incorrect.')
             return
         }
 
-        const role = data.user?.user_metadata?.role
-        if (!role || role === 'admin') {
+        const userId = data.user?.id
+
+        if (!userId) {
+            setLoading(false)
+            setError('Utilisateur introuvable.')
+            return
+        }
+
+        const { data: roleData, error: roleError } = await supabase
+            .from('user_roles')
+            .select('role')
+            .eq('user_id', userId)
+            .maybeSingle()
+
+        setLoading(false)
+
+        if (roleError) {
+            setError('Impossible de récupérer votre rôle.')
+            return
+        }
+
+        if (roleData?.role === 'admin') {
             navigate('/admin')
-        } else {
+        } else if (roleData?.role === 'member') {
+            console.log('Navigating to member page')
             navigate('/espace-membre')
+        } else {
+            setError('Aucun rôle associé à ce compte.')
         }
     }
 

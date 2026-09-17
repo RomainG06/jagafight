@@ -1,10 +1,7 @@
 import { memo, useState } from 'react'
 import logo from '../../assets/white_logo_jaga.png';
 import { useAuth } from '../../contexts/AuthContext'
-
-interface NavbarProps {
-    pathname?: string
-}
+import { usePageContext } from 'vike-react/usePageContext';
 
 const navLinks = [
     { to: '/', label: "L'École" },
@@ -13,12 +10,13 @@ const navLinks = [
     { to: '/notre-adn', label: 'Notre ADN' },
 ]
 
-const Navbar = memo(function Navbar({ pathname = '/' }: NavbarProps) {
+const Navbar = memo(function Navbar() {
+    const { urlPathname } = usePageContext()
     const [menuOpen, setMenuOpen] = useState(false)
     const { session, isAdmin } = useAuth()
 
     const isActive = (to: string) =>
-        to === '/' ? pathname === '/' : pathname.startsWith(to)
+        to === '/' ? urlPathname === '/' : urlPathname.startsWith(to)
     return (
         <header className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a]/95 backdrop-blur-sm border-b border-white/10">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">

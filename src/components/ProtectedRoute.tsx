@@ -8,8 +8,15 @@ export default function ProtectedRoute({ children }: { children: ReactNode }) {
 
     useEffect(() => {
         if (loading) return
-        if (!session) navigate('/admin/login')
-        else if (!isAdmin) navigate('/espace-membre')
+
+        if (!session) {
+            navigate('/admin/login')
+            return
+        }
+
+        if (!isAdmin) {
+            navigate('/espace-membre')
+        }
     }, [loading, session, isAdmin])
 
     if (loading) {

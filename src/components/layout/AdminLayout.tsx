@@ -32,9 +32,26 @@ function AdminLayoutInner({ children }: { children: ReactNode }) {
                 </button>
             </div>
 
-            <div className="flex flex-1">
-                {/* Sidebar */}
-                <nav className="w-48 border-r border-white/10 px-3 py-6 flex-shrink-0">
+            {/* Mobile nav — horizontal tabs, hidden on desktop */}
+            <nav className="flex md:hidden border-b border-white/10 overflow-x-auto flex-shrink-0">
+                {NAV.map(n => (
+                    <a
+                        key={n.to}
+                        href={n.to}
+                        className={`px-5 py-3 text-sm tracking-widest uppercase whitespace-nowrap flex-shrink-0 transition-colors ${
+                            isActive(n.to)
+                                ? 'text-[#F5F5F0] border-b-2 border-[#eb0071]'
+                                : 'text-[#F5F5F0]/40 hover:text-[#F5F5F0]'
+                        }`}
+                    >
+                        {n.label}
+                    </a>
+                ))}
+            </nav>
+
+            <div className="flex flex-1 flex-col md:flex-row">
+                {/* Sidebar — hidden on mobile, visible on desktop */}
+                <nav className="hidden md:flex w-48 border-r border-white/10 px-3 py-6 flex-col flex-shrink-0">
                     <ul className="space-y-1">
                         {NAV.map(n => (
                             <li key={n.to}>

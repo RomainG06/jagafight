@@ -55,9 +55,10 @@ export default function AdminFicheMembre() {
             supabase.from('documents').select('*').eq('membre_id', id),
             supabase.from('paiements').select('*').eq('membre_id', id).order('created_at', { ascending: false }),
         ])
-        console.log('documents:', dRes.data)
-        console.log('documents error:', dRes.error)
         setMembre(mRes.data as Membre)
+        console.log(aRes.data, "adhesion response")
+        console.log(aRes.error, "adhesion response")
+        console.log(dRes.error, "documents response")
         setAdhesion(aRes.data as Adhesion | null)
         setDocuments((dRes.data ?? []) as Document[])
         setPaiements((pRes.data ?? []) as Paiement[])
@@ -127,17 +128,19 @@ export default function AdminFicheMembre() {
 
     return (
         <AdminLayout>
-            <div className="px-6 py-6 max-w-3xl">
-                <div className="flex items-center gap-4 mb-6">
+            <div className="w-full max-w-5xl mx-auto px-4 py-6 sm:px-6">
+                <div className="mb-6 flex flex-col gap-3">
                     <a href="/admin/membres" className="text-xs text-[#F5F5F0]/40 hover:text-[#F5F5F0] transition-colors tracking-widest uppercase">
                         ← Adhérents
                     </a>
-                    <h1 className="font-title text-xl tracking-widest uppercase">
-                        {membre?.prenom} {membre?.nom}
-                    </h1>
-                    {membre?.profil_complet && (
-                        <span className="text-xs text-green-400 border border-green-500/20 bg-green-500/10 px-2 py-0.5">✓ Complet</span>
-                    )}
+                    <div className="flex flex-wrap items-center gap-3">
+                        <h1 className="font-title text-xl tracking-widest uppercase">
+                            {membre?.prenom} {membre?.nom}
+                        </h1>
+                        {membre?.profil_complet && (
+                            <span className="text-xs text-green-400 border border-green-500/20 bg-green-500/10 px-2 py-0.5">✓ Complet</span>
+                        )}
+                    </div>
                 </div>
 
                 {feedback && (
@@ -201,18 +204,18 @@ export default function AdminFicheMembre() {
                     {documents.length === 0 ? (
                         <p className="text-sm text-[#F5F5F0]/30">Aucun document.</p>
                     ) : documents.map(doc => (
-                        <div key={doc.id} className="flex items-center justify-between py-2 border-b border-white/5">
+                        <div key={doc.id} className="flex flex-col gap-2 py-2 border-b border-white/5 sm:flex-row sm:items-center sm:justify-between">
                             <div>
                                 <span className="text-sm text-[#F5F5F0]/70 capitalize">{doc.type.replace(/_/g, ' ')}</span>
                                 {doc.date_validite && (
-                                    <span className="ml-2 text-xs text-[#F5F5F0]/30">
+                                    <span className="block text-xs text-[#F5F5F0]/30 sm:ml-2 sm:inline">
                                         valide jusqu'au {new Date(doc.date_validite).toLocaleDateString('fr-FR')}
                                     </span>
                                 )}
                             </div>
                             <button
                                 onClick={() => downloadDoc(doc)}
-                                className="text-xs text-[#eb0071] hover:underline"
+                                className="text-xs text-[#eb0071] hover:underline cursor-pointer"
                             >
                                 Télécharger
                             </button>
@@ -222,16 +225,16 @@ export default function AdminFicheMembre() {
 
                 {/* Paiements */}
                 <Section title="Paiements">
-                    <div className="flex gap-3 mb-4">
+                    <div className="mb-4 flex flex-col gap-3 sm:flex-row">
                         <button
                             onClick={() => setShowPaiementForm(v => !v)}
-                            className="text-xs px-4 py-2 border border-white/20 text-[#F5F5F0]/60 hover:text-[#F5F5F0] hover:border-white/40 transition-colors tracking-widest uppercase cursor-pointer"
+                            className="w-full sm:w-auto text-xs px-4 py-2 border border-white/20 text-[#F5F5F0]/60 hover:text-[#F5F5F0] hover:border-white/40 transition-colors tracking-widest uppercase cursor-pointer"
                         >
                             + Ajouter un paiement
                         </button>
                         <button
                             onClick={generatePDF}
-                            className="text-xs px-4 py-2 border border-white/20 text-[#F5F5F0]/60 hover:text-[#F5F5F0] hover:border-white/40 transition-colors tracking-widest uppercase cursor-pointer"
+                            className="w-full sm:w-auto text-xs px-4 py-2 border border-white/20 text-[#F5F5F0]/60 hover:text-[#F5F5F0] hover:border-white/40 transition-colors tracking-widest uppercase cursor-pointer"
                         >
                             Générer reçu PDF
                         </button>
@@ -239,7 +242,7 @@ export default function AdminFicheMembre() {
 
                     {showPaiementForm && (
                         <div className="border border-white/10 p-4 mb-4 space-y-3">
-                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
                                 <div>
                                     <label className={LABEL}>Mode</label>
                                     <select value={paiementForm.mode} onChange={e => setPaiementForm(p => ({ ...p, mode: e.target.value as Paiement['mode'] }))} className={SELECT}>
@@ -275,7 +278,7 @@ export default function AdminFicheMembre() {
                                     <input value={paiementForm.notes} onChange={e => setPaiementForm(p => ({ ...p, notes: e.target.value }))} className={INPUT} />
                                 </div>
                             </div>
-                            <div className="flex gap-2">
+                            <div className="flex flex-col gap-2 sm:flex-row">
                                 <button onClick={addPaiement} disabled={savingPaiement} className="px-6 py-2 bg-[#eb0071] text-[#F5F5F0] text-xs font-semibold tracking-widest uppercase hover:opacity-90 disabled:opacity-50 cursor-not-allowed">
                                     {savingPaiement ? 'Enregistrement…' : 'Enregistrer'}
                                 </button>
@@ -289,8 +292,8 @@ export default function AdminFicheMembre() {
                     {paiements.length === 0 ? (
                         <p className="text-sm text-[#F5F5F0]/30">Aucun paiement enregistré.</p>
                     ) : paiements.map(p => (
-                        <div key={p.id} className="flex items-center justify-between py-2.5 border-b border-white/5 text-sm">
-                            <div className="flex items-center gap-3">
+                        <div key={p.id} className="flex flex-col gap-2 py-2.5 border-b border-white/5 text-sm sm:flex-row sm:items-center sm:justify-between">
+                            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                                 <span className="text-[#F5F5F0]/40 text-xs">
                                     {p.date_paiement ? new Date(p.date_paiement).toLocaleDateString('fr-FR') : '—'}
                                 </span>
@@ -311,11 +314,11 @@ export default function AdminFicheMembre() {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
     return (
-        <div className="mb-8">
-            <h2 className="text-s tracking-widest uppercase text-[#F5F5F0] border-b border-white/10 pb-2 mb-4">
+        <div className="mb-6 border border-white/10 p-4 sm:p-5">
+            <h2 className="text-sm tracking-widest uppercase text-[#F5F5F0] border-b border-white/10 pb-2 mb-4">
                 {title}
             </h2>
-            <div className="space-y-2">{children}</div>
+            <div className="space-y-3">{children}</div>
         </div>
     )
 }
@@ -323,9 +326,9 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 function Row({ label, value }: { label: string; value?: string | null }) {
     if (!value) return null
     return (
-        <div className="flex gap-4 text-sm">
-            <span className="text-[#F5F5F0]/40 w-36 flex-shrink-0">{label}</span>
-            <span className="text-[#F5F5F0]/80">{value}</span>
+        <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-4">
+            <span className="text-[#F5F5F0]/40">{label}</span>
+            <span className="text-[#F5F5F0]/80 break-words">{value}</span>
         </div>
     )
 }

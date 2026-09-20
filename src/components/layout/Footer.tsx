@@ -93,15 +93,24 @@ export default function Footer() {
                             <li>Cagnes-sur-Mer, Alpes-Maritimes (06)</li>
                             <li className="flex gap-4 pt-2">
                                 <a
-                                    href="https://instagram.com"
+                                    href="https://www.instagram.com/jagafight?stkn=MThnZTA0bnc1MnNnYw=="
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="hover:text-[#ff0096] transition-colors"
+                                    className="inline-flex items-center gap-2 hover:text-[#ff0096] transition-colors"
                                     aria-label="Instagram Jaga Fight"
                                 >
-                                    Instagram
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="currentColor"
+                                        className="w-4 h-4"
+                                        aria-hidden="true"
+                                    >
+                                        <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5a4.25 4.25 0 0 0 4.25 4.25h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5a4.25 4.25 0 0 0-4.25-4.25h-8.5zm8.75 2.25a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z" />
+                                    </svg>
+                                    <span>Instagram</span>
                                 </a>
-                                <a
+                                {/*                                 <a
                                     href="https://facebook.com"
                                     target="_blank"
                                     rel="noopener noreferrer"
@@ -109,7 +118,7 @@ export default function Footer() {
                                     aria-label="Facebook Jaga Fight"
                                 >
                                     Facebook
-                                </a>
+                                </a> */}
                             </li>
                         </ul>
                     </div>

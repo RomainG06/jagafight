@@ -22,7 +22,7 @@ export default function CoachingCards() {
                         MES COACHINGS
                     </h2>
                     <p className="text-[#F5F5F0]/50 text-sm max-w-md mx-auto">
-                        Tarifs et créneaux disponibles à l'ouverture. Préinscris-toi dès maintenant pour être contacté en priorité.
+                        Tarifs et créneaux disponibles à l'ouverture. Inscris-toi dès maintenant pour être contacté en priorité.
                     </p>
                 </div>
 

@@ -10,7 +10,7 @@ export default function ProtectedRoute({ children }: { children: ReactNode }) {
         if (loading) return
 
         if (!session) {
-            navigate('/admin/login')
+            navigate('/connexion')
             return
         }
 

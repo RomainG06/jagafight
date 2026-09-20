@@ -58,12 +58,12 @@ export default function AdminSaisons() {
 
     return (
         <AdminLayout>
-            <div className="px-6 py-6 max-w-2xl">
-                <div className="flex items-center justify-between mb-6">
+            <div className="w-full max-w-4xl mx-auto px-4 py-6 sm:px-6">
+                <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <h1 className="font-title text-xl tracking-widest uppercase">Saisons</h1>
                     <button
                         onClick={() => setShowForm(v => !v)}
-                        className="text-xs px-4 py-2 border border-white/20 text-[#F5F5F0]/60 hover:text-[#F5F5F0] hover:border-white/40 transition-colors tracking-widest uppercase cursor-pointer"
+                        className="w-full sm:w-auto text-xs px-4 py-2 border border-white/20 text-[#F5F5F0]/60 hover:text-[#F5F5F0] hover:border-white/40 transition-colors tracking-widest uppercase cursor-pointer"
                     >
                         + Nouvelle saison
                     </button>
@@ -81,7 +81,7 @@ export default function AdminSaisons() {
                                 className={INPUT}
                             />
                         </div>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <div>
                                 <label className={LABEL}>Date de début</label>
                                 <input type="date" value={form.date_debut} onChange={e => setForm(f => ({ ...f, date_debut: e.target.value }))} className={INPUT} />
@@ -92,7 +92,7 @@ export default function AdminSaisons() {
                             </div>
                         </div>
                         {error && <p className="text-xs text-red-400">{error}</p>}
-                        <div className="flex gap-3">
+                        <div className="flex flex-col gap-3 sm:flex-row">
                             <button type="submit" disabled={saving} className="px-6 py-2.5 bg-[#eb0071] text-[#F5F5F0] text-xs font-semibold tracking-widest uppercase hover:opacity-90 disabled:opacity-50 rounded cursor-pointer">
                                 {saving ? 'Création…' : 'Créer'}
                             </button>
@@ -112,18 +112,18 @@ export default function AdminSaisons() {
                 ) : (
                     <div className="space-y-3">
                         {saisons.map(s => (
-                            <div key={s.id} className="border border-white/10 px-5 py-4 flex items-center justify-between gap-4">
-                                <div>
-                                    <span className="text-sm text-[#F5F5F0]">{s.label}</span>
+                            <div key={s.id} className="border border-white/10 px-5 py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                                <div className="min-w-0">
+                                    <span className="text-sm text-[#F5F5F0] break-words">{s.label}</span>
                                     {(s.date_debut || s.date_fin) && (
-                                        <span className="ml-3 text-xs text-[#F5F5F0]/30">
+                                        <span className="mt-1 block text-xs text-[#F5F5F0]/30 sm:mt-0 sm:ml-3 sm:inline">
                                             {s.date_debut ? new Date(s.date_debut).toLocaleDateString('fr-FR') : '?'}
                                             {' → '}
                                             {s.date_fin ? new Date(s.date_fin).toLocaleDateString('fr-FR') : '?'}
                                         </span>
                                     )}
                                 </div>
-                                <div className="flex items-center gap-3">
+                                <div className="flex flex-wrap items-center gap-3 sm:justify-end">
                                     {s.active && (
                                         <span className="text-xs text-green-400 border border-green-500/20 bg-green-500/10 px-2 py-0.5">
                                             Active
@@ -131,13 +131,13 @@ export default function AdminSaisons() {
                                     )}
                                     <button
                                         onClick={() => toggleActive(s)}
-                                        className="text-xs text-[#F5F5F0]/40 hover:text-[#F5F5F0] transition-colors tracking-widest uppercase"
+                                        className="text-xs text-[#F5F5F0]/40 hover:text-[#F5F5F0] transition-colors tracking-widest uppercase cursor-pointer"
                                     >
                                         {s.active ? 'Désactiver' : 'Activer'}
                                     </button>
                                     <button
                                         onClick={() => deleteSaison(s.id)}
-                                        className="text-xs text-red-400/50 hover:text-red-400 transition-colors"
+                                        className="text-xs text-red-400/50 hover:text-red-400 transition-colors cursor-pointer"
                                     >
                                         Supprimer
                                     </button>

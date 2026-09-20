@@ -165,7 +165,7 @@ export default function DocumentsSection({ membreId, documents, onSaved }: Props
                                 <button
                                     type="button"
                                     onClick={() => fileRefs.current[cfg.type]?.click()}
-                                    className="px-4 py-2 border border-white/20 text-[#F5F5F0]/60 text-xs tracking-widest uppercase hover:border-white/40 hover:text-[#F5F5F0] transition-colors"
+                                    className="px-4 py-2 border border-white/20 text-[#F5F5F0]/60 text-xs tracking-widest uppercase hover:border-white/40 hover:text-[#F5F5F0] transition-colors cursor-pointer"
                                 >
                                     {existing ? 'Remplacer' : 'Choisir un fichier'}
                                 </button>

@@ -117,48 +117,95 @@ export default function AdminPaiements() {
                         <div className="w-8 h-8 border-2 border-[#eb0071] border-t-transparent rounded-full animate-spin" />
                     </div>
                 ) : (
-                    <div className="overflow-x-auto">
-                        <table className="w-full text-sm border-collapse">
-                            <thead>
-                                <tr className="border-b border-white/10 text-[#F5F5F0]/40 text-xs tracking-widest uppercase">
-                                    <th className="text-left py-3 px-3">Date</th>
-                                    <th className="text-left py-3 px-3">Adhérent</th>
-                                    <th className="text-left py-3 px-3">Mode</th>
-                                    <th className="text-left py-3 px-3">Montant</th>
-                                    <th className="text-left py-3 px-3">Statut</th>
-                                    <th className="text-left py-3 px-3">Référence</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {filtered.length === 0 ? (
-                                    <tr>
-                                        <td colSpan={6} className="text-center text-[#F5F5F0]/30 py-16 text-sm">
-                                            Aucun paiement.
-                                        </td>
+                    <>
+                        <div className="md:hidden space-y-3">
+                            {filtered.length === 0 ? (
+                                <div className="text-center text-[#F5F5F0]/30 py-16 text-sm border border-white/10">
+                                    Aucun paiement.
+                                </div>
+                            ) : filtered.map(p => (
+                                <article key={p.id} className="border border-white/10 bg-white/[0.02] p-4 space-y-3">
+                                    <div className="flex items-start justify-between gap-3">
+                                        <div>
+                                            <p className="text-[10px] tracking-widest uppercase text-[#F5F5F0]/40">Date</p>
+                                            <p className="text-sm text-[#F5F5F0]/70">
+                                                {p.date_paiement ? new Date(p.date_paiement).toLocaleDateString('fr-FR') : '—'}
+                                            </p>
+                                        </div>
+                                        <span className={`text-xs border px-2 py-0.5 ${STATUT_STYLES[p.statut]}`}>
+                                            {STATUT_LABELS[p.statut]}
+                                        </span>
+                                    </div>
+
+                                    <div>
+                                        <p className="text-[10px] tracking-widest uppercase text-[#F5F5F0]/40 mb-1">Adhérent</p>
+                                        <a href={`/admin/membres/${p.membre_id}`} className="text-[#F5F5F0] hover:text-[#eb0071] transition-colors text-sm">
+                                            {p.membre_nom} {p.membre_prenom}
+                                        </a>
+                                    </div>
+
+                                    <div className="grid grid-cols-2 gap-3">
+                                        <div>
+                                            <p className="text-[10px] tracking-widest uppercase text-[#F5F5F0]/40 mb-1">Mode</p>
+                                            <p className="text-sm text-[#F5F5F0]/60">{MODE_LABELS[p.mode]}</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-[10px] tracking-widest uppercase text-[#F5F5F0]/40 mb-1">Montant</p>
+                                            <p className="text-sm text-[#F5F5F0] font-medium">{p.montant} €</p>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <p className="text-[10px] tracking-widest uppercase text-[#F5F5F0]/40 mb-1">Référence</p>
+                                        <p className="text-xs text-[#F5F5F0]/30">{p.reference ?? '—'}</p>
+                                    </div>
+                                </article>
+                            ))}
+                        </div>
+
+                        <div className="hidden md:block overflow-x-auto">
+                            <table className="w-full text-sm border-collapse">
+                                <thead>
+                                    <tr className="border-b border-white/10 text-[#F5F5F0]/40 text-xs tracking-widest uppercase">
+                                        <th className="text-left py-3 px-3">Date</th>
+                                        <th className="text-left py-3 px-3">Adhérent</th>
+                                        <th className="text-left py-3 px-3">Mode</th>
+                                        <th className="text-left py-3 px-3">Montant</th>
+                                        <th className="text-left py-3 px-3">Statut</th>
+                                        <th className="text-left py-3 px-3">Référence</th>
                                     </tr>
-                                ) : filtered.map(p => (
-                                    <tr key={p.id} className="border-b border-white/5 hover:bg-white/2 transition-colors">
-                                        <td className="py-3 px-3 text-[#F5F5F0]/40 text-xs">
-                                            {p.date_paiement ? new Date(p.date_paiement).toLocaleDateString('fr-FR') : '—'}
-                                        </td>
-                                        <td className="py-3 px-3">
-                                            <a href={`/admin/membres/${p.membre_id}`} className="text-[#F5F5F0] hover:text-[#eb0071] transition-colors">
-                                                {p.membre_nom} {p.membre_prenom}
-                                            </a>
-                                        </td>
-                                        <td className="py-3 px-3 text-[#F5F5F0]/60">{MODE_LABELS[p.mode]}</td>
-                                        <td className="py-3 px-3 text-[#F5F5F0] font-medium">{p.montant} €</td>
-                                        <td className="py-3 px-3">
-                                            <span className={`text-xs border px-2 py-0.5 ${STATUT_STYLES[p.statut]}`}>
-                                                {STATUT_LABELS[p.statut]}
-                                            </span>
-                                        </td>
-                                        <td className="py-3 px-3 text-[#F5F5F0]/30 text-xs">{p.reference ?? '—'}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+                                </thead>
+                                <tbody>
+                                    {filtered.length === 0 ? (
+                                        <tr>
+                                            <td colSpan={6} className="text-center text-[#F5F5F0]/30 py-16 text-sm">
+                                                Aucun paiement.
+                                            </td>
+                                        </tr>
+                                    ) : filtered.map(p => (
+                                        <tr key={p.id} className="border-b border-white/5 hover:bg-white/2 transition-colors">
+                                            <td className="py-3 px-3 text-[#F5F5F0]/40 text-xs">
+                                                {p.date_paiement ? new Date(p.date_paiement).toLocaleDateString('fr-FR') : '—'}
+                                            </td>
+                                            <td className="py-3 px-3">
+                                                <a href={`/admin/membres/${p.membre_id}`} className="text-[#F5F5F0] hover:text-[#eb0071] transition-colors">
+                                                    {p.membre_nom} {p.membre_prenom}
+                                                </a>
+                                            </td>
+                                            <td className="py-3 px-3 text-[#F5F5F0]/60">{MODE_LABELS[p.mode]}</td>
+                                            <td className="py-3 px-3 text-[#F5F5F0] font-medium">{p.montant} €</td>
+                                            <td className="py-3 px-3">
+                                                <span className={`text-xs border px-2 py-0.5 ${STATUT_STYLES[p.statut]}`}>
+                                                    {STATUT_LABELS[p.statut]}
+                                                </span>
+                                            </td>
+                                            <td className="py-3 px-3 text-[#F5F5F0]/30 text-xs">{p.reference ?? '—'}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </>
                 )}
             </div>
         </AdminLayout>

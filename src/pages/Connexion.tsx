@@ -77,7 +77,7 @@ export default function Connexion() {
                     <h1 className="font-title text-3xl text-[#F5F5F0] tracking-widest uppercase mb-2 text-center">
                         Connexion
                     </h1>
-                    <p className="text-sm text-[#F5F5F0]/40 text-center mb-8">Espace membre</p>
+                    <p className="text-sm text-[#F5F5F0]/40 text-center mb-8">Connectez-vous à votre compte</p>
 
                     <form onSubmit={handleSubmit} noValidate className="space-y-5">
                         <div>

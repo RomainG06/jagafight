@@ -55,6 +55,8 @@ export default function AdminFicheMembre() {
             supabase.from('documents').select('*').eq('membre_id', id),
             supabase.from('paiements').select('*').eq('membre_id', id).order('created_at', { ascending: false }),
         ])
+        console.log('documents:', dRes.data)
+        console.log('documents error:', dRes.error)
         setMembre(mRes.data as Membre)
         setAdhesion(aRes.data as Adhesion | null)
         setDocuments((dRes.data ?? []) as Document[])

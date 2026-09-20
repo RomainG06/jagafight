@@ -74,9 +74,18 @@ export default function DocumentsSection({ membreId, documents, onSaved }: Props
         const ext = state.file.name.split('.').pop()
         const path = `membres/${membreId}/${DOC_TYPES[cfg.type]}.${ext}`
 
-        const { error: storageError } = await supabase.storage
-            .from('documents-membres')
+        const { data, error: storageError } = await supabase.storage
+            .from('documents')
             .upload(path, state.file, { upsert: true })
+
+        console.log('UPLOAD DATA:', data)
+        console.error('UPLOAD ERROR:', storageError)
+        console.log('FILE:', {
+            name: state.file.name,
+            type: state.file.type,
+            size: state.file.size,
+            path,
+        })
 
         if (storageError) {
             setField(cfg.type, 'error', 'Erreur lors de l\'upload.')

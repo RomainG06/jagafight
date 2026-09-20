@@ -34,11 +34,13 @@ const CERTIF_LABEL: Record<string, string> = {
 }
 
 export default function AdminMembres() {
+    const PAGE_SIZE = 20
     const [rows, setRows] = useState<MembreRow[]>([])
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState('')
     const [filterCertif, setFilterCertif] = useState('')
     const [filterStatut, setFilterStatut] = useState('')
+    const [currentPage, setCurrentPage] = useState(1)
 
     useEffect(() => { fetchData() }, [])
 
@@ -96,6 +98,21 @@ export default function AdminMembres() {
         const matchStatut = !filterStatut || r.statut_pratique === filterStatut
         return matchSearch && matchCertif && matchStatut
     })
+
+    const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
+    const startIndex = (currentPage - 1) * PAGE_SIZE
+    const endIndex = startIndex + PAGE_SIZE
+    const paginated = filtered.slice(startIndex, endIndex)
+
+    useEffect(() => {
+        setCurrentPage(1)
+    }, [search, filterCertif, filterStatut])
+
+    useEffect(() => {
+        if (currentPage > totalPages) {
+            setCurrentPage(totalPages)
+        }
+    }, [currentPage, totalPages])
 
     return (
         <AdminLayout>
@@ -157,7 +174,7 @@ export default function AdminMembres() {
                         <div className="block md:hidden space-y-2">
                             {filtered.length === 0 ? (
                                 <p className="text-center text-[#F5F5F0]/30 py-16 text-sm">Aucun adhérent trouvé.</p>
-                            ) : filtered.map(row => {
+                            ) : paginated.map(row => {
                                 const cs = certifStatus(row.certif_date_validite)
                                 return (
                                     <a
@@ -216,7 +233,7 @@ export default function AdminMembres() {
                                                 Aucun adhérent trouvé.
                                             </td>
                                         </tr>
-                                    ) : filtered.map(row => {
+                                    ) : paginated.map(row => {
                                         const cs = certifStatus(row.certif_date_validite)
                                         return (
                                             <tr key={row.id} className="border-b border-white/5 hover:bg-white/2 transition-colors">
@@ -260,6 +277,35 @@ export default function AdminMembres() {
                                 </tbody>
                             </table>
                         </div>
+
+                        {filtered.length > 0 && (
+                            <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                                <p className="text-xs text-[#F5F5F0]/40 tracking-widest uppercase">
+                                    Affichage {startIndex + 1}-{Math.min(endIndex, filtered.length)} sur {filtered.length}
+                                </p>
+                                <div className="flex items-center gap-2">
+                                    <button
+                                        type="button"
+                                        onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                                        disabled={currentPage === 1}
+                                        className="px-3 py-1.5 text-xs border border-white/20 text-[#F5F5F0]/70 hover:border-white/40 hover:text-[#F5F5F0] transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-default"
+                                    >
+                                        Précédent
+                                    </button>
+                                    <span className="text-xs text-[#F5F5F0]/50 min-w-[72px] text-center">
+                                        Page {currentPage} / {totalPages}
+                                    </span>
+                                    <button
+                                        type="button"
+                                        onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                                        disabled={currentPage === totalPages}
+                                        className="px-3 py-1.5 text-xs border border-white/20 text-[#F5F5F0]/70 hover:border-white/40 hover:text-[#F5F5F0] transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-default"
+                                    >
+                                        Suivant
+                                    </button>
+                                </div>
+                            </div>
+                        )}
                     </>
                 )}
             </div>

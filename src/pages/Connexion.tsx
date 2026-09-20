@@ -125,7 +125,7 @@ export default function Connexion() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="w-full py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm hover:opacity-90 transition-opacity disabled:opacity-50 cursor-pointer disabled:cursor-default"
                         >
                             {loading ? 'Connexion…' : 'Se connecter'}
                         </button>
@@ -134,7 +134,7 @@ export default function Connexion() {
                             <button
                                 type="button"
                                 onClick={handleReset}
-                                className="text-[#F5F5F0]/40 hover:text-[#F5F5F0] transition-colors"
+                                className="text-[#F5F5F0]/40 hover:text-[#F5F5F0] transition-colors cursor-pointer"
                             >
                                 Mot de passe oublié ?
                             </button>

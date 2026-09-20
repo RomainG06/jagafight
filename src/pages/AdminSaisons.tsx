@@ -93,10 +93,10 @@ export default function AdminSaisons() {
                         </div>
                         {error && <p className="text-xs text-red-400">{error}</p>}
                         <div className="flex gap-3">
-                            <button type="submit" disabled={saving} className="px-6 py-2.5 bg-[#eb0071] text-[#F5F5F0] text-xs font-semibold tracking-widest uppercase hover:opacity-90 disabled:opacity-50">
+                            <button type="submit" disabled={saving} className="px-6 py-2.5 bg-[#eb0071] text-[#F5F5F0] text-xs font-semibold tracking-widest uppercase hover:opacity-90 disabled:opacity-50 rounded cursor-pointer">
                                 {saving ? 'Création…' : 'Créer'}
                             </button>
-                            <button type="button" onClick={() => setShowForm(false)} className="px-4 py-2 text-xs text-[#F5F5F0]/40 hover:text-[#F5F5F0]">
+                            <button type="button" onClick={() => setShowForm(false)} className="px-4 py-2 text-xs text-[#F5F5F0]/40 hover:text-[#F5F5F0] cursor-pointer">
                                 Annuler
                             </button>
                         </div>

@@ -54,15 +54,22 @@ function EspaceMembreInner() {
             supabase.from('membres').select('*, adhesions(*), documents(*)').eq('user_id', userId).maybeSingle(),
             supabase.from('saisons').select('*').order('date_debut', { ascending: false }),
         ])
+        console.log('membreRes:', membreRes)
+        console.log('saisonsRes:', saisonsRes)
+        console.log(activeSection, "??")
 
         const raw = membreRes.data as (Membre & { adhesions: Adhesion[]; documents: Document[] }) | null
         const m: Membre | null = raw ? (({ adhesions: _a, documents: _d, ...rest }) => rest)(raw) as Membre : null
         setMembre(m)
         setSaisons((saisonsRes.data ?? []) as Saison[])
+        console.log(saisons, saisonsRes.data)
 
         if (raw) {
             const adhesions = (raw.adhesions ?? []) as Adhesion[]
             adhesions.sort((a, b) => (b.created_at ?? '').localeCompare(a.created_at ?? ''))
+            console.log('RAW:', raw)
+            console.log('RAW ADHESIONS:', raw?.adhesions)
+            console.log('SAISONS API:', saisonsRes.data)
             setAdhesion(adhesions[0] ?? null)
             setDocuments((raw.documents ?? []) as Document[])
         }
@@ -163,7 +170,7 @@ function EspaceMembreInner() {
                                     <li key={s.id}>
                                         <button
                                             onClick={() => setActiveSection(s.id)}
-                                            className={`w-full text-left px-3 py-2.5 text-sm flex items-center justify-between transition-colors ${activeSection === s.id
+                                            className={`w-full text-left px-3 py-2.5 text-sm flex items-center justify-between transition-colors cursor-pointer ${activeSection === s.id
                                                 ? 'text-[#F5F5F0] bg-white/5 border-l-2 border-[#eb0071]'
                                                 : 'text-[#F5F5F0]/50 hover:text-[#F5F5F0] hover:bg-white/3'
                                                 }`}

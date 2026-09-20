@@ -49,11 +49,8 @@ export default function Connexion() {
 
         if (roleData?.role === 'admin') {
             navigate('/admin')
-        } else if (roleData?.role === 'member') {
-            console.log('Navigating to member page')
-            navigate('/espace-membre')
         } else {
-            setError('Aucun rôle associé à ce compte.')
+            navigate('/espace-membre')
         }
     }
 

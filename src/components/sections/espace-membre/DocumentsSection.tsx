@@ -116,7 +116,7 @@ export default function DocumentsSection({ membreId, documents, onSaved }: Props
                     <div key={cfg.type} className="border border-white/10 p-5 space-y-4">
                         <div className="flex items-start justify-between gap-4">
                             <div>
-                                <h3 className="text-sm font-semibold text-[#F5F5F0] tracking-wide">
+                                <h3 className="text-s text-[#F5F5F0] tracking-wide">
                                     {cfg.label}
                                     {cfg.required && <span className="text-[#eb0071] ml-1">*</span>}
                                 </h3>
@@ -126,8 +126,8 @@ export default function DocumentsSection({ membreId, documents, onSaved }: Props
                             </div>
                             {existing?.date_validite && (
                                 <span className={`text-xs px-2 py-0.5 border ${isExpiringSoon(existing.date_validite)
-                                        ? 'border-amber-500/30 text-amber-400 bg-amber-500/10'
-                                        : 'border-green-500/30 text-green-400 bg-green-500/10'
+                                    ? 'border-amber-500/30 text-amber-400 bg-amber-500/10'
+                                    : 'border-green-500/30 text-green-400 bg-green-500/10'
                                     }`}>
                                     Valide jusqu'au {new Date(existing.date_validite).toLocaleDateString('fr-FR')}
                                 </span>

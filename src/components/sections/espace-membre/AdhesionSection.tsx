@@ -34,7 +34,9 @@ const INPUT = 'w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3
 const SELECT = `${INPUT} appearance-none`
 
 export default function AdhesionSection({ membreId, adhesion, saisons, onSaved }: Props) {
+    console.log('adhesion:', adhesion)
     const saisonActive = saisons.find(s => s.active)
+    console.log('saisonActive:', saisonActive)
 
     const { register, handleSubmit, watch, control, reset, formState: { errors, isSubmitting, isDirty } } = useForm<FormValues>({
         resolver: zodResolver(schema),

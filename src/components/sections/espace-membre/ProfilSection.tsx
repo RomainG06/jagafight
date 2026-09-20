@@ -202,7 +202,7 @@ export default function ProfilSection({ membre, userId, onSaved }: Props) {
                 <button
                     type="submit"
                     disabled={isSubmitting || !isDirty}
-                    className="px-8 py-3 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
+                    className="px-8 py-3 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm hover:opacity-90 transition-opacity cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                     {isSubmitting ? 'Enregistrement…' : 'Enregistrer'}
                 </button>

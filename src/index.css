@@ -39,6 +39,11 @@ h5 {
   letter-spacing: 0.04em;
 }
 
+select option {
+  background-color: #0a0a0a;
+  color: #F5F5F0;
+}
+
 /* Screen reader only - pour accessibilité et SEO */
 .sr-only {
   position: absolute;

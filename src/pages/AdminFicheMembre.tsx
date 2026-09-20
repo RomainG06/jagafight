@@ -274,7 +274,7 @@ export default function AdminFicheMembre() {
                                 </div>
                             </div>
                             <div className="flex gap-2">
-                                <button onClick={addPaiement} disabled={savingPaiement} className="px-6 py-2 bg-[#eb0071] text-[#F5F5F0] text-xs font-semibold tracking-widest uppercase hover:opacity-90 disabled:opacity-50">
+                                <button onClick={addPaiement} disabled={savingPaiement} className="px-6 py-2 bg-[#eb0071] text-[#F5F5F0] text-xs font-semibold tracking-widest uppercase hover:opacity-90 disabled:opacity-50 cursor-not-allowed">
                                     {savingPaiement ? 'Enregistrement…' : 'Enregistrer'}
                                 </button>
                                 <button onClick={() => setShowPaiementForm(false)} className="px-4 py-2 text-xs text-[#F5F5F0]/40 hover:text-[#F5F5F0] transition-colors">

@@ -1,9 +1,18 @@
 {
+    "$schema": "https://openapi.vercel.sh/vercel.json",
+    "buildCommand": "npm run build",
+    "outputDirectory": "dist/client",
     "redirects": [
         {
             "source": "/:path((?!.*\\.).*)/",
             "destination": "/:path",
             "permanent": true
+        }
+    ],
+    "rewrites": [
+        {
+            "source": "/((?!assets/).*)",
+            "destination": "/api/ssr.js"
         }
     ],
     "headers": [

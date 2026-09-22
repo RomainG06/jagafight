@@ -53,8 +53,8 @@ export default function Home() {
                             "latitude": "43.6633",
                             "longitude": "7.1481"
                         },
-                        "telephone": "+33-XXX-XXX-XXX",
-                        "email": "contact@jagafight.fr",
+                        "telephone": "+33 7 43 52 72 93",
+                        "email": "Agentpro.athlete@gmail.com",
                         "openingHoursSpecification": {
                             "@type": "OpeningHoursSpecification",
                             "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],

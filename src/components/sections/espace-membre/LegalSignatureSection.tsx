@@ -135,7 +135,7 @@ export default function LegalSignatureSection({ adhesion, userId, onSaved }: Pro
 
             <div className="text-xs text-[#F5F5F0]/30 border border-white/5 px-4 py-3">
                 Vos données sont conservées 12 mois après votre adhésion. Pour exercer vos droits (accès, rectification, suppression), contactez{' '}
-                <a href="mailto:contact@jagafight.fr" className="text-[#eb0071] hover:underline">contact@jagafight.fr</a>.
+                <a href="mailto:Agentpro.athlete@gmail.com" className="text-[#eb0071] hover:underline">Agentpro.athlete@gmail.com</a>.
             </div>
 
             <div>

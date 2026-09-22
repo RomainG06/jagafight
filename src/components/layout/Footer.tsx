@@ -9,7 +9,7 @@ export default function Footer() {
         "url": "https://www.jagafight.fr",
         "logo": "https://www.jagafight.fr/logo.png",
         "description": "École de Muay Thaï à Cagnes-sur-Mer proposant cours collectifs, coaching individuel, stages et formations diplômantes",
-        "email": "contact@jagafight.fr",
+        "email": "Agentpro.athlete@gmail.com",
         "address": {
             "@type": "PostalAddress",
             "addressLocality": "Cagnes-sur-Mer",
@@ -87,8 +87,8 @@ export default function Footer() {
                         <h3 className="font-title text-lg tracking-wider text-[#F5F5F0] mb-4">Contact & Réseaux</h3>
                         <ul className="space-y-2 text-sm text-[#F5F5F0]/50">
                             <li>
-                                <a href="mailto:contact@jagafight.fr" className="hover:text-[#eb0071] transition-colors">
-                                    contact@jagafight.fr
+                                <a href="mailto:Agentpro.athlete@gmail.com" className="hover:text-[#eb0071] transition-colors">
+                                    Agentpro.athlete@gmail.com
                                 </a>
                             </li>
                             <li>Cagnes-sur-Mer, Alpes-Maritimes (06)</li>

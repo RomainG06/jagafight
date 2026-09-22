@@ -19,7 +19,7 @@ export default function MentionsLegales() {
                             <strong className="text-[#F5F5F0]">Jaga Fighting Team</strong><br />
                             Responsable de publication : Hicham<br />
                             Adresse : Cagnes-sur-Mer, Alpes-Maritimes (06)<br />
-                            Email : contact@jagafight.fr<br />
+                            Email : Agentpro.athlete@gmail.com<br />
                             Site web : www.jagafight.fr
                         </p>
                     </section>

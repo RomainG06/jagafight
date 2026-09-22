@@ -207,7 +207,7 @@ export default function Coaching() {
                             Vous souhaitez un accompagnement personnalisé ? Parlons de votre projet.
                         </p>
                         <a
-                            href="mailto:contact@jagafight.fr"
+                            href="mailto:Agentpro.athlete@gmail.com"
                             className="inline-flex items-center px-8 py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm rounded hover:bg-[#d60066] transition-colors"
                         >
                             Nous contacter

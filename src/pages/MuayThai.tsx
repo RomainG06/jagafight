@@ -5,7 +5,7 @@ import respect from '../assets/muayph.jpeg'
 
 const weapons = [
     {
-        number: '02',
+        number: '01',
         title: 'Poings',
         description: 'Directs, crochets et uppercuts structurent les échanges à courte et moyenne distance.',
     },
@@ -15,12 +15,12 @@ const weapons = [
         description: 'Des armes de courte distance qui demandent précision, contrôle et maîtrise technique.',
     },
     {
-        number: '02',
+        number: '03',
         title: 'Genoux',
         description: 'Ils s’utilisent à distance ou dans le corps-à-corps pour développer puissance et coordination.',
     },
     {
-        number: '02',
+        number: '04',
         title: 'Jambes',
         description: 'Les frappes avec les tibias mobilisent tout le corps et donnent au Muay Thaï son rythme singulier.',
     },

@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async'
 import Breadcrumb from '../components/common/Breadcrumb'
 import hichKnee from '../assets/hichKnee.jpg'
-import respect from '../assets/respect.jpg'
+import respect from '../assets/muayph.jpeg'
 
 const weapons = [
     {

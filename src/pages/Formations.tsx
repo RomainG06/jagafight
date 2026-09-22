@@ -122,9 +122,9 @@ export default function Formations() {
                     <span className="text-[#eb0071] text-xs font-semibold tracking-[0.2em] uppercase mb-6 block">
                         Votre parcours professionnel
                     </span>
-                    <h1 className="font-title text-6xl sm:text-7xl lg:text-8xl text-[#F5F5F0] mb-6">
-                        FORMATION COACH<br />
-                        BOXE THAÏ
+                    <h1 className="font-title text-6xl sm:text-7xl lg:text-8xl text-[#F5F5F0] mb-6 uppercase">
+                        FORMATION éducateur<br />
+                        sports de contact
                     </h1>
                     <p className="text-lg text-[#F5F5F0]/70 max-w-2xl mx-auto leading-relaxed">
                         CQP • BPJEPS • BMF • DEJEPS • DESJEPS à Cagnes-sur-Mer (Alpes-Maritimes - 06)

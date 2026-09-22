@@ -43,7 +43,7 @@ export default function LocalSection() {
         {/* CTA final */}
         <div className="text-center bg-[#eb0071]/10 border border-[#eb0071]/30 p-10 sm:p-16">
           <h3 className="font-title text-4xl sm:text-5xl text-[#F5F5F0] mb-4">
-            L'ÉCOLE OUVRE BIENTÔT
+            L'ÉCOLE OUVRE SES PORTES
           </h3>
           <p className="text-[#F5F5F0]/60 mb-8 max-w-md mx-auto">
             Sois parmi les premiers à rejoindre Jaga Fight. Laisse-nous tes coordonnées et nous te contactons en priorité.

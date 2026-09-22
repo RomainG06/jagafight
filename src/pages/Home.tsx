@@ -160,6 +160,12 @@ export default function Home() {
                             >
                                 Découvrir toutes nos valeurs →
                             </a>
+                            <a
+                                href="/muay-thai"
+                                className="block mt-3 text-sm text-[#F5F5F0]/60 hover:text-[#eb0071] transition-colors font-semibold"
+                            >
+                                Comprendre la culture du Muay Thaï →
+                            </a>
                         </div>
                     </div>
                 </div>

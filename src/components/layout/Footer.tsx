@@ -65,6 +65,7 @@ export default function Footer() {
                         <ul className="space-y-2">
                             {[
                                 { to: '/', label: "L'École" },
+                                { to: '/muay-thai', label: 'Le Muay Thaï' },
                                 { to: '/coaching', label: 'Coaching' },
                                 { to: '/mentions-legales', label: 'Mentions légales' },
                                 { to: '/politique-confidentialite', label: 'Politique de confidentialité' },

@@ -13,10 +13,10 @@ export default function Formations() {
             />
 
             <Helmet>
-                <title>Formation Coach Boxe Thaï (Muay Thaï) à Cagnes-sur-Mer (06) | BPJEPS, CQP - Jaga Fight</title>
+                <title>Formation Coach Muay Thai (Boxe Thai) à Cagnes-sur-Mer (06) | BPJEPS, CQP - Jaga Fight</title>
                 <meta
                     name="description"
-                    content="Devenez coach de Boxe Thaï (Muay Thaï) avec Jaga Fight à Cagnes-sur-Mer dans les Alpes-Maritimes (06). Formations CQP, BPJEPS, BMF, DEJEPS et DESJEPS reconnues pour enseigner les sports de combat."
+                    content="Devenez coach de Muay Thai (Boxe Thai) avec Jaga Fight à Cagnes-sur-Mer dans les Alpes-Maritimes (06). Formations CQP, BPJEPS, BMF, DEJEPS et DESJEPS reconnues pour enseigner les sports de combat."
                 />
                 <meta
                     name="keywords"
@@ -25,10 +25,10 @@ export default function Formations() {
                 <link rel="canonical" href="https://www.jagafight.fr/formations" />
 
                 {/* Open Graph */}
-                <meta property="og:title" content="Formation Coach Boxe Thaï (Muay Thaï) | Jaga Fight" />
+                <meta property="og:title" content="Formation Coach Muay Thai (Boxe Thai) | Jaga Fight" />
                 <meta
                     property="og:description"
-                    content="Formez-vous au métier de coach de Boxe Thaï (Muay Thaï) à Cagnes-sur-Mer. CQP, BPJEPS, DEJEPS et DESJEPS."
+                    content="Formez-vous au métier de coach de Muay Thai (Boxe Thai) à Cagnes-sur-Mer. CQP, BPJEPS, DEJEPS et DESJEPS."
                 />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://www.jagafight.fr/formations" />
@@ -36,15 +36,15 @@ export default function Formations() {
 
                 {/* Twitter Card */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Formation Coach Boxe Thaï (Muay Thaï) | Jaga Fight" />
+                <meta name="twitter:title" content="Formation Coach Muay Thai (Boxe Thai) | Jaga Fight" />
                 <meta
                     name="twitter:title"
-                    content="Formation Coach Boxe Thaï (Muay Thaï) | Jaga Fight"
+                    content="Formation Coach Muay Thai (Boxe Thai) | Jaga Fight"
                 />
 
                 <meta
                     name="twitter:description"
-                    content="Devenez coach professionnel de Boxe Thaï (Muay Thaï) grâce aux formations Jaga Fight à Cagnes-sur-Mer."
+                    content="Devenez coach professionnel de Muay Thai (Boxe Thai) grâce aux formations Jaga Fight à Cagnes-sur-Mer."
                 />
                 <meta name="twitter:image" content="https://www.jagafight.fr/og-formations.jpg" />
 

@@ -13,10 +13,10 @@ export default function NotreAdn() {
             />
 
             <Helmet>
-                <title>Notre ADN | Club de Boxe Thaï (Muay Thaï) à Cagnes-sur-Mer - Jaga Fight</title>
+                <title>Notre ADN | Club de Muay Thai (Boxe Thai) à Cagnes-sur-Mer - Jaga Fight</title>
                 <meta
                     name="description"
-                    content="Découvrez l'histoire de Jaga Fight, club de Boxe Thaï (Muay Thaï) à Cagnes-sur-Mer dans les Alpes-Maritimes (06). Nos valeurs, notre équipe et notre vision du sport, de l'éducation et de la transmission."
+                    content="Découvrez l'histoire de Jaga Fight, club de Muay Thai (Boxe Thai) à Cagnes-sur-Mer dans les Alpes-Maritimes (06). Nos valeurs, notre équipe et notre vision du sport, de l'éducation et de la transmission."
                 />
                 <link rel="canonical" href="https://www.jagafight.fr/notre-adn" />
             </Helmet>

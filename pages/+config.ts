@@ -8,5 +8,6 @@ export default {
 
     prerender: true,
     clientRouting: true,
+    lang: 'fr',
 
 } satisfies Config

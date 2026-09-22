@@ -8,7 +8,7 @@ export default function HeroSection() {
 
             <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-24">
                 <h1 className="inline-block px-4 py-1.5 border border-[#eb0071]/60 text-[#eb0071] text-xs font-semibold tracking-[0.2em] uppercase mb-8 rounded-sm">
-                    Club de Boxe Thaï (Muay Thaï) à Cagnes-sur-Mer • Alpes-Maritimes (06)
+                    Club de Muay Thai (Boxe Thai) à Cagnes-sur-Mer • Alpes-Maritimes (06)
                 </h1>
 
                 {/* Logo visuel */}

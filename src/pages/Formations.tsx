@@ -122,9 +122,9 @@ export default function Formations() {
                     <span className="text-[#eb0071] text-xs font-semibold tracking-[0.2em] uppercase mb-6 block">
                         Votre parcours professionnel
                     </span>
-                    <h1 className="font-title text-6xl sm:text-7xl lg:text-8xl text-[#F5F5F0] mb-6">
-                        FORMATION COACH<br />
-                        BOXE THAÏ
+                    <h1 className="font-title text-6xl sm:text-7xl lg:text-8xl text-[#F5F5F0] mb-6 uppercase">
+                        FORMATION éducateur<br />
+                        sports de contact
                     </h1>
                     <p className="text-lg text-[#F5F5F0]/70 max-w-2xl mx-auto leading-relaxed">
                         CQP • BPJEPS • BMF • DEJEPS • DESJEPS à Cagnes-sur-Mer (Alpes-Maritimes - 06)
@@ -166,7 +166,7 @@ export default function Formations() {
                             },
                         ].map((item) => (
                             <div key={item.step} className="border border-white/10 p-8 hover:border-[#eb0071]/60 transition-colors">
-                                <span className="font-title text-5xl text-[#eb0071]/20 block mb-4">{item.step}</span>
+                                <span className="font-title text-5xl text-[#eb0071] block mb-4">{item.step}</span>
                                 <h3 className="font-title text-2xl text-[#F5F5F0] mb-3">{item.title}</h3>
                                 <p className="text-[#F5F5F0]/60 leading-relaxed">{item.desc}</p>
                             </div>
@@ -188,7 +188,7 @@ export default function Formations() {
                         Contactez-nous pour échanger sur votre projet professionnel et construire ensemble votre parcours de formation.
                     </p>
                     <a
-                        href="/preinscription"
+                        href="/inscription"
                         className="inline-flex items-center px-8 py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-wide rounded hover:bg-[#d60066] transition-colors"
                     >
                         Candidater maintenant

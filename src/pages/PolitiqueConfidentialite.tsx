@@ -17,20 +17,25 @@ export default function PolitiqueConfidentialite() {
                         <h2 className="font-title text-2xl text-[#F5F5F0] mb-3">Responsable du traitement</h2>
                         <p>
                             <strong className="text-[#F5F5F0]">Jaga Fighting Team</strong> — Hicham<br />
-                            Email : contact@jagafight.fr
+                            Email : Agentpro.athlete@gmail.com
                         </p>
                     </section>
 
                     <section>
                         <h2 className="font-title text-2xl text-[#F5F5F0] mb-3">Données collectées</h2>
-                        <p>Dans le cadre du formulaire de préinscription, nous collectons :</p>
+                        <p>Dans le cadre du formulaire d'inscription et d'adhésion, nous collectons :</p>
                         <ul className="list-disc pl-5 mt-2 space-y-1">
                             <li>Prénom et nom</li>
+                            <li>Date de naissance</li>
+                            <li>Adresse postale</li>
+                            <li>Nationalité</li>
                             <li>Adresse email</li>
-                            <li>Numéro de téléphone (optionnel)</li>
-                            <li>Tranche d'âge (optionnel)</li>
-                            <li>Type d'activité souhaitée (optionnel)</li>
-                            <li>Message libre (optionnel)</li>
+                            <li>Numéro de téléphone</li>
+                            <li>Informations de santé (déclarations utiles à la pratique sportive)</li>
+                            <li>Contact(s) d'urgence</li>
+                            <li>Signature électronique</li>
+                            <li>Document(s) d'identité et pièces justificatives transmises</li>
+                            <li>Informations de paiement liées à l'adhésion</li>
                         </ul>
                     </section>
 
@@ -38,7 +43,7 @@ export default function PolitiqueConfidentialite() {
                         <h2 className="font-title text-2xl text-[#F5F5F0] mb-3">Finalité du traitement</h2>
                         <p>
                             Ces données sont collectées uniquement dans le but de vous recontacter lors de l'ouverture de l'école Jaga Fight
-                            à Cagnes-sur-Mer. Elles ne seront pas utilisées à d'autres fins ni cédées à des tiers.
+                            à Cagnes-sur-Mer et Saint Laurent du Var. Elles ne seront pas utilisées à d'autres fins ni cédées à des tiers.
                         </p>
                     </section>
 
@@ -76,8 +81,8 @@ export default function PolitiqueConfidentialite() {
                         </ul>
                         <p className="mt-3">
                             Pour exercer ces droits, contactez-nous à :{' '}
-                            <a href="mailto:contact@jagafight.fr" className="text-[#eb0071] hover:underline">
-                                contact@jagafight.fr
+                            <a href="mailto:Agentpro.athlete@gmail.com" className="text-[#eb0071] hover:underline">
+                                Agentpro.athlete@gmail.com
                             </a>
                         </p>
                     </section>
@@ -101,7 +106,7 @@ export default function PolitiqueConfidentialite() {
                                 className="text-[#eb0071] hover:underline"
                             >
                                 CNIL (Commission Nationale de l'Informatique et des Libertés)
-                            </a>.
+                            </a>
                         </p>
                     </section>
 

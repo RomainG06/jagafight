@@ -16,11 +16,23 @@ export default function MentionsLegales() {
                     <section>
                         <h2 className="font-title text-2xl text-[#F5F5F0] mb-3">Éditeur du site</h2>
                         <p>
-                            <strong className="text-[#F5F5F0]">Jaga Fighting Team</strong><br />
+                            <strong className="text-[#F5F5F0]">JAGA FIGHT</strong><br />
+                            Forme juridique : association déclarée<br />
+                            Numéro RNA : W061018019<br />
+                            SIREN : 990 250 458<br />
+                            SIRET du siège : 990 250 458 00017<br />
                             Responsable de publication : Hicham<br />
-                            Adresse : Cagnes-sur-Mer, Alpes-Maritimes (06)<br />
-                            Email : contact@jagafight.fr<br />
-                            Site web : www.jagafight.fr
+                            Siège social : 82 avenue de Grasse, 06800 Cagnes-sur-Mer, France<br />
+                            Email : Agentpro.athlete@gmail.com<br />
+                            Site web : www.jagafight.fr<br />
+                            <a
+                                href="https://annuaire-entreprises.data.gouv.fr/entreprise/jaga-fight-990250458"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-[#eb0071] hover:underline"
+                            >
+                                Consulter la fiche officielle de l’association
+                            </a>
                         </p>
                     </section>
 
@@ -37,7 +49,7 @@ export default function MentionsLegales() {
                     <section>
                         <h2 className="font-title text-2xl text-[#F5F5F0] mb-3">Propriété intellectuelle</h2>
                         <p>
-                            L'ensemble du contenu de ce site (textes, images, logos, structure) est la propriété exclusive de Jaga Fighting Team.
+                            L'ensemble du contenu de ce site (textes, images, logos, structure) est la propriété exclusive de JAGA FIGHT.
                             Toute reproduction, même partielle, est interdite sans autorisation préalable écrite.
                         </p>
                     </section>
@@ -45,7 +57,7 @@ export default function MentionsLegales() {
                     <section>
                         <h2 className="font-title text-2xl text-[#F5F5F0] mb-3">Limitation de responsabilité</h2>
                         <p>
-                            Jaga Fighting Team s'efforce d'assurer l'exactitude des informations diffusées sur ce site.
+                            JAGA FIGHT s'efforce d'assurer l'exactitude des informations diffusées sur ce site.
                             Toutefois, la responsabilité de l'éditeur ne pourra être engagée en cas d'erreurs ou d'omissions.
                         </p>
                     </section>

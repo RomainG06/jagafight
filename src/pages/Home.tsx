@@ -53,8 +53,8 @@ export default function Home() {
                             "latitude": "43.6633",
                             "longitude": "7.1481"
                         },
-                        "telephone": "+33-XXX-XXX-XXX",
-                        "email": "contact@jagafight.fr",
+                        "telephone": "+33 7 43 52 72 93",
+                        "email": "Agentpro.athlete@gmail.com",
                         "openingHoursSpecification": {
                             "@type": "OpeningHoursSpecification",
                             "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
@@ -114,7 +114,7 @@ export default function Home() {
                                 Fondée à Perpignan par Oualid OUMERZOUK, ancien légionnaire du 2e REP et champion du monde Nokento Full Fight 2017, Jaga Fight a été créée avec une vision exigeante : former des pratiquants complets, techniquement affûtés et mentalement solides.
                             </p>
                             <p className="text-[#F5F5F0]/60 text-sm leading-relaxed mb-6">
-                                Après le décès de Oualid, Hicham a repris le flambeau pour poursuivre cette mission. En 2025, Jaga Fight ouvre ses portes à Cagnes-sur-Mer avec le soutien de la Ville, de l'AFMT, de la FFKMDA et du Ministère des Sports.
+                                Après le décès de Oualid, Hicham a repris le flambeau pour poursuivre cette mission. En 2026, Jaga Fight ouvre ses portes à Cagnes-sur-Mer avec le soutien de la Ville, de l'AFMT, de la FFKMDA et du Ministère des Sports.
                             </p>
                             <blockquote className="border-l-2 border-[#eb0071] pl-4 italic text-[#F5F5F0]/60 text-sm">
                                 « Polir son esprit pour être fier de ce que l'on voit dans son miroir. »
@@ -159,6 +159,12 @@ export default function Home() {
                                 className="inline-block mt-6 text-sm text-[#eb0071] hover:text-[#ff0096] transition-colors font-semibold"
                             >
                                 Découvrir toutes nos valeurs →
+                            </a>
+                            <a
+                                href="/muay-thai"
+                                className="block mt-3 text-sm text-[#F5F5F0]/60 hover:text-[#eb0071] transition-colors font-semibold"
+                            >
+                                Comprendre la culture du Muay Thaï →
                             </a>
                         </div>
                     </div>

@@ -1,0 +1,207 @@
+import { useEffect } from 'react'
+import { useForm, Controller, useWatch } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { supabase } from '../../../lib/supabase'
+import type { Adhesion, Saison } from '../../../lib/supabase'
+import { DISCIPLINES, FORMULES, REGLEMENT_VERSION, CGV_VERSION } from '../../../data/inscriptionConfig'
+import { calculerTarif } from '../../../data/tarifsConfig'
+import type { FormuleId } from '../../../data/inscriptionConfig'
+
+const schema = z.object({
+    disciplines: z.array(z.string()).min(1, 'Sélectionnez au moins une discipline'),
+    statut_pratique: z.enum(['loisir', 'competiteur']),
+    licence_numero: z.string().optional(),
+    palmares: z.string().optional(),
+    poids_categorie: z.string().optional(),
+    formule_tarifaire: z.string().min(1, 'Choisissez une formule'),
+    code_promo: z.string().optional(),
+    date_debut_souhaitee: z.string().optional(),
+    saison_id: z.string().min(1, 'Aucune saison active trouvée'),
+})
+
+type FormValues = z.infer<typeof schema>
+
+interface Props {
+    membreId: string
+    adhesion: Adhesion | null
+    saisons: Saison[]
+    onSaved: () => void
+}
+
+const LABEL = 'block text-xs font-semibold tracking-widest uppercase text-[#F5F5F0]/60 mb-2'
+const INPUT = 'w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:border-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071] transition-colors'
+const SELECT = `${INPUT} appearance-none`
+
+export default function AdhesionSection({ membreId, adhesion, saisons, onSaved }: Props) {
+    const saisonActive = saisons.find(s => s.active)
+
+    const { register, handleSubmit, control, reset, formState: { errors, isSubmitting, isDirty } } = useForm<FormValues>({
+        resolver: zodResolver(schema),
+        defaultValues: {
+            disciplines: adhesion?.disciplines ?? [],
+            statut_pratique: adhesion?.statut_pratique ?? 'loisir',
+            licence_numero: adhesion?.licence_numero ?? '',
+            palmares: adhesion?.palmares ?? '',
+            poids_categorie: adhesion?.poids_categorie ?? '',
+            formule_tarifaire: adhesion?.formule_tarifaire ?? '',
+            code_promo: adhesion?.code_promo ?? '',
+            date_debut_souhaitee: adhesion?.date_debut_souhaitee ?? '',
+            saison_id: adhesion?.saison_id ?? saisonActive?.id ?? '',
+        },
+    })
+
+    const [statut, formule] = useWatch({
+        control,
+        name: ['statut_pratique', 'formule_tarifaire'],
+    })
+    const montant = formule ? calculerTarif(formule as FormuleId) : null
+
+    useEffect(() => {
+        if (adhesion) reset({
+            disciplines: adhesion.disciplines ?? [],
+            statut_pratique: adhesion.statut_pratique ?? 'loisir',
+            licence_numero: adhesion.licence_numero ?? '',
+            palmares: adhesion.palmares ?? '',
+            poids_categorie: adhesion.poids_categorie ?? '',
+            formule_tarifaire: adhesion.formule_tarifaire ?? '',
+            code_promo: adhesion.code_promo ?? '',
+            date_debut_souhaitee: adhesion.date_debut_souhaitee ?? '',
+            saison_id: adhesion.saison_id ?? saisonActive?.id ?? '',
+        })
+    }, [adhesion, saisonActive, reset])
+
+    async function onSubmit(values: FormValues) {
+        const payload = {
+            membre_id: membreId,
+            ...values,
+            montant_calcule: montant ?? 0,
+            reglement_version: REGLEMENT_VERSION,
+            cgv_version: CGV_VERSION,
+        }
+
+        const { error } = adhesion?.id
+            ? await supabase.from('adhesions').update(payload).eq('id', adhesion.id)
+            : await supabase.from('adhesions').insert(payload)
+
+        if (!error) onSaved()
+    }
+
+    return (
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            {/* Disciplines */}
+            <fieldset>
+                <legend className={LABEL}>Discipline(s) *</legend>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+                    {DISCIPLINES.map(d => (
+                        <label key={d.id} className="flex items-center gap-3 cursor-pointer group">
+                            <Controller
+                                name="disciplines"
+                                control={control}
+                                render={({ field }) => (
+                                    <input
+                                        type="checkbox"
+                                        value={d.id}
+                                        checked={field.value.includes(d.id)}
+                                        onChange={e => {
+                                            const next = e.target.checked
+                                                ? [...field.value, d.id]
+                                                : field.value.filter((v: string) => v !== d.id)
+                                            field.onChange(next)
+                                        }}
+                                        className="accent-[#eb0071] w-4 h-4 flex-shrink-0"
+                                    />
+                                )}
+                            />
+                            <span className="text-sm text-[#F5F5F0]/70 group-hover:text-[#F5F5F0] transition-colors">{d.label}</span>
+                        </label>
+                    ))}
+                </div>
+                {errors.disciplines && <p className="text-xs text-red-400 mt-2">{errors.disciplines.message}</p>}
+            </fieldset>
+
+            {/* Statut */}
+            <fieldset>
+                <legend className={LABEL}>Statut</legend>
+                <div className="flex gap-6 mt-2">
+                    {([['loisir', 'Loisir'], ['competiteur', 'Compétiteur']] as const).map(([val, lbl]) => (
+                        <label key={val} className="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" value={val} {...register('statut_pratique')} className="accent-[#eb0071]" />
+                            <span className="text-sm text-[#F5F5F0]/70">{lbl}</span>
+                        </label>
+                    ))}
+                </div>
+            </fieldset>
+
+            {statut === 'competiteur' && (
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border border-[#eb0071]/20 bg-[#eb0071]/5 p-4">
+                    <div>
+                        <label htmlFor="adhesion-licence" className={LABEL}>N° de licence</label>
+                        <input id="adhesion-licence" {...register('licence_numero')} className={INPUT} />
+                    </div>
+                    <div>
+                        <label htmlFor="adhesion-poids" className={LABEL}>Poids de catégorie</label>
+                        <input id="adhesion-poids" {...register('poids_categorie')} className={INPUT} placeholder="Ex. : -67 kg" />
+                    </div>
+                    <div>
+                        <label htmlFor="adhesion-palmares" className={LABEL}>Palmarès</label>
+                        <input id="adhesion-palmares" {...register('palmares')} className={INPUT} />
+                    </div>
+                </div>
+            )}
+
+            {/* Formule */}
+            <div>
+                <label htmlFor="adhesion-formule" className={LABEL}>Formule tarifaire *</label>
+                <select id="adhesion-formule" {...register('formule_tarifaire')} className={SELECT}>
+                    <option value="">— Choisir —</option>
+                    {FORMULES.map(f => (
+                        <option key={f.id} value={f.id}>{f.label}</option>
+                    ))}
+                </select>
+                {errors.formule_tarifaire && <p className="text-xs text-red-400 mt-1">{errors.formule_tarifaire.message}</p>}
+                {montant !== null && (
+                    <p className="text-sm text-[#F5F5F0]/60 mt-2">
+                        Montant calculé : <span className="text-[#F5F5F0] font-semibold">
+                            {montant === 0 ? 'à définir' : `${montant} €`}
+                        </span>
+                    </p>
+                )}
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label htmlFor="adhesion-code-promo" className={LABEL}>Code promo / Coupon sport</label>
+                    <input id="adhesion-code-promo" autoComplete="off" {...register('code_promo')} className={INPUT} placeholder="Optionnel…" />
+                </div>
+                <div>
+                    <label htmlFor="adhesion-date-debut" className={LABEL}>Date de début souhaitée</label>
+                    <input id="adhesion-date-debut" type="date" {...register('date_debut_souhaitee')} className={INPUT} />
+                </div>
+            </div>
+
+            {/* Saison */}
+            <div>
+                <p className={LABEL}>Saison</p>
+                {saisonActive ? (
+                    <p className="text-sm text-[#F5F5F0]/60 mt-1">
+                        Saison active : <span className="text-[#F5F5F0]">{saisonActive.label}</span>
+                    </p>
+                ) : (
+                    <p className="text-xs text-amber-400">Aucune saison active. Contactez le club.</p>
+                )}
+                {errors.saison_id && <p className="text-xs text-red-400 mt-1">{errors.saison_id.message}</p>}
+            </div>
+
+            <div className="flex justify-end">
+                <button
+                    type="submit"
+                    disabled={isSubmitting || !isDirty}
+                    className="px-8 py-3 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm hover:opacity-90 transition-opacity disabled:opacity-40 cursor-pointer disabled:cursor-default"
+                >
+                    {isSubmitting ? 'Enregistrement…' : 'Enregistrer'}
+                </button>
+            </div>
+        </form>
+    )
+}

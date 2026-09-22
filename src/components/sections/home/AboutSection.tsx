@@ -42,7 +42,7 @@ export default function AboutSection() {
                                     <p className="text-xs text-[#F5F5F0]/50 mt-1 tracking-wide">Activités proposées</p>
                                 </div>
                                 <div>
-                                    <p className="font-title text-3xl text-[#eb0071]">2025</p>
+                                    <p className="font-title text-3xl text-[#eb0071]">2026</p>
                                     <p className="text-xs text-[#F5F5F0]/50 mt-1 tracking-wide">Ouverture Cagnes-sur-Mer</p>
                                 </div>
                             </div>

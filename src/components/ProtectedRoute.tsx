@@ -1,9 +1,23 @@
-import { Navigate } from 'react-router-dom'
-import { useAuth } from '../contexts/AuthContext'
+import { useEffect } from 'react'
+import { navigate } from 'vike/client/router'
+import { useAuth } from '../contexts/auth-context'
 import type { ReactNode } from 'react'
 
 export default function ProtectedRoute({ children }: { children: ReactNode }) {
-    const { session, loading } = useAuth()
+    const { session, loading, isAdmin } = useAuth()
+
+    useEffect(() => {
+        if (loading) return
+
+        if (!session) {
+            navigate('/connexion')
+            return
+        }
+
+        if (!isAdmin) {
+            navigate('/espace-membre')
+        }
+    }, [loading, session, isAdmin])
 
     if (loading) {
         return (
@@ -13,9 +27,7 @@ export default function ProtectedRoute({ children }: { children: ReactNode }) {
         )
     }
 
-    if (!session) {
-        return <Navigate to="/admin/login" replace />
-    }
+    if (!session || !isAdmin) return null
 
     return <>{children}</>
 }

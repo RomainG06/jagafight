@@ -42,6 +42,20 @@ export default function NotreAdn() {
             {/* Valeurs */}
             <ValuesSection />
 
+            <section className="py-16 bg-[#0a0a0a] border-y border-white/10">
+                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <p className="text-[#F5F5F0]/70 leading-relaxed text-pretty">
+                        Respect, discipline et transmission prennent tout leur sens dans la pratique. Découvrez l’histoire, les traditions et les codes qui façonnent cet art martial.
+                    </p>
+                    <a
+                        href="/muay-thai"
+                        className="inline-flex mt-6 text-sm text-[#eb0071] hover:text-[#ff0096] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071] transition-colors font-semibold"
+                    >
+                        Comprendre le Muay Thaï →
+                    </a>
+                </div>
+            </section>
+
             {/* L'équipe */}
             <section className="py-24 bg-[#0d0d0d]">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">

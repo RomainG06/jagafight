@@ -22,7 +22,7 @@ export default function CoachingCards() {
                         MES COACHINGS
                     </h2>
                     <p className="text-[#F5F5F0]/50 text-sm max-w-md mx-auto">
-                        Tarifs et créneaux disponibles à l'ouverture. Préinscris-toi dès maintenant pour être contacté en priorité.
+                        Tarifs et créneaux disponibles à l'ouverture. Inscris-toi dès maintenant pour être contacté en priorité.
                     </p>
                 </div>
 
@@ -40,12 +40,6 @@ export default function CoachingCards() {
                                 <p className="text-xs text-[#F5F5F0]/40 tracking-wide mb-4">{formula.public}</p>
                                 <p className="text-sm text-[#F5F5F0]/60 leading-relaxed">{formula.description}</p>
                             </div>
-                            <a
-                                href="/preinscription"
-                                className="mt-6 block text-center px-4 py-2.5 border border-[#eb0071] text-[#eb0071] text-sm font-semibold tracking-wide hover:bg-[#eb0071] hover:text-[#F5F5F0] transition-colors rounded"
-                            >
-                                Me préinscrire
-                            </a>
                         </div>
                     ))}
                 </div>

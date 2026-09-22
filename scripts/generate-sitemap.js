@@ -51,14 +51,6 @@ const pages = [
         path: "/muay-thai",
         lastmod: "2026-09-22",
     },
-    {
-        path: "/mentions-legales",
-        lastmod: "2026-07-29",
-    },
-    {
-        path: "/politique-confidentialite",
-        lastmod: "2026-07-29",
-    },
 ];
 
 /**

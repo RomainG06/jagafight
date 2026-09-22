@@ -5,10 +5,11 @@ import { usePageContext } from 'vike-react/usePageContext';
 
 const navLinks = [
     { to: '/', label: "L'École" },
-    { to: '/muay-thai', label: 'Le Muay Thaï' },
     { to: '/coaching', label: 'Coaching' },
     { to: '/formations', label: 'Formations' },
     { to: '/notre-adn', label: 'Notre ADN' },
+    { to: '/muay-thai', label: 'Le Muay Thaï' },
+
 ]
 
 const Navbar = memo(function Navbar() {

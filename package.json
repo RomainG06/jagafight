@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vike dev",
-    "build": "npm run generate:og && npm run generate:sitemap && tsc -b && vike build",
+    "build": "npm run clean && npm run generate:og && npm run generate:sitemap && tsc -b && vike build",
+    "clean": "node scripts/clean-build.js",
     "generate:og": "node scripts/generate-og-images.js",
     "generate:sitemap": "node scripts/generate-sitemap.js",
     "lint": "eslint .",

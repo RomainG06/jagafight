@@ -3,7 +3,6 @@
 export function Head() {
     return (
         <>
-            <link rel="icon" type="image/x-icon" href="/favicon.ico" />
             <link rel="icon" type="image/svg+xml" href="/logo_jaga.svg" />
             <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
             <link rel="manifest" href="/manifest.json" />

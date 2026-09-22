@@ -45,7 +45,7 @@ export default function ProfileSelector() {
                             key={profile.title}
                             href={profile.to}
                             onClick={handleScrollToActivities}
-                            className="group border border-white/10 p-8 hover:border-[#eb0071] transition-all duration-300 hover:scale-105"
+        className="group border border-white/10 p-8 hover:border-[#eb0071] transition-[border-color,transform] duration-300 hover:scale-105"
                         >
                             <h3 className="font-title text-2xl text-[#F5F5F0] mb-3 group-hover:text-[#eb0071] transition-colors">
                                 {profile.title}

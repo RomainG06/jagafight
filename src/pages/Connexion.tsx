@@ -86,12 +86,14 @@ export default function Connexion() {
                             </label>
                             <input
                                 id="email"
+                                name="email"
                                 type="email"
                                 required
                                 autoComplete="email"
+                                spellCheck={false}
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
-                                className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#eb0071] transition-colors"
+                                className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:border-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071] transition-colors"
                             />
                         </div>
 
@@ -101,23 +103,24 @@ export default function Connexion() {
                             </label>
                             <input
                                 id="password"
+                                name="password"
                                 type="password"
                                 required
                                 autoComplete="current-password"
                                 value={password}
                                 onChange={e => setPassword(e.target.value)}
-                                className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#eb0071] transition-colors"
+                                className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:border-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071] transition-colors"
                             />
                         </div>
 
                         {error && (
-                            <p className="text-sm text-red-400 bg-red-400/10 border border-red-400/30 px-4 py-3">
+                            <p role="alert" className="text-sm text-red-400 bg-red-400/10 border border-red-400/30 px-4 py-3">
                                 {error}
                             </p>
                         )}
 
                         {resetSent && (
-                            <p className="text-sm text-green-400 bg-green-400/10 border border-green-400/30 px-4 py-3">
+                            <p role="status" aria-live="polite" className="text-sm text-green-400 bg-green-400/10 border border-green-400/30 px-4 py-3">
                                 Email de réinitialisation envoyé.
                             </p>
                         )}

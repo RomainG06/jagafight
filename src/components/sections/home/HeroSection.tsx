@@ -5,15 +5,14 @@ export default function HeroSection() {
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
             {/* Background */}
             <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#1a0a0a] to-[#0a0a0a]" />
-            <div className="absolute inset-0 bg-[url('/images/hero-placeholder.jpg')] bg-cover bg-center opacity-20" />
 
-            <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-24">
+            <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-24">
                 <h1 className="inline-block px-4 py-1.5 border border-[#eb0071]/60 text-[#eb0071] text-xs font-semibold tracking-[0.2em] uppercase mb-8 rounded-sm">
                     Club de Boxe Thaï (Muay Thaï) à Cagnes-sur-Mer • Alpes-Maritimes (06)
                 </h1>
 
                 {/* Logo visuel */}
-                <img src={logoWhite} alt="Logo Jaga Fight - École Muay Thaï Cagnes-sur-Mer" className="h-48 sm:h-64 lg:h-80 mb-6 mx-auto" />
+                <img src={logoWhite} alt="Logo Jaga Fight - École Muay Thaï Cagnes-sur-Mer" width="1051" height="594" loading="eager" fetchPriority="high" className="h-48 sm:h-64 lg:h-80 mb-6 mx-auto" />
                 {/* Sous-titre */}
                 <p className="text-lg sm:text-xl text-[#eb0071]/70 max-w-xl mx-auto mb-10 font-light tracking-wide">
                     Sport, éducation, transformation. À Cagnes-sur-Mer.

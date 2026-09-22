@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { navigate } from 'vike/client/router'
-import { useAuth } from '../contexts/AuthContext'
+import { useAuth } from '../contexts/auth-context'
 import type { ReactNode } from 'react'
 
 export default function ProtectedRoute({ children }: { children: ReactNode }) {

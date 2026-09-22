@@ -18,7 +18,7 @@ const STATUT_LABELS: Record<string, string> = {
 }
 
 const LABEL = 'block text-xs font-semibold tracking-widest uppercase text-[#F5F5F0]/60 mb-2'
-const INPUT = 'w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-2 text-sm focus:outline-none focus:border-[#eb0071] transition-colors'
+const INPUT = 'w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-2 text-sm focus:border-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071] transition-colors'
 const SELECT = `${INPUT} appearance-none`
 
 interface PaiementForm {
@@ -48,7 +48,6 @@ export default function AdminFicheMembre() {
 
     const fetchData = useCallback(async () => {
         if (!id) return
-        setLoading(true)
         const [mRes, aRes, dRes, pRes] = await Promise.all([
             supabase.from('membres').select('*').eq('id', id).single(),
             supabase.from('adhesions').select('*').eq('membre_id', id).order('created_at', { ascending: false }).limit(1).maybeSingle(),
@@ -56,22 +55,21 @@ export default function AdminFicheMembre() {
             supabase.from('paiements').select('*').eq('membre_id', id).order('created_at', { ascending: false }),
         ])
         setMembre(mRes.data as Membre)
-        console.log(aRes.data, "adhesion response")
-        console.log(aRes.error, "adhesion response")
-        console.log(dRes.error, "documents response")
         setAdhesion(aRes.data as Adhesion | null)
         setDocuments((dRes.data ?? []) as Document[])
         setPaiements((pRes.data ?? []) as Paiement[])
         setLoading(false)
     }, [id])
 
-    useEffect(() => { fetchData() }, [fetchData])
+    // Fetching remote records is the external synchronization performed by this effect.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    useEffect(() => { void fetchData() }, [fetchData])
 
     async function downloadDoc(doc: Document) {
         const { data } = await supabase.storage
             .from('documents-membres')
             .createSignedUrl(doc.storage_path, 60)
-        if (data?.signedUrl) window.open(data.signedUrl, '_blank')
+        if (data?.signedUrl) window.open(data.signedUrl, '_blank', 'noopener,noreferrer')
     }
 
     async function addPaiement() {
@@ -244,8 +242,8 @@ export default function AdminFicheMembre() {
                         <div className="border border-white/10 p-4 mb-4 space-y-3">
                             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
                                 <div>
-                                    <label className={LABEL}>Mode</label>
-                                    <select value={paiementForm.mode} onChange={e => setPaiementForm(p => ({ ...p, mode: e.target.value as Paiement['mode'] }))} className={SELECT}>
+                                    <label htmlFor="paiement-mode" className={LABEL}>Mode</label>
+                                    <select id="paiement-mode" value={paiementForm.mode} onChange={e => setPaiementForm(p => ({ ...p, mode: e.target.value as Paiement['mode'] }))} className={SELECT}>
                                         <option value="especes">Espèces</option>
                                         <option value="cheque">Chèque</option>
                                         <option value="cb">CB</option>
@@ -253,12 +251,12 @@ export default function AdminFicheMembre() {
                                     </select>
                                 </div>
                                 <div>
-                                    <label className={LABEL}>Montant (€)</label>
-                                    <input type="number" min="0" step="0.01" value={paiementForm.montant} onChange={e => setPaiementForm(p => ({ ...p, montant: e.target.value }))} className={INPUT} />
+                                    <label htmlFor="paiement-montant" className={LABEL}>Montant (€)</label>
+                                    <input id="paiement-montant" name="montant" type="number" inputMode="decimal" min="0" step="0.01" value={paiementForm.montant} onChange={e => setPaiementForm(p => ({ ...p, montant: e.target.value }))} className={INPUT} />
                                 </div>
                                 <div>
-                                    <label className={LABEL}>Statut</label>
-                                    <select value={paiementForm.statut} onChange={e => setPaiementForm(p => ({ ...p, statut: e.target.value as Paiement['statut'] }))} className={SELECT}>
+                                    <label htmlFor="paiement-statut" className={LABEL}>Statut</label>
+                                    <select id="paiement-statut" value={paiementForm.statut} onChange={e => setPaiementForm(p => ({ ...p, statut: e.target.value as Paiement['statut'] }))} className={SELECT}>
                                         <option value="paye">Payé</option>
                                         <option value="partiel">Partiel</option>
                                         <option value="en_attente">En attente</option>
@@ -266,23 +264,23 @@ export default function AdminFicheMembre() {
                                     </select>
                                 </div>
                                 <div>
-                                    <label className={LABEL}>Date</label>
-                                    <input type="date" value={paiementForm.date_paiement} onChange={e => setPaiementForm(p => ({ ...p, date_paiement: e.target.value }))} className={INPUT} />
+                                    <label htmlFor="paiement-date" className={LABEL}>Date</label>
+                                    <input id="paiement-date" name="date-paiement" type="date" value={paiementForm.date_paiement} onChange={e => setPaiementForm(p => ({ ...p, date_paiement: e.target.value }))} className={INPUT} />
                                 </div>
                                 <div>
-                                    <label className={LABEL}>Référence</label>
-                                    <input value={paiementForm.reference} onChange={e => setPaiementForm(p => ({ ...p, reference: e.target.value }))} className={INPUT} />
+                                    <label htmlFor="paiement-reference" className={LABEL}>Référence</label>
+                                    <input id="paiement-reference" name="reference" autoComplete="off" value={paiementForm.reference} onChange={e => setPaiementForm(p => ({ ...p, reference: e.target.value }))} className={INPUT} />
                                 </div>
                                 <div>
-                                    <label className={LABEL}>Notes</label>
-                                    <input value={paiementForm.notes} onChange={e => setPaiementForm(p => ({ ...p, notes: e.target.value }))} className={INPUT} />
+                                    <label htmlFor="paiement-notes" className={LABEL}>Notes</label>
+                                    <input id="paiement-notes" name="notes" autoComplete="off" value={paiementForm.notes} onChange={e => setPaiementForm(p => ({ ...p, notes: e.target.value }))} className={INPUT} />
                                 </div>
                             </div>
                             <div className="flex flex-col gap-2 sm:flex-row">
-                                <button onClick={addPaiement} disabled={savingPaiement} className="px-6 py-2 bg-[#eb0071] text-[#F5F5F0] text-xs font-semibold tracking-widest uppercase hover:opacity-90 disabled:opacity-50 cursor-not-allowed">
+                                <button type="button" onClick={addPaiement} disabled={savingPaiement} className="px-6 py-2 bg-[#eb0071] text-[#F5F5F0] text-xs font-semibold tracking-widest uppercase hover:opacity-90 disabled:opacity-50 cursor-not-allowed">
                                     {savingPaiement ? 'Enregistrement…' : 'Enregistrer'}
                                 </button>
-                                <button onClick={() => setShowPaiementForm(false)} className="px-4 py-2 text-xs text-[#F5F5F0]/40 hover:text-[#F5F5F0] transition-colors">
+                                <button type="button" onClick={() => setShowPaiementForm(false)} className="px-4 py-2 text-xs text-[#F5F5F0]/40 hover:text-[#F5F5F0] transition-colors">
                                     Annuler
                                 </button>
                             </div>

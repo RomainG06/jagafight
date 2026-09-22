@@ -3,7 +3,7 @@ import { supabase } from '../lib/supabase'
 import type { Saison } from '../lib/supabase'
 import AdminLayout from '../components/layout/AdminLayout'
 
-const INPUT = 'w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-2.5 text-sm focus:outline-none focus:border-[#eb0071] transition-colors'
+const INPUT = 'w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-2.5 text-sm focus:border-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071] transition-colors'
 const LABEL = 'block text-xs font-semibold tracking-widest uppercase text-[#F5F5F0]/60 mb-2'
 
 export default function AdminSaisons() {
@@ -73,22 +73,24 @@ export default function AdminSaisons() {
                     <form onSubmit={handleCreate} className="border border-white/10 p-5 mb-6 space-y-4">
                         <h2 className="text-xs tracking-widest uppercase text-[#F5F5F0]/40">Nouvelle saison</h2>
                         <div>
-                            <label className={LABEL}>Libellé *</label>
+                            <label htmlFor="saison-libelle" className={LABEL}>Libellé *</label>
                             <input
+                                id="saison-libelle"
+                                name="libelle"
                                 value={form.label}
                                 onChange={e => setForm(f => ({ ...f, label: e.target.value }))}
-                                placeholder="ex: 2026-2027"
+                                placeholder="Ex. : 2026-2027…"
                                 className={INPUT}
                             />
                         </div>
                         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <div>
-                                <label className={LABEL}>Date de début</label>
-                                <input type="date" value={form.date_debut} onChange={e => setForm(f => ({ ...f, date_debut: e.target.value }))} className={INPUT} />
+                                <label htmlFor="saison-date-debut" className={LABEL}>Date de début</label>
+                                <input id="saison-date-debut" name="date-debut" type="date" value={form.date_debut} onChange={e => setForm(f => ({ ...f, date_debut: e.target.value }))} className={INPUT} />
                             </div>
                             <div>
-                                <label className={LABEL}>Date de fin</label>
-                                <input type="date" value={form.date_fin} onChange={e => setForm(f => ({ ...f, date_fin: e.target.value }))} className={INPUT} />
+                                <label htmlFor="saison-date-fin" className={LABEL}>Date de fin</label>
+                                <input id="saison-date-fin" name="date-fin" type="date" value={form.date_fin} onChange={e => setForm(f => ({ ...f, date_fin: e.target.value }))} className={INPUT} />
                             </div>
                         </div>
                         {error && <p className="text-xs text-red-400">{error}</p>}

@@ -19,6 +19,12 @@ const DOC_CONFIG: DocEntry[] = [
     { type: 'PIECE_IDENTITE', label: "Pièce d'identité", required: false, accept: DOC_ACCEPT },
 ]
 
+const FILE_EXTENSION_BY_MIME: Record<string, string> = {
+    'application/pdf': 'pdf',
+    'image/jpeg': 'jpg',
+    'image/png': 'png',
+}
+
 interface Props {
     membreId: string
     documents: Document[]
@@ -34,13 +40,13 @@ interface FileState {
 }
 
 const LABEL = 'block text-xs font-semibold tracking-widest uppercase text-[#F5F5F0]/60 mb-2'
-const INPUT = 'w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#eb0071] transition-colors'
+const INPUT = 'w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:border-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071] transition-colors'
 
 export default function DocumentsSection({ membreId, documents, onSaved }: Props) {
     const [fileStates, setFileStates] = useState<Record<string, FileState>>(() =>
         Object.fromEntries(DOC_CONFIG.map(d => [d.type, { file: null, preview: null, dateValidite: '', error: '', uploading: false }]))
     )
-    const fileRefs = useRef<Record<string, HTMLInputElement | null>>({})
+    const objectUrlsRef = useRef(new Set<string>())
 
     const existingByType = Object.fromEntries(documents.map(d => [d.type, d]))
 
@@ -48,20 +54,35 @@ export default function DocumentsSection({ membreId, documents, onSaved }: Props
         setFileStates(prev => ({ ...prev, [type]: { ...prev[type], [key]: value } }))
     }
 
-    function handleFile(type: string, file: File | null) {
+    function handleFile(cfg: DocEntry, file: File | null) {
         if (!file) return
+        const allowedTypes = (cfg.accept ?? DOC_ACCEPT).split(',')
+        if (!allowedTypes.includes(file.type) || !FILE_EXTENSION_BY_MIME[file.type]) {
+            setField(cfg.type, 'error', 'Format non autorisé. Utilisez un PDF, JPG ou PNG.')
+            return
+        }
         if (file.size > DOC_MAX_SIZE_MB * 1024 * 1024) {
-            setField(type, 'error', `Taille max : ${DOC_MAX_SIZE_MB} Mo`)
+            setField(cfg.type, 'error', `Taille max : ${DOC_MAX_SIZE_MB} Mo`)
             return
         }
         const preview = file.type.startsWith('image/') ? URL.createObjectURL(file) : null
-        setFileStates(prev => ({ ...prev, [type]: { ...prev[type], file, preview, error: '' } }))
+        if (preview) objectUrlsRef.current.add(preview)
+        setFileStates(prev => {
+            const previousPreview = prev[cfg.type].preview
+            if (previousPreview) {
+                URL.revokeObjectURL(previousPreview)
+                objectUrlsRef.current.delete(previousPreview)
+            }
+            return { ...prev, [cfg.type]: { ...prev[cfg.type], file, preview, error: '' } }
+        })
     }
 
     // Revoke object URLs on unmount
     useEffect(() => {
+        const objectUrls = objectUrlsRef.current
         return () => {
-            Object.values(fileStates).forEach(s => { if (s.preview) URL.revokeObjectURL(s.preview) })
+            objectUrls.forEach(url => URL.revokeObjectURL(url))
+            objectUrls.clear()
         }
     }, [])
 
@@ -71,21 +92,17 @@ export default function DocumentsSection({ membreId, documents, onSaved }: Props
         setField(cfg.type, 'uploading', true)
         setField(cfg.type, 'error', '')
 
-        const ext = state.file.name.split('.').pop()
+        const ext = FILE_EXTENSION_BY_MIME[state.file.type]
+        if (!ext) {
+            setField(cfg.type, 'error', 'Format de fichier non autorisé.')
+            setField(cfg.type, 'uploading', false)
+            return
+        }
         const path = `membres/${membreId}/${DOC_TYPES[cfg.type]}.${ext}`
 
-        const { data, error: storageError } = await supabase.storage
+        const { error: storageError } = await supabase.storage
             .from('documents')
             .upload(path, state.file, { upsert: true })
-
-        console.log('UPLOAD DATA:', data)
-        console.error('UPLOAD ERROR:', storageError)
-        console.log('FILE:', {
-            name: state.file.name,
-            type: state.file.type,
-            size: state.file.size,
-            path,
-        })
 
         if (storageError) {
             setField(cfg.type, 'error', 'Erreur lors de l\'upload.')
@@ -120,6 +137,8 @@ export default function DocumentsSection({ membreId, documents, onSaved }: Props
             {DOC_CONFIG.map(cfg => {
                 const state = fileStates[cfg.type]
                 const existing = existingByType[DOC_TYPES[cfg.type] as Document['type']]
+                const inputId = `document-${cfg.type.toLowerCase()}`
+                const dateId = `${inputId}-date-validite`
 
                 return (
                     <div key={cfg.type} className="border border-white/10 p-5 space-y-4">
@@ -145,7 +164,7 @@ export default function DocumentsSection({ membreId, documents, onSaved }: Props
 
                         {/* Preview */}
                         {state.preview && (
-                            <img src={state.preview} alt="Aperçu" className="h-24 w-24 object-cover border border-white/10" />
+                            <img src={state.preview} alt={`Aperçu du fichier ${cfg.label.toLowerCase()}`} width="96" height="96" className="h-24 w-24 object-cover border border-white/10" />
                         )}
                         {state.file && !state.preview && (
                             <p className="text-xs text-[#F5F5F0]/40">
@@ -156,19 +175,18 @@ export default function DocumentsSection({ membreId, documents, onSaved }: Props
                         <div className="flex flex-wrap gap-3 items-end">
                             <div>
                                 <input
-                                    ref={el => { fileRefs.current[cfg.type] = el }}
+                                    id={inputId}
                                     type="file"
                                     accept={cfg.accept ?? DOC_ACCEPT}
-                                    className="hidden"
-                                    onChange={e => handleFile(cfg.type, e.target.files?.[0] ?? null)}
+                                    className="peer sr-only"
+                                    onChange={e => handleFile(cfg, e.target.files?.[0] ?? null)}
                                 />
-                                <button
-                                    type="button"
-                                    onClick={() => fileRefs.current[cfg.type]?.click()}
-                                    className="px-4 py-2 border border-white/20 text-[#F5F5F0]/60 text-xs tracking-widest uppercase hover:border-white/40 hover:text-[#F5F5F0] transition-colors cursor-pointer"
+                                <label
+                                    htmlFor={inputId}
+                                    className="inline-block px-4 py-2 border border-white/20 text-[#F5F5F0]/60 text-xs tracking-widest uppercase hover:border-white/40 hover:text-[#F5F5F0] transition-colors cursor-pointer peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#eb0071]"
                                 >
                                     {existing ? 'Remplacer' : 'Choisir un fichier'}
-                                </button>
+                                </label>
                                 <span className="text-xs text-[#F5F5F0]/30 ml-2">
                                     PDF, JPG ou PNG — max {DOC_MAX_SIZE_MB} Mo
                                 </span>
@@ -176,9 +194,11 @@ export default function DocumentsSection({ membreId, documents, onSaved }: Props
 
                             {cfg.showDateValidite && (
                                 <div>
-                                    <label className={LABEL}>Date de validité du certificat</label>
+                                    <label htmlFor={dateId} className={LABEL}>Date de validité du certificat</label>
                                     <input
+                                        id={dateId}
                                         type="date"
+                                        name={`${cfg.type.toLowerCase()}-date-validite`}
                                         value={state.dateValidite}
                                         onChange={e => setField(cfg.type, 'dateValidite', e.target.value)}
                                         className={INPUT}
@@ -199,7 +219,7 @@ export default function DocumentsSection({ membreId, documents, onSaved }: Props
                         </div>
 
                         {state.error && (
-                            <p className="text-xs text-red-400">{state.error}</p>
+                            <p role="alert" className="text-xs text-red-400">{state.error}</p>
                         )}
                     </div>
                 )

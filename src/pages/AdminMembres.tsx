@@ -12,7 +12,7 @@ interface MembreRow extends Membre {
 }
 
 const LABEL_INPUT = 'text-xs text-[#F5F5F0]/60 tracking-widest uppercase block mb-1'
-const SELECT = 'bg-white/5 border border-white/10 text-[#F5F5F0] px-3 py-1.5 text-xs focus:outline-none focus:border-[#eb0071]'
+const SELECT = 'bg-white/5 border border-white/10 text-[#F5F5F0] px-3 py-1.5 text-xs focus:border-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071]'
 
 function certifStatus(dateStr?: string | null): 'valide' | 'expire-bientot' | 'expire' | 'absent' {
     if (!dateStr) return 'absent'
@@ -42,10 +42,7 @@ export default function AdminMembres() {
     const [filterStatut, setFilterStatut] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
 
-    useEffect(() => { fetchData() }, [])
-
     async function fetchData() {
-        setLoading(true)
         const [membresRes, adhesionsRes, docsRes] = await Promise.all([
             supabase.from('membres').select('*').order('created_at', { ascending: false }),
             supabase.from('adhesions').select('membre_id, disciplines, statut_pratique').order('created_at', { ascending: false }),
@@ -74,6 +71,10 @@ export default function AdminMembres() {
         setLoading(false)
     }
 
+    // Fetching remote records is the external synchronization performed by this effect.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    useEffect(() => { void fetchData() }, [])
+
     function exportCSV() {
         const headers = ['Nom', 'Prénom', 'Email', 'Téléphone', 'Disciplines', 'Statut', 'Certif', 'Profil complet']
         const lines = filtered.map(r => [
@@ -100,19 +101,10 @@ export default function AdminMembres() {
     })
 
     const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
-    const startIndex = (currentPage - 1) * PAGE_SIZE
+    const visiblePage = Math.min(currentPage, totalPages)
+    const startIndex = (visiblePage - 1) * PAGE_SIZE
     const endIndex = startIndex + PAGE_SIZE
     const paginated = filtered.slice(startIndex, endIndex)
-
-    useEffect(() => {
-        setCurrentPage(1)
-    }, [search, filterCertif, filterStatut])
-
-    useEffect(() => {
-        if (currentPage > totalPages) {
-            setCurrentPage(totalPages)
-        }
-    }, [currentPage, totalPages])
 
     return (
         <AdminLayout>
@@ -135,18 +127,21 @@ export default function AdminMembres() {
                 {/* Filtres */}
                 <div className="flex flex-col gap-3 mb-6 sm:flex-row sm:flex-wrap sm:gap-4">
                     <div className="flex-1 min-w-0">
-                        <label className={LABEL_INPUT}>Recherche</label>
+                        <label htmlFor="membres-recherche" className={LABEL_INPUT}>Recherche</label>
                         <input
+                            id="membres-recherche"
+                            name="recherche"
                             type="search"
+                            autoComplete="off"
                             value={search}
-                            onChange={e => setSearch(e.target.value)}
+                            onChange={e => { setSearch(e.target.value); setCurrentPage(1) }}
                             placeholder="Nom, prénom, email…"
-                            className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-3 py-1.5 text-sm focus:outline-none focus:border-[#eb0071] sm:w-56"
+                            className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-3 py-1.5 text-sm focus:border-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071] sm:w-56"
                         />
                     </div>
                     <div>
-                        <label className={LABEL_INPUT}>Certificat</label>
-                        <select value={filterCertif} onChange={e => setFilterCertif(e.target.value)} className={`w-full sm:w-auto ${SELECT}`}>
+                        <label htmlFor="membres-certificat" className={LABEL_INPUT}>Certificat</label>
+                        <select id="membres-certificat" value={filterCertif} onChange={e => { setFilterCertif(e.target.value); setCurrentPage(1) }} className={`w-full sm:w-auto ${SELECT}`}>
                             <option value="">Tous</option>
                             <option value="valide">Valide</option>
                             <option value="expire-bientot">Expire bientôt</option>
@@ -155,8 +150,8 @@ export default function AdminMembres() {
                         </select>
                     </div>
                     <div>
-                        <label className={LABEL_INPUT}>Statut</label>
-                        <select value={filterStatut} onChange={e => setFilterStatut(e.target.value)} className={`w-full sm:w-auto ${SELECT}`}>
+                        <label htmlFor="membres-statut" className={LABEL_INPUT}>Statut</label>
+                        <select id="membres-statut" value={filterStatut} onChange={e => { setFilterStatut(e.target.value); setCurrentPage(1) }} className={`w-full sm:w-auto ${SELECT}`}>
                             <option value="">Tous</option>
                             <option value="loisir">Loisir</option>
                             <option value="competiteur">Compétiteur</option>
@@ -286,19 +281,19 @@ export default function AdminMembres() {
                                 <div className="flex items-center gap-2">
                                     <button
                                         type="button"
-                                        onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                                        disabled={currentPage === 1}
+                            onClick={() => setCurrentPage(Math.max(1, visiblePage - 1))}
+                            disabled={visiblePage === 1}
                                         className="px-3 py-1.5 text-xs border border-white/20 text-[#F5F5F0]/70 hover:border-white/40 hover:text-[#F5F5F0] transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-default"
                                     >
                                         Précédent
                                     </button>
                                     <span className="text-xs text-[#F5F5F0]/50 min-w-[72px] text-center">
-                                        Page {currentPage} / {totalPages}
+                            Page {visiblePage} / {totalPages}
                                     </span>
                                     <button
                                         type="button"
-                                        onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                                        disabled={currentPage === totalPages}
+                            onClick={() => setCurrentPage(Math.min(totalPages, visiblePage + 1))}
+                            disabled={visiblePage === totalPages}
                                         className="px-3 py-1.5 text-xs border border-white/20 text-[#F5F5F0]/70 hover:border-white/40 hover:text-[#F5F5F0] transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-default"
                                     >
                                         Suivant

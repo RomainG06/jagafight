@@ -4,7 +4,12 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string
 
 if (!supabaseUrl || !supabaseAnonKey) {
-  console.warn('Variables Supabase manquantes dans .env.local')
+  throw new Error('Configuration Supabase manquante : vérifiez les variables VITE_SUPABASE_URL et VITE_SUPABASE_ANON_KEY.')
+}
+
+const parsedSupabaseUrl = new URL(supabaseUrl)
+if (parsedSupabaseUrl.protocol !== 'https:' && parsedSupabaseUrl.hostname !== 'localhost') {
+  throw new Error('VITE_SUPABASE_URL doit utiliser HTTPS.')
 }
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)

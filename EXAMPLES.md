@@ -161,14 +161,14 @@ import OptimizedImage from '../../common/OptimizedImage'
 
 **Avant** (renderer/HeroSection.tsx):
 ```tsx
-<div className="bg-[url('/images/hero-bg.jpg')] bg-cover bg-center" />
+<div className="bg-[url('/og-image.jpg')] bg-cover bg-center" />
 ```
 
 **Après** (utiliser une vraie balise img avec OptimizedImage):
 ```tsx
 <div className="relative">
     <OptimizedImage
-        src="/images/hero-bg.jpg"
+  src="/og-image.jpg"
         alt=""
         width={1920}
         height={1080}

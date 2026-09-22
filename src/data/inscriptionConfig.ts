@@ -31,4 +31,4 @@ export const DOC_TYPES = {
 } as const
 
 export const DOC_ACCEPT = 'image/jpeg,image/png,application/pdf'
-export const DOC_MAX_SIZE_MB = 5
+export const DOC_MAX_SIZE_MB = 1

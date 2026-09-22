@@ -3,7 +3,7 @@ import { navigate } from 'vike/client/router'
 import { Helmet } from 'react-helmet-async'
 import { supabase } from '../lib/supabase'
 import type { Membre, Adhesion, Document, Saison } from '../lib/supabase'
-import { useAuth } from '../contexts/AuthContext'
+import { useAuth } from '../contexts/auth-context'
 import MemberRoute from '../components/MemberRoute'
 import ProfilSection from '../components/sections/espace-membre/ProfilSection'
 import AdhesionSection from '../components/sections/espace-membre/AdhesionSection'
@@ -54,22 +54,17 @@ function EspaceMembreInner() {
             supabase.from('membres').select('*, adhesions(*), documents(*)').eq('user_id', userId).maybeSingle(),
             supabase.from('saisons').select('*').order('date_debut', { ascending: false }),
         ])
-        console.log('membreRes:', membreRes)
-        console.log('saisonsRes:', saisonsRes)
-        console.log(activeSection, "??")
-
         const raw = membreRes.data as (Membre & { adhesions: Adhesion[]; documents: Document[] }) | null
-        const m: Membre | null = raw ? (({ adhesions: _a, documents: _d, ...rest }) => rest)(raw) as Membre : null
+        const m: Membre | null = raw ? (({ adhesions, documents: nestedDocuments, ...rest }) => {
+            void adhesions
+            void nestedDocuments
+            return rest
+        })(raw) as Membre : null
         setMembre(m)
         setSaisons((saisonsRes.data ?? []) as Saison[])
-        console.log(saisons, saisonsRes.data)
-
         if (raw) {
             const adhesions = (raw.adhesions ?? []) as Adhesion[]
             adhesions.sort((a, b) => (b.created_at ?? '').localeCompare(a.created_at ?? ''))
-            console.log('RAW:', raw)
-            console.log('RAW ADHESIONS:', raw?.adhesions)
-            console.log('SAISONS API:', saisonsRes.data)
             setAdhesion(adhesions[0] ?? null)
             setDocuments((raw.documents ?? []) as Document[])
         }
@@ -77,7 +72,9 @@ function EspaceMembreInner() {
         setLoading(false)
     }, [userId])
 
-    useEffect(() => { fetchData() }, [fetchData])
+    // Fetching remote records is the external synchronization performed by this effect.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    useEffect(() => { void fetchData() }, [fetchData])
 
     function handleSaved() {
         fetchData()
@@ -148,7 +145,7 @@ function EspaceMembreInner() {
                     </div>
                     <div className="h-1 bg-white/5 w-full">
                         <div
-                            className="h-1 bg-[#eb0071] transition-all duration-500"
+                            className="h-1 bg-[#eb0071] transition-[width] duration-500"
                             style={{ width: `${pct}%` }}
                         />
                     </div>
@@ -187,7 +184,7 @@ function EspaceMembreInner() {
                     </nav>
 
                     {/* Section content */}
-                    <main className="flex-1 px-6 py-8 max-w-4xl mx-auto">
+                    <div className="flex-1 px-6 py-8 max-w-4xl mx-auto">
                         <h2 className="font-title text-2xl tracking-widest uppercase text-[#F5F5F0] mb-6">
                             {SECTIONS.find(s => s.id === activeSection)?.label}
                         </h2>
@@ -226,7 +223,7 @@ function EspaceMembreInner() {
                                 Enregistrez d'abord votre profil pour accéder à cette section.
                             </p>
                         )}
-                    </main>
+                    </div>
                 </div>
             </div>
         </>

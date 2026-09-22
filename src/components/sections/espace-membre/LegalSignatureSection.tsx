@@ -19,16 +19,15 @@ export default function LegalSignatureSection({ adhesion, userId, onSaved }: Pro
     const [cgv, setCgv] = useState(false)
     const [saving, setSaving] = useState(false)
     const [error, setError] = useState('')
-    const [isClient, setIsClient] = useState(false)
     const [SignatureCanvas, setSignatureCanvas] = useState<typeof import('react-signature-canvas').default | null>(null)
 
-    // react-signature-canvas requires window
-    useEffect(() => { setIsClient(true) }, [])
-
     useEffect(() => {
-        if (!isClient) return
-        import('react-signature-canvas').then(m => setSignatureCanvas(() => m.default))
-    }, [isClient])
+        let cancelled = false
+        import('react-signature-canvas').then(module => {
+            if (!cancelled) setSignatureCanvas(() => module.default)
+        })
+        return () => { cancelled = true }
+    }, [])
 
     const sigCanvasRef = useRef<{ isEmpty(): boolean; clear(): void; toDataURL(type?: string): string } | null>(null)
 
@@ -96,7 +95,7 @@ export default function LegalSignatureSection({ adhesion, userId, onSaved }: Pro
                     required
                     label={<>
                         J'accepte le traitement de mes données personnelles conformément à la{' '}
-                        <a href="/politique-confidentialite" target="_blank" className="text-[#eb0071] hover:underline">
+                        <a href="/politique-confidentialite" target="_blank" rel="noopener noreferrer" className="text-[#eb0071] hover:underline">
                             politique de confidentialité
                         </a>.
                     </>}
@@ -143,7 +142,7 @@ export default function LegalSignatureSection({ adhesion, userId, onSaved }: Pro
                 <span className="block text-xs font-semibold tracking-widest uppercase text-[#F5F5F0]/60 mb-3">
                     Signature électronique *
                 </span>
-                {isClient && SignatureCanvas ? (
+                {SignatureCanvas ? (
                     <div className="border border-white/20 bg-white rounded-sm overflow-hidden">
                         <SignatureCanvas
                             ref={sigCanvasRef as React.RefObject<InstanceType<typeof SignatureCanvas>>}

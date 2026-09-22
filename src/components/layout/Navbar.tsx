@@ -1,6 +1,6 @@
 import { memo, useState } from 'react'
 import logo from '../../assets/white_logo_jaga.png';
-import { useAuth } from '../../contexts/AuthContext'
+import { useAuth } from '../../contexts/auth-context'
 import { usePageContext } from 'vike-react/usePageContext';
 
 const navLinks = [
@@ -22,8 +22,8 @@ const Navbar = memo(function Navbar() {
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
-                    <a href="/" className="flex-shrink-0">
-                        <img src={logo} alt="Jaga Fight" className="h-12 w-auto" />
+                    <a href="/" className="flex-shrink-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071]">
+                        <img src={logo} alt="Jaga Fight" width="1051" height="594" className="h-12 w-auto" />
                     </a>
 
                     {/* Desktop nav */}
@@ -83,20 +83,23 @@ const Navbar = memo(function Navbar() {
                         </div>
                         {/* Burger mobile */}
                         <button
-                            className="md:hidden p-2 text-[#F5F5F0]"
+                            type="button"
+                            className="md:hidden p-2 text-[#F5F5F0] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071]"
                             onClick={() => setMenuOpen(!menuOpen)}
-                            aria-label="Menu"
+                            aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+                            aria-expanded={menuOpen}
+                            aria-controls="mobile-navigation"
                         >
-                            <div className={`w-5 h-0.5 bg-current transition-all ${menuOpen ? 'rotate-45 translate-y-1.5' : ''}`} />
-                            <div className={`w-5 h-0.5 bg-current my-1 transition-all ${menuOpen ? 'opacity-0' : ''}`} />
-                            <div className={`w-5 h-0.5 bg-current transition-all ${menuOpen ? '-rotate-45 -translate-y-1.5' : ''}`} />
+                            <span aria-hidden="true" className={`block w-5 h-0.5 bg-current transition-transform ${menuOpen ? 'rotate-45 translate-y-1.5' : ''}`} />
+                            <span aria-hidden="true" className={`block w-5 h-0.5 bg-current my-1 transition-opacity ${menuOpen ? 'opacity-0' : ''}`} />
+                            <span aria-hidden="true" className={`block w-5 h-0.5 bg-current transition-transform ${menuOpen ? '-rotate-45 -translate-y-1.5' : ''}`} />
                         </button>
                     </div>
                 </div>
 
                 {/* Mobile menu */}
                 {menuOpen && (
-                    <div className="md:hidden py-4 border-t border-white/10">
+                    <div id="mobile-navigation" className="md:hidden py-4 border-t border-white/10">
                         <nav className="flex flex-col gap-4">
                             {navLinks.map(link => (
                                 <a

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm, Controller, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { supabase } from '../../../lib/supabase'
@@ -30,15 +30,13 @@ interface Props {
 }
 
 const LABEL = 'block text-xs font-semibold tracking-widest uppercase text-[#F5F5F0]/60 mb-2'
-const INPUT = 'w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#eb0071] transition-colors'
+const INPUT = 'w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:border-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071] transition-colors'
 const SELECT = `${INPUT} appearance-none`
 
 export default function AdhesionSection({ membreId, adhesion, saisons, onSaved }: Props) {
-    console.log('adhesion:', adhesion)
     const saisonActive = saisons.find(s => s.active)
-    console.log('saisonActive:', saisonActive)
 
-    const { register, handleSubmit, watch, control, reset, formState: { errors, isSubmitting, isDirty } } = useForm<FormValues>({
+    const { register, handleSubmit, control, reset, formState: { errors, isSubmitting, isDirty } } = useForm<FormValues>({
         resolver: zodResolver(schema),
         defaultValues: {
             disciplines: adhesion?.disciplines ?? [],
@@ -53,9 +51,11 @@ export default function AdhesionSection({ membreId, adhesion, saisons, onSaved }
         },
     })
 
-    const statut = watch('statut_pratique')
-    const formule = watch('formule_tarifaire') as FormuleId
-    const montant = formule ? calculerTarif(formule as FormuleId, watch('code_promo')) : null
+    const [statut, formule] = useWatch({
+        control,
+        name: ['statut_pratique', 'formule_tarifaire'],
+    })
+    const montant = formule ? calculerTarif(formule as FormuleId) : null
 
     useEffect(() => {
         if (adhesion) reset({
@@ -90,8 +90,8 @@ export default function AdhesionSection({ membreId, adhesion, saisons, onSaved }
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {/* Disciplines */}
-            <div>
-                <span className={LABEL}>Discipline(s) *</span>
+            <fieldset>
+                <legend className={LABEL}>Discipline(s) *</legend>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
                     {DISCIPLINES.map(d => (
                         <label key={d.id} className="flex items-center gap-3 cursor-pointer group">
@@ -118,11 +118,11 @@ export default function AdhesionSection({ membreId, adhesion, saisons, onSaved }
                     ))}
                 </div>
                 {errors.disciplines && <p className="text-xs text-red-400 mt-2">{errors.disciplines.message}</p>}
-            </div>
+            </fieldset>
 
             {/* Statut */}
-            <div>
-                <span className={LABEL}>Statut</span>
+            <fieldset>
+                <legend className={LABEL}>Statut</legend>
                 <div className="flex gap-6 mt-2">
                     {([['loisir', 'Loisir'], ['competiteur', 'Compétiteur']] as const).map(([val, lbl]) => (
                         <label key={val} className="flex items-center gap-2 cursor-pointer">
@@ -131,29 +131,29 @@ export default function AdhesionSection({ membreId, adhesion, saisons, onSaved }
                         </label>
                     ))}
                 </div>
-            </div>
+            </fieldset>
 
             {statut === 'competiteur' && (
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border border-[#eb0071]/20 bg-[#eb0071]/5 p-4">
                     <div>
-                        <label className={LABEL}>N° de licence</label>
-                        <input {...register('licence_numero')} className={INPUT} />
+                        <label htmlFor="adhesion-licence" className={LABEL}>N° de licence</label>
+                        <input id="adhesion-licence" {...register('licence_numero')} className={INPUT} />
                     </div>
                     <div>
-                        <label className={LABEL}>Poids de catégorie</label>
-                        <input {...register('poids_categorie')} className={INPUT} placeholder="ex: -67 kg" />
+                        <label htmlFor="adhesion-poids" className={LABEL}>Poids de catégorie</label>
+                        <input id="adhesion-poids" {...register('poids_categorie')} className={INPUT} placeholder="Ex. : -67 kg" />
                     </div>
                     <div>
-                        <label className={LABEL}>Palmarès</label>
-                        <input {...register('palmares')} className={INPUT} />
+                        <label htmlFor="adhesion-palmares" className={LABEL}>Palmarès</label>
+                        <input id="adhesion-palmares" {...register('palmares')} className={INPUT} />
                     </div>
                 </div>
             )}
 
             {/* Formule */}
             <div>
-                <label className={LABEL}>Formule tarifaire *</label>
-                <select {...register('formule_tarifaire')} className={SELECT}>
+                <label htmlFor="adhesion-formule" className={LABEL}>Formule tarifaire *</label>
+                <select id="adhesion-formule" {...register('formule_tarifaire')} className={SELECT}>
                     <option value="">— Choisir —</option>
                     {FORMULES.map(f => (
                         <option key={f.id} value={f.id}>{f.label}</option>
@@ -171,18 +171,18 @@ export default function AdhesionSection({ membreId, adhesion, saisons, onSaved }
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label className={LABEL}>Code promo / Coupon sport</label>
-                    <input {...register('code_promo')} className={INPUT} placeholder="Optionnel" />
+                    <label htmlFor="adhesion-code-promo" className={LABEL}>Code promo / Coupon sport</label>
+                    <input id="adhesion-code-promo" autoComplete="off" {...register('code_promo')} className={INPUT} placeholder="Optionnel…" />
                 </div>
                 <div>
-                    <label className={LABEL}>Date de début souhaitée</label>
-                    <input type="date" {...register('date_debut_souhaitee')} className={INPUT} />
+                    <label htmlFor="adhesion-date-debut" className={LABEL}>Date de début souhaitée</label>
+                    <input id="adhesion-date-debut" type="date" {...register('date_debut_souhaitee')} className={INPUT} />
                 </div>
             </div>
 
             {/* Saison */}
             <div>
-                <label className={LABEL}>Saison</label>
+                <p className={LABEL}>Saison</p>
                 {saisonActive ? (
                     <p className="text-sm text-[#F5F5F0]/60 mt-1">
                         Saison active : <span className="text-[#F5F5F0]">{saisonActive.label}</span>

@@ -119,11 +119,13 @@ export default function Inscription() {
                                 </label>
                                 <input
                                     id="prenom"
+                                    name="prenom"
                                     type="text"
                                     required
+                                    autoComplete="given-name"
                                     value={prenom}
                                     onChange={e => setPrenom(e.target.value)}
-                                    className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#eb0071] transition-colors"
+                                    className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:border-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071] transition-colors"
                                 />
                             </div>
                             <div>
@@ -132,11 +134,13 @@ export default function Inscription() {
                                 </label>
                                 <input
                                     id="nom"
+                                    name="nom"
                                     type="text"
                                     required
+                                    autoComplete="family-name"
                                     value={nom}
                                     onChange={e => setNom(e.target.value)}
-                                    className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#eb0071] transition-colors"
+                                    className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:border-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071] transition-colors"
                                 />
                             </div>
                         </div>
@@ -147,12 +151,14 @@ export default function Inscription() {
                             </label>
                             <input
                                 id="email"
+                                name="email"
                                 type="email"
                                 required
                                 autoComplete="email"
+                                spellCheck={false}
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
-                                className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#eb0071] transition-colors"
+                                className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:border-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071] transition-colors"
                             />
                         </div>
 
@@ -162,13 +168,14 @@ export default function Inscription() {
                             </label>
                             <input
                                 id="password"
+                                name="password"
                                 type="password"
                                 required
                                 autoComplete="new-password"
                                 value={password}
                                 onChange={e => setPassword(e.target.value)}
-                                className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#eb0071] transition-colors"
-                                placeholder="8 caractères minimum"
+                                className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:border-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071] transition-colors"
+                                placeholder="8 caractères minimum…"
                             />
                         </div>
 
@@ -178,17 +185,18 @@ export default function Inscription() {
                             </label>
                             <input
                                 id="confirm"
+                                name="confirm-password"
                                 type="password"
                                 required
                                 autoComplete="new-password"
                                 value={confirm}
                                 onChange={e => setConfirm(e.target.value)}
-                                className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#eb0071] transition-colors"
+                                className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:border-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071] transition-colors"
                             />
                         </div>
 
                         {error && (
-                            <p className="text-sm text-red-400 bg-red-400/10 border border-red-400/30 px-4 py-3">
+                            <p role="alert" className="text-sm text-red-400 bg-red-400/10 border border-red-400/30 px-4 py-3">
                                 {error}
                             </p>
                         )}

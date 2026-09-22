@@ -27,10 +27,7 @@ export default function AdminPaiements() {
     const [filterStatut, setFilterStatut] = useState('')
     const [filterMode, setFilterMode] = useState('')
 
-    useEffect(() => { fetchData() }, [])
-
     async function fetchData() {
-        setLoading(true)
         const [paRes, mRes] = await Promise.all([
             supabase.from('paiements').select('*').order('created_at', { ascending: false }),
             supabase.from('membres').select('id, nom, prenom'),
@@ -47,6 +44,10 @@ export default function AdminPaiements() {
         setRows(enriched)
         setLoading(false)
     }
+
+    // Fetching remote records is the external synchronization performed by this effect.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    useEffect(() => { void fetchData() }, [])
 
     const filtered = rows.filter(r => {
         const matchStatut = !filterStatut || r.statut === filterStatut
@@ -83,11 +84,12 @@ export default function AdminPaiements() {
                 {/* Filtres */}
                 <div className="flex flex-wrap gap-4 mb-6">
                     <div>
-                        <label className="text-xs text-[#F5F5F0]/60 tracking-widest uppercase block mb-1">Statut</label>
+                        <label htmlFor="paiements-statut" className="text-xs text-[#F5F5F0]/60 tracking-widest uppercase block mb-1">Statut</label>
                         <select
+                            id="paiements-statut"
                             value={filterStatut}
                             onChange={e => setFilterStatut(e.target.value)}
-                            className="bg-white/5 border border-white/10 text-[#F5F5F0] px-3 py-1.5 text-xs focus:outline-none focus:border-[#eb0071]"
+                            className="bg-white/5 border border-white/10 text-[#F5F5F0] px-3 py-1.5 text-xs focus:border-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071]"
                         >
                             <option value="">Tous</option>
                             <option value="paye">Payé</option>
@@ -97,11 +99,12 @@ export default function AdminPaiements() {
                         </select>
                     </div>
                     <div>
-                        <label className="text-xs text-[#F5F5F0]/60 tracking-widest uppercase block mb-1">Mode</label>
+                        <label htmlFor="paiements-mode" className="text-xs text-[#F5F5F0]/60 tracking-widest uppercase block mb-1">Mode</label>
                         <select
+                            id="paiements-mode"
                             value={filterMode}
                             onChange={e => setFilterMode(e.target.value)}
-                            className="bg-white/5 border border-white/10 text-[#F5F5F0] px-3 py-1.5 text-xs focus:outline-none focus:border-[#eb0071]"
+                            className="bg-white/5 border border-white/10 text-[#F5F5F0] px-3 py-1.5 text-xs focus:border-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071]"
                         >
                             <option value="">Tous</option>
                             <option value="especes">Espèces</option>

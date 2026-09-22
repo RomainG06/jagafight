@@ -21,7 +21,7 @@ interface Props {
 }
 
 const LABEL = 'block text-xs font-semibold tracking-widest uppercase text-[#F5F5F0]/60 mb-2'
-const INPUT = 'w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#eb0071] transition-colors'
+const INPUT = 'w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:border-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071] transition-colors'
 
 export default function UrgenceSanteSection({ membre, userId, onSaved }: Props) {
     const { register, handleSubmit, reset, formState: { errors, isSubmitting, isDirty } } = useForm<FormValues>({
@@ -59,18 +59,18 @@ export default function UrgenceSanteSection({ membre, userId, onSaved }: Props) 
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
-                        <label className={LABEL}>Nom *</label>
-                        <input {...register('urgence_nom')} className={INPUT} />
+                        <label htmlFor="urgence-nom" className={LABEL}>Nom *</label>
+                        <input id="urgence-nom" autoComplete="name" {...register('urgence_nom')} className={INPUT} />
                         {errors.urgence_nom && <p className="text-xs text-red-400 mt-1">{errors.urgence_nom.message}</p>}
                     </div>
                     <div>
-                        <label className={LABEL}>Lien (famille, ami…) *</label>
-                        <input {...register('urgence_lien')} className={INPUT} />
+                        <label htmlFor="urgence-lien" className={LABEL}>Lien (famille, ami…) *</label>
+                        <input id="urgence-lien" {...register('urgence_lien')} className={INPUT} />
                         {errors.urgence_lien && <p className="text-xs text-red-400 mt-1">{errors.urgence_lien.message}</p>}
                     </div>
                     <div>
-                        <label className={LABEL}>Téléphone *</label>
-                        <input type="tel" {...register('urgence_tel')} className={INPUT} />
+                        <label htmlFor="urgence-telephone" className={LABEL}>Téléphone *</label>
+                        <input id="urgence-telephone" type="tel" autoComplete="tel" {...register('urgence_tel')} className={INPUT} />
                         {errors.urgence_tel && <p className="text-xs text-red-400 mt-1">{errors.urgence_tel.message}</p>}
                     </div>
                 </div>
@@ -83,7 +83,9 @@ export default function UrgenceSanteSection({ membre, userId, onSaved }: Props) 
                 <div className="bg-amber-500/5 border border-amber-500/20 px-4 py-3 text-xs text-amber-400/80">
                     Ces informations sont facultatives et à caractère sensible. Elles sont accessibles uniquement par le responsable du club, conformément au RGPD.
                 </div>
+                <label htmlFor="urgence-sante-infos" className={LABEL}>Informations médicales à signaler</label>
                 <textarea
+                    id="urgence-sante-infos"
                     {...register('sante_infos')}
                     rows={4}
                     placeholder="Allergies, traitements en cours, antécédents médicaux à signaler…"

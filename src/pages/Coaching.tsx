@@ -1,7 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 import Breadcrumb from '../components/common/Breadcrumb'
 import CoachHero from '../components/sections/coaching/CoachHero'
-import ProfessionalExperience from '../components/sections/coaching/ProfessionalExperience'
 import CoachingCards from '../components/sections/coaching/CoachingCards'
 
 export default function Coaching() {
@@ -76,7 +75,6 @@ export default function Coaching() {
                 </script>
             </Helmet>
             <CoachHero />
-            <ProfessionalExperience />
 
             {/* Pour qui ? */}
             <section className="py-24 bg-[#0d0d0d]">

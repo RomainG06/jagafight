@@ -9,6 +9,6 @@ export const TARIFS: Record<FormuleId, number> = {
     'pro-sante': 0,
 }
 
-export function calculerTarif(formule: FormuleId, _codePromo?: string): number {
+export function calculerTarif(formule: FormuleId): number {
     return TARIFS[formule] ?? 0
 }

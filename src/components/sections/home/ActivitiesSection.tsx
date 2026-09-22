@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const activities = [
     {
@@ -68,6 +68,22 @@ const activities = [
 
 export default function ActivitiesSection() {
     const [activeActivity, setActiveActivity] = useState<number | null>(null);
+    const [canHover, setCanHover] = useState(false);
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
+
+        const updateCanHover = () => {
+            setCanHover(mediaQuery.matches);
+        };
+
+        updateCanHover();
+        mediaQuery.addEventListener('change', updateCanHover);
+
+        return () => {
+            mediaQuery.removeEventListener('change', updateCanHover);
+        };
+    }, []);
 
     return (
         <section className="py-24 bg-[#0d0d0d]">
@@ -86,9 +102,15 @@ export default function ActivitiesSection() {
                         <React.Fragment key={index}>
                             <div
                                 onMouseEnter={() => {
-                                    setActiveActivity(index);
+                                    if (canHover) {
+                                        setActiveActivity(index);
+                                    }
                                 }}
-                                onMouseLeave={() => setActiveActivity(null)}
+                                onMouseLeave={() => {
+                                    if (canHover) {
+                                        setActiveActivity(null);
+                                    }
+                                }}
                                 onClick={() =>
                                     setActiveActivity(activeActivity === index ? null : index)
                                 }
@@ -98,7 +120,7 @@ export default function ActivitiesSection() {
                                 <div className="absolute left-0 top-0 h-full w-0.5 bg-[#eb0071] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
 
                                 {/* Numéro */}
-                                <span className="font-title text-3xl sm:text-4xl text-white/10 group-hover:text-[#ff0096]/40 transition-colors duration-300 w-12 shrink-0 text-right select-none">
+                                <span className="font-title text-3xl sm:text-4xl text-[#eb0071] sm:text-white/10 sm:group-hover:text-[#ff0096]/40 transition-colors duration-300 w-12 shrink-0 text-right select-none">
                                     {activity.number}
                                 </span>
 
@@ -106,6 +128,15 @@ export default function ActivitiesSection() {
                                 <h3 className="font-title text-lg sm:text-2xl text-[#F5F5F0] group-hover:text-white transition-colors duration-200 flex-1 min-w-0 leading-tight">
                                     {activity.title}
                                 </h3>
+
+                                <span
+                                    className={`sm:hidden shrink-0 text-[#eb0071] transition-transform duration-200 ${activeActivity === index ? 'rotate-180' : ''}`}
+                                    aria-hidden="true"
+                                >
+                                    <svg className="w-4 h-4" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                    </svg>
+                                </span>
 
                                 {/* Méta */}
                                 <div className="hidden md:flex flex-col items-end gap-1 shrink-0 text-right">

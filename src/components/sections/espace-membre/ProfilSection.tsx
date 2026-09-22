@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { supabase } from '../../../lib/supabase'
@@ -32,7 +32,18 @@ interface Props {
 }
 
 const LABEL = 'block text-xs font-semibold tracking-widest uppercase text-[#F5F5F0]/60 mb-2'
-const INPUT = 'w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:outline-none focus:border-[#eb0071] transition-colors placeholder:text-white/20'
+const INPUT = 'w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:border-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071] transition-colors placeholder:text-white/20'
+const TODAY = new Date()
+
+function isUnder18(dateString: string) {
+    const birthDate = new Date(`${dateString}T00:00:00`)
+    let age = TODAY.getFullYear() - birthDate.getFullYear()
+    const birthdayHasPassed =
+        TODAY.getMonth() > birthDate.getMonth()
+        || (TODAY.getMonth() === birthDate.getMonth() && TODAY.getDate() >= birthDate.getDate())
+    if (!birthdayHasPassed) age -= 1
+    return age < 18
+}
 
 export default function ProfilSection({ membre, userId, onSaved }: Props) {
     const membreValues = useMemo<FormValues>(() => ({
@@ -69,24 +80,19 @@ export default function ProfilSection({ membre, userId, onSaved }: Props) {
         membre?.responsable_email,
     ])
 
-    const { register, handleSubmit, watch, reset, formState: { errors, isSubmitting, isDirty } } = useForm<FormValues>({
+    const { register, handleSubmit, control, reset, formState: { errors, isSubmitting, isDirty } } = useForm<FormValues>({
         resolver: zodResolver(schema),
         defaultValues: membreValues,
     })
 
-    const dateNaissance = watch('date_naissance')
-    const isMineur = !!dateNaissance && (() => {
-        const dob = new Date(dateNaissance)
-        const age = (Date.now() - dob.getTime()) / (1000 * 60 * 60 * 24 * 365.25)
-        return age < 18
-    })()
+    const dateNaissance = useWatch({ control, name: 'date_naissance' })
+    const isMineur = !!dateNaissance && isUnder18(dateNaissance)
 
     useEffect(() => {
         reset(membreValues)
     }, [membreValues, reset])
 
     async function onSubmit(values: FormValues) {
-        console.log('Submitting form with values:', values)
         const { error } = await supabase.from('membres').upsert({
             user_id: userId,
             ...values,
@@ -96,54 +102,50 @@ export default function ProfilSection({ membre, userId, onSaved }: Props) {
         if (!error) onSaved()
     }
 
-    function onInvalidSubmit(formErrors: typeof errors) {
-        console.log('Formulaire invalide, soumission bloquée:', formErrors)
-    }
-
     return (
-        <form noValidate onSubmit={handleSubmit(onSubmit, onInvalidSubmit)} className="space-y-6">
-            <div>
-                <span className={LABEL}>Civilité</span>
+        <form noValidate onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <fieldset>
+                <legend className={LABEL}>Civilité</legend>
                 <div className="flex gap-6">
                     {(['M.', 'Mme'] as const).map(c => (
                         <label key={c} className="flex items-center gap-2 cursor-pointer">
-                            <input type="radio" value={c} {...register('civilite')} className="accent-[#eb0071]" />
+                            <input type="radio" value={c} {...register('civilite')} className="accent-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071]" />
                             <span className="text-sm text-[#F5F5F0]/70">{c}</span>
                         </label>
                     ))}
                 </div>
-            </div>
+            </fieldset>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label className={LABEL}>Prénom *</label>
-                    <input {...register('prenom')} className={INPUT} />
+                    <label htmlFor="profil-prenom" className={LABEL}>Prénom *</label>
+                    <input id="profil-prenom" autoComplete="given-name" {...register('prenom')} className={INPUT} />
                     {errors.prenom && <p className="text-xs text-red-400 mt-1">{errors.prenom.message}</p>}
                 </div>
                 <div>
-                    <label className={LABEL}>Nom *</label>
-                    <input {...register('nom')} className={INPUT} />
+                    <label htmlFor="profil-nom" className={LABEL}>Nom *</label>
+                    <input id="profil-nom" autoComplete="family-name" {...register('nom')} className={INPUT} />
                     {errors.nom && <p className="text-xs text-red-400 mt-1">{errors.nom.message}</p>}
                 </div>
                 <div>
-                    <label className={LABEL}>Date de naissance *</label>
-                    <input type="date" {...register('date_naissance')} className={INPUT} />
+                    <label htmlFor="profil-date-naissance" className={LABEL}>Date de naissance *</label>
+                    <input id="profil-date-naissance" type="date" autoComplete="bday" {...register('date_naissance')} className={INPUT} />
                     {errors.date_naissance && <p className="text-xs text-red-400 mt-1">{errors.date_naissance.message}</p>}
                     {isMineur && (
                         <p className="text-xs text-amber-400 mt-1">Mineur — les informations du responsable légal sont requises ci-dessous.</p>
                     )}
                 </div>
                 <div>
-                    <label className={LABEL}>Lieu de naissance</label>
-                    <input {...register('lieu_naissance')} className={INPUT} />
+                    <label htmlFor="profil-lieu-naissance" className={LABEL}>Lieu de naissance</label>
+                    <input id="profil-lieu-naissance" {...register('lieu_naissance')} className={INPUT} />
                 </div>
                 <div>
-                    <label className={LABEL}>Nationalité</label>
-                    <input {...register('nationalite')} className={INPUT} placeholder="Française" />
+                    <label htmlFor="profil-nationalite" className={LABEL}>Nationalité</label>
+                    <input id="profil-nationalite" {...register('nationalite')} className={INPUT} placeholder="Française" />
                 </div>
                 <div>
-                    <label className={LABEL}>Téléphone</label>
-                    <input type="tel" {...register('telephone')} className={INPUT} />
+                    <label htmlFor="profil-telephone" className={LABEL}>Téléphone</label>
+                    <input id="profil-telephone" type="tel" autoComplete="tel" {...register('telephone')} className={INPUT} />
                 </div>
             </div>
 
@@ -152,17 +154,17 @@ export default function ProfilSection({ membre, userId, onSaved }: Props) {
                     Adresse postale
                 </h3>
                 <div>
-                    <label className={LABEL}>Adresse</label>
-                    <input {...register('adresse')} className={INPUT} />
+                    <label htmlFor="profil-adresse" className={LABEL}>Adresse</label>
+                    <input id="profil-adresse" autoComplete="street-address" {...register('adresse')} className={INPUT} />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                     <div>
-                        <label className={LABEL}>Code postal</label>
-                        <input {...register('cp')} className={INPUT} />
+                        <label htmlFor="profil-code-postal" className={LABEL}>Code postal</label>
+                        <input id="profil-code-postal" inputMode="numeric" autoComplete="postal-code" {...register('cp')} className={INPUT} />
                     </div>
                     <div>
-                        <label className={LABEL}>Ville</label>
-                        <input {...register('ville')} className={INPUT} />
+                        <label htmlFor="profil-ville" className={LABEL}>Ville</label>
+                        <input id="profil-ville" autoComplete="address-level2" {...register('ville')} className={INPUT} />
                     </div>
                 </div>
             </div>
@@ -174,24 +176,24 @@ export default function ProfilSection({ membre, userId, onSaved }: Props) {
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label className={LABEL}>Prénom</label>
-                            <input {...register('responsable_prenom')} className={INPUT} />
+                            <label htmlFor="responsable-prenom" className={LABEL}>Prénom</label>
+                            <input id="responsable-prenom" autoComplete="given-name" {...register('responsable_prenom')} className={INPUT} />
                         </div>
                         <div>
-                            <label className={LABEL}>Nom</label>
-                            <input {...register('responsable_nom')} className={INPUT} />
+                            <label htmlFor="responsable-nom" className={LABEL}>Nom</label>
+                            <input id="responsable-nom" autoComplete="family-name" {...register('responsable_nom')} className={INPUT} />
                         </div>
                         <div>
-                            <label className={LABEL}>Lien (père, mère, tuteur…)</label>
-                            <input {...register('responsable_lien')} className={INPUT} />
+                            <label htmlFor="responsable-lien" className={LABEL}>Lien (père, mère, tuteur…)</label>
+                            <input id="responsable-lien" {...register('responsable_lien')} className={INPUT} />
                         </div>
                         <div>
-                            <label className={LABEL}>Téléphone</label>
-                            <input type="tel" {...register('responsable_tel')} className={INPUT} />
+                            <label htmlFor="responsable-telephone" className={LABEL}>Téléphone</label>
+                            <input id="responsable-telephone" type="tel" autoComplete="tel" {...register('responsable_tel')} className={INPUT} />
                         </div>
                         <div className="sm:col-span-2">
-                            <label className={LABEL}>Email</label>
-                            <input type="email" {...register('responsable_email')} className={INPUT} />
+                            <label htmlFor="responsable-email" className={LABEL}>Email</label>
+                            <input id="responsable-email" type="email" autoComplete="email" spellCheck={false} {...register('responsable_email')} className={INPUT} />
                             {errors.responsable_email && <p className="text-xs text-red-400 mt-1">{errors.responsable_email.message}</p>}
                         </div>
                     </div>

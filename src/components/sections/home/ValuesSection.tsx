@@ -67,7 +67,7 @@ export default function ValuesSection() {
                     {values.map((value) => (
                         <article
                             key={value.title}
-                            className="group overflow-hidden border border-white/10 transition-all duration-300 hover:border-[#eb0071]/60"
+              className="group overflow-hidden border border-white/10 transition-colors duration-300 hover:border-[#eb0071]/60"
                         >
                             <div className="relative h-44 overflow-hidden">
                                 <OptimizedImage

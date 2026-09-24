@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from 'react'
 import { usePageContext } from 'vike-react/usePageContext'
+import { navigate } from 'vike/client/router'
 import { supabase } from '../lib/supabase'
 import type { Membre, Adhesion, Document, Paiement } from '../lib/supabase'
 import AdminLayout from '../components/layout/AdminLayout'
@@ -44,7 +45,11 @@ export default function AdminFicheMembre() {
         date_paiement: new Date().toISOString().slice(0, 10), reference: '', notes: '',
     })
     const [savingPaiement, setSavingPaiement] = useState(false)
+    const [editingPaiementId, setEditingPaiementId] = useState<string | null>(null)
+    const [deletingPaiementId, setDeletingPaiementId] = useState<string | null>(null)
+    const [deletingMembre, setDeletingMembre] = useState(false)
     const [feedback, setFeedback] = useState('')
+    const [error, setError] = useState('')
 
     const fetchData = useCallback(async () => {
         if (!id) return
@@ -72,22 +77,113 @@ export default function AdminFicheMembre() {
         if (data?.signedUrl) window.open(data.signedUrl, '_blank', 'noopener,noreferrer')
     }
 
-    async function addPaiement() {
+    function resetPaiementForm() {
+        setPaiementForm({
+            mode: 'especes', montant: '', statut: 'en_attente',
+            date_paiement: new Date().toISOString().slice(0, 10), reference: '', notes: '',
+        })
+        setEditingPaiementId(null)
+        setShowPaiementForm(false)
+    }
+
+    function startEditPaiement(paiement: Paiement) {
+        if (!paiement.id) return
+        setPaiementForm({
+            mode: paiement.mode,
+            montant: String(paiement.montant),
+            statut: paiement.statut,
+            date_paiement: paiement.date_paiement?.slice(0, 10) ?? '',
+            reference: paiement.reference ?? '',
+            notes: paiement.notes ?? '',
+        })
+        setEditingPaiementId(paiement.id)
+        setShowPaiementForm(true)
+        setError('')
+    }
+
+    async function savePaiement() {
         if (!id || !paiementForm.montant) return
+        const montant = Number(paiementForm.montant)
+        if (!Number.isFinite(montant) || montant <= 0) {
+            setError('Le montant doit être supérieur à 0.')
+            return
+        }
+
         setSavingPaiement(true)
-        await supabase.from('paiements').insert({
+        setError('')
+
+        const values = {
             membre_id: id,
             adhesion_id: adhesion?.id,
             mode: paiementForm.mode,
-            montant: parseFloat(paiementForm.montant),
+            montant,
             statut: paiementForm.statut,
-            date_paiement: paiementForm.date_paiement || undefined,
-            reference: paiementForm.reference || undefined,
-            notes: paiementForm.notes || undefined,
-        })
+            date_paiement: paiementForm.date_paiement || null,
+            reference: paiementForm.reference.trim() || null,
+            notes: paiementForm.notes.trim() || null,
+        }
+
+        const result = editingPaiementId
+            ? await supabase.from('paiements').update(values).eq('id', editingPaiementId).select('id')
+            : await supabase.from('paiements').insert(values).select('id')
+
         setSavingPaiement(false)
-        setShowPaiementForm(false)
-        fetchData()
+        if (result.error || !result.data?.length) {
+            setError(result.error?.message ?? 'Le paiement n’a pas pu être enregistré. Vérifiez les autorisations RLS.')
+            return
+        }
+
+        setFeedback(editingPaiementId ? 'Paiement modifié.' : 'Paiement ajouté.')
+        resetPaiementForm()
+        await fetchData()
+    }
+
+    async function deletePaiement(paiement: Paiement) {
+        if (!paiement.id) return
+        const confirmed = window.confirm(`Supprimer définitivement ce paiement de ${paiement.montant} € ?`)
+        if (!confirmed) return
+
+        setDeletingPaiementId(paiement.id)
+        setError('')
+        const { data, error: deleteError } = await supabase
+            .from('paiements')
+            .delete()
+            .eq('id', paiement.id)
+            .select('id')
+
+        setDeletingPaiementId(null)
+        if (deleteError || !data?.length) {
+            setError(deleteError?.message ?? 'Le paiement n’a pas pu être supprimé. Vérifiez les autorisations RLS.')
+            return
+        }
+
+        if (editingPaiementId === paiement.id) resetPaiementForm()
+        setFeedback('Paiement supprimé.')
+        await fetchData()
+    }
+
+    async function deleteMembre() {
+        if (!id || !membre) return
+        const confirmed = window.confirm(
+            `Supprimer définitivement la fiche de ${membre.prenom} ${membre.nom} et ses données associées ?`,
+        )
+        if (!confirmed) return
+
+        setDeletingMembre(true)
+        setError('')
+        const { data, error: deleteError } = await supabase
+            .from('membres')
+            .delete()
+            .eq('id', id)
+            .select('id')
+
+        if (deleteError || !data?.length) {
+            setDeletingMembre(false)
+            setError(deleteError?.message ?? 'Le membre n’a pas pu être supprimé. Vérifiez les autorisations RLS et les relations de la base.')
+            return
+        }
+
+        await navigate('/admin/membres')
     }
 
     async function generatePDF() {
@@ -131,18 +227,31 @@ export default function AdminFicheMembre() {
                     <a href="/admin/membres" className="text-xs text-[#F5F5F0]/40 hover:text-[#F5F5F0] transition-colors tracking-widest uppercase">
                         ← Adhérents
                     </a>
-                    <div className="flex flex-wrap items-center gap-3">
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                        <div className="flex flex-wrap items-center gap-3">
                         <h1 className="font-title text-xl tracking-widest uppercase">
                             {membre?.prenom} {membre?.nom}
                         </h1>
                         {membre?.profil_complet && (
                             <span className="text-xs text-green-400 border border-green-500/20 bg-green-500/10 px-2 py-0.5">✓ Complet</span>
                         )}
+                        </div>
+                        <button
+                            type="button"
+                            onClick={deleteMembre}
+                            disabled={deletingMembre}
+                            className="border border-red-500/30 px-3 py-2 text-xs uppercase tracking-widest text-red-400 transition-colors hover:border-red-400 hover:bg-red-500/10 disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                            {deletingMembre ? 'Suppression…' : 'Supprimer le membre'}
+                        </button>
                     </div>
                 </div>
 
                 {feedback && (
-                    <p className="mb-4 text-sm text-green-400 bg-green-500/10 border border-green-500/20 px-4 py-2">{feedback}</p>
+                    <p role="status" className="mb-4 text-sm text-green-400 bg-green-500/10 border border-green-500/20 px-4 py-2">{feedback}</p>
+                )}
+                {error && (
+                    <p role="alert" className="mb-4 text-sm text-red-400 bg-red-500/10 border border-red-500/20 px-4 py-2">{error}</p>
                 )}
 
                 {/* Identité */}
@@ -225,10 +334,17 @@ export default function AdminFicheMembre() {
                 <Section title="Paiements">
                     <div className="mb-4 flex flex-col gap-3 sm:flex-row">
                         <button
-                            onClick={() => setShowPaiementForm(v => !v)}
+                            onClick={() => {
+                                if (showPaiementForm) resetPaiementForm()
+                                else {
+                                    setEditingPaiementId(null)
+                                    setShowPaiementForm(true)
+                                    setError('')
+                                }
+                            }}
                             className="w-full sm:w-auto text-xs px-4 py-2 border border-white/20 text-[#F5F5F0]/60 hover:text-[#F5F5F0] hover:border-white/40 transition-colors tracking-widest uppercase cursor-pointer"
                         >
-                            + Ajouter un paiement
+                            {showPaiementForm ? 'Fermer le formulaire' : '+ Ajouter un paiement'}
                         </button>
                         <button
                             onClick={generatePDF}
@@ -277,10 +393,10 @@ export default function AdminFicheMembre() {
                                 </div>
                             </div>
                             <div className="flex flex-col gap-2 sm:flex-row">
-                                <button type="button" onClick={addPaiement} disabled={savingPaiement} className="px-6 py-2 bg-[#eb0071] text-[#F5F5F0] text-xs font-semibold tracking-widest uppercase hover:opacity-90 disabled:opacity-50 cursor-not-allowed">
-                                    {savingPaiement ? 'Enregistrement…' : 'Enregistrer'}
+                                <button type="button" onClick={savePaiement} disabled={savingPaiement} className="px-6 py-2 bg-[#eb0071] text-[#F5F5F0] text-xs font-semibold tracking-widest uppercase hover:opacity-90 disabled:opacity-50 cursor-not-allowed">
+                                    {savingPaiement ? 'Enregistrement…' : editingPaiementId ? 'Enregistrer les modifications' : 'Enregistrer'}
                                 </button>
-                                <button type="button" onClick={() => setShowPaiementForm(false)} className="px-4 py-2 text-xs text-[#F5F5F0]/40 hover:text-[#F5F5F0] transition-colors">
+                                <button type="button" onClick={resetPaiementForm} className="px-4 py-2 text-xs text-[#F5F5F0]/40 hover:text-[#F5F5F0] transition-colors">
                                     Annuler
                                 </button>
                             </div>
@@ -299,9 +415,22 @@ export default function AdminFicheMembre() {
                                 <span className="text-[#F5F5F0] font-medium">{p.montant} €</span>
                                 {p.reference && <span className="text-xs text-[#F5F5F0]/30">{p.reference}</span>}
                             </div>
-                            <span className={`text-xs border px-2 py-0.5 ${STATUT_PAIEMENT_STYLES[p.statut]}`}>
-                                {STATUT_LABELS[p.statut]}
-                            </span>
+                            <div className="flex flex-wrap items-center gap-3">
+                                <span className={`text-xs border px-2 py-0.5 ${STATUT_PAIEMENT_STYLES[p.statut]}`}>
+                                    {STATUT_LABELS[p.statut]}
+                                </span>
+                                <button type="button" onClick={() => startEditPaiement(p)} className="text-xs text-[#eb0071] hover:underline">
+                                    Modifier
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => deletePaiement(p)}
+                                    disabled={deletingPaiementId === p.id}
+                                    className="text-xs text-red-400 hover:underline disabled:opacity-50"
+                                >
+                                    {deletingPaiementId === p.id ? 'Suppression…' : 'Supprimer'}
+                                </button>
+                            </div>
                         </div>
                     ))}
                 </Section>

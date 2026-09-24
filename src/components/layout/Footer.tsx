@@ -67,6 +67,7 @@ export default function Footer() {
                                 { to: '/', label: "L'École" },
                                 { to: '/muay-thai', label: 'Le Muay Thaï' },
                                 { to: '/coaching', label: 'Coaching' },
+                                { to: '/tarifs', label: 'Tarifs' },
                                 { to: '/mentions-legales', label: 'Mentions légales' },
                                 { to: '/politique-confidentialite', label: 'Politique de confidentialité' },
                             ].map(link => (

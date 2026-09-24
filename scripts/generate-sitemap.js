@@ -51,10 +51,6 @@ const pages = [
         path: "/muay-thai",
         lastmod: "2026-09-22",
     },
-    {
-        path: "/tarifs",
-        lastmod: "2026-09-24",
-    },
 ];
 
 /**

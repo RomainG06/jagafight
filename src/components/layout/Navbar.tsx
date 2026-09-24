@@ -9,7 +9,6 @@ const navLinks = [
     { to: '/formations', label: 'Formations' },
     { to: '/notre-adn', label: 'Notre ADN' },
     { to: '/muay-thai', label: 'Le Muay Thaï' },
-    { to: '/tarifs', label: 'Tarifs' },
 
 ]
 
@@ -30,7 +29,7 @@ const Navbar = memo(function Navbar() {
                     </a>
 
                     {/* Desktop nav */}
-                    <nav className="hidden md:flex items-center gap-5 lg:gap-8">
+                    <nav className="hidden md:flex items-center gap-8">
                         {navLinks.map(link => (
                             <a
                                 key={link.to}

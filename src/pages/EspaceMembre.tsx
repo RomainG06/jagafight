@@ -37,6 +37,20 @@ function isLegalComplete(a: Adhesion | null) {
     return !!a?.signature_base64
 }
 
+function getCompletion(
+    membre: Membre | null,
+    adhesion: Adhesion | null,
+    documents: Document[]
+) {
+    return [
+        { id: 'profil' as const, complete: isProfilComplete(membre) },
+        { id: 'adhesion' as const, complete: isAdhesionComplete(adhesion) },
+        { id: 'documents' as const, complete: isDocumentsComplete(documents) },
+        { id: 'urgence' as const, complete: isUrgenceComplete(membre) },
+        { id: 'legal' as const, complete: isLegalComplete(adhesion) },
+    ]
+}
+
 function EspaceMembreInner() {
     const { session } = useAuth()
     const [activeSection, setActiveSection] = useState<SectionId>('profil')
@@ -51,45 +65,93 @@ function EspaceMembreInner() {
 
     const fetchData = useCallback(async () => {
         const [membreRes, saisonsRes] = await Promise.all([
-            supabase.from('membres').select('*, adhesions(*), documents(*)').eq('user_id', userId).maybeSingle(),
-            supabase.from('saisons').select('*').order('date_debut', { ascending: false }),
-        ])
-        const raw = membreRes.data as (Membre & { adhesions: Adhesion[]; documents: Document[] }) | null
-        const m: Membre | null = raw ? (({ adhesions, documents: nestedDocuments, ...rest }) => {
-            void adhesions
-            void nestedDocuments
-            return rest
-        })(raw) as Membre : null
-        setMembre(m)
-        setSaisons((saisonsRes.data ?? []) as Saison[])
-        if (raw) {
-            const adhesions = (raw.adhesions ?? []) as Adhesion[]
-            adhesions.sort((a, b) => (b.created_at ?? '').localeCompare(a.created_at ?? ''))
-            setAdhesion(adhesions[0] ?? null)
-            setDocuments((raw.documents ?? []) as Document[])
-        }
+            supabase
+                .from('membres')
+                .select('*, adhesions(*), documents(*)')
+                .eq('user_id', userId)
+                .maybeSingle(),
 
+            supabase
+                .from('saisons')
+                .select('*')
+                .order('date_debut', { ascending: false }),
+        ])
+
+        const raw = membreRes.data as (
+            Membre & {
+                adhesions: Adhesion[]
+                documents: Document[]
+            }
+        ) | null
+
+        const m: Membre | null = raw
+            ? (({ adhesions, documents, ...rest }) => {
+                void adhesions
+                void documents
+                return rest
+            })(raw) as Membre
+            : null
+
+        const adhesions = [...(raw?.adhesions ?? [])] as Adhesion[]
+
+        adhesions.sort(
+            (a, b) =>
+                (b.created_at ?? '').localeCompare(a.created_at ?? '')
+        )
+
+        const currentAdhesion = adhesions[0] ?? null
+        const currentDocuments = (raw?.documents ?? []) as Document[]
+        const currentSaisons = (saisonsRes.data ?? []) as Saison[]
+
+        setMembre(m)
+        setAdhesion(currentAdhesion)
+        setDocuments(currentDocuments)
+        setSaisons(currentSaisons)
         setLoading(false)
+
+        // IMPORTANT : on retourne directement les valeurs fraîches
+        return {
+            membre: m,
+            adhesion: currentAdhesion,
+            documents: currentDocuments,
+        }
     }, [userId])
 
     // Fetching remote records is the external synchronization performed by this effect.
     // eslint-disable-next-line react-hooks/set-state-in-effect
     useEffect(() => { void fetchData() }, [fetchData])
 
-    function handleSaved() {
-        fetchData()
+    async function handleSaved() {
+        const data = await fetchData()
+
         setSavedFeedback(true)
         setTimeout(() => setSavedFeedback(false), 2500)
+
+        const completion = getCompletion(
+            data.membre,
+            data.adhesion,
+            data.documents
+        )
+
+        const firstIncomplete = completion.find(section => !section.complete)
+
+        if (firstIncomplete) {
+            setActiveSection(firstIncomplete.id)
+        }
     }
 
-    const completion = [
-        isProfilComplete(membre),
-        isAdhesionComplete(adhesion),
-        isDocumentsComplete(documents),
-        isUrgenceComplete(membre),
-        isLegalComplete(adhesion),
-    ]
-    const pct = Math.round((completion.filter(Boolean).length / completion.length) * 100)
+    const completion = getCompletion(
+        membre,
+        adhesion,
+        documents
+    )
+
+    const pct = Math.round(
+        (
+            completion.filter(section => section.complete).length
+            / completion.length
+        ) * 100
+    )
 
     if (loading) {
         return (
@@ -161,18 +223,20 @@ function EspaceMembreInner() {
                     {/* Sidebar navigation */}
                     <nav className="md:w-56 md:border-r md:border-white/10 md:min-h-screen px-4 py-6 flex-shrink-0">
                         <ul className="space-y-1">
-                            {SECTIONS.map((s, i) => {
-                                const done = completion[i]
+                            {SECTIONS.map(s => {
+                                const done = completion.find(c => c.id === s.id)?.complete ?? false
+
                                 return (
                                     <li key={s.id}>
                                         <button
                                             onClick={() => setActiveSection(s.id)}
                                             className={`w-full text-left px-3 py-2.5 text-sm flex items-center justify-between transition-colors cursor-pointer ${activeSection === s.id
-                                                ? 'text-[#F5F5F0] bg-white/5 border-l-2 border-[#eb0071]'
-                                                : 'text-[#F5F5F0]/50 hover:text-[#F5F5F0] hover:bg-white/3'
+                                                    ? 'text-[#F5F5F0] bg-white/5 border-l-2 border-[#eb0071]'
+                                                    : 'text-[#F5F5F0]/50 hover:text-[#F5F5F0] hover:bg-white/3'
                                                 }`}
                                         >
                                             <span>{s.label}</span>
+
                                             {done && (
                                                 <span className="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0" />
                                             )}

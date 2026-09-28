@@ -55,7 +55,7 @@ export default function NotFound() {
                                 Notre ADN
                             </a>
                             <a
-                                href="mailto:Agentpro.athlete@gmail.com"
+                                href="mailto:agentpro.athlete@gmail.com"
                                 className="hover:text-[#eb0071] transition-colors"
                             >
                                 Contact

@@ -8,6 +8,7 @@ export default function Connexion() {
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
+    const [resetLoading, setResetLoading] = useState(false)
     const [resetSent, setResetSent] = useState(false)
 
     async function handleSubmit(e: FormEvent) {
@@ -55,13 +56,25 @@ export default function Connexion() {
     }
 
     async function handleReset() {
-        if (!email) {
+        const normalizedEmail = email.trim()
+        if (!normalizedEmail) {
             setError('Saisissez votre email pour réinitialiser le mot de passe.')
             return
         }
-        await supabase.auth.resetPasswordForEmail(email, {
-            redirectTo: `${window.location.origin}/espace-membre`,
+
+        setError('')
+        setResetSent(false)
+        setResetLoading(true)
+        const { error: resetError } = await supabase.auth.resetPasswordForEmail(normalizedEmail, {
+            redirectTo: `${window.location.origin}/reset-password`,
         })
+        setResetLoading(false)
+
+        if (resetError) {
+            setError('Impossible d’envoyer l’e-mail de réinitialisation. Réessayez dans quelques instants.')
+            return
+        }
+
         setResetSent(true)
     }
 
@@ -137,9 +150,10 @@ export default function Connexion() {
                             <button
                                 type="button"
                                 onClick={handleReset}
-                                className="text-[#F5F5F0]/40 hover:text-[#F5F5F0] transition-colors cursor-pointer"
+                                disabled={resetLoading}
+                                className="text-[#F5F5F0]/40 hover:text-[#F5F5F0] transition-colors cursor-pointer disabled:cursor-default disabled:opacity-50"
                             >
-                                Mot de passe oublié ?
+                                {resetLoading ? 'Envoi…' : 'Mot de passe oublié ?'}
                             </button>
                             <a href="/inscription" className="text-[#eb0071] hover:underline">
                                 Créer un compte

@@ -218,7 +218,7 @@ export default function Tarifs() {
                             S’inscrire
                         </a>
                         <a
-                            href="mailto:Agentpro.athlete@gmail.com"
+                            href="mailto:agentpro.athlete@gmail.com"
                             className="inline-flex justify-center rounded border border-white/30 px-7 py-3.5 font-semibold text-[#F5F5F0] transition-[color,border-color] hover:border-[#eb0071] hover:text-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071]"
                         >
                             Nous contacter

@@ -54,7 +54,7 @@ export default function Home() {
                             "longitude": "7.1481"
                         },
                         "telephone": "+33 7 43 52 72 93",
-                        "email": "Agentpro.athlete@gmail.com",
+                        "email": "agentpro.athlete@gmail.com",
                         "openingHoursSpecification": {
                             "@type": "OpeningHoursSpecification",
                             "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],

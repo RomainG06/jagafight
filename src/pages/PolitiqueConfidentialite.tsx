@@ -17,7 +17,7 @@ export default function PolitiqueConfidentialite() {
                         <h2 className="font-title text-2xl text-[#F5F5F0] mb-3">Responsable du traitement</h2>
                         <p>
                             <strong className="text-[#F5F5F0]">Jaga Fighting Team</strong> — Hicham<br />
-                            Email : Agentpro.athlete@gmail.com
+                            Email : agentpro.athlete@gmail.com
                         </p>
                     </section>
 
@@ -81,8 +81,8 @@ export default function PolitiqueConfidentialite() {
                         </ul>
                         <p className="mt-3">
                             Pour exercer ces droits, contactez-nous à :{' '}
-                            <a href="mailto:Agentpro.athlete@gmail.com" className="text-[#eb0071] hover:underline">
-                                Agentpro.athlete@gmail.com
+                            <a href="mailto:agentpro.athlete@gmail.com" className="text-[#eb0071] hover:underline">
+                                agentpro.athlete@gmail.com
                             </a>
                         </p>
                     </section>

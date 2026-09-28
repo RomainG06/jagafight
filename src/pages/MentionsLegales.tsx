@@ -23,7 +23,7 @@ export default function MentionsLegales() {
                             SIRET du siège : 990 250 458 00017<br />
                             Responsable de publication : Hicham<br />
                             Siège social : 82 avenue de Grasse, 06800 Cagnes-sur-Mer, France<br />
-                            Email : Agentpro.athlete@gmail.com<br />
+                            Email : agentpro.athlete@gmail.com<br />
                             Site web : www.jagafight.fr<br />
                             <a
                                 href="https://annuaire-entreprises.data.gouv.fr/entreprise/jaga-fight-990250458"

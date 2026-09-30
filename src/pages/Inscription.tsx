@@ -1,5 +1,4 @@
 import { useState, type FormEvent } from 'react'
-import { navigate } from 'vike/client/router'
 import { Helmet } from 'react-helmet-async'
 import { supabase } from '../lib/supabase'
 
@@ -13,6 +12,7 @@ export default function Inscription() {
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const [success, setSuccess] = useState(false)
+    const [requiresEmailConfirmation, setRequiresEmailConfirmation] = useState(false)
 
     async function handleSubmit(e: FormEvent) {
         e.preventDefault()
@@ -28,11 +28,17 @@ export default function Inscription() {
         }
 
         setLoading(true)
-        const { error: authError, data } = await supabase.auth.signUp({
+        const { data, error: authError } = await supabase.auth.signUp({
             email,
             password,
             options: {
-                data: { civilite, prenom, nom, role: 'member' },
+                emailRedirectTo: `${window.location.origin}/connexion`,
+                data: {
+                    civilite,
+                    prenom,
+                    nom,
+                    role: 'member',
+                },
             },
         })
         setLoading(false)
@@ -44,33 +50,8 @@ export default function Inscription() {
             return
         }
 
-        // If email confirmation is disabled in Supabase, session is immediately available
-        if (data.session) {
-            navigate('/espace-membre')
-        } else {
-            setSuccess(true)
-        }
-    }
-
-    if (success) {
-        return (
-            <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4">
-                <div className="w-full max-w-sm text-center space-y-4">
-                    <div className="w-12 h-12 bg-green-500/10 border border-green-500/30 rounded-full flex items-center justify-center mx-auto">
-                        <svg className="w-6 h-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                    </div>
-                    <h2 className="font-title text-2xl text-[#F5F5F0] tracking-widest uppercase">Compte créé !</h2>
-                    <p className="text-sm text-[#F5F5F0]/60">
-                        Un email de confirmation vous a été envoyé. Cliquez sur le lien pour activer votre compte.
-                    </p>
-                    <a href="/connexion" className="inline-block text-sm text-[#eb0071] hover:underline mt-2">
-                        Se connecter
-                    </a>
-                </div>
-            </div>
-        )
+        setRequiresEmailConfirmation(!data.session)
+        setSuccess(true)
     }
 
     return (
@@ -218,6 +199,44 @@ export default function Inscription() {
                     </form>
                 </div>
             </div>
+
+            {success && (
+                <div
+                    className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 px-4 backdrop-blur-sm"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-labelledby="inscription-success-title"
+                    aria-describedby="inscription-success-description"
+                >
+                    <div className="w-full max-w-md border border-green-500/30 bg-[#0d0d0d] p-7 text-center shadow-2xl sm:p-9">
+                        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-green-500/30 bg-green-500/10">
+                            <svg className="h-7 w-7 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+
+                        <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-green-400">
+                            Inscription réussie
+                        </p>
+                        <h2 id="inscription-success-title" className="mt-2 font-title text-3xl uppercase tracking-widest text-[#F5F5F0]">
+                            Compte créé !
+                        </h2>
+                        <p id="inscription-success-description" className="mt-4 text-sm leading-relaxed text-[#F5F5F0]/60">
+                            {requiresEmailConfirmation
+                                ? 'Un e-mail de confirmation vous a été envoyé. Cliquez sur le lien reçu pour activer votre compte.'
+                                : 'Votre compte est prêt. Vous pouvez maintenant accéder à votre espace membre et compléter votre dossier.'}
+                        </p>
+
+                        <a
+                            href={requiresEmailConfirmation ? '/connexion' : '/espace-membre'}
+                            autoFocus
+                            className="mt-7 inline-flex w-full justify-center bg-[#eb0071] px-6 py-3.5 text-sm font-semibold text-[#F5F5F0] transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071]"
+                        >
+                            {requiresEmailConfirmation ? 'Retour à la connexion' : 'Accéder à mon espace'}
+                        </a>
+                    </div>
+                </div>
+            )}
         </>
     )
 }

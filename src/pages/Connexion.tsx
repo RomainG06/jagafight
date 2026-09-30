@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react'
 import { navigate } from 'vike/client/router'
 import { Helmet } from 'react-helmet-async'
 import { supabase } from '../lib/supabase'
+import { Eye, EyeOff } from 'lucide-react'
 
 export default function Connexion() {
     const [email, setEmail] = useState('')
@@ -10,6 +11,7 @@ export default function Connexion() {
     const [loading, setLoading] = useState(false)
     const [resetLoading, setResetLoading] = useState(false)
     const [resetSent, setResetSent] = useState(false)
+    const [showPassword, setShowPassword] = useState(false)
 
     async function handleSubmit(e: FormEvent) {
         e.preventDefault()
@@ -78,6 +80,10 @@ export default function Connexion() {
         setResetSent(true)
     }
 
+    function togglePasswordVisibility() {
+        setShowPassword(prev => !prev)
+    }
+
     return (
         <>
             <Helmet>
@@ -111,19 +117,42 @@ export default function Connexion() {
                         </div>
 
                         <div>
-                            <label htmlFor="password" className="block text-xs font-semibold tracking-widest uppercase text-[#F5F5F0]/60 mb-2">
+                            <label
+                                htmlFor="password"
+                                className="block text-xs font-semibold tracking-widest uppercase text-[#F5F5F0]/60 mb-2"
+                            >
                                 Mot de passe
                             </label>
-                            <input
-                                id="password"
-                                name="password"
-                                type="password"
-                                required
-                                autoComplete="current-password"
-                                value={password}
-                                onChange={e => setPassword(e.target.value)}
-                                className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 text-sm focus:border-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071] transition-colors"
-                            />
+
+                            <div className="relative">
+                                <input
+                                    id="password"
+                                    name="password"
+                                    type={showPassword ? 'text' : 'password'}
+                                    required
+                                    autoComplete="current-password"
+                                    value={password}
+                                    onChange={e => setPassword(e.target.value)}
+                                    className="w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-3 pr-12 text-sm focus:border-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071] transition-colors"
+                                />
+
+                                <button
+                                    type="button"
+                                    onClick={togglePasswordVisibility}
+                                    aria-label={showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
+                                    className="absolute right-3 top-1/2 -translate-y-1/2
+                                                flex items-center justify-center
+                                                w-8 h-8
+                                                text-white/60 hover:text-[#eb0071]
+                                                transition-colors cursor-pointer"
+                                >
+                                    {showPassword ? (
+                                        <EyeOff size={18} />
+                                    ) : (
+                                        <Eye size={18} />
+                                    )}
+                                </button>
+                            </div>
                         </div>
 
                         {error && (

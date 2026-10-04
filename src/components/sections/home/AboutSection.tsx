@@ -14,7 +14,7 @@ export default function AboutSection() {
                         <p className="text-[#F5F5F0]/70 text-base leading-relaxed mb-6">
                             Jaga Fight est plus qu'une salle de sport. C'est un espace d'éducation,
                             de résilience et de reconstruction, ouvert à tous les publics : enfants,
-                            adolescents, adultes, seniors, femmes en difficulté, forces de l'ordre.
+                            adolescents, adultes, seniors, forces de l'ordre.
                         </p>
                         <p className="text-[#F5F5F0]/70 text-base leading-relaxed">
                             Nous croyons que le sport de combat, pratiqué dans un cadre bienveillant

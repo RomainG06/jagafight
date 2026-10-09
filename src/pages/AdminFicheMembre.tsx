@@ -71,10 +71,17 @@ export default function AdminFicheMembre() {
     useEffect(() => { void fetchData() }, [fetchData])
 
     async function downloadDoc(doc: Document) {
-        const { data } = await supabase.storage
-            .from('documents-membres')
-            .createSignedUrl(doc.storage_path, 60)
-        if (data?.signedUrl) window.open(data.signedUrl, '_blank', 'noopener,noreferrer')
+        setError('')
+        const { data, error: downloadError } = await supabase.storage
+            .from('documents')
+            .createSignedUrl(doc.storage_path, 60, { download: true })
+
+        if (downloadError || !data?.signedUrl) {
+            setError(downloadError?.message ?? 'Impossible de télécharger ce document.')
+            return
+        }
+
+        window.location.assign(data.signedUrl)
     }
 
     function resetPaiementForm() {
@@ -229,12 +236,12 @@ export default function AdminFicheMembre() {
                     </a>
                     <div className="flex flex-wrap items-center justify-between gap-3">
                         <div className="flex flex-wrap items-center gap-3">
-                        <h1 className="font-title text-xl tracking-widest uppercase">
-                            {membre?.prenom} {membre?.nom}
-                        </h1>
-                        {membre?.profil_complet && (
-                            <span className="text-xs text-green-400 border border-green-500/20 bg-green-500/10 px-2 py-0.5">✓ Complet</span>
-                        )}
+                            <h1 className="font-title text-xl tracking-widest uppercase">
+                                {membre?.prenom} {membre?.nom}
+                            </h1>
+                            {membre?.profil_complet && (
+                                <span className="text-xs text-green-400 border border-green-500/20 bg-green-500/10 px-2 py-0.5">✓ Complet</span>
+                            )}
                         </div>
                         <button
                             type="button"

@@ -150,9 +150,7 @@ export default function ProfilSection({ membre, userId, onSaved }: Props) {
             </div>
 
             <div className="space-y-4">
-                <h3 className="text-xs font-semibold tracking-widest uppercase text-[#F5F5F0]/40 border-b border-white/10 pb-2">
-                    Adresse postale
-                </h3>
+
                 <div>
                     <label htmlFor="profil-adresse" className={LABEL}>Adresse</label>
                     <input id="profil-adresse" autoComplete="street-address" {...register('adresse')} className={INPUT} />

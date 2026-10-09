@@ -45,6 +45,7 @@ export default function AdminFicheMembre() {
         date_paiement: new Date().toISOString().slice(0, 10), reference: '', notes: '',
     })
     const [savingPaiement, setSavingPaiement] = useState(false)
+    const [profilePhoto, setProfilePhoto] = useState<string | null>(null)
     const [editingPaiementId, setEditingPaiementId] = useState<string | null>(null)
     const [deletingPaiementId, setDeletingPaiementId] = useState<string | null>(null)
     const [deletingMembre, setDeletingMembre] = useState(false)
@@ -59,10 +60,27 @@ export default function AdminFicheMembre() {
             supabase.from('documents').select('*').eq('membre_id', id),
             supabase.from('paiements').select('*').eq('membre_id', id).order('created_at', { ascending: false }),
         ])
+        const memberDocuments = (dRes.data ?? []) as Document[]
+        const profilePhotoDocument = memberDocuments.find(document => document.type === 'photo_identite')
+        let profilePhotoUrl: string | null = null
+
+        if (profilePhotoDocument) {
+            const { data: photoData, error: photoError } = await supabase.storage
+                .from('documents')
+                .createSignedUrl(profilePhotoDocument.storage_path, 60 * 60)
+
+            if (photoError) {
+                setError("Impossible de charger la photo de l'adhérent : " + photoError.message)
+            } else {
+                profilePhotoUrl = photoData.signedUrl
+            }
+        }
+
         setMembre(mRes.data as Membre)
         setAdhesion(aRes.data as Adhesion | null)
-        setDocuments((dRes.data ?? []) as Document[])
+        setDocuments(memberDocuments)
         setPaiements((pRes.data ?? []) as Paiement[])
+        setProfilePhoto(profilePhotoUrl)
         setLoading(false)
     }, [id])
 
@@ -263,15 +281,23 @@ export default function AdminFicheMembre() {
 
                 {/* Identité */}
                 <Section title="Identité">
-                    <Row label="Civilité" value={membre?.civilite} />
-                    <Row label="Prénom" value={membre?.prenom} />
-                    <Row label="Nom" value={membre?.nom} />
-                    <Row label="Date de naissance" value={membre?.date_naissance ? new Date(membre.date_naissance).toLocaleDateString('fr-FR') : undefined} />
-                    <Row label="Lieu de naissance" value={membre?.lieu_naissance} />
-                    <Row label="Nationalité" value={membre?.nationalite} />
-                    <Row label="Adresse" value={[membre?.adresse, membre?.cp, membre?.ville].filter(Boolean).join(', ')} />
-                    <Row label="Email" value={membre?.email} />
-                    <Row label="Téléphone" value={membre?.telephone} />
+                    <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_14rem] lg:items-start">
+                        <div className="space-y-3">
+                            <Row label="Civilité" value={membre?.civilite} />
+                            <Row label="Prénom" value={membre?.prenom} />
+                            <Row label="Nom" value={membre?.nom} />
+                            <Row label="Date de naissance" value={membre?.date_naissance ? new Date(membre.date_naissance).toLocaleDateString('fr-FR') : undefined} />
+                            <Row label="Lieu de naissance" value={membre?.lieu_naissance} />
+                            <Row label="Nationalité" value={membre?.nationalite} />
+                            <Row label="Adresse" value={[membre?.adresse, membre?.cp, membre?.ville].filter(Boolean).join(', ')} />
+                            <Row label="Email" value={membre?.email} />
+                            <Row label="Téléphone" value={membre?.telephone} />
+                        </div>
+                        <MemberPhoto
+                            src={profilePhoto}
+                            name={[membre?.prenom, membre?.nom].filter(Boolean).join(' ')}
+                        />
+                    </div>
                 </Section>
 
                 {membre?.est_mineur && (
@@ -320,7 +346,13 @@ export default function AdminFicheMembre() {
                     ) : documents.map(doc => (
                         <div key={doc.id} className="flex flex-col gap-2 py-2 border-b border-white/5 sm:flex-row sm:items-center sm:justify-between">
                             <div>
-                                <span className="text-sm text-[#F5F5F0]/70 capitalize">{doc.type.replace(/_/g, ' ')}</span>
+                                <span className="text-sm text-[#F5F5F0]/70">
+                                    {doc.type === 'photo_identite'
+                                        ? "Photo de l'adhérent"
+                                        : doc.type === 'piece_identite'
+                                            ? "Document officiel d'identité"
+                                            : doc.type.replace(/_/g, ' ')}
+                                </span>
                                 {doc.date_validite && (
                                     <span className="block text-xs text-[#F5F5F0]/30 sm:ml-2 sm:inline">
                                         valide jusqu'au {new Date(doc.date_validite).toLocaleDateString('fr-FR')}
@@ -464,5 +496,31 @@ function Row({ label, value }: { label: string; value?: string | null }) {
             <span className="text-[#F5F5F0]/40">{label}</span>
             <span className="text-[#F5F5F0]/80 break-words">{value}</span>
         </div>
+    )
+}
+
+function MemberPhoto({ src, name }: { src?: string | null; name?: string }) {
+    const initials = name?.split(' ').filter(Boolean).slice(0, 2).map(part => part[0]?.toUpperCase()).join('') || '?'
+
+    return (
+        <aside className="order-first mx-auto w-full max-w-56 lg:order-last lg:mx-0 lg:justify-self-end" aria-label="Portrait du membre">
+            <div className="border border-white/10 bg-white/[0.03] p-3 shadow-xl">
+                <div className="aspect-[4/5] overflow-hidden bg-white/5">
+                    {src ? (
+                        <img
+                            src={src}
+                            alt={name ? `Photo de ${name}` : "Portrait du membre"}
+                            width="224"
+                            height="280"
+                            className="h-full w-full object-cover"
+                        />
+                    ) : (
+                        <div className="flex h-full w-full items-center justify-center text-4xl font-semibold tracking-widest text-[#F5F5F0]/25">
+                            {initials}
+                        </div>
+                    )}
+                </div>
+            </div>
+        </aside>
     )
 }

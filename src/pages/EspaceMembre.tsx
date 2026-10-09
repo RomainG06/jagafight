@@ -267,7 +267,7 @@ function EspaceMembreInner() {
                         </h2>
 
                         {activeSection === 'profil' && (
-                            <ProfilSection membre={membre} userId={userId} onSaved={handleSaved} />
+                            <ProfilSection membre={membre} userId={userId} documents={documents} onSaved={handleSaved} />
                         )}
                         {activeSection === 'adhesion' && (
                             <AdhesionSection

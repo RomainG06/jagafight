@@ -14,9 +14,8 @@ interface DocEntry {
 
 const DOC_CONFIG: DocEntry[] = [
     { type: 'CERTIFICAT_MEDICAL', label: 'Certificat médical', required: true, accept: DOC_ACCEPT, showDateValidite: true },
-    { type: 'PHOTO_IDENTITE', label: "Photo d'identité", required: false, accept: 'image/jpeg,image/png', showCrop: true },
     { type: 'LICENCE', label: 'Licence fédérale', required: false, accept: DOC_ACCEPT },
-    { type: 'PIECE_IDENTITE', label: "Pièce d'identité", required: false, accept: DOC_ACCEPT },
+    { type: 'PIECE_IDENTITE', label: "Document officiel d'identité", required: false, accept: DOC_ACCEPT },
 ]
 
 const FILE_EXTENSION_BY_MIME: Record<string, string> = {

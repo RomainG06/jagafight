@@ -133,6 +133,22 @@ export default function DocumentsSection({ membreId, documents, onSaved }: Props
 
     return (
         <div className="space-y-8">
+            <div className="border border-[#eb0071]/40 bg-[#eb0071]/10 p-5 sm:p-6">
+                <p className="text-xs font-semibold tracking-widest uppercase text-[#eb0071] mb-2">
+                    Certificat médical obligatoire
+                </p>
+                <p className="text-sm leading-relaxed text-[#F5F5F0]/75 max-w-3xl">
+                    Votre inscription ne pourra être finalisée qu’après le dépôt d’un certificat médical. Vous pouvez envoyer votre propre certificat ci-dessous ou télécharger le CERFA, le faire remplir, puis le déposer dans cette section.
+                </p>
+                <a
+                    href="/documents/cerfa-certificat-medical-15699.pdf"
+                    download
+                    className="inline-flex mt-4 px-5 py-2.5 border border-[#eb0071] text-[#F5F5F0] text-xs font-semibold tracking-widest uppercase hover:bg-[#eb0071] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071]"
+                >
+                    Télécharger le CERFA
+                </a>
+            </div>
+
             {DOC_CONFIG.map(cfg => {
                 const state = fileStates[cfg.type]
                 const existing = existingByType[DOC_TYPES[cfg.type] as Document['type']]

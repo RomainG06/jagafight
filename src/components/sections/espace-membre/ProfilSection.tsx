@@ -55,6 +55,8 @@ export default function ProfilSection({ membre, userId, documents, onSaved }: Pr
     const existingPhoto = documents.find(document => document.type === 'photo_identite')
     const [photoFile, setPhotoFile] = useState<File | null>(null)
     const [photoPreview, setPhotoPreview] = useState<string | null>(null)
+    const [existingPhotoUrl, setExistingPhotoUrl] = useState<string | null>(null)
+    const [existingPhotoLoading, setExistingPhotoLoading] = useState(false)
     const [photoError, setPhotoError] = useState('')
     const [photoUploading, setPhotoUploading] = useState(false)
     const previewUrlRef = useRef<string | null>(null)
@@ -108,6 +110,39 @@ export default function ProfilSection({ membre, userId, documents, onSaved }: Pr
     useEffect(() => () => {
         if (previewUrlRef.current) URL.revokeObjectURL(previewUrlRef.current)
     }, [])
+
+    useEffect(() => {
+        let active = true
+
+        async function loadExistingPhoto() {
+            if (!existingPhoto?.storage_path) {
+                setExistingPhotoUrl(null)
+                setExistingPhotoLoading(false)
+                return
+            }
+
+            setExistingPhotoLoading(true)
+            const { data, error } = await supabase.storage
+                .from('documents')
+                .createSignedUrl(existingPhoto.storage_path, 60 * 60)
+
+            if (!active) return
+
+            setExistingPhotoLoading(false)
+            if (error || !data?.signedUrl) {
+                setExistingPhotoUrl(null)
+                setPhotoError("La photo enregistrée n'a pas pu être affichée.")
+                return
+            }
+
+            setExistingPhotoUrl(data.signedUrl)
+        }
+
+        void loadExistingPhoto()
+        return () => {
+            active = false
+        }
+    }, [existingPhoto?.storage_path])
 
     function handlePhotoFile(file: File | null) {
         if (!file) return
@@ -254,11 +289,17 @@ export default function ProfilSection({ membre, userId, documents, onSaved }: Pr
             <section className="border border-white/10 bg-white/[0.02] p-5" aria-labelledby="photo-adherent-title">
                 <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
                     <div className="flex h-28 w-28 shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/15 bg-white/5">
-                        {photoPreview ? (
-                            <img src={photoPreview} alt="Aperçu de la photo de l'adhérent" width="112" height="112" className="h-full w-full object-cover" />
+                        {photoPreview || existingPhotoUrl ? (
+                            <img
+                                src={photoPreview ?? existingPhotoUrl ?? undefined}
+                                alt={`Photo de ${membre?.prenom ?? "l'adhérent"} ${membre?.nom ?? ''}`.trim()}
+                                width="112"
+                                height="112"
+                                className="h-full w-full object-cover"
+                            />
                         ) : (
                             <span className="px-3 text-center text-xs text-[#F5F5F0]/35">
-                                {existingPhoto ? 'Photo enregistrée' : 'Aucune photo'}
+                                {existingPhotoLoading ? 'Chargement…' : 'Aucune photo'}
                             </span>
                         )}
                     </div>

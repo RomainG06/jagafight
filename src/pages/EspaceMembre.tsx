@@ -26,7 +26,7 @@ function isProfilComplete(m: Membre | null) {
     return !!(m?.nom && m?.prenom && m?.date_naissance && m?.telephone)
 }
 function isAdhesionComplete(a: Adhesion | null) {
-    return !!(a?.disciplines?.length && a?.formule_tarifaire)
+    return !!(a?.disciplines?.length && a?.formule_tarifaire && a?.mode_paiement)
 }
 function isDocumentsComplete(docs: Document[]) {
     return docs.some(d => d.type === 'certificat_medical')

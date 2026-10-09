@@ -319,6 +319,7 @@ export default function AdminFicheMembre() {
                         <Row label="Palmarès" value={adhesion.palmares} />
                     </>}
                     <Row label="Formule" value={adhesion?.formule_tarifaire} />
+                    <Row label="Mode de paiement souhaité" value={adhesion?.mode_paiement ? MODE_LABELS[adhesion.mode_paiement] : undefined} />
                     <Row label="Montant" value={adhesion?.montant_calcule != null ? `${adhesion.montant_calcule} €` : undefined} />
                     <Row label="Date de début" value={adhesion?.date_debut_souhaitee ? new Date(adhesion.date_debut_souhaitee).toLocaleDateString('fr-FR') : undefined} />
                     {adhesion?.signature_horodatee && (

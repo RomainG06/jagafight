@@ -15,6 +15,7 @@ const schema = z.object({
     palmares: z.string().optional(),
     poids_categorie: z.string().optional(),
     formule_tarifaire: z.string().min(1, 'Choisissez une formule'),
+    mode_paiement: z.enum(['especes', 'cheque', 'cb', 'virement'], { error: 'Choisissez un mode de paiement' }),
     code_promo: z.string().optional(),
     date_debut_souhaitee: z.string().optional(),
     saison_id: z.string().min(1, 'Aucune saison active trouvée'),
@@ -45,6 +46,7 @@ export default function AdhesionSection({ membreId, adhesion, saisons, onSaved }
             palmares: adhesion?.palmares ?? '',
             poids_categorie: adhesion?.poids_categorie ?? '',
             formule_tarifaire: adhesion?.formule_tarifaire ?? '',
+            mode_paiement: adhesion?.mode_paiement,
             code_promo: adhesion?.code_promo ?? '',
             date_debut_souhaitee: adhesion?.date_debut_souhaitee ?? '',
             saison_id: adhesion?.saison_id ?? saisonActive?.id ?? '',
@@ -65,6 +67,7 @@ export default function AdhesionSection({ membreId, adhesion, saisons, onSaved }
             palmares: adhesion.palmares ?? '',
             poids_categorie: adhesion.poids_categorie ?? '',
             formule_tarifaire: adhesion.formule_tarifaire ?? '',
+            mode_paiement: adhesion.mode_paiement,
             code_promo: adhesion.code_promo ?? '',
             date_debut_souhaitee: adhesion.date_debut_souhaitee ?? '',
             saison_id: adhesion.saison_id ?? saisonActive?.id ?? '',
@@ -168,6 +171,26 @@ export default function AdhesionSection({ membreId, adhesion, saisons, onSaved }
                     </p>
                 )}
             </div>
+
+            {/* Mode de paiement */}
+            <fieldset>
+                <legend className={LABEL}>Mode de paiement souhaité *</legend>
+                <p className="text-xs text-[#F5F5F0]/40 mb-3">
+                    Ce choix indique votre préférence au club. Il ne déclenche aucun paiement en ligne.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {([['cb', 'Carte bancaire'], ['virement', 'Virement'], ['cheque', 'Chèque'], ['especes', 'Espèces']] as const).map(([value, label]) => (
+                        <label
+                            key={value}
+                            className="flex items-center gap-3 border border-white/10 bg-white/[0.02] px-4 py-3 cursor-pointer hover:border-[#eb0071]/50 transition-colors"
+                        >
+                            <input type="radio" value={value} {...register('mode_paiement')} className="accent-[#eb0071]" />
+                            <span className="text-sm text-[#F5F5F0]/70">{label}</span>
+                        </label>
+                    ))}
+                </div>
+                {errors.mode_paiement && <p className="text-xs text-red-400 mt-2">{errors.mode_paiement.message}</p>}
+            </fieldset>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>

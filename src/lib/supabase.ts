@@ -60,6 +60,7 @@ export type Adhesion = {
   palmares?: string
   poids_categorie?: string
   formule_tarifaire?: string
+  mode_paiement?: 'especes' | 'cheque' | 'cb' | 'virement'
   montant_calcule?: number
   code_promo?: string
   date_debut_souhaitee?: string

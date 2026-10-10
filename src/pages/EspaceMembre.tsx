@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from 'react'
+import { Lock } from 'lucide-react'
 import { navigate } from 'vike/client/router'
 import { Helmet } from 'react-helmet-async'
 import { supabase } from '../lib/supabase'
@@ -25,7 +26,7 @@ function isProfilComplete(m: Membre | null) {
     return !!(m?.nom && m?.prenom && m?.date_naissance && m?.telephone)
 }
 function isAdhesionComplete(a: Adhesion | null) {
-    return !!(a?.disciplines?.length && a?.formule_tarifaire)
+    return !!(a?.disciplines?.length && a?.formule_tarifaire && a?.mode_paiement)
 }
 function isDocumentsComplete(docs: Document[]) {
     return docs.some(d => d.type === 'certificat_medical')
@@ -225,19 +226,31 @@ function EspaceMembreInner() {
                         <ul className="space-y-1">
                             {SECTIONS.map(s => {
                                 const done = completion.find(c => c.id === s.id)?.complete ?? false
+                                const profilDone = completion.find(c => c.id === 'profil')?.complete ?? false
+                                const locked = s.id !== 'profil' && !profilDone
 
                                 return (
                                     <li key={s.id}>
                                         <button
-                                            onClick={() => setActiveSection(s.id)}
-                                            className={`w-full text-left px-3 py-2.5 text-sm flex items-center justify-between transition-colors cursor-pointer ${activeSection === s.id
-                                                    ? 'text-[#F5F5F0] bg-white/5 border-l-2 border-[#eb0071]'
-                                                    : 'text-[#F5F5F0]/50 hover:text-[#F5F5F0] hover:bg-white/3'
+                                            onClick={() => !locked && setActiveSection(s.id)}
+                                            disabled={locked}
+                                            title={locked ? 'Complétez votre profil pour débloquer cette section' : undefined}
+                                            className={`w-full text-left px-3 py-2.5 text-sm flex items-center justify-between transition-colors ${locked
+                                                ? 'text-[#F5F5F0]/30 cursor-not-allowed'
+                                                : activeSection === s.id
+                                                    ? 'text-[#F5F5F0] bg-white/5 border-l-2 border-[#eb0071] cursor-pointer'
+                                                    : 'text-[#F5F5F0]/50 hover:text-[#F5F5F0] hover:bg-white/3 cursor-pointer'
                                                 }`}
                                         >
-                                            <span>{s.label}</span>
+                                            <span className="flex items-center gap-2">
+                                                {locked
+                                                    ? <Lock className="w-3 h-3 opacity-50" />
+                                                    : <span className="w-3" />
+                                                }
+                                                {s.label}
+                                            </span>
 
-                                            {done && (
+                                            {done && !locked && (
                                                 <span className="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0" />
                                             )}
                                         </button>
@@ -254,7 +267,7 @@ function EspaceMembreInner() {
                         </h2>
 
                         {activeSection === 'profil' && (
-                            <ProfilSection membre={membre} userId={userId} onSaved={handleSaved} />
+                            <ProfilSection membre={membre} userId={userId} documents={documents} onSaved={handleSaved} />
                         )}
                         {activeSection === 'adhesion' && (
                             <AdhesionSection

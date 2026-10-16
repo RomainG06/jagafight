@@ -316,7 +316,6 @@ export default function ProfilSection({ membre, userId, documents, onSaved }: Pr
                                 id="photo-adherent"
                                 type="file"
                                 accept="image/jpeg,image/png"
-                                capture="user"
                                 className="peer sr-only"
                                 onChange={event => handlePhotoFile(event.target.files?.[0] ?? null)}
                             />

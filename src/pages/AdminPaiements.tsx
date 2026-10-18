@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import type { Paiement, Membre } from '../lib/supabase'
 import AdminLayout from '../components/layout/AdminLayout'
-import jagaLogo from '../assets/white_logo_jaga.png'
 
 interface PaiementRow extends Paiement {
     membre_nom?: string
@@ -152,133 +151,27 @@ export default function AdminPaiements() {
         await fetchData()
     }
 
-    async function exportCSV() {
-        try {
-            const { jsPDF } = await import('jspdf')
-            const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' })
-            const pageWidth = doc.internal.pageSize.getWidth()
-            const pageHeight = doc.internal.pageSize.getHeight()
-            const margin = 10
-            const columns = [
-                { label: 'Date', x: 10, width: 28 },
-                { label: 'Adh\u00e9rent', x: 38, width: 65 },
-                { label: 'Mode', x: 103, width: 34 },
-                { label: 'Montant', x: 137, width: 28 },
-                { label: 'Statut', x: 165, width: 35 },
-                { label: 'R\u00e9f\u00e9rence', x: 200, width: 87 },
-            ]
-            const total = filtered.reduce((sum, paiement) => sum + Number(paiement.montant || 0), 0)
-            const formatAmount = (amount: number) => `${amount.toFixed(2)} EUR`
-            const formatDate = (date?: string) => date
-                ? new Date(date).toLocaleDateString('fr-FR')
-                : '\u2014'
-
-            const logo = new Image()
-            logo.src = jagaLogo
-            try {
-                await logo.decode()
-            } catch {
-                await new Promise<void>((resolve, reject) => {
-                    logo.onload = () => resolve()
-                    logo.onerror = () => reject(new Error('Logo indisponible'))
-                })
-            }
-
-            const drawPageHeader = () => {
-                doc.setFillColor(8, 8, 8)
-                doc.rect(0, 0, pageWidth, 35, 'F')
-                doc.addImage(logo, 'PNG', 12, 8.75, 31, 17.5)
-                doc.setTextColor(245, 245, 240)
-                doc.setFont('helvetica', 'bold')
-                doc.setFontSize(18)
-                doc.text('EXPORT DES PAIEMENTS', 51, 16)
-                doc.setFont('helvetica', 'normal')
-                doc.setFontSize(9)
-                doc.setTextColor(190, 190, 190)
-                doc.text(`Jaga Fighting Team - ${new Date().toLocaleDateString('fr-FR')}`, 51, 24)
-            }
-
-            const drawTableHeader = (y: number) => {
-                doc.setFillColor(235, 0, 113)
-                doc.rect(margin, y, pageWidth - margin * 2, 9, 'F')
-                doc.setTextColor(255, 255, 255)
-                doc.setFont('helvetica', 'bold')
-                doc.setFontSize(8)
-                columns.forEach(column => doc.text(column.label, column.x + 2, y + 6))
-                return y + 9
-            }
-
-            drawPageHeader()
-            doc.setTextColor(35, 35, 35)
-            doc.setFont('helvetica', 'normal')
-            doc.setFontSize(9)
-            const filterDescription = [
-                filterStatut ? `Statut : ${STATUT_LABELS[filterStatut]}` : 'Tous les statuts',
-                filterMode ? `Mode : ${MODE_LABELS[filterMode]}` : 'Tous les modes',
-            ].join('  |  ')
-            doc.text(filterDescription, margin, 43)
-            doc.setFont('helvetica', 'bold')
-            doc.setFontSize(11)
-            doc.text(`TOTAL : ${formatAmount(total)}`, pageWidth - margin, 43, { align: 'right' })
-
-            let y = drawTableHeader(49)
-            doc.setFontSize(8)
-
-            if (filtered.length === 0) {
-                doc.setTextColor(100, 100, 100)
-                doc.setFont('helvetica', 'normal')
-                doc.text('Aucun paiement pour les filtres s\u00e9lectionn\u00e9s.', margin + 2, y + 8)
-            }
-
-            filtered.forEach((paiement, index) => {
-                const member = `${paiement.membre_nom ?? ''} ${paiement.membre_prenom ?? ''}`.trim() || '\u2014'
-                const values = [
-                    [formatDate(paiement.date_paiement)],
-                    doc.splitTextToSize(member, columns[1].width - 4),
-                    [MODE_LABELS[paiement.mode] ?? paiement.mode],
-                    [formatAmount(Number(paiement.montant || 0))],
-                    [STATUT_LABELS[paiement.statut] ?? paiement.statut],
-                    doc.splitTextToSize(paiement.reference ?? '\u2014', columns[5].width - 4),
-                ]
-                const lineCount = Math.max(...values.map(lines => lines.length))
-                const rowHeight = Math.max(9, lineCount * 4 + 4)
-
-                if (y + rowHeight > pageHeight - 13) {
-                    doc.addPage()
-                    drawPageHeader()
-                    y = drawTableHeader(40)
-                }
-
-                if (index % 2 === 0) {
-                    doc.setFillColor(247, 247, 247)
-                    doc.rect(margin, y, pageWidth - margin * 2, rowHeight, 'F')
-                }
-                doc.setDrawColor(225, 225, 225)
-                doc.line(margin, y + rowHeight, pageWidth - margin, y + rowHeight)
-                doc.setTextColor(35, 35, 35)
-                doc.setFont('helvetica', 'normal')
-                values.forEach((lines, columnIndex) => {
-                    doc.text(lines, columns[columnIndex].x + 2, y + 6)
-                })
-                y += rowHeight
-            })
-
-            const pageCount = doc.getNumberOfPages()
-            for (let page = 1; page <= pageCount; page += 1) {
-                doc.setPage(page)
-                doc.setFont('helvetica', 'normal')
-                doc.setFontSize(8)
-                doc.setTextColor(120, 120, 120)
-                doc.text(`Page ${page} / ${pageCount}`, pageWidth - margin, pageHeight - 6, { align: 'right' })
-            }
-
-            doc.save(`paiements-${new Date().toISOString().slice(0, 10)}.pdf`)
-            setFeedback('PDF export\u00e9 avec succ\u00e8s.')
-            setTimeout(() => setFeedback(''), 3000)
-        } catch (exportError) {
-            console.error(exportError)
-            setError("Le PDF n'a pas pu \u00eatre g\u00e9n\u00e9.")
-        }
+    function exportCSV() {
+        const headers = ['Date', 'Adhérent', 'Mode', 'Montant (€)', 'Statut', 'Référence']
+        const total = filtered.reduce((sum, paiement) => sum + Number(paiement.montant || 0), 0)
+        const escapeCell = (value: unknown) => `"${String(value ?? '').replace(/"/g, '""')}"`
+        const lines = filtered.map(paiement => [
+            paiement.date_paiement ? new Date(paiement.date_paiement).toLocaleDateString('fr-FR') : '',
+            `${paiement.membre_nom ?? ''} ${paiement.membre_prenom ?? ''}`.trim(),
+            MODE_LABELS[paiement.mode] ?? paiement.mode,
+            Number(paiement.montant || 0).toFixed(2),
+            STATUT_LABELS[paiement.statut] ?? paiement.statut,
+            paiement.reference ?? '',
+        ].map(escapeCell).join(','))
+        const totalLine = ['', '', 'TOTAL', total.toFixed(2), '', ''].map(escapeCell).join(',')
+        const csv = `\uFEFF${[headers.map(escapeCell).join(','), ...lines, totalLine].join('\n')}`
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
+        const url = URL.createObjectURL(blob)
+        const link = document.createElement('a')
+        link.href = url
+        link.download = `paiements-${new Date().toISOString().slice(0, 10)}.csv`
+        link.click()
+        URL.revokeObjectURL(url)
     }
 
     const filtered = rows.filter(r => {
@@ -301,10 +194,10 @@ export default function AdminPaiements() {
                         </span>
                     </h1>
                     <button
-                        onClick={() => void exportCSV()}
+                        onClick={exportCSV}
                         className="w-full sm:w-auto text-xs px-4 py-2 border border-white/20 text-[#F5F5F0]/60 hover:text-[#F5F5F0] hover:border-white/40 transition-colors tracking-widest uppercase cursor-pointer"
                     >
-                        Exporter PDF
+                        Exporter CSV
                     </button>
                 </div>
 

@@ -5,22 +5,41 @@ import { z } from 'zod'
 import { supabase } from '../../../lib/supabase'
 import type { Document, Membre } from '../../../lib/supabase'
 
+const REQUIRED_MESSAGE = 'Requis'
+const requiredText = z.string().trim().min(1, REQUIRED_MESSAGE)
+
 const schema = z.object({
     civilite: z.enum(['M.', 'Mme']),
-    prenom: z.string().min(1, 'Requis'),
-    nom: z.string().min(1, 'Requis'),
-    date_naissance: z.string().min(1, 'Requis'),
-    lieu_naissance: z.string().optional(),
-    nationalite: z.string().optional(),
-    adresse: z.string().optional(),
-    cp: z.string().optional(),
-    ville: z.string().optional(),
-    telephone: z.string().optional(),
-    responsable_nom: z.string().optional(),
-    responsable_prenom: z.string().optional(),
-    responsable_lien: z.string().optional(),
-    responsable_tel: z.string().optional(),
-    responsable_email: z.string().email('Email invalide').optional().or(z.literal('')),
+    prenom: requiredText,
+    nom: requiredText,
+    date_naissance: requiredText,
+    lieu_naissance: requiredText,
+    nationalite: requiredText,
+    adresse: requiredText,
+    cp: requiredText,
+    ville: requiredText,
+    telephone: requiredText,
+    responsable_nom: z.string().trim().optional(),
+    responsable_prenom: z.string().trim().optional(),
+    responsable_lien: z.string().trim().optional(),
+    responsable_tel: z.string().trim().optional(),
+    responsable_email: z.string().trim().email('Email invalide').optional().or(z.literal('')),
+}).superRefine((values, context) => {
+    if (!values.date_naissance || !isUnder18(values.date_naissance)) return
+
+    const requiredRepresentativeFields = [
+        'responsable_nom',
+        'responsable_prenom',
+        'responsable_lien',
+        'responsable_tel',
+        'responsable_email',
+    ] as const
+
+    requiredRepresentativeFields.forEach(field => {
+        if (!values[field]?.trim()) {
+            context.addIssue({ code: 'custom', path: [field], message: REQUIRED_MESSAGE })
+        }
+    })
 })
 
 type FormValues = z.infer<typeof schema>
@@ -224,7 +243,7 @@ export default function ProfilSection({ membre, userId, documents, onSaved }: Pr
     return (
         <form noValidate onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <fieldset>
-                <legend className={LABEL}>Civilité</legend>
+                <legend className={LABEL}>Civilité *</legend>
                 <div className="flex gap-6">
                     {(['M.', 'Mme'] as const).map(c => (
                         <label key={c} className="flex items-center gap-2 cursor-pointer">
@@ -255,33 +274,39 @@ export default function ProfilSection({ membre, userId, documents, onSaved }: Pr
                     )}
                 </div>
                 <div>
-                    <label htmlFor="profil-lieu-naissance" className={LABEL}>Lieu de naissance</label>
+                    <label htmlFor="profil-lieu-naissance" className={LABEL}>Lieu de naissance *</label>
                     <input id="profil-lieu-naissance" {...register('lieu_naissance')} className={INPUT} />
+                    {errors.lieu_naissance && <p className="text-xs text-red-400 mt-1">{errors.lieu_naissance.message}</p>}
                 </div>
                 <div>
-                    <label htmlFor="profil-nationalite" className={LABEL}>Nationalité</label>
+                    <label htmlFor="profil-nationalite" className={LABEL}>Nationalité *</label>
                     <input id="profil-nationalite" {...register('nationalite')} className={INPUT} placeholder="Française" />
+                    {errors.nationalite && <p className="text-xs text-red-400 mt-1">{errors.nationalite.message}</p>}
                 </div>
                 <div>
-                    <label htmlFor="profil-telephone" className={LABEL}>Téléphone</label>
+                    <label htmlFor="profil-telephone" className={LABEL}>Téléphone *</label>
                     <input id="profil-telephone" type="tel" autoComplete="tel" {...register('telephone')} className={INPUT} />
+                    {errors.telephone && <p className="text-xs text-red-400 mt-1">{errors.telephone.message}</p>}
                 </div>
             </div>
 
             <div className="space-y-4">
 
                 <div>
-                    <label htmlFor="profil-adresse" className={LABEL}>Adresse</label>
+                    <label htmlFor="profil-adresse" className={LABEL}>Adresse *</label>
                     <input id="profil-adresse" autoComplete="street-address" {...register('adresse')} className={INPUT} />
+                    {errors.adresse && <p className="text-xs text-red-400 mt-1">{errors.adresse.message}</p>}
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                     <div>
-                        <label htmlFor="profil-code-postal" className={LABEL}>Code postal</label>
+                        <label htmlFor="profil-code-postal" className={LABEL}>Code postal *</label>
                         <input id="profil-code-postal" inputMode="numeric" autoComplete="postal-code" {...register('cp')} className={INPUT} />
+                        {errors.cp && <p className="text-xs text-red-400 mt-1">{errors.cp.message}</p>}
                     </div>
                     <div>
-                        <label htmlFor="profil-ville" className={LABEL}>Ville</label>
+                        <label htmlFor="profil-ville" className={LABEL}>Ville *</label>
                         <input id="profil-ville" autoComplete="address-level2" {...register('ville')} className={INPUT} />
+                        {errors.ville && <p className="text-xs text-red-400 mt-1">{errors.ville.message}</p>}
                     </div>
                 </div>
             </div>
@@ -316,7 +341,6 @@ export default function ProfilSection({ membre, userId, documents, onSaved }: Pr
                                 id="photo-adherent"
                                 type="file"
                                 accept="image/jpeg,image/png"
-                                capture="user"
                                 className="peer sr-only"
                                 onChange={event => handlePhotoFile(event.target.files?.[0] ?? null)}
                             />
@@ -343,23 +367,27 @@ export default function ProfilSection({ membre, userId, documents, onSaved }: Pr
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label htmlFor="responsable-prenom" className={LABEL}>Prénom</label>
+                            <label htmlFor="responsable-prenom" className={LABEL}>Prénom *</label>
                             <input id="responsable-prenom" autoComplete="given-name" {...register('responsable_prenom')} className={INPUT} />
+                            {errors.responsable_prenom && <p className="text-xs text-red-400 mt-1">{errors.responsable_prenom.message}</p>}
                         </div>
                         <div>
-                            <label htmlFor="responsable-nom" className={LABEL}>Nom</label>
+                            <label htmlFor="responsable-nom" className={LABEL}>Nom *</label>
                             <input id="responsable-nom" autoComplete="family-name" {...register('responsable_nom')} className={INPUT} />
+                            {errors.responsable_nom && <p className="text-xs text-red-400 mt-1">{errors.responsable_nom.message}</p>}
                         </div>
                         <div>
-                            <label htmlFor="responsable-lien" className={LABEL}>Lien (père, mère, tuteur…)</label>
+                            <label htmlFor="responsable-lien" className={LABEL}>Lien (père, mère, tuteur…) *</label>
                             <input id="responsable-lien" {...register('responsable_lien')} className={INPUT} />
+                            {errors.responsable_lien && <p className="text-xs text-red-400 mt-1">{errors.responsable_lien.message}</p>}
                         </div>
                         <div>
-                            <label htmlFor="responsable-telephone" className={LABEL}>Téléphone</label>
+                            <label htmlFor="responsable-telephone" className={LABEL}>Téléphone *</label>
                             <input id="responsable-telephone" type="tel" autoComplete="tel" {...register('responsable_tel')} className={INPUT} />
+                            {errors.responsable_tel && <p className="text-xs text-red-400 mt-1">{errors.responsable_tel.message}</p>}
                         </div>
                         <div className="sm:col-span-2">
-                            <label htmlFor="responsable-email" className={LABEL}>Email</label>
+                            <label htmlFor="responsable-email" className={LABEL}>Email *</label>
                             <input id="responsable-email" type="email" autoComplete="email" spellCheck={false} {...register('responsable_email')} className={INPUT} />
                             {errors.responsable_email && <p className="text-xs text-red-400 mt-1">{errors.responsable_email.message}</p>}
                         </div>

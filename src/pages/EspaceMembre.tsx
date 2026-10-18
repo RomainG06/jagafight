@@ -23,7 +23,15 @@ const SECTIONS: { id: SectionId; label: string }[] = [
 ]
 
 function isProfilComplete(m: Membre | null) {
-    return !!(m?.nom && m?.prenom && m?.date_naissance && m?.telephone)
+    if (!(m?.civilite && m.nom && m.prenom && m.date_naissance && m.lieu_naissance
+        && m.nationalite && m.adresse && m.cp && m.ville && m.telephone)) {
+        return false
+    }
+
+    if (!m.est_mineur) return true
+
+    return !!(m.responsable_nom && m.responsable_prenom && m.responsable_lien
+        && m.responsable_tel && m.responsable_email)
 }
 function isAdhesionComplete(a: Adhesion | null) {
     return !!(a?.disciplines?.length && a?.formule_tarifaire && a?.mode_paiement)

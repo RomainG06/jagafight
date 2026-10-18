@@ -51,6 +51,11 @@ export default function AdminFicheMembre() {
     const [deletingMembre, setDeletingMembre] = useState(false)
     const [feedback, setFeedback] = useState('')
     const [error, setError] = useState('')
+    const paiementMontant = Number(paiementForm.montant)
+    const canSavePaiement = paiementForm.montant.trim() !== ''
+        && Number.isFinite(paiementMontant)
+        && paiementMontant > 0
+        && !savingPaiement
 
     const fetchData = useCallback(async () => {
         if (!id) return
@@ -408,7 +413,7 @@ export default function AdminFicheMembre() {
                                 </div>
                                 <div>
                                     <label htmlFor="paiement-montant" className={LABEL}>Montant (€)</label>
-                                    <input id="paiement-montant" name="montant" type="number" inputMode="decimal" min="0" step="0.01" value={paiementForm.montant} onChange={e => setPaiementForm(p => ({ ...p, montant: e.target.value }))} className={INPUT} />
+                                    <input id="paiement-montant" name="montant" type="number" inputMode="decimal" min="0.01" step="0.01" value={paiementForm.montant} onChange={e => setPaiementForm(p => ({ ...p, montant: e.target.value }))} className={INPUT} />
                                 </div>
                                 <div>
                                     <label htmlFor="paiement-statut" className={LABEL}>Statut</label>
@@ -433,7 +438,7 @@ export default function AdminFicheMembre() {
                                 </div>
                             </div>
                             <div className="flex flex-col gap-2 sm:flex-row">
-                                <button type="button" onClick={savePaiement} disabled={savingPaiement} className="px-6 py-2 bg-[#eb0071] text-[#F5F5F0] text-xs font-semibold tracking-widest uppercase hover:opacity-90 disabled:opacity-50 cursor-not-allowed">
+                                <button type="button" onClick={savePaiement} disabled={!canSavePaiement} className="px-6 py-2 bg-[#eb0071] text-[#F5F5F0] text-xs font-semibold tracking-widest uppercase hover:opacity-90 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed">
                                     {savingPaiement ? 'Enregistrement…' : editingPaiementId ? 'Enregistrer les modifications' : 'Enregistrer'}
                                 </button>
                                 <button type="button" onClick={resetPaiementForm} className="px-4 py-2 text-xs text-[#F5F5F0]/40 hover:text-[#F5F5F0] transition-colors">

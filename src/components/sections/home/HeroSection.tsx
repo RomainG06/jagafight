@@ -1,6 +1,8 @@
 import logoWhite from '../../../assets/white_logo_jaga.png'
+import { useAuth } from '../../../contexts/auth-context'
 
 export default function HeroSection() {
+    const { session } = useAuth()
     return (
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
             {/* Background */}
@@ -20,12 +22,22 @@ export default function HeroSection() {
 
                 {/* CTAs */}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a
-                        href="/inscription"
-                        className="px-8 py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm rounded hover:bg-[#eb0071] transition-colors"
-                    >
-                        S'inscrire
-                    </a>
+                    {!session && (
+                        <a
+                            href="/inscription"
+                            className="px-8 py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm rounded hover:bg-[#eb0071] transition-colors"
+                        >
+                            S'inscrire
+                        </a>
+                    )}
+                    {session && (
+                        <a
+                            href="/espace-membre"
+                            className="px-8 py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm rounded hover:bg-[#eb0071] transition-colors"
+                        >
+                            Mon espace
+                        </a>
+                    )}
                     <a
                         href="/coaching"
                         className="px-8 py-4 border border-[#F5F5F0]/30 text-[#F5F5F0]/80 font-semibold tracking-widest uppercase text-sm rounded hover:border-[#F5F5F0]/60 hover:text-[#F5F5F0] transition-colors"

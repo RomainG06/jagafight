@@ -8,13 +8,14 @@ export default function Footer() {
         "name": "Jaga Fight",
         "url": "https://www.jagafight.fr",
         "logo": "https://www.jagafight.fr/logo.png",
-        "description": "École de Muay Thaï à Cagnes-sur-Mer proposant cours collectifs, coaching individuel, stages et formations diplômantes",
+        "description": "École de Muay Thaï à Saint-Laurent-du-Var proposant cours collectifs, coaching individuel, stages et formations diplômantes",
         "email": "agentpro.athlete@gmail.com",
         "address": {
             "@type": "PostalAddress",
-            "addressLocality": "Cagnes-sur-Mer",
+            "streetAddress": "864 Av. Pierre et Marie Curie",
+            "addressLocality": "Saint-Laurent-du-Var",
             "addressRegion": "Alpes-Maritimes",
-            "postalCode": "06800",
+            "postalCode": "06700",
             "addressCountry": "FR"
         },
         "areaServed": [
@@ -48,7 +49,7 @@ export default function Footer() {
                             JAGA<span className="text-[#eb0071]"> FIGHT</span>
                         </span>
                         <p className="mt-3 text-sm text-[#F5F5F0]/50 leading-relaxed">
-                            École de Muay Thaï à Cagnes-sur-Mer.<br />
+                            École de Muay Thaï à Saint-Laurent-du-Var.<br />
                             Sport, éducation, transformation.
                         </p>
                         <p className="mt-3 text-xs text-[#F5F5F0]/40 leading-relaxed">
@@ -92,7 +93,7 @@ export default function Footer() {
                                     agentpro.athlete@gmail.com
                                 </a>
                             </li>
-                            <li>Cagnes-sur-Mer, Alpes-Maritimes (06)</li>
+                            <li>864 Av. Pierre et Marie Curie<br />06700 Saint-Laurent-du-Var</li>
                             <li className="flex gap-4 pt-2">
                                 <a
                                     href="https://www.instagram.com/jagafight?stkn=MThnZTA0bnc1MnNnYw=="

@@ -21,11 +21,11 @@ export default function HistorySection() {
                             },
                             {
                                 year: 'Transmission',
-                                text: "Après le décès de Oualid, Hicham reprend le flambeau et porte le projet à Cagnes-sur-Mer. L'esprit, les valeurs et la vision restent intacts.",
+                                text: "Après le décès de Oualid, Hicham reprend le flambeau et porte le projet sur la Côte d’Azur. L'esprit, les valeurs et la vision restent intacts.",
                             },
                             {
-                                year: '2025–2026',
-                                text: "Jaga Fight ouvre ses portes à Cagnes-sur-Mer, avec le soutien de la Ville, de l'AFMT, de la FFKMDA et du Ministère des Sports.",
+                                year: '2026–2027',
+                                text: "Jaga Fight ouvre ses portes à Saint-Laurent-du-Var et accueille les pratiquants de Cagnes-sur-Mer, Nice, Antibes et de toute la Côte d’Azur.",
                             },
                         ].map((item) => (
                             <div key={item.year} className="flex gap-8 pl-12 relative">

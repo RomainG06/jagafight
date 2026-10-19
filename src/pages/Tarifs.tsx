@@ -59,7 +59,7 @@ export default function Tarifs() {
             <Breadcrumb items={[{ name: 'Tarifs', url: 'https://www.jagafight.fr/tarifs' }]} />
             <Helmet>
                 <title>Tarifs Muay Thaï, fitness et packs | Jaga Fight</title>
-                <meta name="description" content="Tarifs Jaga Fight : Muay Thaï, self defense, cross training, packs, pass et carnets de séances à Cagnes-sur-Mer." />
+                <meta name="description" content="Tarifs Jaga Fight : Muay Thaï, self defense, cross training, packs, pass et carnets de séances à Saint-Laurent-du-Var, près de Cagnes-sur-Mer." />
                 <link rel="canonical" href="https://www.jagafight.fr/tarifs" />
                 <meta property="og:title" content="Tarifs Muay Thaï, fitness et packs | Jaga Fight" />
                 <meta property="og:description" content="Formules Muay Thaï, fitness, packs, pass et séances à l’unité chez Jaga Fight." />

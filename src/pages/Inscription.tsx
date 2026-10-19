@@ -58,7 +58,7 @@ export default function Inscription() {
         <>
             <Helmet>
                 <title>Inscription — Jaga Fight</title>
-                <meta name="description" content="Créez votre espace membre Jaga Fight pour vous inscrire à nos cours de Muay Thaï à Cagnes-sur-Mer." />
+                <meta name="description" content="Créez votre espace membre Jaga Fight pour vous inscrire à nos cours de Muay Thaï à Saint-Laurent-du-Var, près de Cagnes-sur-Mer." />
             </Helmet>
 
             <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4 py-20">

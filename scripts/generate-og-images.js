@@ -36,7 +36,7 @@ const images = [
     {
         name: "og-image.jpg",
         title: "JAGA FIGHT",
-        subtitle: "École de Muay Thaï à Cagnes-sur-Mer",
+        subtitle: "École de Muay Thaï à Saint-Laurent-du-Var",
         baseImage: join(assetsDir, "hichKnee.jpg"),
         position: "center",
     },

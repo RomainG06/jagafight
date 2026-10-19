@@ -13,25 +13,25 @@ export default function Coaching() {
             />
 
             <Helmet>
-                <title>Coaching Muay Thai (Boxe Thai) à Cagnes-sur-Mer (06) | Hicham  - Jaga Fight</title>
+                <title>Coaching Muay Thai à Saint-Laurent-du-Var (06) | Jaga Fight</title>
                 <meta
                     name="description"
-                    content="Coaching de Muay Thai (Boxe Thai) à Cagnes-sur-Mer dans les Alpes-Maritimes (06) avec Hicham , Champion d'Europe. Cours particuliers, coaching personnalisé, stages et préparation compétition près de Nice."
+                    content="Coaching de Muay Thai (Boxe Thaï) à Saint-Laurent-du-Var, près de Cagnes-sur-Mer et Nice, avec Hicham. Cours particuliers, coaching personnalisé, stages et préparation compétition."
                 />
-                <meta name="keywords" content="coaching Muay Thaï Cagnes, coach boxe thai Nice, cours boxe thaï 06, Hicham  champion, formation BPJEPS Muay Thaï, coaching boxe antibes" />
+                <meta name="keywords" content="coaching Muay Thaï Saint-Laurent-du-Var, coaching Muay Thaï Cagnes-sur-Mer, coach boxe thaï Nice, cours boxe thaï 06, coaching Antibes" />
                 <link rel="canonical" href="https://www.jagafight.fr/coaching" />
 
                 {/* Open Graph */}
-                <meta property="og:title" content="Coaching Muay Thai (Boxe Thai) à Cagnes-sur-Mer (06) | Hicham  - Jaga Fight" />
-                <meta property="og:description" content="Coaching de Muay Thai (Boxe Thai) à Cagnes-sur-Mer dans les Alpes-Maritimes (06) avec Hicham , Champion d'Europe. Cours particuliers, coaching personnalisé, stages et préparation compétition près de Nice." />
+                <meta property="og:title" content="Coaching Muay Thai (Boxe Thaï) à Saint-Laurent-du-Var (06) | Jaga Fight" />
+                <meta property="og:description" content="Coaching de Muay Thai à Saint-Laurent-du-Var, près de Cagnes-sur-Mer et Nice." />
                 <meta property="og:type" content="profile" />
                 <meta property="og:url" content="https://www.jagafight.fr/coaching" />
                 <meta property="og:image" content="https://www.jagafight.fr/og-coaching.jpg" />
 
                 {/* Twitter Card */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Coaching Muay Thai (Boxe Thai) à Cagnes-sur-Mer (06) | Hicham  - Jaga Fight" />
-                <meta name="twitter:description" content="Coaching de Muay Thai (Boxe Thai) à Cagnes-sur-Mer dans les Alpes-Maritimes (06) avec Hicham , Champion d'Europe. Cours particuliers, coaching personnalisé, stages et préparation compétition près de Nice." />
+                <meta name="twitter:title" content="Coaching Muay Thai (Boxe Thaï) à Saint-Laurent-du-Var (06) | Jaga Fight" />
+                <meta name="twitter:description" content="Coaching de Muay Thai à Saint-Laurent-du-Var, près de Cagnes-sur-Mer et Nice." />
                 <meta name="twitter:image" content="https://www.jagafight.fr/og-coaching.jpg" />
 
                 {/* Structured Data - Person */}
@@ -61,9 +61,10 @@ export default function Coaching() {
                             "name": "Jaga Fight",
                             "address": {
                                 "@type": "PostalAddress",
-                                "addressLocality": "Cagnes-sur-Mer",
+                                "streetAddress": "864 Av. Pierre et Marie Curie",
+                                "addressLocality": "Saint-Laurent-du-Var",
                                 "addressRegion": "Alpes-Maritimes",
-                                "postalCode": "06800",
+                                "postalCode": "06700",
                                 "addressCountry": "FR"
                             }
                         },

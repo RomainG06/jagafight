@@ -1,5 +1,4 @@
 const partners = [
-  { name: 'Ville de Cagnes-sur-Mer', url: 'https://ville.cagnes.fr/' },
   { name: 'AFMT', url: 'https://www.afmt.fr/' },
   { name: 'FFKMDA', url: 'https://www.ffkmda.com/' },
   { name: 'Ministère des Sports', url: 'https://www.sports.gouv.fr/' },
@@ -17,11 +16,11 @@ export default function LocalSection() {
             Ancrage local
           </span>
           <h2 className="font-title text-5xl sm:text-6xl text-[#F5F5F0] mb-4">
-            CAGNES-SUR-MER
+            SAINT-LAURENT-DU-VAR
           </h2>
           <p className="text-[#F5F5F0]/60 text-base max-w-md mx-auto">
-            Jaga Fight s'implante au cœur de la Côte d'Azur pour 2025-2026,
-            avec le soutien d'institutions locales et nationales.
+            Jaga Fight est ouvert à Saint-Laurent-du-Var, au cœur de la Côte d'Azur,
+            et accueille les pratiquants de Cagnes-sur-Mer, Nice, Antibes et des Alpes-Maritimes.
           </p>
         </div>
 
@@ -43,10 +42,10 @@ export default function LocalSection() {
         {/* CTA final */}
         <div className="text-center bg-[#eb0071]/10 border border-[#eb0071]/30 p-10 sm:p-16">
           <h3 className="font-title text-4xl sm:text-5xl text-[#F5F5F0] mb-4">
-            L'ÉCOLE OUVRE SES PORTES
+            L'ÉCOLE EST OUVERTE
           </h3>
           <p className="text-[#F5F5F0]/60 mb-8 max-w-md mx-auto">
-            Sois parmi les premiers à rejoindre Jaga Fight. Laisse-nous tes coordonnées et nous te contactons en priorité.
+            Rejoins Jaga Fight à Saint-Laurent-du-Var et trouve la formule qui correspond à tes objectifs.
           </p>
           <a
             href="/inscription"

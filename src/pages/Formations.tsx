@@ -13,14 +13,14 @@ export default function Formations() {
             />
 
             <Helmet>
-                <title>Formation Coach Muay Thai (Boxe Thai) à Cagnes-sur-Mer (06) | BPJEPS, CQP - Jaga Fight</title>
+                <title>Formation Coach Muay Thai (Boxe Thai) à Saint-Laurent-du-Var (06) | BPJEPS, CQP - Jaga Fight</title>
                 <meta
                     name="description"
-                    content="Devenez coach de Muay Thai (Boxe Thai) avec Jaga Fight à Cagnes-sur-Mer dans les Alpes-Maritimes (06). Formations CQP, BPJEPS, BMF, DEJEPS et DESJEPS reconnues pour enseigner les sports de combat."
+                    content="Devenez coach de Muay Thai (Boxe Thai) avec Jaga Fight à Saint-Laurent-du-Var, dans les Alpes-Maritimes. Formations CQP, BPJEPS, BMF, DEJEPS et DESJEPS."
                 />
                 <meta
                     name="keywords"
-                    content="formation coach boxe thaï, formation coach muay thaï, BPJEPS sports de combat, CQP boxe thaï, devenir coach boxe thaï, formation BPJEPS Alpes-Maritimes, formation BPJEPS 06, Cagnes-sur-Mer, Nice"
+                    content="formation coach boxe thaï, formation coach muay thaï, BPJEPS sports de combat, CQP boxe thaï, formation BPJEPS Alpes-Maritimes, Saint-Laurent-du-Var, Cagnes-sur-Mer, Nice"
                 />
                 <link rel="canonical" href="https://www.jagafight.fr/formations" />
 
@@ -28,7 +28,7 @@ export default function Formations() {
                 <meta property="og:title" content="Formation Coach Muay Thai (Boxe Thai) | Jaga Fight" />
                 <meta
                     property="og:description"
-                    content="Formez-vous au métier de coach de Muay Thai (Boxe Thai) à Cagnes-sur-Mer. CQP, BPJEPS, DEJEPS et DESJEPS."
+                    content="Formez-vous au métier de coach de Muay Thai à Saint-Laurent-du-Var. CQP, BPJEPS, DEJEPS et DESJEPS."
                 />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://www.jagafight.fr/formations" />
@@ -44,7 +44,7 @@ export default function Formations() {
 
                 <meta
                     name="twitter:description"
-                    content="Devenez coach professionnel de Muay Thai (Boxe Thai) grâce aux formations Jaga Fight à Cagnes-sur-Mer."
+                    content="Devenez coach professionnel de Muay Thai (Boxe Thai) grâce aux formations Jaga Fight à Saint-Laurent-du-Var."
                 />
                 <meta name="twitter:image" content="https://www.jagafight.fr/og-formations.jpg" />
 
@@ -53,16 +53,17 @@ export default function Formations() {
                     {JSON.stringify({
                         "@context": "https://schema.org",
                         "@type": "Course",
-                        "name": "Formation professionnelle Coach Muay Thaï",
+                        "name": "Formation professionnelle Coach Muay Thai (Boxe Thaï)",
                         "description": "Parcours complet pour devenir coach professionnel de Muay Thaï, du CQP au DESJEPS. Formations diplômantes reconnues par le Ministère des Sports et les fédérations.",
                         "provider": {
                             "@type": "SportsActivityLocation",
                             "name": "Jaga Fight",
                             "address": {
                                 "@type": "PostalAddress",
-                                "addressLocality": "Cagnes-sur-Mer",
+                                "streetAddress": "864 Av. Pierre et Marie Curie",
+                                "addressLocality": "Saint-Laurent-du-Var",
                                 "addressRegion": "Alpes-Maritimes",
-                                "postalCode": "06800",
+                                "postalCode": "06700",
                                 "addressCountry": "FR"
                             }
                         },
@@ -127,7 +128,7 @@ export default function Formations() {
                         sports de contact
                     </h1>
                     <p className="text-lg text-[#F5F5F0]/70 max-w-2xl mx-auto leading-relaxed">
-                        CQP • BPJEPS • BMF • DEJEPS • DESJEPS à Cagnes-sur-Mer (Alpes-Maritimes - 06)
+                        CQP • BPJEPS • BMF • DEJEPS • DESJEPS à Saint-Laurent-du-Var (Alpes-Maritimes - 06)
                     </p>
                 </div>
             </section>

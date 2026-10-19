@@ -16,7 +16,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 export type Membre = {
   id?: string
-  user_id: string
+  user_id: string | null
   civilite?: 'M.' | 'Mme'
   nom: string
   prenom: string

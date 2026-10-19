@@ -43,7 +43,7 @@ export default function AboutSection() {
                                 </div>
                                 <div>
                                     <p className="font-title text-3xl text-[#eb0071]">2026</p>
-                                    <p className="text-xs text-[#F5F5F0]/50 mt-1 tracking-wide">Ouverture Cagnes-sur-Mer</p>
+                                    <p className="text-xs text-[#F5F5F0]/50 mt-1 tracking-wide">Ouverture Saint-Laurent-du-Var</p>
                                 </div>
                             </div>
                         </div>

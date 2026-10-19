@@ -95,7 +95,7 @@ const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'Le Muay Thaï : histoire, culture et transmission des valeurs',
-    description: 'Comprendre le Muay Thaï, l’art des 8 membres, sa culture, ses traditions et les valeurs transmises par Jaga Fight à Cagnes-sur-Mer.',
+    description: 'Comprendre le Muay Thaï, l’art des 8 membres, sa culture, ses traditions et les valeurs transmises par Jaga Fight à Saint-Laurent-du-Var.',
     mainEntityOfPage: 'https://www.jagafight.fr/muay-thai',
     image: 'https://www.jagafight.fr/og-image.jpg',
     author: {
@@ -140,14 +140,14 @@ export default function MuayThai() {
                 <title>Muay Thaï : histoire, culture et valeurs | Jaga Fight</title>
                 <meta
                     name="description"
-                    content="Découvrez le Muay Thaï, l’art des 8 membres, sa culture et ses valeurs. Une transmission exigeante et accessible chez Jaga Fight à Cagnes-sur-Mer."
+                    content="Découvrez le Muay Thaï, l’art des 8 membres, sa culture et ses valeurs. Une transmission exigeante et accessible chez Jaga Fight à Saint-Laurent-du-Var."
                 />
                 <link rel="canonical" href="https://www.jagafight.fr/muay-thai" />
 
                 <meta property="og:title" content="Muay Thaï : histoire, culture et valeurs | Jaga Fight" />
                 <meta
                     property="og:description"
-                    content="Comprendre le Muay Thaï, ses techniques, ses traditions et les valeurs transmises chez Jaga Fight à Cagnes-sur-Mer."
+                    content="Comprendre le Muay Thaï, ses techniques, ses traditions et les valeurs transmises chez Jaga Fight à Saint-Laurent-du-Var."
                 />
                 <meta property="og:type" content="article" />
                 <meta property="og:url" content="https://www.jagafight.fr/muay-thai" />
@@ -348,7 +348,7 @@ export default function MuayThai() {
                 <section id="pratiquer" className="scroll-mt-24 py-20 sm:py-24 bg-[#0d0d0d]">
                     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="max-w-3xl">
-                            <p className="text-[#eb0071] text-xs font-semibold tracking-[0.2em] uppercase mb-4">À Cagnes-sur-Mer</p>
+                            <p className="text-[#eb0071] text-xs font-semibold tracking-[0.2em] uppercase mb-4">À Saint-Laurent-du-Var</p>
                             <h2 className="font-title text-5xl sm:text-6xl text-[#F5F5F0] leading-none text-balance">
                                 TRANSMETTRE LE MUAY THAÏ CHEZ JAGA FIGHT
                             </h2>

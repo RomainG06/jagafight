@@ -5,7 +5,7 @@ export default function NotFound() {
         <>
             <Helmet>
                 <title>Page introuvable — Jaga Fight</title>
-                <meta name="description" content="La page que vous recherchez n'existe pas. Retournez à l'accueil pour découvrir notre école de Muay Thaï à Cagnes-sur-Mer." />
+                <meta name="description" content="La page que vous recherchez n'existe pas. Retournez à l'accueil pour découvrir notre école de Muay Thaï à Saint-Laurent-du-Var." />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>
 
@@ -24,7 +24,7 @@ export default function NotFound() {
                     <p className="text-gray-400 mb-8 text-lg">
                         La page que vous recherchez n'existe pas ou a été déplacée.
                         <br />
-                        Retournez à l'accueil pour découvrir notre école de Muay Thaï à Cagnes-sur-Mer.
+                        Retournez à l'accueil pour découvrir notre école de Muay Thaï à Saint-Laurent-du-Var.
                     </p>
 
                     {/* Navigation */}

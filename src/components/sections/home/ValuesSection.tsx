@@ -21,7 +21,7 @@ const values = [
             "La régularité et l'effort construit le caractère. Chaque session est un pas vers la meilleure version de soi.",
         img: disciplineImg,
         imgPosition: "object-center",
-        alt: "Entraînement discipline Muay Thaï Cagnes-sur-Mer",
+        alt: "Entraînement discipline Muay Thaï à Saint-Laurent-du-Var",
     },
     {
         title: "Solidarité",
@@ -37,7 +37,7 @@ const values = [
             "Peu importe l'âge, le niveau ou le parcours — Jaga Fight est ouvert à tous, sans exception.",
         img: inclusionImg,
         imgPosition: "object-center",
-        alt: "Cours Muay Thaï accessibles à tous - Inclusion Cagnes",
+        alt: "Cours Muay Thaï accessibles à tous sur la Côte d'Azur",
     },
     {
         title: "Engagement",

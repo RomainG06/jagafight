@@ -4,6 +4,9 @@ import { navigate } from 'vike/client/router'
 import { supabase } from '../lib/supabase'
 import type { Membre, Adhesion, Document, Paiement } from '../lib/supabase'
 import AdminLayout from '../components/layout/AdminLayout'
+import MemberProfileForm from '../components/admin/MemberProfileForm'
+import type { MemberProfileValues } from '../components/admin/MemberProfileForm'
+import { isUnder18 } from '../lib/memberProfile'
 
 const MODE_LABELS: Record<string, string> = {
     especes: 'Espèces', cheque: 'Chèque', cb: 'CB', virement: 'Virement',
@@ -21,6 +24,13 @@ const STATUT_LABELS: Record<string, string> = {
 const LABEL = 'block text-xs font-semibold tracking-widest uppercase text-[#F5F5F0]/60 mb-2'
 const INPUT = 'w-full bg-white/5 border border-white/10 text-[#F5F5F0] px-4 py-2 text-sm focus:border-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071] transition-colors'
 const SELECT = `${INPUT} appearance-none`
+const DOCUMENT_LABELS: Record<Document['type'], string> = {
+    certificat_medical: 'Certificat médical',
+    photo_identite: "Photo de l'adhérent",
+    piece_identite: "Document officiel d'identité",
+    licence: 'Licence',
+}
+const MAX_DOCUMENT_SIZE_BYTES = 10 * 1024 * 1024
 
 interface PaiementForm {
     mode: Paiement['mode']
@@ -49,6 +59,12 @@ export default function AdminFicheMembre() {
     const [editingPaiementId, setEditingPaiementId] = useState<string | null>(null)
     const [deletingPaiementId, setDeletingPaiementId] = useState<string | null>(null)
     const [deletingMembre, setDeletingMembre] = useState(false)
+    const [showMemberForm, setShowMemberForm] = useState(false)
+    const [savingMember, setSavingMember] = useState(false)
+    const [documentType, setDocumentType] = useState<Document['type']>('certificat_medical')
+    const [documentFile, setDocumentFile] = useState<File | null>(null)
+    const [documentValidityDate, setDocumentValidityDate] = useState('')
+    const [uploadingDocument, setUploadingDocument] = useState(false)
     const [feedback, setFeedback] = useState('')
     const [error, setError] = useState('')
     const paiementMontant = Number(paiementForm.montant)
@@ -105,6 +121,87 @@ export default function AdminFicheMembre() {
         }
 
         window.location.assign(data.signedUrl)
+    }
+
+    async function saveMember(values: MemberProfileValues) {
+        if (!id) return
+        setSavingMember(true)
+        setError('')
+        const { error: updateError } = await supabase
+            .from('membres')
+            .update({ ...values, est_mineur: isUnder18(values.date_naissance) })
+            .eq('id', id)
+
+        setSavingMember(false)
+        if (updateError) {
+            setError(updateError.message)
+            return
+        }
+
+        setShowMemberForm(false)
+        setFeedback('Fiche adhérent modifiée.')
+        await fetchData()
+    }
+
+    async function uploadDocument() {
+        if (!id || !documentFile) return
+        if (documentFile.size > MAX_DOCUMENT_SIZE_BYTES) {
+            setError('Le document ne peut pas dépasser 10 Mo.')
+            return
+        }
+
+        const isPhoto = documentType === 'photo_identite'
+        if (isPhoto && !['image/jpeg', 'image/png'].includes(documentFile.type)) {
+            setError("La photo de l'adhérent doit être au format JPG ou PNG.")
+            return
+        }
+        if (!isPhoto && !['application/pdf', 'image/jpeg', 'image/png'].includes(documentFile.type)) {
+            setError('Le document doit être au format PDF, JPG ou PNG.')
+            return
+        }
+
+        const extension = documentFile.name.split('.').pop()?.toLowerCase()
+            || (documentFile.type === 'application/pdf' ? 'pdf' : documentFile.type === 'image/png' ? 'png' : 'jpg')
+        const storagePath = `membres/${id}/${documentType}.${extension}`
+        const previousDocument = documents.find(document => document.type === documentType)
+
+        setUploadingDocument(true)
+        setError('')
+        const { error: uploadError } = await supabase.storage
+            .from('documents')
+            .upload(storagePath, documentFile, { upsert: true, contentType: documentFile.type })
+
+        if (uploadError) {
+            setUploadingDocument(false)
+            setError(uploadError.message)
+            return
+        }
+
+        const documentValues = {
+            membre_id: id,
+            type: documentType,
+            storage_path: storagePath,
+            date_validite: documentType === 'certificat_medical' ? documentValidityDate || null : null,
+        }
+        const result = previousDocument?.id
+            ? await supabase.from('documents').update(documentValues).eq('id', previousDocument.id)
+            : await supabase.from('documents').insert(documentValues)
+
+        if (result.error) {
+            setUploadingDocument(false)
+            setError(result.error.message)
+            return
+        }
+
+        if (previousDocument?.storage_path && previousDocument.storage_path !== storagePath) {
+            await supabase.storage.from('documents').remove([previousDocument.storage_path])
+        }
+
+        setUploadingDocument(false)
+        setDocumentFile(null)
+        setDocumentValidityDate('')
+        setFeedback(`${DOCUMENT_LABELS[documentType]} enregistré.`)
+        await fetchData()
     }
 
     function resetPaiementForm() {
@@ -266,6 +363,14 @@ export default function AdminFicheMembre() {
                                 <span className="text-xs text-green-400 border border-green-500/20 bg-green-500/10 px-2 py-0.5">✓ Complet</span>
                             )}
                         </div>
+                        <div className="flex flex-wrap gap-2">
+                            <button
+                                type="button"
+                                onClick={() => { setShowMemberForm(value => !value); setError('') }}
+                                className="border border-white/20 px-3 py-2 text-xs uppercase tracking-widest text-[#F5F5F0]/70 transition-colors hover:border-white/40 hover:text-[#F5F5F0]"
+                            >
+                                {showMemberForm ? 'Fermer la modification' : 'Modifier la fiche'}
+                            </button>
                         <button
                             type="button"
                             onClick={deleteMembre}
@@ -274,6 +379,7 @@ export default function AdminFicheMembre() {
                         >
                             {deletingMembre ? 'Suppression…' : 'Supprimer le membre'}
                         </button>
+                        </div>
                     </div>
                 </div>
 
@@ -282,6 +388,19 @@ export default function AdminFicheMembre() {
                 )}
                 {error && (
                     <p role="alert" className="mb-4 text-sm text-red-400 bg-red-500/10 border border-red-500/20 px-4 py-2">{error}</p>
+                )}
+
+                {showMemberForm && (
+                    <section className="mb-6">
+                        <h2 className="mb-3 text-sm tracking-widest uppercase text-[#F5F5F0]">Modifier la fiche adhérent</h2>
+                        <MemberProfileForm
+                            membre={membre}
+                            submitLabel="Enregistrer les modifications"
+                            submitting={savingMember}
+                            onSubmit={saveMember}
+                            onCancel={() => setShowMemberForm(false)}
+                        />
+                    </section>
                 )}
 
                 {/* Identité */}
@@ -347,6 +466,33 @@ export default function AdminFicheMembre() {
 
                 {/* Documents */}
                 <Section title="Documents">
+                    <div className="mb-5 border-b border-white/10 pb-5">
+                        <h3 className="mb-3 text-xs font-semibold tracking-widest uppercase text-[#F5F5F0]/70">Ajouter ou remplacer un document</h3>
+                        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                            <div>
+                                <label htmlFor="document-type" className={LABEL}>Type</label>
+                                <select id="document-type" value={documentType} onChange={event => setDocumentType(event.target.value as Document['type'])} className={SELECT}>
+                                    {Object.entries(DOCUMENT_LABELS).map(([type, label]) => <option key={type} value={type}>{label}</option>)}
+                                </select>
+                            </div>
+                            <div>
+                                <label htmlFor="document-file" className={LABEL}>Fichier</label>
+                                <input id="document-file" type="file" accept={documentType === 'photo_identite' ? 'image/jpeg,image/png' : 'application/pdf,image/jpeg,image/png'} onChange={event => setDocumentFile(event.target.files?.[0] ?? null)} className="block w-full text-sm text-[#F5F5F0]/70 file:mr-3 file:border-0 file:bg-white/10 file:px-3 file:py-2 file:text-xs file:text-[#F5F5F0] hover:file:bg-white/15" />
+                            </div>
+                            {documentType === 'certificat_medical' && (
+                                <div>
+                                    <label htmlFor="document-validity" className={LABEL}>Valide jusqu'au</label>
+                                    <input id="document-validity" type="date" value={documentValidityDate} onChange={event => setDocumentValidityDate(event.target.value)} className={INPUT} />
+                                </div>
+                            )}
+                        </div>
+                        <div className="mt-3 flex flex-wrap items-center gap-3">
+                            <button type="button" onClick={uploadDocument} disabled={!documentFile || uploadingDocument} className="px-4 py-2 text-xs font-semibold uppercase tracking-widest bg-[#eb0071] text-[#F5F5F0] hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
+                                {uploadingDocument ? 'Envoi…' : 'Enregistrer le document'}
+                            </button>
+                            <span className="text-xs text-[#F5F5F0]/35">PDF, JPG ou PNG · 10 Mo maximum</span>
+                        </div>
+                    </div>
                     {documents.length === 0 ? (
                         <p className="text-sm text-[#F5F5F0]/30">Aucun document.</p>
                     ) : documents.map(doc => (

@@ -7,6 +7,7 @@ const navLinks = [
     { to: '/', label: "L'École" },
     { to: '/coaching', label: 'Coaching' },
     { to: '/formations', label: 'Formations' },
+    { to: '/tarifs', label: 'Tarifs' },
     { to: '/notre-adn', label: 'Notre ADN' },
     { to: '/muay-thai', label: 'Le Muay Thaï' },
 

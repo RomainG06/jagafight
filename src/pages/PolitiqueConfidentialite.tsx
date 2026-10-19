@@ -42,8 +42,8 @@ export default function PolitiqueConfidentialite() {
                     <section>
                         <h2 className="font-title text-2xl text-[#F5F5F0] mb-3">Finalité du traitement</h2>
                         <p>
-                            Ces données sont collectées uniquement dans le but de vous recontacter lors de l'ouverture de l'école Jaga Fight
-                            à Cagnes-sur-Mer et Saint Laurent du Var. Elles ne seront pas utilisées à d'autres fins ni cédées à des tiers.
+                            Ces données sont collectées uniquement dans le cadre des activités de l'école Jaga Fight à Saint-Laurent-du-Var
+                            et de son développement futur sur la Côte d'Azur, notamment à Cagnes-sur-Mer. Elles ne seront pas utilisées à d'autres fins ni cédées à des tiers.
                         </p>
                     </section>
 

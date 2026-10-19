@@ -9,17 +9,17 @@ export default function Home() {
     return (
         <>
             <Helmet>
-                <title>Club de Muay Thai (Boxe Thai) à Cagnes-sur-Mer (06) | Jaga Fight</title>
+                <title>Club de Muay Thai à Saint-Laurent-du-Var (06) | Jaga Fight</title>
                 <meta
                     name="description"
-                    content="Jaga Fight est un club de Muay Thai (Boxe Thai) à Cagnes-sur-Mer dans les Alpes-Maritimes (06), proche de Nice. Cours adultes, enfants, débutants et compétiteurs, self-défense, stages et formation."
+                    content="Jaga Fight est un club de Muay Thai (Boxe Thai) à Saint-Laurent-du-Var, proche de Cagnes-sur-Mer et Nice. Cours adultes, enfants, débutants et compétiteurs dans les Alpes-Maritimes."
                 />
-                <meta name="keywords" content="Muay Thaï Cagnes-sur-Mer, boxe thaï Nice, cours boxe Cagnes, muay thai antibes, boxe thai 06, école boxe thaïlandaise côte d'azur, club boxe alpes maritimes, self-défense Cagnes, Jaga Fight" />
+                <meta name="keywords" content="Muay Thaï (Boxe Thai) Saint-Laurent-du-Var, boxe thaï Cagnes-sur-Mer, boxe thaï Nice, cours boxe Antibes, club boxe Alpes-Maritimes, école boxe thaïlandaise Côte d'Azur, Jaga Fight" />
                 <link rel="canonical" href="https://www.jagafight.fr/" />
 
                 {/* Open Graph */}
-                <meta property="og:title" content="Club de Muay Thai (Boxe Thai) à Cagnes-sur-Mer (06) | Jaga Fight" />
-                <meta property="og:description" content="Cours de Boxe Thaï et Muay Thaï dans les Alpes-Maritimes (06)." />
+                <meta property="og:title" content="Club de Muay Thai à Saint-Laurent-du-Var (06) | Jaga Fight" />
+                <meta property="og:description" content="Cours de Boxe Thaï (Boxe Thai) et Muay Thaï dans les Alpes-Maritimes (06)." />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://www.jagafight.fr/" />
                 <meta property="og:image" content="https://www.jagafight.fr/og-image.jpg" />
@@ -27,8 +27,8 @@ export default function Home() {
 
                 {/* Twitter Card */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Club de Muay Thai (Boxe Thai) à Cagnes-sur-Mer (06) | Jaga Fight" />
-                <meta name="twitter:description" content="Club de Muay Thai (Boxe Thai) à Cagnes-sur-Mer dans les Alpes-Maritimes (06), proche de Nice. Cours adultes, enfants, débutants et compétiteurs, self-défense, stages et formation." />
+                <meta name="twitter:title" content="Club de Muay Thai à Saint-Laurent-du-Var (06) | Jaga Fight" />
+                <meta name="twitter:description" content="Club de Muay Thai (Boxe Thai) à Saint-Laurent-du-Var, près de Cagnes-sur-Mer et Nice. Cours adultes, enfants, débutants et compétiteurs." />
                 <meta name="twitter:image" content="https://www.jagafight.fr/og-image.jpg" />
 
                 {/* Structured Data - LocalBusiness */}
@@ -37,21 +37,17 @@ export default function Home() {
                         "@context": "https://schema.org",
                         "@type": ["SportsActivityLocation", "LocalBusiness"],
                         "name": "Jaga Fight",
-                        "description": "École de Muay Thaï à Cagnes-sur-Mer proposant des cours collectifs, self-défense, stages et formations diplômantes",
+                        "description": "École de Muay Thaï à Saint-Laurent-du-Var proposant des cours collectifs, self-défense, stages et formations diplômantes",
                         "url": "https://www.jagafight.fr",
                         "logo": "https://www.jagafight.fr/logo.png",
                         "image": "https://www.jagafight.fr/og-image.jpg",
                         "address": {
                             "@type": "PostalAddress",
-                            "addressLocality": "Cagnes-sur-Mer",
+                            "streetAddress": "864 Av. Pierre et Marie Curie",
+                            "addressLocality": "Saint-Laurent-du-Var",
                             "addressRegion": "Alpes-Maritimes",
-                            "postalCode": "06800",
+                            "postalCode": "06700",
                             "addressCountry": "FR"
-                        },
-                        "geo": {
-                            "@type": "GeoCoordinates",
-                            "latitude": "43.6633",
-                            "longitude": "7.1481"
                         },
                         "telephone": "+33 7 43 52 72 93",
                         "email": "agentpro.athlete@gmail.com",
@@ -65,6 +61,10 @@ export default function Home() {
                         "areaServed": [
                             {
                                 "@type": "City",
+                                "name": "Saint-Laurent-du-Var"
+                            },
+                            {
+                                "@type": "City",
                                 "name": "Cagnes-sur-Mer"
                             },
                             {
@@ -74,6 +74,10 @@ export default function Home() {
                             {
                                 "@type": "City",
                                 "name": "Antibes"
+                            },
+                            {
+                                "@type": "City",
+                                "name": "Villeneuve-Loubet"
                             }
                         ],
                         "founder": {
@@ -114,7 +118,7 @@ export default function Home() {
                                 Fondée à Perpignan par Oualid OUMERZOUK, ancien légionnaire du 2e REP et champion du monde Nokento Full Fight 2017, Jaga Fight a été créée avec une vision exigeante : former des pratiquants complets, techniquement affûtés et mentalement solides.
                             </p>
                             <p className="text-[#F5F5F0]/60 text-sm leading-relaxed mb-6">
-                                Après le décès de Oualid, Hicham a repris le flambeau pour poursuivre cette mission. En 2026, Jaga Fight ouvre ses portes à Cagnes-sur-Mer avec le soutien de la Ville, de l'AFMT, de la FFKMDA et du Ministère des Sports.
+                                Après le décès de Oualid, Hicham a repris le flambeau pour poursuivre cette mission. En 2026, Jaga Fight ouvre ses portes à Saint-Laurent-du-Var et accueille les pratiquants de toute la Côte d’Azur.
                             </p>
                             <blockquote className="border-l-2 border-[#eb0071] pl-4 italic text-[#F5F5F0]/60 text-sm">
                                 « Polir son esprit pour être fier de ce que l'on voit dans son miroir. »

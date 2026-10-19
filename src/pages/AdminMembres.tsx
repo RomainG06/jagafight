@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react'
+import { navigate } from 'vike/client/router'
 import { supabase } from '../lib/supabase'
 import type { Membre, Document } from '../lib/supabase'
 import AdminLayout from '../components/layout/AdminLayout'
+import MemberProfileForm from '../components/admin/MemberProfileForm'
+import type { MemberProfileValues } from '../components/admin/MemberProfileForm'
+import { isUnder18 } from '../lib/memberProfile'
 
 interface MembreRow extends Membre {
     documents?: Document[]
@@ -41,6 +45,9 @@ export default function AdminMembres() {
     const [filterCertif, setFilterCertif] = useState('')
     const [filterStatut, setFilterStatut] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
+    const [showCreateForm, setShowCreateForm] = useState(false)
+    const [savingCreate, setSavingCreate] = useState(false)
+    const [createError, setCreateError] = useState('')
 
     async function fetchData() {
         const [membresRes, adhesionsRes, docsRes] = await Promise.all([
@@ -92,6 +99,29 @@ export default function AdminMembres() {
         a.click()
     }
 
+    async function createMember(values: MemberProfileValues) {
+        setSavingCreate(true)
+        setCreateError('')
+        const { data, error } = await supabase
+            .from('membres')
+            .insert({
+                ...values,
+                user_id: null,
+                est_mineur: isUnder18(values.date_naissance),
+                profil_complet: false,
+            })
+            .select('id')
+            .single()
+
+        setSavingCreate(false)
+        if (error || !data?.id) {
+            setCreateError(error?.message ?? "La fiche de l'adhérent n'a pas pu être créée.")
+            return
+        }
+
+        await navigate(`/admin/membres/${data.id}`)
+    }
+
     const filtered = rows.filter(r => {
         const q = search.toLowerCase()
         const matchSearch = !q || [r.nom, r.prenom, r.email].some(v => v?.toLowerCase().includes(q))
@@ -116,13 +146,35 @@ export default function AdminMembres() {
                             {filtered.length}
                         </span>
                     </h1>
-                    <button
-                        onClick={exportCSV}
-                        className="w-full sm:w-auto text-xs px-4 py-2 border border-white/20 text-[#F5F5F0]/60 hover:text-[#F5F5F0] hover:border-white/40 transition-colors tracking-widest uppercase cursor-pointer"
-                    >
-                        Exporter CSV
-                    </button>
+                    <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
+                        <button
+                            type="button"
+                            onClick={() => { setShowCreateForm(value => !value); setCreateError('') }}
+                            className="text-xs px-4 py-2 bg-[#eb0071] text-[#F5F5F0] hover:opacity-90 transition-colors tracking-widest uppercase cursor-pointer"
+                        >
+                            {showCreateForm ? 'Fermer le formulaire' : '+ Ajouter un adhérent'}
+                        </button>
+                        <button
+                            onClick={exportCSV}
+                            className="text-xs px-4 py-2 border border-white/20 text-[#F5F5F0]/60 hover:text-[#F5F5F0] hover:border-white/40 transition-colors tracking-widest uppercase cursor-pointer"
+                        >
+                            Exporter CSV
+                        </button>
+                    </div>
                 </div>
+
+                {showCreateForm && (
+                    <section className="mb-6">
+                        <h2 className="mb-3 text-sm tracking-widest uppercase text-[#F5F5F0]">Nouvel adhérent</h2>
+                        {createError && <p role="alert" className="mb-4 border border-red-500/20 bg-red-500/10 px-4 py-2 text-sm text-red-400">{createError}</p>}
+                        <MemberProfileForm
+                            submitLabel="Créer l’adhérent"
+                            submitting={savingCreate}
+                            onSubmit={createMember}
+                            onCancel={() => { setShowCreateForm(false); setCreateError('') }}
+                        />
+                    </section>
+                )}
 
                 {/* Filtres */}
                 <div className="flex flex-col gap-3 mb-6 sm:flex-row sm:flex-wrap sm:gap-4">
@@ -281,19 +333,19 @@ export default function AdminMembres() {
                                 <div className="flex items-center gap-2">
                                     <button
                                         type="button"
-                            onClick={() => setCurrentPage(Math.max(1, visiblePage - 1))}
-                            disabled={visiblePage === 1}
+                                        onClick={() => setCurrentPage(Math.max(1, visiblePage - 1))}
+                                        disabled={visiblePage === 1}
                                         className="px-3 py-1.5 text-xs border border-white/20 text-[#F5F5F0]/70 hover:border-white/40 hover:text-[#F5F5F0] transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-default"
                                     >
                                         Précédent
                                     </button>
                                     <span className="text-xs text-[#F5F5F0]/50 min-w-[72px] text-center">
-                            Page {visiblePage} / {totalPages}
+                                        Page {visiblePage} / {totalPages}
                                     </span>
                                     <button
                                         type="button"
-                            onClick={() => setCurrentPage(Math.min(totalPages, visiblePage + 1))}
-                            disabled={visiblePage === totalPages}
+                                        onClick={() => setCurrentPage(Math.min(totalPages, visiblePage + 1))}
+                                        disabled={visiblePage === totalPages}
                                         className="px-3 py-1.5 text-xs border border-white/20 text-[#F5F5F0]/70 hover:border-white/40 hover:text-[#F5F5F0] transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-default"
                                     >
                                         Suivant

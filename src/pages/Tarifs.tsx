@@ -145,7 +145,7 @@ function SubscriptionTable({ title, items }: { title: string; items: Subscriptio
 function SessionTable() {
     return (
         <section className="border border-white/10 bg-[#0d0d0d]" aria-labelledby="tarifs-carnets">
-            <h2 id="tarifs-carnets" className="bg-[#eb0071]/15 px-4 py-4 font-title text-3xl uppercase text-[#F5F5F0] sm:px-6">Carnets & essai</h2>
+            <h2 id="tarifs-carnets" className="bg-[#eb0071]/15 px-4 py-4 font-title text-3xl uppercase text-[#F5F5F0] sm:px-6">Carnets & essai (cours collectifs)</h2>
             <div className="divide-y divide-white/10">
                 {sessions.map(item => (
                     <article key={item.name} className="grid grid-cols-[minmax(0,1fr)_7rem] items-center px-4 py-4 sm:grid-cols-[minmax(0,1fr)_10rem] sm:px-6">

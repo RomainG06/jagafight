@@ -1,4 +1,4 @@
-import { useId, useState } from 'react'
+import { useEffect, useId, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { MessageCircle, Phone } from 'lucide-react'
 import Breadcrumb from '../components/common/Breadcrumb'
@@ -56,6 +56,17 @@ export default function EssaiGratuit() {
     const [day, setDay] = useState<Day>()
     const [firstName, setFirstName] = useState('')
     const firstNameId = useId()
+
+    // Présélection depuis un lien du type /essai-gratuit?cours=kids (lu après hydratation : la page est pré-rendue).
+    useEffect(() => {
+        const id = new URLSearchParams(window.location.search).get('cours')
+        const preset = trialCourses.find(item => item.id === id)
+        if (!preset) return
+        // Lecture unique de l'URL au montage : volontairement hors du rendu pour éviter un écart d'hydratation.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setCourseId(preset.id)
+        setDay(preset.days.length === 1 ? preset.days[0] : undefined)
+    }, [])
 
     const course = trialCourses.find(item => item.id === courseId)
     const message = buildMessage(course, day, firstName)

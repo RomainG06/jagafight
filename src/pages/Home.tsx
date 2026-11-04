@@ -1,8 +1,8 @@
 import { Helmet } from 'react-helmet-async'
 import HeroSection from '../components/sections/home/HeroSection'
-import ProfileSelector from '../components/sections/home/ProfileSelector'
+import CoursesSection from '../components/sections/home/CoursesSection'
+import GoFurtherSection from '../components/sections/home/GoFurtherSection'
 import AboutSection from '../components/sections/home/AboutSection'
-import ActivitiesSection from '../components/sections/home/ActivitiesSection'
 import LocalSection from '../components/sections/home/LocalSection'
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
                 <title>Club de Muay Thai à Saint-Laurent-du-Var (06) | Jaga Fight</title>
                 <meta
                     name="description"
-                    content="Jaga Fight est un club de Muay Thai (Boxe Thai) à Saint-Laurent-du-Var, proche de Cagnes-sur-Mer et Nice. Cours adultes, enfants, débutants et compétiteurs dans les Alpes-Maritimes."
+                    content="Club de Muay Thaï (boxe thaï) à Saint-Laurent-du-Var, près de Cagnes-sur-Mer et Nice : cours adultes, féminin, enfants, ados et self défense. 1er cours offert."
                 />
                 <link rel="canonical" href="https://www.jagafight.fr/" />
 
@@ -33,11 +33,8 @@ export default function Home() {
             </Helmet>
 
             <HeroSection />
-            <ProfileSelector />
+            <CoursesSection />
             <AboutSection />
-            <div id="activites">
-                <ActivitiesSection />
-            </div>
 
             {/* Histoire & Valeurs — Résumé court */}
             <section className="py-24 bg-[#0a0a0a]">
@@ -112,6 +109,7 @@ export default function Home() {
                 </div>
             </section>
 
+            <GoFurtherSection />
             <LocalSection />
         </>
     )

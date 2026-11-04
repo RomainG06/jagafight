@@ -90,10 +90,10 @@ export default function ActivitiesSection() {
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
                     <span className="text-[#eb0071] text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">
-                        Activités
+                        Projet associatif
                     </span>
                     <h2 className="font-title text-5xl sm:text-6xl text-[#F5F5F0]">
-                        CE QUE NOUS PROPOSONS
+                        NOS ACTIONS
                     </h2>
                 </div>
 

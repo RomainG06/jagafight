@@ -9,7 +9,7 @@ import { CLUB_ID, SITE_URL } from '../data/club'
 
 const PAGE_URL = `${SITE_URL}/essai-gratuit`
 const TITLE = 'Cours d’essai gratuit de Muay Thaï à Saint-Laurent-du-Var | Jaga Fight'
-const DESCRIPTION = 'Réservez votre premier cours offert chez Jaga Fight : Muay Thaï adultes, féminin, enfants, ados ou self défense à Saint-Laurent-du-Var. Réponse rapide par WhatsApp.'
+const DESCRIPTION = 'Premier cours offert chez Jaga Fight à Saint-Laurent-du-Var : Muay Thaï adultes, féminin, enfants, ados ou self défense. Réservez en ligne.'
 
 const trialCourses = courses.filter(course => course.trial)
 

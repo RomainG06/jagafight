@@ -17,7 +17,7 @@ export default function Coaching() {
                 <title>Coaching Muay Thai à Saint-Laurent-du-Var (06) | Jaga Fight</title>
                 <meta
                     name="description"
-                    content="Coaching de Muay Thai (Boxe Thaï) à Saint-Laurent-du-Var, près de Cagnes-sur-Mer et Nice, avec Hicham. Cours particuliers, coaching personnalisé, stages et préparation compétition."
+                    content="Coaching Muay Thaï avec Hicham à Saint-Laurent-du-Var, près de Nice : cours particuliers, coaching personnalisé, stages et préparation compétition."
                 />
                 <link rel="canonical" href="https://www.jagafight.fr/coaching" />
 

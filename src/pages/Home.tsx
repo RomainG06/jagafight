@@ -13,7 +13,7 @@ export default function Home() {
                 <title>Club de Muay Thai à Saint-Laurent-du-Var (06) | Jaga Fight</title>
                 <meta
                     name="description"
-                    content="Club de Muay Thaï (boxe thaï) à Saint-Laurent-du-Var, près de Cagnes-sur-Mer et Nice : cours adultes, féminin, enfants, ados et self défense. 1er cours offert."
+                    content="Club de Muay Thaï à Saint-Laurent-du-Var, près de Cagnes-sur-Mer et Nice : cours adultes, féminin, enfants, ados et self défense. 1er cours offert."
                 />
                 <link rel="canonical" href="https://www.jagafight.fr/" />
 

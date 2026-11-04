@@ -13,11 +13,11 @@ const activities = [
     {
         number: '02',
         title: 'Self-défense',
-        public: 'Femmes victimes de violences',
-        objective: 'Sécurité, reconstruction',
+        public: 'Femmes · Adultes',
+        objective: 'Sécurité, confiance en soi',
         tag: 'Accompagnement',
         description:
-            "Un accompagnement bienveillant combinant techniques de protection, gestion du stress et renforcement de la confiance en soi. Ces ateliers visent à aider les participantes à retrouver un sentiment de sécurité et à se réapproprier leur espace de vie."
+            "Des techniques simples et efficaces pour se protéger, gérer le stress et réagir face à une agression. Un cours accessible à tous les niveaux, dans un cadre bienveillant, pour gagner en confiance au quotidien."
     },
     {
         number: '03',

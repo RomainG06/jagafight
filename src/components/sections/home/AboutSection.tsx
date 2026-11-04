@@ -34,12 +34,12 @@ export default function AboutSection() {
                             </p>
                             <div className="mt-8 pt-8 border-t border-white/10 grid grid-cols-3 gap-4 text-center">
                                 <div>
-                                    <p className="font-title text-3xl text-[#eb0071]">120+</p>
-                                    <p className="text-xs text-[#F5F5F0]/50 mt-1 tracking-wide">Préinscrits dès la création</p>
+                                    <p className="font-title text-3xl text-[#eb0071]">20+</p>
+                                    <p className="text-xs text-[#F5F5F0]/50 mt-1 tracking-wide">Ans d’expérience du coach principal</p>
                                 </div>
                                 <div>
-                                    <p className="font-title text-3xl text-[#eb0071]">7</p>
-                                    <p className="text-xs text-[#F5F5F0]/50 mt-1 tracking-wide">Activités proposées</p>
+                                    <p className="font-title text-3xl text-[#eb0071]">1er</p>
+                                    <p className="text-xs text-[#F5F5F0]/50 mt-1 tracking-wide">Cours d’essai offert</p>
                                 </div>
                                 <div>
                                     <p className="font-title text-3xl text-[#eb0071]">2026</p>

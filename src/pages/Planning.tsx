@@ -3,6 +3,7 @@ import Breadcrumb from '../components/common/Breadcrumb'
 import { courses, DAYS, formatTime, type Category, type Course, type Day } from '../data/planning'
 import { PHONE_DISPLAY, PHONE_HREF } from '../data/contact'
 import { CLUB_ID, SITE_URL } from '../data/club'
+import { coursePageFor } from '../data/coursePages'
 
 const PAGE_URL = `${SITE_URL}/planning`
 
@@ -161,7 +162,11 @@ export default function Planning() {
                                     <div className="flex items-center gap-3">
                                         <span aria-hidden="true" className={`h-2.5 w-2.5 shrink-0 rounded-full ${categoryStyles[course.category].dot}`} />
                                         <div>
-                                            <h3 className="text-sm uppercase tracking-wide text-[#F5F5F0] sm:text-base">{course.name}</h3>
+                                            <h3 className="text-sm uppercase tracking-wide text-[#F5F5F0] sm:text-base">
+                                                {coursePageFor(course.id) ? (
+                                                    <a href={`/cours/${coursePageFor(course.id)?.slug}`} className="underline-offset-4 hover:text-[#eb0071] hover:underline">{course.name}</a>
+                                                ) : course.name}
+                                            </h3>
                                             <p className="text-xs italic text-[#F5F5F0]/50 sm:text-sm">{course.audience}</p>
                                         </div>
                                     </div>

@@ -1,4 +1,5 @@
 import { courses, formatSlot, type Course } from '../../../data/planning'
+import { coursePageFor } from '../../../data/coursePages'
 
 // Prix d'appel repris de la page /tarifs (abonnement 6 mois) — à mettre à jour avec elle.
 const offers: Array<{ title: string; audience: string; ids: string[]; price: string; trialId?: string }> = [
@@ -30,7 +31,13 @@ export default function CoursesSection() {
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {offers.map(offer => (
                         <article key={offer.title} className="flex flex-col border border-white/10 bg-[#0a0a0a] p-6 transition-colors hover:border-[#eb0071]/50">
-                            <h3 className="font-title text-3xl text-[#F5F5F0]">{offer.title}</h3>
+                            <h3 className="font-title text-3xl text-[#F5F5F0]">
+                                {coursePageFor(offer.ids[0]) ? (
+                                    <a href={`/cours/${coursePageFor(offer.ids[0])?.slug}`} className="transition-colors hover:text-[#eb0071]">
+                                        {offer.title}
+                                    </a>
+                                ) : offer.title}
+                            </h3>
                             <p className="mt-1 text-sm text-[#F5F5F0]/55">{offer.audience}</p>
 
                             <ul className="mt-5 space-y-1.5 border-l-2 border-[#eb0071] pl-3 text-sm text-[#F5F5F0]/80">

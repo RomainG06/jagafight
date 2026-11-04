@@ -1,5 +1,6 @@
 import { INSTAGRAM_URL, PHONE_DISPLAY, PHONE_HREF, whatsappUrl } from '../../data/contact'
 import { clubSchema } from '../../data/club'
+import { coursePages } from '../../data/coursePages'
 
 export default function Footer() {
     const year = new Date().getFullYear()
@@ -11,7 +12,7 @@ export default function Footer() {
                 {JSON.stringify(clubSchema)}
             </script>
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
                     {/* Logo & baseline */}
                     <div>
                         <span className="font-title text-2xl tracking-widest text-[#F5F5F0]">
@@ -51,6 +52,20 @@ export default function Footer() {
                                         className="text-sm text-[#F5F5F0]/50 hover:text-[#eb0071] transition-colors"
                                     >
                                         {link.label}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Nos cours */}
+                    <div>
+                        <h3 className="font-title text-lg tracking-wider text-[#F5F5F0] mb-4">Nos cours</h3>
+                        <ul className="space-y-2">
+                            {coursePages.map(page => (
+                                <li key={page.slug}>
+                                    <a href={`/cours/${page.slug}`} className="text-sm text-[#F5F5F0]/50 hover:text-[#eb0071] transition-colors">
+                                        {page.menuLabel}
                                     </a>
                                 </li>
                             ))}

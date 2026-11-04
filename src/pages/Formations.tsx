@@ -19,10 +19,6 @@ export default function Formations() {
                     name="description"
                     content="Devenez coach de Muay Thai (Boxe Thai) avec Jaga Fight à Saint-Laurent-du-Var, dans les Alpes-Maritimes. Formations CQP, BPJEPS, BMF, DEJEPS et DESJEPS."
                 />
-                <meta
-                    name="keywords"
-                    content="formation coach boxe thaï, formation coach muay thaï, BPJEPS sports de combat, CQP boxe thaï, formation BPJEPS Alpes-Maritimes, Saint-Laurent-du-Var, Cagnes-sur-Mer, Nice"
-                />
                 <link rel="canonical" href="https://www.jagafight.fr/formations" />
 
                 {/* Open Graph */}

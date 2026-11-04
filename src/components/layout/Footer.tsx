@@ -1,48 +1,14 @@
-import { PHONE_DISPLAY, PHONE_E164, PHONE_HREF, whatsappUrl } from '../../data/contact'
+import { INSTAGRAM_URL, PHONE_DISPLAY, PHONE_HREF, whatsappUrl } from '../../data/contact'
+import { clubSchema } from '../../data/club'
 
 export default function Footer() {
     const year = new Date().getFullYear()
-
-    // Structured Data - Organization
-    const organizationSchema = {
-        "@context": "https://schema.org",
-        "@type": "SportsOrganization",
-        "name": "Jaga Fight",
-        "url": "https://www.jagafight.fr",
-        "logo": "https://www.jagafight.fr/logo.png",
-        "description": "École de Muay Thaï à Saint-Laurent-du-Var proposant cours collectifs, coaching individuel, stages et formations diplômantes",
-        "email": "agentpro.athlete@gmail.com",
-        "telephone": PHONE_E164,
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "864 Av. Pierre et Marie Curie",
-            "addressLocality": "Saint-Laurent-du-Var",
-            "addressRegion": "Alpes-Maritimes",
-            "postalCode": "06700",
-            "addressCountry": "FR"
-        },
-        "areaServed": [
-            "Cagnes-sur-Mer",
-            "Nice",
-            "Antibes",
-            "Villeneuve-Loubet",
-            "Saint-Laurent-du-Var",
-            "Côte d'Azur",
-            "Alpes-Maritimes"
-        ],
-        "founder": {
-            "@type": "Person",
-            "name": "Oualid OUMERZOUK"
-        },
-        "foundingDate": "2025",
-        "slogan": "Sport, éducation, transformation"
-    }
 
     return (
         <footer className="bg-[#0a0a0a] border-t border-white/10 mt-auto">
             {/* Structured Data */}
             <script type="application/ld+json">
-                {JSON.stringify(organizationSchema)}
+                {JSON.stringify(clubSchema)}
             </script>
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -106,7 +72,7 @@ export default function Footer() {
                             <li>864 Av. Pierre et Marie Curie<br />06700 Saint-Laurent-du-Var</li>
                             <li className="flex gap-4 pt-2">
                                 <a
-                                    href="https://www.instagram.com/jagafight?stkn=MThnZTA0bnc1MnNnYw=="
+                                    href={INSTAGRAM_URL}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center gap-2 hover:text-[#ff0096] transition-colors"

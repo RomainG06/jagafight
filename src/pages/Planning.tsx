@@ -1,9 +1,9 @@
 import { Helmet } from 'react-helmet-async'
 import Breadcrumb from '../components/common/Breadcrumb'
 import { courses, DAYS, formatTime, type Category, type Course, type Day } from '../data/planning'
-import { PHONE_DISPLAY, PHONE_E164, PHONE_HREF } from '../data/contact'
+import { PHONE_DISPLAY, PHONE_HREF } from '../data/contact'
+import { CLUB_ID, SITE_URL } from '../data/club'
 
-const SITE_URL = 'https://www.jagafight.fr'
 const PAGE_URL = `${SITE_URL}/planning`
 
 const categoryStyles: Record<Category, { label: string; dot: string; border: string }> = {
@@ -29,22 +29,6 @@ const coursesByDay = DAYS.map(day => ({
     items: courses.filter(course => course.days.includes(day)).sort(sortByStart),
 }))
 
-const location = {
-    '@type': 'SportsActivityLocation',
-    '@id': `${SITE_URL}/#club`,
-    name: 'Jaga Fight',
-    url: SITE_URL,
-    telephone: PHONE_E164,
-    address: {
-        '@type': 'PostalAddress',
-        streetAddress: '864 Av. Pierre et Marie Curie',
-        addressLocality: 'Saint-Laurent-du-Var',
-        addressRegion: 'Alpes-Maritimes',
-        postalCode: '06700',
-        addressCountry: 'FR',
-    },
-}
-
 const planningSchema = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -55,10 +39,9 @@ const planningSchema = {
             name: 'Planning des cours de Muay Thaï | Jaga Fight Saint-Laurent-du-Var',
             description: 'Horaires des cours Jaga Fight : Muay Thaï adultes, féminin, enfants, ados, self défense et footing à Saint-Laurent-du-Var.',
             inLanguage: 'fr-FR',
-            about: { '@id': `${SITE_URL}/#club` },
+            about: { '@id': CLUB_ID },
             mainEntity: { '@id': `${PAGE_URL}#cours` },
         },
-        location,
         {
             '@type': 'ItemList',
             '@id': `${PAGE_URL}#cours`,
@@ -73,8 +56,8 @@ const planningSchema = {
                     description: `Cours de ${course.name} (${course.audience.toLowerCase()}) chaque ${course.days.join(', ').toLowerCase()} à ${formatTime(course.start)} à Saint-Laurent-du-Var.`,
                     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
                     eventStatus: 'https://schema.org/EventScheduled',
-                    location: { '@id': `${SITE_URL}/#club` },
-                    organizer: { '@type': 'SportsOrganization', name: 'Jaga Fight', url: SITE_URL },
+                    location: { '@id': CLUB_ID },
+                    organizer: { '@id': CLUB_ID },
                     eventSchedule: {
                         '@type': 'Schedule',
                         repeatFrequency: 'P1W',

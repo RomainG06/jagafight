@@ -3,9 +3,9 @@ import { Helmet } from 'react-helmet-async'
 import { MessageCircle, Phone } from 'lucide-react'
 import Breadcrumb from '../components/common/Breadcrumb'
 import { courses, formatSlot, type Course, type Day } from '../data/planning'
-import { PHONE_DISPLAY, PHONE_E164, PHONE_HREF, whatsappUrl } from '../data/contact'
+import { PHONE_DISPLAY, PHONE_HREF, whatsappUrl } from '../data/contact'
+import { CLUB_ID, SITE_URL } from '../data/club'
 
-const SITE_URL = 'https://www.jagafight.fr'
 const PAGE_URL = `${SITE_URL}/essai-gratuit`
 const TITLE = 'Cours d’essai gratuit de Muay Thaï à Saint-Laurent-du-Var | Jaga Fight'
 const DESCRIPTION = 'Réservez votre premier cours offert chez Jaga Fight : Muay Thaï adultes, féminin, enfants, ados ou self défense à Saint-Laurent-du-Var. Réponse rapide par WhatsApp.'
@@ -28,30 +28,17 @@ const schema = {
             name: TITLE,
             description: DESCRIPTION,
             inLanguage: 'fr-FR',
-            about: { '@id': `${SITE_URL}/#club` },
+            about: { '@id': CLUB_ID },
         },
         {
-            '@type': 'SportsActivityLocation',
-            '@id': `${SITE_URL}/#club`,
-            name: 'Jaga Fight',
-            url: SITE_URL,
-            telephone: PHONE_E164,
-            address: {
-                '@type': 'PostalAddress',
-                streetAddress: '864 Av. Pierre et Marie Curie',
-                addressLocality: 'Saint-Laurent-du-Var',
-                addressRegion: 'Alpes-Maritimes',
-                postalCode: '06700',
-                addressCountry: 'FR',
-            },
-            makesOffer: {
-                '@type': 'Offer',
-                name: 'Cours d’essai gratuit — Muay Thaï ou self défense',
-                price: '0',
-                priceCurrency: 'EUR',
-                url: PAGE_URL,
-                availability: 'https://schema.org/InStock',
-            },
+            '@type': 'Offer',
+            '@id': `${PAGE_URL}#offre`,
+            name: 'Cours d’essai gratuit — Muay Thaï ou self défense',
+            price: '0',
+            priceCurrency: 'EUR',
+            url: PAGE_URL,
+            availability: 'https://schema.org/InStock',
+            offeredBy: { '@id': CLUB_ID },
         },
     ],
 }

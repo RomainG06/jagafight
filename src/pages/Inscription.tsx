@@ -110,6 +110,7 @@ export default function Inscription() {
         <>
             <Helmet>
                 <title>Inscription — Jaga Fight</title>
+                <meta name="robots" content="noindex" />
                 <meta name="description" content="Créez votre espace membre Jaga Fight pour vous inscrire à nos cours de Muay Thaï à Saint-Laurent-du-Var, près de Cagnes-sur-Mer." />
             </Helmet>
 

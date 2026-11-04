@@ -14,7 +14,6 @@ export default function Home() {
                     name="description"
                     content="Jaga Fight est un club de Muay Thai (Boxe Thai) à Saint-Laurent-du-Var, proche de Cagnes-sur-Mer et Nice. Cours adultes, enfants, débutants et compétiteurs dans les Alpes-Maritimes."
                 />
-                <meta name="keywords" content="Muay Thaï (Boxe Thai) Saint-Laurent-du-Var, boxe thaï Cagnes-sur-Mer, boxe thaï Nice, cours boxe Antibes, club boxe Alpes-Maritimes, école boxe thaïlandaise Côte d'Azur, Jaga Fight" />
                 <link rel="canonical" href="https://www.jagafight.fr/" />
 
                 {/* Open Graph */}
@@ -31,68 +30,6 @@ export default function Home() {
                 <meta name="twitter:description" content="Club de Muay Thai (Boxe Thai) à Saint-Laurent-du-Var, près de Cagnes-sur-Mer et Nice. Cours adultes, enfants, débutants et compétiteurs." />
                 <meta name="twitter:image" content="https://www.jagafight.fr/og-image.jpg" />
 
-                {/* Structured Data - LocalBusiness */}
-                <script type="application/ld+json">
-                    {JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": ["SportsActivityLocation", "LocalBusiness"],
-                        "name": "Jaga Fight",
-                        "description": "École de Muay Thaï à Saint-Laurent-du-Var proposant des cours collectifs, self-défense, stages et formations diplômantes",
-                        "url": "https://www.jagafight.fr",
-                        "logo": "https://www.jagafight.fr/logo.png",
-                        "image": "https://www.jagafight.fr/og-image.jpg",
-                        "address": {
-                            "@type": "PostalAddress",
-                            "streetAddress": "864 Av. Pierre et Marie Curie",
-                            "addressLocality": "Saint-Laurent-du-Var",
-                            "addressRegion": "Alpes-Maritimes",
-                            "postalCode": "06700",
-                            "addressCountry": "FR"
-                        },
-                        "telephone": "+33 7 43 52 72 93",
-                        "email": "agentpro.athlete@gmail.com",
-                        "openingHoursSpecification": {
-                            "@type": "OpeningHoursSpecification",
-                            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-                            "opens": "09:00",
-                            "closes": "21:00"
-                        },
-                        "priceRange": "€€",
-                        "areaServed": [
-                            {
-                                "@type": "City",
-                                "name": "Saint-Laurent-du-Var"
-                            },
-                            {
-                                "@type": "City",
-                                "name": "Cagnes-sur-Mer"
-                            },
-                            {
-                                "@type": "City",
-                                "name": "Nice"
-                            },
-                            {
-                                "@type": "City",
-                                "name": "Antibes"
-                            },
-                            {
-                                "@type": "City",
-                                "name": "Villeneuve-Loubet"
-                            }
-                        ],
-                        "founder": {
-                            "@type": "Person",
-                            "name": "Oualid OUMERZOUK",
-                            "award": "Champion du monde Nokento Full Fight 2017"
-                        },
-                        "employee": {
-                            "@type": "Person",
-                            "name": "Hicham",
-                            "jobTitle": "Coach principal",
-                            "award": "Champion d'Europe Muay Thaï"
-                        }
-                    })}
-                </script>
             </Helmet>
 
             <HeroSection />

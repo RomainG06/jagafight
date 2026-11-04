@@ -155,20 +155,26 @@ function ProductCard({ produit, dispo, onReserve }: { produit: Produit; dispo: M
 
     return (
         <article className="flex flex-col border border-white/10 bg-[#0d0d0d]">
-            <div className="relative aspect-[4/5] overflow-hidden bg-white/5">
+            <div className="group relative aspect-[4/5] overflow-hidden bg-gradient-to-b from-[#0a0a0a] via-[#120509] to-[#2a0717]">
+                {/* Halo rose aux couleurs du site, derrière le produit */}
+                <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_55%,rgba(235,0,113,0.38),transparent_62%)] transition-opacity duration-500 group-hover:opacity-100 opacity-80" />
+                <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(235,0,113,0.18),transparent_45%)]" />
                 {src ? (
                     <button
                         type="button"
                         onClick={() => setZoomed(true)}
                         aria-label={`Agrandir la photo : ${produit.nom}`}
-                        className="group block h-full w-full cursor-zoom-in focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#eb0071]"
+                        className="relative block h-full w-full cursor-zoom-in p-6 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#eb0071] sm:p-8"
                     >
-                        {/* Fond flouté issu de la même photo : l'image entière reste visible, quel que soit son format. */}
-                        <img src={src} alt="" aria-hidden="true" loading="lazy" className="absolute inset-0 h-full w-full scale-110 object-cover opacity-40 blur-2xl" />
-                        <img src={src} alt={produit.nom} loading="lazy" className="relative h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.02]" />
+                        <img
+                            src={src}
+                            alt={produit.nom}
+                            loading="lazy"
+                            className="h-full w-full object-contain drop-shadow-[0_24px_40px_rgba(0,0,0,0.7)] transition-transform duration-300 group-hover:scale-[1.03]"
+                        />
                     </button>
                 ) : (
-                    <div className="flex h-full items-center justify-center font-title text-4xl text-white/10">JAGA FIGHT</div>
+                    <div className="relative flex h-full items-center justify-center font-title text-4xl text-white/15">JAGA FIGHT</div>
                 )}
                 {soldOut && <span className="absolute left-3 top-3 bg-[#0a0a0a]/90 px-3 py-1 text-xs uppercase tracking-widest text-[#F5F5F0]">Épuisé</span>}
             </div>

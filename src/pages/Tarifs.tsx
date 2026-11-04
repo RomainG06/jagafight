@@ -74,12 +74,12 @@ export default function Tarifs() {
             <header className="relative overflow-hidden border-b border-white/10 bg-[#0a0a0a]">
                 <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(235,0,113,0.24),transparent_46%)]" />
                 <div className="relative mx-auto max-w-6xl px-4 py-20 text-center sm:px-6 sm:py-28 lg:px-8">
-                    <h1 className="font-title text-6xl leading-[0.9] text-[#F5F5F0] sm:text-7xl lg:text-8xl">TARIFS</h1>
+                    <h1 className="font-title text-6xl leading-[0.9] text-[#F5F5F0] sm:text-7xl lg:text-8xl">TARIFS<span className="mt-4 block text-2xl tracking-wide text-[#eb0071] sm:text-3xl">Muay Thaï · Self défense · Fitness</span></h1>
                     <p className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-[#F5F5F0]/70 sm:text-lg">Des formules pensées pour pratiquer, progresser et trouver votre rythme au sein de Jaga Fight.</p>
                 </div>
             </header>
 
-            <main className="bg-[#0a0a0a] py-14 sm:py-20">
+            <div className="bg-[#0a0a0a] py-14 sm:py-20">
                 <div className="mx-auto max-w-6xl space-y-8 px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-col gap-3 border-l-2 border-[#eb0071] pl-4 sm:flex-row sm:items-end sm:justify-between">
                         <div>
@@ -102,7 +102,7 @@ export default function Tarifs() {
 
                     <aside className="border-l-2 border-[#eb0071] bg-white/[0.03] px-5 py-4 text-sm leading-relaxed text-[#F5F5F0]/60">Tarifs communiqués à titre indicatif pour la saison 2026/2027. Contactez Jaga Fight pour confirmer la disponibilité des cours et les modalités d’inscription.</aside>
                 </div>
-            </main>
+            </div>
 
             <section className="border-t border-white/10 bg-[#0d0d0d] py-16 sm:py-20">
                 <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">

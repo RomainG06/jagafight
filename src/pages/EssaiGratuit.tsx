@@ -2,6 +2,7 @@ import { useEffect, useId, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { MessageCircle, Phone } from 'lucide-react'
 import Breadcrumb from '../components/common/Breadcrumb'
+import GoogleReviewsBadge from '../components/common/GoogleReviewsBadge'
 import { courses, formatSlot, type Course, type Day } from '../data/planning'
 import { PHONE_DISPLAY, PHONE_HREF, whatsappUrl } from '../data/contact'
 import { CLUB_ID, SITE_URL } from '../data/club'
@@ -199,6 +200,9 @@ export default function EssaiGratuit() {
                                     <Phone aria-hidden="true" className="h-4 w-4" />
                                     Je préfère appeler : {PHONE_DISPLAY}
                                 </a>
+                                <div className="flex justify-center pt-2">
+                                    <GoogleReviewsBadge />
+                                </div>
                             </div>
                         </div>
                     </section>

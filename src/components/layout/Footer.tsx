@@ -34,12 +34,14 @@ export default function Footer() {
                         <h3 className="font-title text-lg tracking-wider text-[#F5F5F0] mb-4">Navigation</h3>
                         <ul className="space-y-2">
                             {[
-                                { to: '/', label: "L'École" },
-                                { to: '/muay-thai', label: 'Le Muay Thaï' },
-                                { to: '/coaching', label: 'Coaching' },
+                                { to: '/', label: 'Accueil' },
                                 { to: '/essai-gratuit', label: "Cours d'essai gratuit" },
                                 { to: '/planning', label: 'Planning' },
                                 { to: '/tarifs', label: 'Tarifs' },
+                                { to: '/coaching', label: 'Coaching' },
+                                { to: '/formations', label: 'Formations' },
+                                { to: '/notre-adn', label: 'Le club' },
+                                { to: '/muay-thai', label: 'Le Muay Thaï' },
                                 { to: '/mentions-legales', label: 'Mentions légales' },
                                 { to: '/politique-confidentialite', label: 'Politique de confidentialité' },
                             ].map(link => (

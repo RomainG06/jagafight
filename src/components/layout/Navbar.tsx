@@ -5,15 +5,14 @@ import { usePageContext } from 'vike-react/usePageContext';
 import { MessageCircle, Phone } from 'lucide-react'
 import { PHONE_HREF, whatsappUrl } from '../../data/contact'
 
+// Ordre : ce qui fait venir au club d'abord, puis le contenu « club ».
 const navLinks = [
-    { to: '/', label: "L'École" },
-    { to: '/coaching', label: 'Coaching' },
-    { to: '/formations', label: 'Formations' },
     { to: '/planning', label: 'Planning' },
     { to: '/tarifs', label: 'Tarifs' },
-    { to: '/notre-adn', label: 'Notre ADN' },
+    { to: '/coaching', label: 'Coaching' },
+    { to: '/formations', label: 'Formations' },
+    { to: '/notre-adn', label: 'Le club' },
     { to: '/muay-thai', label: 'Le Muay Thaï' },
-
 ]
 
 const Navbar = memo(function Navbar() {

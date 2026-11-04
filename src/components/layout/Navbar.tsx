@@ -71,9 +71,15 @@ const Navbar = memo(function Navbar() {
                                     </a>
                                     <a
                                         href="/essai-gratuit"
-                                        className="whitespace-nowrap text-sm font-medium text-[#F5F5F0] bg-[#eb0071] px-4 py-1.5 hover:opacity-90 transition-opacity rounded"
+                                        className="whitespace-nowrap text-sm font-medium text-[#F5F5F0] border border-white/30 px-3 py-1.5 hover:border-[#eb0071] hover:text-[#eb0071] transition-colors rounded"
                                     >
                                         Essai gratuit
+                                    </a>
+                                    <a
+                                        href="/inscription"
+                                        className="whitespace-nowrap text-sm font-medium text-[#F5F5F0] bg-[#eb0071] px-4 py-1.5 hover:opacity-90 transition-opacity rounded"
+                                    >
+                                        S'inscrire
                                     </a>
                                 </>
                             ) : null}
@@ -133,11 +139,11 @@ const Navbar = memo(function Navbar() {
                                     <a href="/connexion" className="text-base font-medium text-[#F5F5F0]/70" onClick={() => setMenuOpen(false)}>
                                         Connexion
                                     </a>
-                                    <a href="/inscription" className="text-base font-medium text-[#F5F5F0]/70" onClick={() => setMenuOpen(false)}>
-                                        S'inscrire
-                                    </a>
-                                    <a href="/essai-gratuit" className="text-base font-medium text-[#eb0071]" onClick={() => setMenuOpen(false)}>
+                                    <a href="/essai-gratuit" className="text-base font-medium text-[#F5F5F0]/70" onClick={() => setMenuOpen(false)}>
                                         Cours d'essai gratuit
+                                    </a>
+                                    <a href="/inscription" className="rounded bg-[#eb0071] px-4 py-3 text-center text-base font-semibold text-white" onClick={() => setMenuOpen(false)}>
+                                        S'inscrire au club
                                     </a>
                                 </>
                             ) : null}

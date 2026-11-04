@@ -60,6 +60,60 @@ function getCompletion(
     ]
 }
 
+const SECTION_HINTS: Record<SectionId, string> = {
+    profil: 'Renseignez votre identité et votre adresse (et, pour un mineur, le responsable légal). Cette étape débloque les suivantes.',
+    adhesion: 'Choisissez votre discipline, votre formule et votre mode de paiement.',
+    documents: 'Déposez votre certificat médical. Le CERFA à faire remplir par votre médecin est téléchargeable dans cette section.',
+    urgence: 'Indiquez une personne à prévenir en cas de besoin pendant un entraînement.',
+    legal: 'Lisez le règlement intérieur et signez en ligne pour finaliser votre dossier.',
+}
+
+function NextStepCard({ completion, pct, onContinue }: {
+    completion: { id: SectionId; complete: boolean }[]
+    pct: number
+    onContinue: (id: SectionId) => void
+}) {
+    const next = completion.find(section => !section.complete)
+    const doneCount = completion.filter(section => section.complete).length
+
+    if (!next) {
+        return (
+            <div className="mx-6 mt-4 border border-green-500/30 bg-green-500/10 px-5 py-4">
+                <p className="text-sm font-semibold text-green-300">Votre dossier est complet, merci !</p>
+                <p className="mt-1 text-sm text-[#F5F5F0]/70">
+                    Le club va le vérifier. Le règlement de votre adhésion se fait au club : présentez-vous à votre prochain cours.
+                </p>
+            </div>
+        )
+    }
+
+    const label = SECTIONS.find(section => section.id === next.id)?.label ?? ''
+
+    return (
+        <div className="mx-6 mt-4 flex flex-col gap-4 border border-[#eb0071]/40 bg-[#eb0071]/10 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#eb0071]">
+                    {pct === 0 ? 'Bienvenue ! Finalisez votre inscription' : `Prochaine étape · ${doneCount + 1} sur ${completion.length}`}
+                </p>
+                <p className="mt-1 text-sm font-semibold text-[#F5F5F0]">{label}</p>
+                <p className="mt-1 text-sm text-[#F5F5F0]/65">{SECTION_HINTS[next.id]}</p>
+                {pct === 0 && (
+                    <p className="mt-2 text-xs text-[#F5F5F0]/45">
+                        Votre inscription au club n’est validée qu’une fois les 5 sections complétées. Vos réponses sont enregistrées au fur et à mesure.
+                    </p>
+                )}
+            </div>
+            <button
+                type="button"
+                onClick={() => onContinue(next.id)}
+                className="shrink-0 rounded bg-[#eb0071] px-5 py-2.5 text-xs font-semibold uppercase tracking-widest text-white hover:opacity-90 cursor-pointer"
+            >
+                {pct === 0 ? 'Commencer' : 'Continuer'}
+            </button>
+        </div>
+    )
+}
+
 function EspaceMembreInner() {
     const { session } = useAuth()
     const [activeSection, setActiveSection] = useState<SectionId>('profil')
@@ -222,6 +276,15 @@ function EspaceMembreInner() {
                     </div>
                 </div>
 
+                <NextStepCard
+                    completion={completion}
+                    pct={pct}
+                    onContinue={id => {
+                        setActiveSection(id)
+                        document.getElementById('espace-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                    }}
+                />
+
                 {savedFeedback && (
                     <div className="mx-6 mt-4 px-4 py-3 bg-green-500/10 border border-green-500/30 text-sm text-green-400">
                         ✓ Enregistré avec succès.
@@ -269,7 +332,7 @@ function EspaceMembreInner() {
                     </nav>
 
                     {/* Section content */}
-                    <div className="flex-1 px-6 py-8 max-w-4xl mx-auto">
+                    <div id="espace-section" className="flex-1 px-6 py-8 max-w-4xl mx-auto scroll-mt-20">
                         <h2 className="font-title text-2xl tracking-widest uppercase text-[#F5F5F0] mb-6">
                             {SECTIONS.find(s => s.id === activeSection)?.label}
                         </h2>

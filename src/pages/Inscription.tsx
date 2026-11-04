@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { supabase } from '../lib/supabase'
 import { Eye, EyeOff } from 'lucide-react'
+import InscriptionSteps from '../components/common/InscriptionSteps'
 
 
 type FieldErrors = {
@@ -109,18 +110,20 @@ export default function Inscription() {
     return (
         <>
             <Helmet>
-                <title>Inscription — Jaga Fight</title>
+                <title>S’inscrire au club — Jaga Fight</title>
                 <meta name="robots" content="noindex" />
                 <meta name="description" content="Créez votre espace membre Jaga Fight pour vous inscrire à nos cours de Muay Thaï à Saint-Laurent-du-Var, près de Cagnes-sur-Mer." />
             </Helmet>
 
-            <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4 py-20">
-                <div className="w-full max-w-3xl">
-                    <h1 className="font-title text-3xl text-[#F5F5F0] tracking-widest uppercase mb-2 text-center">
-                        Créer un compte
+            <div className="min-h-screen bg-[#0a0a0a] px-4 py-14 sm:py-20">
+                <div className="mx-auto grid w-full max-w-5xl gap-12 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
+                <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#eb0071]">Étape 1 sur 4 · Créer votre compte</p>
+                    <h1 className="mt-3 font-title text-4xl text-[#F5F5F0] sm:text-5xl">
+                        S’INSCRIRE AU CLUB
                     </h1>
-                    <p className="text-sm text-[#F5F5F0]/40 text-center mb-8">
-                        Accédez à votre espace membre pour finaliser votre inscription
+                    <p className="mt-3 mb-8 text-sm leading-relaxed text-[#F5F5F0]/60">
+                        Créez votre compte en 2 minutes. Vous compléterez ensuite votre dossier d’adhésion (formule, contact d’urgence, certificat médical) depuis votre espace membre.
                     </p>
 
                     <form onSubmit={handleSubmit} noValidate className="space-y-5">
@@ -319,6 +322,15 @@ export default function Inscription() {
                         </p>
                     </form>
                 </div>
+
+                <aside className="border border-white/10 bg-[#0d0d0d] p-6 lg:sticky lg:top-24 lg:self-start">
+                    <InscriptionSteps compact />
+                    <p className="mt-6 text-xs text-[#F5F5F0]/40">
+                        Vous hésitez encore ?{' '}
+                        <a href="/essai-gratuit" className="text-[#eb0071] underline-offset-4 hover:underline">Le premier cours est offert</a>.
+                    </p>
+                </aside>
+                </div>
             </div>
 
             {success && (
@@ -337,15 +349,15 @@ export default function Inscription() {
                         </div>
 
                         <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-green-400">
-                            Inscription réussie
+                            Étape 1 sur 4 terminée
                         </p>
                         <h2 id="inscription-success-title" className="mt-2 font-title text-3xl uppercase tracking-widest text-[#F5F5F0]">
                             Compte créé !
                         </h2>
                         <p id="inscription-success-description" className="mt-4 text-sm leading-relaxed text-[#F5F5F0]/60">
                             {requiresEmailConfirmation
-                                ? 'Un e-mail de confirmation vous a été envoyé. Cliquez sur le lien reçu pour activer votre compte.'
-                                : 'Votre compte est prêt. Vous pouvez maintenant accéder à votre espace membre et compléter votre dossier.'}
+                                ? 'Un e-mail de confirmation vous a été envoyé. Cliquez sur le lien reçu pour activer votre compte, puis connectez-vous pour compléter votre dossier.'
+                                : 'Votre compte est prêt. Prochaine étape : compléter votre dossier dans votre espace membre (profil, formule, certificat médical). Votre inscription n’est validée qu’une fois le dossier complet.'}
                         </p>
 
                         <a
@@ -353,7 +365,7 @@ export default function Inscription() {
                             autoFocus
                             className="mt-7 inline-flex w-full justify-center bg-[#eb0071] px-6 py-3.5 text-sm font-semibold text-[#F5F5F0] transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071]"
                         >
-                            {requiresEmailConfirmation ? 'Retour à la connexion' : 'Accéder à mon espace'}
+                            {requiresEmailConfirmation ? 'Retour à la connexion' : 'Compléter mon dossier'}
                         </a>
                     </div>
                 </div>

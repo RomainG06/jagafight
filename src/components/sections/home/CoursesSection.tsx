@@ -50,20 +50,25 @@ export default function CoursesSection() {
                                 ))}
                             </ul>
 
-                            <div className="mt-auto flex items-end justify-between gap-3 pt-6">
+                            <div className="mt-auto pt-6">
                                 <p className="text-sm text-[#F5F5F0]/60">{offer.price}</p>
-                                {offer.trialId ? (
+                                <div className="mt-3 flex items-center justify-between gap-3">
                                     <a
-                                        href={`/essai-gratuit?cours=${offer.trialId}`}
+                                        href="/inscription"
                                         className="shrink-0 rounded bg-[#eb0071] px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071]"
                                     >
-                                        Essai gratuit
+                                        S’inscrire
                                     </a>
-                                ) : (
-                                    <a href="/tarifs" className="shrink-0 text-xs font-semibold uppercase tracking-wider text-[#eb0071]">
-                                        Tarifs →
-                                    </a>
-                                )}
+                                    {offer.trialId ? (
+                                        <a href={`/essai-gratuit?cours=${offer.trialId}`} className="text-xs font-semibold uppercase tracking-wider text-[#F5F5F0]/70 hover:text-[#eb0071]">
+                                            Essai gratuit →
+                                        </a>
+                                    ) : (
+                                        <a href="/tarifs" className="text-xs font-semibold uppercase tracking-wider text-[#F5F5F0]/70 hover:text-[#eb0071]">
+                                            Tarifs →
+                                        </a>
+                                    )}
+                                </div>
                             </div>
                         </article>
                     ))}

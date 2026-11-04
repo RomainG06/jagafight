@@ -1,7 +1,7 @@
-import { MessageCircle, Phone } from 'lucide-react'
+import { Gift, Phone } from 'lucide-react'
 import { usePageContext } from 'vike-react/usePageContext'
 import { useAuth } from '../../contexts/auth-context'
-import { PHONE_HREF, whatsappUrl } from '../../data/contact'
+import { PHONE_HREF } from '../../data/contact'
 
 // Pages où la barre n'a pas de sens (espace privé, formulaires de compte).
 const HIDDEN_PREFIXES = ['/admin', '/espace-membre', '/inscription', '/connexion', '/reset-password', '/essai-gratuit']
@@ -29,13 +29,13 @@ export default function MobileContactBar() {
                     <Phone aria-hidden="true" className="h-5 w-5" />
                     Appeler
                 </a>
-                <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className={`${item} border-x border-white/10 text-[#F5F5F0]/80`}>
-                    <MessageCircle aria-hidden="true" className="h-5 w-5" />
-                    WhatsApp
+                <a href="/essai-gratuit" className={`${item} border-x border-white/10 text-[#F5F5F0]/80`}>
+                    <Gift aria-hidden="true" className="h-5 w-5" />
+                    Essai gratuit
                 </a>
-                <a href="/essai-gratuit" className={`${item} flex-[1.4] bg-[#eb0071] text-white`}>
-                    <span className="font-title text-xl leading-none tracking-wide normal-case">1er cours</span>
-                    offert
+                <a href="/inscription" className={`${item} flex-[1.4] bg-[#eb0071] text-white`}>
+                    <span className="font-title text-xl leading-none tracking-wide normal-case">S’inscrire</span>
+                    au club
                 </a>
             </nav>
         </>

@@ -25,10 +25,10 @@ export default function HeroSection() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     {!session && (
                         <a
-                            href="/essai-gratuit"
-                            className="px-8 py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm rounded hover:bg-[#eb0071] transition-colors"
+                            href="/inscription"
+                            className="px-8 py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm rounded hover:opacity-90 transition-opacity"
                         >
-                            Réserver mon essai gratuit
+                            S'inscrire au club
                         </a>
                     )}
                     {session && (
@@ -40,13 +40,16 @@ export default function HeroSection() {
                         </a>
                     )}
                     <a
-                        href="/planning"
+                        href="/essai-gratuit"
                         className="px-8 py-4 border border-[#F5F5F0]/30 text-[#F5F5F0]/80 font-semibold tracking-widest uppercase text-sm rounded hover:border-[#F5F5F0]/60 hover:text-[#F5F5F0] transition-colors"
                     >
-                        Voir le planning
+                        Essai gratuit
                     </a>
                 </div>
-                <GoogleReviewsBadge className="mt-8" />
+                <a href="/planning" className="mt-5 inline-block text-sm text-[#F5F5F0]/60 underline-offset-4 hover:text-[#F5F5F0] hover:underline">
+                    Voir le planning des cours →
+                </a>
+                <div><GoogleReviewsBadge className="mt-6" /></div>
             </div>
         </section>
     )

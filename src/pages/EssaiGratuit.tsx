@@ -233,6 +233,12 @@ export default function EssaiGratuit() {
                                 <a href="/tarifs" className="text-[#eb0071] underline-offset-4 hover:underline">Voir les tarifs</a>
                             </p>
                         </section>
+
+                        <section aria-labelledby="essai-inscription" className="border border-[#eb0071]/40 bg-[#eb0071]/10 px-5 py-5">
+                            <h2 id="essai-inscription" className="font-title text-2xl text-[#F5F5F0]">DÉJÀ DÉCIDÉ ?</h2>
+                            <p className="mt-2 text-sm leading-relaxed text-[#F5F5F0]/70">Inscrivez-vous directement en ligne : vous complétez votre dossier et déposez votre certificat médical depuis votre espace membre.</p>
+                            <a href="/inscription" className="mt-4 inline-flex rounded bg-[#eb0071] px-5 py-2.5 text-sm font-semibold uppercase tracking-wider text-white hover:opacity-90">S’inscrire au club</a>
+                        </section>
                     </aside>
                 </div>
             </div>

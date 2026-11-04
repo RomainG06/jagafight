@@ -65,14 +65,20 @@ export default function LocalSection() {
             L'ÉCOLE EST OUVERTE
           </h3>
           <p className="text-[#F5F5F0]/60 mb-8 max-w-md mx-auto">
-            Rejoins Jaga Fight à Saint-Laurent-du-Var et viens tester gratuitement ton premier cours.
+            Inscris-toi en ligne en quelques minutes, ou viens d’abord tester gratuitement ton premier cours.
           </p>
           <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a
-            href="/essai-gratuit"
-            className="inline-flex items-center px-8 py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm rounded hover:bg-[#eb0071] transition-colors"
+            href="/inscription"
+            className="inline-flex items-center px-8 py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm rounded hover:opacity-90 transition-opacity"
           >
-            Réserver mon essai gratuit
+            S’inscrire au club
+          </a>
+          <a
+            href="/essai-gratuit"
+            className="inline-flex items-center px-8 py-4 border border-white/30 text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm rounded hover:border-[#eb0071] hover:text-[#eb0071] transition-colors"
+          >
+            Essai gratuit
           </a>
           <a
             href={PHONE_HREF}

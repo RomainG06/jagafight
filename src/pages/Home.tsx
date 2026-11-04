@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet-async'
 import HeroSection from '../components/sections/home/HeroSection'
 import CoursesSection from '../components/sections/home/CoursesSection'
 import GoFurtherSection from '../components/sections/home/GoFurtherSection'
+import InscriptionSteps from '../components/common/InscriptionSteps'
 import AboutSection from '../components/sections/home/AboutSection'
 import LocalSection from '../components/sections/home/LocalSection'
 
@@ -34,6 +35,7 @@ export default function Home() {
 
             <HeroSection />
             <CoursesSection />
+            <InscriptionSteps />
             <AboutSection />
 
             {/* Histoire & Valeurs — Résumé court */}

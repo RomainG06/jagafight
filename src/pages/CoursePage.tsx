@@ -106,10 +106,13 @@ export default function CoursePage({ slug }: { slug: string }) {
                     <h1 className="mt-4 max-w-4xl font-title text-5xl leading-[0.95] text-[#F5F5F0] sm:text-6xl lg:text-7xl">{page.h1.toUpperCase()}</h1>
                     <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#F5F5F0]/70 sm:text-lg">{page.intro}</p>
                     <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-                        <a href={trialHref} className="inline-flex justify-center rounded bg-[#eb0071] px-7 py-3.5 text-sm font-semibold uppercase tracking-widest text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071]">
-                            Réserver mon essai gratuit
+                        <a href="/inscription" className="inline-flex justify-center rounded bg-[#eb0071] px-7 py-3.5 text-sm font-semibold uppercase tracking-widest text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071]">
+                            S’inscrire au club
                         </a>
-                        <a href={PHONE_HREF} className="inline-flex items-center justify-center gap-2 rounded border border-white/30 px-7 py-3.5 text-sm text-[#F5F5F0] transition-colors hover:border-[#eb0071] hover:text-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071]">
+                        <a href={trialHref} className="inline-flex justify-center rounded border border-white/30 px-7 py-3.5 text-sm font-semibold uppercase tracking-widest text-[#F5F5F0] transition-colors hover:border-[#eb0071] hover:text-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071]">
+                            Essai gratuit
+                        </a>
+                        <a href={PHONE_HREF} className="inline-flex items-center justify-center gap-2 px-2 py-3.5 text-sm text-[#F5F5F0]/70 transition-colors hover:text-[#eb0071]">
                             <Phone aria-hidden="true" className="h-4 w-4" />
                             {PHONE_DISPLAY}
                         </a>
@@ -217,14 +220,18 @@ export default function CoursePage({ slug }: { slug: string }) {
 
             <section className="border-t border-white/10 bg-[#0d0d0d] py-16 sm:py-20">
                 <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-                    <p className="text-xs uppercase tracking-[0.2em] text-[#eb0071]">1er cours offert</p>
-                    <h2 className="mt-4 font-title text-4xl text-[#F5F5F0] sm:text-5xl">VENEZ ESSAYER</h2>
+                    <p className="text-xs uppercase tracking-[0.2em] text-[#eb0071]">Rejoindre Jaga Fight</p>
+                    <h2 className="mt-4 font-title text-4xl text-[#F5F5F0] sm:text-5xl">PRÊT À VOUS LANCER ?</h2>
                     <p className="mt-5 leading-relaxed text-[#F5F5F0]/65">
-                        {CLUB_ADDRESS.street}, {CLUB_ADDRESS.postalCode} {CLUB_ADDRESS.city}.
+                        Inscrivez-vous en ligne et complétez votre dossier depuis votre espace membre, ou venez d’abord essayer : le premier cours est offert.
+                        {' '}{CLUB_ADDRESS.street}, {CLUB_ADDRESS.postalCode} {CLUB_ADDRESS.city}.
                     </p>
                     <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-                        <a href={trialHref} className="inline-flex justify-center rounded bg-[#eb0071] px-7 py-3.5 text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071]">
-                            Réserver mon essai gratuit
+                        <a href="/inscription" className="inline-flex justify-center rounded bg-[#eb0071] px-7 py-3.5 text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071]">
+                            S’inscrire au club
+                        </a>
+                        <a href={trialHref} className="inline-flex justify-center rounded border border-white/30 px-7 py-3.5 text-[#F5F5F0] transition-colors hover:border-[#eb0071] hover:text-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071]">
+                            Essai gratuit
                         </a>
                         <a
                             href={whatsappUrl(`Bonjour Jaga Fight, j’ai une question sur le cours ${page.menuLabel}.`)}

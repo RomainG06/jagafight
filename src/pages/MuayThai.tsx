@@ -186,7 +186,7 @@ export default function MuayThai() {
                                 Comprendre le Muay Thaï
                             </a>
                             <a
-                                href="/inscription"
+                                href="/planning"
                                 className="inline-flex justify-center px-7 py-3.5 border border-white/30 text-[#F5F5F0] font-semibold tracking-wide rounded hover:border-[#eb0071] hover:text-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071] transition-[color,border-color]"
                             >
                                 Découvrir nos cours
@@ -386,11 +386,11 @@ export default function MuayThai() {
                                     </p>
                                 </div>
                                 <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                                    <a href="/inscription" className="inline-flex justify-center px-6 py-3 bg-[#eb0071] text-[#F5F5F0] font-semibold rounded hover:bg-[#d60066] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071] transition-colors">
-                                        S’inscrire
+                                    <a href="/essai-gratuit" className="inline-flex justify-center px-6 py-3 bg-[#eb0071] text-[#F5F5F0] font-semibold rounded hover:bg-[#d60066] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071] transition-colors">
+                                        Réserver mon essai gratuit
                                     </a>
-                                    <a href="/coaching" className="inline-flex justify-center px-6 py-3 border border-white/25 text-[#F5F5F0] font-semibold rounded hover:border-[#eb0071] hover:text-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071] transition-[color,border-color]">
-                                        Voir le coaching
+                                    <a href="/planning" className="inline-flex justify-center px-6 py-3 border border-white/25 text-[#F5F5F0] font-semibold rounded hover:border-[#eb0071] hover:text-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071] transition-[color,border-color]">
+                                        Voir le planning
                                     </a>
                                 </div>
                             </div>

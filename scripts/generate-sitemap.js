@@ -55,6 +55,14 @@ const pages = [
         path: "/tarifs",
         lastmod: "2026-10-19",
     },
+    {
+        path: "/planning",
+        lastmod: "2026-11-04",
+    },
+    {
+        path: "/essai-gratuit",
+        lastmod: "2026-11-04",
+    },
 ];
 
 /**

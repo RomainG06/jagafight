@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 import Breadcrumb from '../components/common/Breadcrumb'
+import { PHONE_DISPLAY, PHONE_HREF } from '../data/contact'
 
 type Subscription = { name: string; detail: string; sixMonths: string; oneYear: string }
 
@@ -107,10 +108,10 @@ export default function Tarifs() {
                 <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
                     <p className="text-xs  uppercase tracking-[0.2em] text-[#eb0071]">Rejoindre Jaga Fight</p>
                     <h2 className="mt-4 font-title text-4xl text-[#F5F5F0] sm:text-5xl">PRÊT À COMMENCER ?</h2>
-                    <p className="mt-5 leading-relaxed text-[#F5F5F0]/65">Créez votre espace membre pour vous inscrire, ou contactez-nous pour choisir la formule adaptée.</p>
+                    <p className="mt-5 leading-relaxed text-[#F5F5F0]/65">Testez gratuitement votre premier cours de Muay Thaï ou de self defense, puis choisissez la formule adaptée. Déjà décidé ? <a href="/inscription" className="text-[#eb0071] underline-offset-4 hover:underline">Créez votre espace membre</a>.</p>
                     <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-                        <a href="/inscription" className="inline-flex justify-center rounded bg-[#eb0071] px-7 py-3.5  text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071]">S’inscrire</a>
-                        <a href="mailto:agentpro.athlete@gmail.com" className="inline-flex justify-center rounded border border-white/30 px-7 py-3.5  text-[#F5F5F0] transition-colors hover:border-[#eb0071] hover:text-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071]">Nous contacter</a>
+                        <a href="/essai-gratuit" className="inline-flex justify-center rounded bg-[#eb0071] px-7 py-3.5  text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071]">Réserver mon essai gratuit</a>
+                        <a href={PHONE_HREF} className="inline-flex justify-center rounded border border-white/30 px-7 py-3.5  text-[#F5F5F0] transition-colors hover:border-[#eb0071] hover:text-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071]">Appeler le {PHONE_DISPLAY}</a>
                     </div>
                 </div>
             </section>

@@ -1,3 +1,5 @@
+import { PHONE_DISPLAY, PHONE_E164, PHONE_HREF, whatsappUrl } from '../../data/contact'
+
 export default function Footer() {
     const year = new Date().getFullYear()
 
@@ -10,6 +12,7 @@ export default function Footer() {
         "logo": "https://www.jagafight.fr/logo.png",
         "description": "École de Muay Thaï à Saint-Laurent-du-Var proposant cours collectifs, coaching individuel, stages et formations diplômantes",
         "email": "agentpro.athlete@gmail.com",
+        "telephone": PHONE_E164,
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "864 Av. Pierre et Marie Curie",
@@ -68,6 +71,8 @@ export default function Footer() {
                                 { to: '/', label: "L'École" },
                                 { to: '/muay-thai', label: 'Le Muay Thaï' },
                                 { to: '/coaching', label: 'Coaching' },
+                                { to: '/essai-gratuit', label: "Cours d'essai gratuit" },
+                                { to: '/planning', label: 'Planning' },
                                 { to: '/tarifs', label: 'Tarifs' },
                                 { to: '/mentions-legales', label: 'Mentions légales' },
                                 { to: '/politique-confidentialite', label: 'Politique de confidentialité' },
@@ -88,6 +93,11 @@ export default function Footer() {
                     <div>
                         <h3 className="font-title text-lg tracking-wider text-[#F5F5F0] mb-4">Contact & Réseaux</h3>
                         <ul className="space-y-2 text-sm text-[#F5F5F0]/50">
+                            <li>
+                                <a href={PHONE_HREF} className="hover:text-[#eb0071] transition-colors">{PHONE_DISPLAY}</a>
+                                {' · '}
+                                <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className="hover:text-[#eb0071] transition-colors">WhatsApp</a>
+                            </li>
                             <li>
                                 <a href="mailto:agentpro.athlete@gmail.com" className="hover:text-[#eb0071] transition-colors">
                                     agentpro.athlete@gmail.com

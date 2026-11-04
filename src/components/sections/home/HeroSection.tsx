@@ -24,10 +24,10 @@ export default function HeroSection() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     {!session && (
                         <a
-                            href="/inscription"
+                            href="/essai-gratuit"
                             className="px-8 py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm rounded hover:bg-[#eb0071] transition-colors"
                         >
-                            S'inscrire
+                            Réserver mon essai gratuit
                         </a>
                     )}
                     {session && (
@@ -39,10 +39,10 @@ export default function HeroSection() {
                         </a>
                     )}
                     <a
-                        href="/coaching"
+                        href="/planning"
                         className="px-8 py-4 border border-[#F5F5F0]/30 text-[#F5F5F0]/80 font-semibold tracking-widest uppercase text-sm rounded hover:border-[#F5F5F0]/60 hover:text-[#F5F5F0] transition-colors"
                     >
-                        Découvrir le coaching
+                        Voir le planning
                     </a>
                 </div>
             </div>

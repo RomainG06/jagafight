@@ -3,6 +3,7 @@ import '../src/index.css'
 import type { ReactNode } from 'react'
 import Navbar from '../src/components/layout/Navbar'
 import Footer from '../src/components/layout/Footer'
+import MobileContactBar from '../src/components/layout/MobileContactBar'
 import { AuthProvider } from '../src/contexts/AuthContext'
 
 export function Layout({ children }: { children: ReactNode }) {
@@ -17,6 +18,7 @@ export function Layout({ children }: { children: ReactNode }) {
                     {children}
                 </main>
                 <Footer />
+                <MobileContactBar />
             </div>
         </AuthProvider>
     )

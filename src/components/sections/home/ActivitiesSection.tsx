@@ -13,11 +13,11 @@ const activities = [
     {
         number: '02',
         title: 'Self-défense',
-        public: 'Femmes victimes de violences',
-        objective: 'Sécurité, reconstruction',
+        public: 'Femmes · Adultes',
+        objective: 'Sécurité, confiance en soi',
         tag: 'Accompagnement',
         description:
-            "Un accompagnement bienveillant combinant techniques de protection, gestion du stress et renforcement de la confiance en soi. Ces ateliers visent à aider les participantes à retrouver un sentiment de sécurité et à se réapproprier leur espace de vie."
+            "Des techniques simples et efficaces pour se protéger, gérer le stress et réagir face à une agression. Un cours accessible à tous les niveaux, dans un cadre bienveillant, pour gagner en confiance au quotidien."
     },
     {
         number: '03',
@@ -90,10 +90,10 @@ export default function ActivitiesSection() {
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
                     <span className="text-[#eb0071] text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">
-                        Activités
+                        Projet associatif
                     </span>
                     <h2 className="font-title text-5xl sm:text-6xl text-[#F5F5F0]">
-                        CE QUE NOUS PROPOSONS
+                        NOS ACTIONS
                     </h2>
                 </div>
 

@@ -1,8 +1,9 @@
 import { Helmet } from 'react-helmet-async'
 import HeroSection from '../components/sections/home/HeroSection'
-import ProfileSelector from '../components/sections/home/ProfileSelector'
+import CoursesSection from '../components/sections/home/CoursesSection'
+import GoFurtherSection from '../components/sections/home/GoFurtherSection'
+import InscriptionSteps from '../components/common/InscriptionSteps'
 import AboutSection from '../components/sections/home/AboutSection'
-import ActivitiesSection from '../components/sections/home/ActivitiesSection'
 import LocalSection from '../components/sections/home/LocalSection'
 
 export default function Home() {
@@ -12,9 +13,8 @@ export default function Home() {
                 <title>Club de Muay Thai à Saint-Laurent-du-Var (06) | Jaga Fight</title>
                 <meta
                     name="description"
-                    content="Jaga Fight est un club de Muay Thai (Boxe Thai) à Saint-Laurent-du-Var, proche de Cagnes-sur-Mer et Nice. Cours adultes, enfants, débutants et compétiteurs dans les Alpes-Maritimes."
+                    content="Club de Muay Thaï à Saint-Laurent-du-Var, près de Cagnes-sur-Mer et Nice : cours adultes, féminin, enfants, ados et self défense. 1er cours offert."
                 />
-                <meta name="keywords" content="Muay Thaï (Boxe Thai) Saint-Laurent-du-Var, boxe thaï Cagnes-sur-Mer, boxe thaï Nice, cours boxe Antibes, club boxe Alpes-Maritimes, école boxe thaïlandaise Côte d'Azur, Jaga Fight" />
                 <link rel="canonical" href="https://www.jagafight.fr/" />
 
                 {/* Open Graph */}
@@ -31,76 +31,12 @@ export default function Home() {
                 <meta name="twitter:description" content="Club de Muay Thai (Boxe Thai) à Saint-Laurent-du-Var, près de Cagnes-sur-Mer et Nice. Cours adultes, enfants, débutants et compétiteurs." />
                 <meta name="twitter:image" content="https://www.jagafight.fr/og-image.jpg" />
 
-                {/* Structured Data - LocalBusiness */}
-                <script type="application/ld+json">
-                    {JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": ["SportsActivityLocation", "LocalBusiness"],
-                        "name": "Jaga Fight",
-                        "description": "École de Muay Thaï à Saint-Laurent-du-Var proposant des cours collectifs, self-défense, stages et formations diplômantes",
-                        "url": "https://www.jagafight.fr",
-                        "logo": "https://www.jagafight.fr/logo.png",
-                        "image": "https://www.jagafight.fr/og-image.jpg",
-                        "address": {
-                            "@type": "PostalAddress",
-                            "streetAddress": "864 Av. Pierre et Marie Curie",
-                            "addressLocality": "Saint-Laurent-du-Var",
-                            "addressRegion": "Alpes-Maritimes",
-                            "postalCode": "06700",
-                            "addressCountry": "FR"
-                        },
-                        "telephone": "+33 7 43 52 72 93",
-                        "email": "agentpro.athlete@gmail.com",
-                        "openingHoursSpecification": {
-                            "@type": "OpeningHoursSpecification",
-                            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-                            "opens": "09:00",
-                            "closes": "21:00"
-                        },
-                        "priceRange": "€€",
-                        "areaServed": [
-                            {
-                                "@type": "City",
-                                "name": "Saint-Laurent-du-Var"
-                            },
-                            {
-                                "@type": "City",
-                                "name": "Cagnes-sur-Mer"
-                            },
-                            {
-                                "@type": "City",
-                                "name": "Nice"
-                            },
-                            {
-                                "@type": "City",
-                                "name": "Antibes"
-                            },
-                            {
-                                "@type": "City",
-                                "name": "Villeneuve-Loubet"
-                            }
-                        ],
-                        "founder": {
-                            "@type": "Person",
-                            "name": "Oualid OUMERZOUK",
-                            "award": "Champion du monde Nokento Full Fight 2017"
-                        },
-                        "employee": {
-                            "@type": "Person",
-                            "name": "Hicham",
-                            "jobTitle": "Coach principal",
-                            "award": "Champion d'Europe Muay Thaï"
-                        }
-                    })}
-                </script>
             </Helmet>
 
             <HeroSection />
-            <ProfileSelector />
+            <CoursesSection />
+            <InscriptionSteps />
             <AboutSection />
-            <div id="activites">
-                <ActivitiesSection />
-            </div>
 
             {/* Histoire & Valeurs — Résumé court */}
             <section className="py-24 bg-[#0a0a0a]">
@@ -175,6 +111,7 @@ export default function Home() {
                 </div>
             </section>
 
+            <GoFurtherSection />
             <LocalSection />
         </>
     )

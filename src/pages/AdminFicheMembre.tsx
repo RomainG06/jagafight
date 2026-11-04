@@ -314,27 +314,23 @@ export default function AdminFicheMembre() {
     }
 
     async function generatePDF() {
-        const { jsPDF } = await import('jspdf')
-        const doc = new jsPDF()
-        doc.setFont('helvetica', 'bold')
-        doc.setFontSize(18)
-        doc.text('Jaga Fighting Team', 20, 20)
-        doc.setFont('helvetica', 'normal')
-        doc.setFontSize(11)
-        doc.text(`Adhérent : ${membre?.prenom} ${membre?.nom}`, 20, 40)
-        doc.text(`Email : ${membre?.email ?? ''}`, 20, 50)
-        doc.text(`Formule : ${adhesion?.formule_tarifaire ?? '—'}`, 20, 60)
-        doc.setFontSize(14)
-        doc.text('Paiements', 20, 80)
-        doc.setFontSize(10)
-        let y = 92
-        paiements.forEach(p => {
-            doc.text(`${p.date_paiement ?? '—'}  ${MODE_LABELS[p.mode]}  ${p.montant} €  ${STATUT_LABELS[p.statut]}`, 20, y)
-            y += 10
-        })
-        doc.save(`recu-${membre?.nom}-${membre?.prenom}.pdf`)
-        setFeedback('PDF généré.')
-        setTimeout(() => setFeedback(''), 3000)
+        if (!membre) return
+        setError('')
+        try {
+            let saisonLabel: string | null = null
+            if (adhesion?.saison_id) {
+                const { data } = await supabase.from('saisons').select('label').eq('id', adhesion.saison_id).maybeSingle()
+                saisonLabel = (data as { label?: string } | null)?.label ?? null
+            }
+            const { buildReceipt } = await import('../lib/receiptPdf')
+            const doc = await buildReceipt({ membre, adhesion, paiements, saisonLabel })
+            const fileName = `recu-${membre.nom}-${membre.prenom}`.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-zA-Z0-9-]+/g, '-')
+            doc.save(`${fileName}.pdf`)
+            setFeedback('PDF généré.')
+            setTimeout(() => setFeedback(''), 3000)
+        } catch {
+            setError('Le reçu PDF n’a pas pu être généré.')
+        }
     }
 
     if (loading) {

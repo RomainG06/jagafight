@@ -1,48 +1,18 @@
+import { INSTAGRAM_URL, PHONE_DISPLAY, PHONE_HREF, whatsappUrl } from '../../data/contact'
+import { clubSchema } from '../../data/club'
+import { coursePages } from '../../data/coursePages'
+
 export default function Footer() {
     const year = new Date().getFullYear()
-
-    // Structured Data - Organization
-    const organizationSchema = {
-        "@context": "https://schema.org",
-        "@type": "SportsOrganization",
-        "name": "Jaga Fight",
-        "url": "https://www.jagafight.fr",
-        "logo": "https://www.jagafight.fr/logo.png",
-        "description": "École de Muay Thaï à Saint-Laurent-du-Var proposant cours collectifs, coaching individuel, stages et formations diplômantes",
-        "email": "agentpro.athlete@gmail.com",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "864 Av. Pierre et Marie Curie",
-            "addressLocality": "Saint-Laurent-du-Var",
-            "addressRegion": "Alpes-Maritimes",
-            "postalCode": "06700",
-            "addressCountry": "FR"
-        },
-        "areaServed": [
-            "Cagnes-sur-Mer",
-            "Nice",
-            "Antibes",
-            "Villeneuve-Loubet",
-            "Saint-Laurent-du-Var",
-            "Côte d'Azur",
-            "Alpes-Maritimes"
-        ],
-        "founder": {
-            "@type": "Person",
-            "name": "Oualid OUMERZOUK"
-        },
-        "foundingDate": "2025",
-        "slogan": "Sport, éducation, transformation"
-    }
 
     return (
         <footer className="bg-[#0a0a0a] border-t border-white/10 mt-auto">
             {/* Structured Data */}
             <script type="application/ld+json">
-                {JSON.stringify(organizationSchema)}
+                {JSON.stringify(clubSchema)}
             </script>
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
                     {/* Logo & baseline */}
                     <div>
                         <span className="font-title text-2xl tracking-widest text-[#F5F5F0]">
@@ -65,10 +35,15 @@ export default function Footer() {
                         <h3 className="font-title text-lg tracking-wider text-[#F5F5F0] mb-4">Navigation</h3>
                         <ul className="space-y-2">
                             {[
-                                { to: '/', label: "L'École" },
-                                { to: '/muay-thai', label: 'Le Muay Thaï' },
-                                { to: '/coaching', label: 'Coaching' },
+                                { to: '/', label: 'Accueil' },
+                                { to: '/essai-gratuit', label: "Cours d'essai gratuit" },
+                                { to: '/planning', label: 'Planning' },
                                 { to: '/tarifs', label: 'Tarifs' },
+                                { to: '/coaching', label: 'Coaching' },
+                                { to: '/formations', label: 'Formations' },
+                                { to: '/notre-adn', label: 'Le club' },
+                                { to: '/muay-thai', label: 'Le Muay Thaï' },
+                                { to: '/boutique', label: 'Boutique' },
                                 { to: '/mentions-legales', label: 'Mentions légales' },
                                 { to: '/politique-confidentialite', label: 'Politique de confidentialité' },
                             ].map(link => (
@@ -84,10 +59,29 @@ export default function Footer() {
                         </ul>
                     </div>
 
+                    {/* Nos cours */}
+                    <div>
+                        <h3 className="font-title text-lg tracking-wider text-[#F5F5F0] mb-4">Nos cours</h3>
+                        <ul className="space-y-2">
+                            {coursePages.map(page => (
+                                <li key={page.slug}>
+                                    <a href={`/cours/${page.slug}`} className="text-sm text-[#F5F5F0]/50 hover:text-[#eb0071] transition-colors">
+                                        {page.menuLabel}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
                     {/* Réseaux & contact */}
                     <div>
                         <h3 className="font-title text-lg tracking-wider text-[#F5F5F0] mb-4">Contact & Réseaux</h3>
                         <ul className="space-y-2 text-sm text-[#F5F5F0]/50">
+                            <li>
+                                <a href={PHONE_HREF} className="hover:text-[#eb0071] transition-colors">{PHONE_DISPLAY}</a>
+                                {' · '}
+                                <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className="hover:text-[#eb0071] transition-colors">WhatsApp</a>
+                            </li>
                             <li>
                                 <a href="mailto:agentpro.athlete@gmail.com" className="hover:text-[#eb0071] transition-colors">
                                     agentpro.athlete@gmail.com
@@ -96,7 +90,7 @@ export default function Footer() {
                             <li>864 Av. Pierre et Marie Curie<br />06700 Saint-Laurent-du-Var</li>
                             <li className="flex gap-4 pt-2">
                                 <a
-                                    href="https://www.instagram.com/jagafight?stkn=MThnZTA0bnc1MnNnYw=="
+                                    href={INSTAGRAM_URL}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center gap-2 hover:text-[#ff0096] transition-colors"

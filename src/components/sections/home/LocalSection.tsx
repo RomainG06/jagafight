@@ -1,3 +1,8 @@
+import { MapPin, Phone } from 'lucide-react'
+import GoogleReviewsBadge from '../../common/GoogleReviewsBadge'
+import { GOOGLE_DIRECTIONS_URL, PHONE_DISPLAY, PHONE_HREF } from '../../../data/contact'
+import { CLUB_ADDRESS } from '../../../data/club'
+
 const partners = [
   { name: 'AFMT', url: 'https://www.afmt.fr/' },
   { name: 'FFKMDA', url: 'https://www.ffkmda.com/' },
@@ -22,6 +27,21 @@ export default function LocalSection() {
             Jaga Fight est ouvert à Saint-Laurent-du-Var, au cœur de la Côte d'Azur,
             et accueille les pratiquants de Cagnes-sur-Mer, Nice, Antibes et des Alpes-Maritimes.
           </p>
+          <address className="mt-8 not-italic text-[#F5F5F0]/80">
+            {CLUB_ADDRESS.street}<br />{CLUB_ADDRESS.postalCode} {CLUB_ADDRESS.city}
+          </address>
+          <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a
+              href={GOOGLE_DIRECTIONS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded border border-white/30 px-5 py-2.5 text-sm text-[#F5F5F0] transition-colors hover:border-[#eb0071] hover:text-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071]"
+            >
+              <MapPin aria-hidden="true" className="h-4 w-4" />
+              Itinéraire Google Maps
+            </a>
+            <GoogleReviewsBadge />
+          </div>
         </div>
 
         {/* Partenaires */}
@@ -45,14 +65,29 @@ export default function LocalSection() {
             L'ÉCOLE EST OUVERTE
           </h3>
           <p className="text-[#F5F5F0]/60 mb-8 max-w-md mx-auto">
-            Rejoins Jaga Fight à Saint-Laurent-du-Var et trouve la formule qui correspond à tes objectifs.
+            Inscris-toi en ligne en quelques minutes, ou viens d’abord tester gratuitement ton premier cours.
           </p>
+          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a
             href="/inscription"
-            className="inline-flex items-center px-8 py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm rounded hover:bg-[#eb0071] transition-colors"
+            className="inline-flex items-center px-8 py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm rounded hover:opacity-90 transition-opacity"
           >
-            S'inscrire maintenant
+            S’inscrire au club
           </a>
+          <a
+            href="/essai-gratuit"
+            className="inline-flex items-center px-8 py-4 border border-white/30 text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm rounded hover:border-[#eb0071] hover:text-[#eb0071] transition-colors"
+          >
+            Essai gratuit
+          </a>
+          <a
+            href={PHONE_HREF}
+            className="inline-flex items-center gap-2 px-8 py-4 border border-white/30 text-[#F5F5F0] text-sm rounded hover:border-[#eb0071] hover:text-[#eb0071] transition-colors"
+          >
+            <Phone aria-hidden="true" className="h-4 w-4" />
+            {PHONE_DISPLAY}
+          </a>
+          </div>
         </div>
       </div>
     </section>

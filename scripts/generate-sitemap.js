@@ -55,6 +55,34 @@ const pages = [
         path: "/tarifs",
         lastmod: "2026-10-19",
     },
+    {
+        path: "/planning",
+        lastmod: "2026-11-04",
+    },
+    {
+        path: "/essai-gratuit",
+        lastmod: "2026-11-04",
+    },
+    {
+        path: "/cours/muay-thai-adultes",
+        lastmod: "2026-11-04",
+    },
+    {
+        path: "/cours/muay-thai-feminin",
+        lastmod: "2026-11-04",
+    },
+    {
+        path: "/cours/muay-thai-enfants-ados",
+        lastmod: "2026-11-04",
+    },
+    {
+        path: "/cours/self-defense",
+        lastmod: "2026-11-04",
+    },
+    {
+        path: "/boutique",
+        lastmod: "2026-11-04",
+    },
 ];
 
 /**

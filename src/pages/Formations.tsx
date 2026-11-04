@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 import Breadcrumb from '../components/common/Breadcrumb'
+import { whatsappUrl } from '../data/contact'
 import TrainingSection from '../components/sections/home/TrainingSection'
 import LocalSection from '../components/sections/home/LocalSection'
 
@@ -17,10 +18,6 @@ export default function Formations() {
                 <meta
                     name="description"
                     content="Devenez coach de Muay Thai (Boxe Thai) avec Jaga Fight à Saint-Laurent-du-Var, dans les Alpes-Maritimes. Formations CQP, BPJEPS, BMF, DEJEPS et DESJEPS."
-                />
-                <meta
-                    name="keywords"
-                    content="formation coach boxe thaï, formation coach muay thaï, BPJEPS sports de combat, CQP boxe thaï, formation BPJEPS Alpes-Maritimes, Saint-Laurent-du-Var, Cagnes-sur-Mer, Nice"
                 />
                 <link rel="canonical" href="https://www.jagafight.fr/formations" />
 
@@ -189,10 +186,12 @@ export default function Formations() {
                         Contactez-nous pour échanger sur votre projet professionnel et construire ensemble votre parcours de formation.
                     </p>
                     <a
-                        href="/inscription"
+                        href={whatsappUrl('Bonjour Jaga Fight, je souhaite des informations sur vos formations de coach (CQP, BPJEPS…).')}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="inline-flex items-center px-8 py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-wide rounded hover:bg-[#d60066] transition-colors"
                     >
-                        Candidater maintenant
+                        Nous écrire sur WhatsApp
                     </a>
                 </div>
             </section>

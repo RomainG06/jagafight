@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 import Breadcrumb from '../components/common/Breadcrumb'
+import { whatsappUrl } from '../data/contact'
 import CoachHero from '../components/sections/coaching/CoachHero'
 import CoachingCards from '../components/sections/coaching/CoachingCards'
 
@@ -16,9 +17,8 @@ export default function Coaching() {
                 <title>Coaching Muay Thai à Saint-Laurent-du-Var (06) | Jaga Fight</title>
                 <meta
                     name="description"
-                    content="Coaching de Muay Thai (Boxe Thaï) à Saint-Laurent-du-Var, près de Cagnes-sur-Mer et Nice, avec Hicham. Cours particuliers, coaching personnalisé, stages et préparation compétition."
+                    content="Coaching Muay Thaï avec Hicham à Saint-Laurent-du-Var, près de Nice : cours particuliers, coaching personnalisé, stages et préparation compétition."
                 />
-                <meta name="keywords" content="coaching Muay Thaï Saint-Laurent-du-Var, coaching Muay Thaï Cagnes-sur-Mer, coach boxe thaï Nice, cours boxe thaï 06, coaching Antibes" />
                 <link rel="canonical" href="https://www.jagafight.fr/coaching" />
 
                 {/* Open Graph */}
@@ -208,10 +208,12 @@ export default function Coaching() {
                             Vous souhaitez un accompagnement personnalisé ? Parlons de votre projet.
                         </p>
                         <a
-                            href="mailto:agentpro.athlete@gmail.com"
+                            href={whatsappUrl('Bonjour Jaga Fight, je souhaite échanger sur un coaching personnalisé.')}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="inline-flex items-center px-8 py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm rounded hover:bg-[#d60066] transition-colors"
                         >
-                            Nous contacter
+                            Nous écrire sur WhatsApp
                         </a>
                     </div>
                 </div>

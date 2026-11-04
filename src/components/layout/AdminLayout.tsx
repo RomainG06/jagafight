@@ -7,6 +7,7 @@ const NAV = [
     { to: '/admin/membres', label: 'Adhérents' },
     { to: '/admin/paiements', label: 'Paiements' },
     { to: '/admin/saisons', label: 'Saisons' },
+    { to: '/admin/boutique', label: 'Boutique' },
 ]
 
 function AdminLayoutInner({ children }: { children: ReactNode }) {

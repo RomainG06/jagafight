@@ -2,21 +2,22 @@ import { Helmet } from 'react-helmet-async'
 import Breadcrumb from '../components/common/Breadcrumb'
 import HistorySection from '../components/sections/home/HistorySection'
 import ValuesSection from '../components/sections/home/ValuesSection'
+import ActivitiesSection from '../components/sections/home/ActivitiesSection'
 
 export default function NotreAdn() {
     return (
         <>
             <Breadcrumb
                 items={[
-                    { name: 'Notre ADN', url: 'https://www.jagafight.fr/notre-adn' }
+                    { name: 'Le club', url: 'https://www.jagafight.fr/notre-adn' }
                 ]}
             />
 
             <Helmet>
-                <title>Notre ADN | Club de Muay Thai à Saint-Laurent-du-Var - Jaga Fight</title>
+                <title>Le club Jaga Fight : histoire et valeurs | Saint-Laurent-du-Var</title>
                 <meta
                     name="description"
-                    content="Découvrez l'histoire de Jaga Fight, club de Muay Thai (Boxe Thai) à Saint-Laurent-du-Var dans les Alpes-Maritimes. Nos valeurs, notre équipe et notre vision de la transmission."
+                    content="L'histoire, les valeurs et l'équipe de Jaga Fight, club de Muay Thaï à Saint-Laurent-du-Var, près de Nice et Cagnes-sur-Mer."
                 />
                 <link rel="canonical" href="https://www.jagafight.fr/notre-adn" />
             </Helmet>
@@ -41,6 +42,9 @@ export default function NotreAdn() {
 
             {/* Valeurs */}
             <ValuesSection />
+
+            {/* Projet associatif */}
+            <ActivitiesSection />
 
             <section className="py-16 bg-[#0a0a0a] border-y border-white/10">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

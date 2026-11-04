@@ -2,15 +2,17 @@ import { memo, useState } from 'react'
 import logo from '../../assets/white_logo_jaga.png';
 import { useAuth } from '../../contexts/auth-context'
 import { usePageContext } from 'vike-react/usePageContext';
+import { MessageCircle, Phone } from 'lucide-react'
+import { PHONE_HREF, whatsappUrl } from '../../data/contact'
 
+// Ordre : ce qui fait venir au club d'abord, puis le contenu « club ».
 const navLinks = [
-    { to: '/', label: "L'École" },
+    { to: '/planning', label: 'Planning' },
+    { to: '/tarifs', label: 'Tarifs' },
     { to: '/coaching', label: 'Coaching' },
     { to: '/formations', label: 'Formations' },
-    { to: '/tarifs', label: 'Tarifs' },
-    { to: '/notre-adn', label: 'Notre ADN' },
-    { to: '/muay-thai', label: 'Le Muay Thaï' },
-
+    { to: '/notre-adn', label: 'Le club' },
+    { to: '/boutique', label: 'Boutique' },
 ]
 
 const Navbar = memo(function Navbar() {
@@ -30,7 +32,7 @@ const Navbar = memo(function Navbar() {
                     </a>
 
                     {/* Desktop nav */}
-                    <nav className="hidden md:flex items-center gap-8">
+                    <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
                         {navLinks.map(link => (
                             <a
                                 key={link.to}
@@ -53,7 +55,7 @@ const Navbar = memo(function Navbar() {
                     {/* CTA + burger */}
                     <div className="flex items-center gap-4">
                         {/* Auth CTA — desktop */}
-                        <div className="hidden md:flex items-center gap-3">
+                        <div className="hidden lg:flex items-center gap-3">
                             {session && !isAdmin ? (
                                 <a
                                     href="/espace-membre"
@@ -68,8 +70,14 @@ const Navbar = memo(function Navbar() {
                                         Connexion
                                     </a>
                                     <a
+                                        href="/essai-gratuit"
+                                        className="whitespace-nowrap text-sm font-medium text-[#F5F5F0] border border-white/30 px-3 py-1.5 hover:border-[#eb0071] hover:text-[#eb0071] transition-colors rounded"
+                                    >
+                                        Essai gratuit
+                                    </a>
+                                    <a
                                         href="/inscription"
-                                        className="text-sm font-medium text-[#F5F5F0] bg-[#eb0071] px-4 py-1.5 hover:opacity-90 transition-opacity rounded"
+                                        className="whitespace-nowrap text-sm font-medium text-[#F5F5F0] bg-[#eb0071] px-4 py-1.5 hover:opacity-90 transition-opacity rounded"
                                     >
                                         S'inscrire
                                     </a>
@@ -87,7 +95,7 @@ const Navbar = memo(function Navbar() {
                         {/* Burger mobile */}
                         <button
                             type="button"
-                            className="md:hidden p-2 text-[#F5F5F0] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071]"
+                            className="lg:hidden p-2 text-[#F5F5F0] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#eb0071]"
                             onClick={() => setMenuOpen(!menuOpen)}
                             aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
                             aria-expanded={menuOpen}
@@ -102,7 +110,7 @@ const Navbar = memo(function Navbar() {
 
                 {/* Mobile menu */}
                 {menuOpen && (
-                    <div id="mobile-navigation" className="md:hidden py-4 border-t border-white/10">
+                    <div id="mobile-navigation" className="lg:hidden py-4 border-t border-white/10">
                         <nav className="flex flex-col gap-4">
                             {navLinks.map(link => (
                                 <a
@@ -131,11 +139,22 @@ const Navbar = memo(function Navbar() {
                                     <a href="/connexion" className="text-base font-medium text-[#F5F5F0]/70" onClick={() => setMenuOpen(false)}>
                                         Connexion
                                     </a>
-                                    <a href="/inscription" className="text-base font-medium text-[#eb0071]" onClick={() => setMenuOpen(false)}>
-                                        S'inscrire
+                                    <a href="/essai-gratuit" className="text-base font-medium text-[#F5F5F0]/70" onClick={() => setMenuOpen(false)}>
+                                        Cours d'essai gratuit
+                                    </a>
+                                    <a href="/inscription" className="rounded bg-[#eb0071] px-4 py-3 text-center text-base font-semibold text-white" onClick={() => setMenuOpen(false)}>
+                                        S'inscrire au club
                                     </a>
                                 </>
                             ) : null}
+                            <div className="flex gap-3 border-t border-white/10 pt-4">
+                                <a href={PHONE_HREF} className="flex flex-1 items-center justify-center gap-2 border border-white/20 py-2.5 text-sm text-[#F5F5F0]">
+                                    <Phone aria-hidden="true" className="h-4 w-4" /> Appeler
+                                </a>
+                                <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className="flex flex-1 items-center justify-center gap-2 border border-white/20 py-2.5 text-sm text-[#F5F5F0]">
+                                    <MessageCircle aria-hidden="true" className="h-4 w-4" /> WhatsApp
+                                </a>
+                            </div>
                         </nav>
                     </div>
                 )}

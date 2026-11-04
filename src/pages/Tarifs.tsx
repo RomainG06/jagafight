@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 import Breadcrumb from '../components/common/Breadcrumb'
+import InscriptionSteps from '../components/common/InscriptionSteps'
 
 type Subscription = { name: string; detail: string; sixMonths: string; oneYear: string }
 
@@ -73,12 +74,12 @@ export default function Tarifs() {
             <header className="relative overflow-hidden border-b border-white/10 bg-[#0a0a0a]">
                 <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(235,0,113,0.24),transparent_46%)]" />
                 <div className="relative mx-auto max-w-6xl px-4 py-20 text-center sm:px-6 sm:py-28 lg:px-8">
-                    <h1 className="font-title text-6xl leading-[0.9] text-[#F5F5F0] sm:text-7xl lg:text-8xl">TARIFS</h1>
+                    <h1 className="font-title text-6xl leading-[0.9] text-[#F5F5F0] sm:text-7xl lg:text-8xl">TARIFS<span className="mt-4 block text-2xl tracking-wide text-[#eb0071] sm:text-3xl">Muay Thaï · Self défense · Fitness</span></h1>
                     <p className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-[#F5F5F0]/70 sm:text-lg">Des formules pensées pour pratiquer, progresser et trouver votre rythme au sein de Jaga Fight.</p>
                 </div>
             </header>
 
-            <main className="bg-[#0a0a0a] py-14 sm:py-20">
+            <div className="bg-[#0a0a0a] py-14 sm:py-20">
                 <div className="mx-auto max-w-6xl space-y-8 px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-col gap-3 border-l-2 border-[#eb0071] pl-4 sm:flex-row sm:items-end sm:justify-between">
                         <div>
@@ -101,16 +102,18 @@ export default function Tarifs() {
 
                     <aside className="border-l-2 border-[#eb0071] bg-white/[0.03] px-5 py-4 text-sm leading-relaxed text-[#F5F5F0]/60">Tarifs communiqués à titre indicatif pour la saison 2026/2027. Contactez Jaga Fight pour confirmer la disponibilité des cours et les modalités d’inscription.</aside>
                 </div>
-            </main>
+            </div>
+
+            <InscriptionSteps withCta={false} />
 
             <section className="border-t border-white/10 bg-[#0d0d0d] py-16 sm:py-20">
                 <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
                     <p className="text-xs  uppercase tracking-[0.2em] text-[#eb0071]">Rejoindre Jaga Fight</p>
                     <h2 className="mt-4 font-title text-4xl text-[#F5F5F0] sm:text-5xl">PRÊT À COMMENCER ?</h2>
-                    <p className="mt-5 leading-relaxed text-[#F5F5F0]/65">Créez votre espace membre pour vous inscrire, ou contactez-nous pour choisir la formule adaptée.</p>
+                    <p className="mt-5 leading-relaxed text-[#F5F5F0]/65">Inscrivez-vous en ligne : vous choisissez votre formule et complétez votre dossier depuis votre espace membre. Pas encore décidé ? Le premier cours est offert.</p>
                     <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-                        <a href="/inscription" className="inline-flex justify-center rounded bg-[#eb0071] px-7 py-3.5  text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071]">S’inscrire</a>
-                        <a href="mailto:agentpro.athlete@gmail.com" className="inline-flex justify-center rounded border border-white/30 px-7 py-3.5  text-[#F5F5F0] transition-colors hover:border-[#eb0071] hover:text-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071]">Nous contacter</a>
+                        <a href="/inscription" className="inline-flex justify-center rounded bg-[#eb0071] px-7 py-3.5  text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071]">S’inscrire au club</a>
+                        <a href="/essai-gratuit" className="inline-flex justify-center rounded border border-white/30 px-7 py-3.5  text-[#F5F5F0] transition-colors hover:border-[#eb0071] hover:text-[#eb0071] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#eb0071]">Réserver mon essai gratuit</a>
                     </div>
                 </div>
             </section>

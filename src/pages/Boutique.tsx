@@ -146,21 +146,33 @@ function EmptyState({ text }: { text: string }) {
 function ProductCard({ produit, dispo, onReserve }: { produit: Produit; dispo: Map<string, number>; onReserve: (variante: Variante) => void }) {
     const firstAvailable = produit.boutique_variantes.find(v => (dispo.get(v.id) ?? 0) > 0)
     const [selectedId, setSelectedId] = useState(firstAvailable?.id)
-    const selected = produit.boutique_variantes.find(v => v.id === selectedId && (dispo.get(v.id) ?? 0) > 0)
+    // Si la taille choisie s'est épuisée entre-temps, on bascule sur la première taille encore disponible.
+    const selected = produit.boutique_variantes.find(v => v.id === selectedId && (dispo.get(v.id) ?? 0) > 0) ?? firstAvailable
     const soldOut = !firstAvailable
     const src = imageUrl(produit.image_path)
     const groupName = useId()
+    const [zoomed, setZoomed] = useState(false)
 
     return (
         <article className="flex flex-col border border-white/10 bg-[#0d0d0d]">
-            <div className="relative aspect-square overflow-hidden bg-white/5">
+            <div className="relative aspect-[4/5] overflow-hidden bg-white/5">
                 {src ? (
-                    <img src={src} alt={produit.nom} loading="lazy" className="h-full w-full object-cover" />
+                    <button
+                        type="button"
+                        onClick={() => setZoomed(true)}
+                        aria-label={`Agrandir la photo : ${produit.nom}`}
+                        className="group block h-full w-full cursor-zoom-in focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#eb0071]"
+                    >
+                        {/* Fond flouté issu de la même photo : l'image entière reste visible, quel que soit son format. */}
+                        <img src={src} alt="" aria-hidden="true" loading="lazy" className="absolute inset-0 h-full w-full scale-110 object-cover opacity-40 blur-2xl" />
+                        <img src={src} alt={produit.nom} loading="lazy" className="relative h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.02]" />
+                    </button>
                 ) : (
                     <div className="flex h-full items-center justify-center font-title text-4xl text-white/10">JAGA FIGHT</div>
                 )}
                 {soldOut && <span className="absolute left-3 top-3 bg-[#0a0a0a]/90 px-3 py-1 text-xs uppercase tracking-widest text-[#F5F5F0]">Épuisé</span>}
             </div>
+            {zoomed && src && <ImageLightbox src={src} alt={produit.nom} onClose={() => setZoomed(false)} />}
             <div className="flex flex-1 flex-col p-5">
                 <div className="flex items-start justify-between gap-3">
                     <h3 className="font-title text-2xl leading-tight text-[#F5F5F0]">{produit.nom}</h3>
@@ -202,6 +214,31 @@ function ProductCard({ produit, dispo, onReserve }: { produit: Produit; dispo: M
                 </div>
             </div>
         </article>
+    )
+}
+
+function ImageLightbox({ src, alt, onClose }: { src: string; alt: string; onClose: () => void }) {
+    const closeRef = useRef<HTMLButtonElement>(null)
+
+    useEffect(() => {
+        closeRef.current?.focus()
+        const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') onClose() }
+        document.addEventListener('keydown', onKey)
+        const overflow = document.body.style.overflow
+        document.body.style.overflow = 'hidden'
+        return () => {
+            document.removeEventListener('keydown', onKey)
+            document.body.style.overflow = overflow
+        }
+    }, [onClose])
+
+    return (
+        <div role="dialog" aria-modal="true" aria-label={alt} onClick={onClose} className="fixed inset-0 z-[60] flex cursor-zoom-out items-center justify-center bg-black/90 p-4">
+            <button ref={closeRef} type="button" onClick={onClose} aria-label="Fermer" className="absolute right-4 top-4 p-2 text-[#F5F5F0]/70 hover:text-[#F5F5F0]">
+                <X aria-hidden="true" className="h-6 w-6" />
+            </button>
+            <img src={src} alt={alt} className="max-h-[90vh] max-w-full object-contain" />
+        </div>
     )
 }
 

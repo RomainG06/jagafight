@@ -79,6 +79,10 @@ const pages = [
         path: "/cours/self-defense",
         lastmod: "2026-11-04",
     },
+    {
+        path: "/boutique",
+        lastmod: "2026-11-04",
+    },
 ];
 
 /**

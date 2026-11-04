@@ -43,6 +43,7 @@ export default function Footer() {
                                 { to: '/formations', label: 'Formations' },
                                 { to: '/notre-adn', label: 'Le club' },
                                 { to: '/muay-thai', label: 'Le Muay Thaï' },
+                                { to: '/boutique', label: 'Boutique' },
                                 { to: '/mentions-legales', label: 'Mentions légales' },
                                 { to: '/politique-confidentialite', label: 'Politique de confidentialité' },
                             ].map(link => (

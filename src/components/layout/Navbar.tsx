@@ -12,7 +12,7 @@ const navLinks = [
     { to: '/coaching', label: 'Coaching' },
     { to: '/formations', label: 'Formations' },
     { to: '/notre-adn', label: 'Le club' },
-    { to: '/muay-thai', label: 'Le Muay Thaï' },
+    { to: '/boutique', label: 'Boutique' },
 ]
 
 const Navbar = memo(function Navbar() {

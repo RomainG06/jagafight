@@ -124,6 +124,17 @@ export default function Footer() {
                 <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-[#F5F5F0]/30">
                     <p>© {year} Jaga Fight — Tous droits réservés</p>
                     <p>
+                        Site réalisé par :{' '}
+                        <a
+                            href="https://advance-ia.fr"
+                            target="_blank"
+                            rel="noopener"
+                            className="text-[#F5F5F0]/50 hover:text-[#eb0071] transition-colors"
+                        >
+                            advance-ia.fr
+                        </a>
+                    </p>
+                    <p>
                         <a href="/mentions-legales" className="hover:text-[#eb0071]/60 transition-colors">
                             Mentions légales
                         </a>

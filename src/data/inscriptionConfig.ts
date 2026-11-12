@@ -4,6 +4,7 @@ export const DISCIPLINES = [
     { id: 'enfants', label: 'Enfants (6–12 ans)' },
     { id: 'ados', label: 'Ados (13–17 ans)' },
     { id: 'footing', label: 'Footing' },
+    { id: 'stretching', label: 'Stretching' },
 ] as const
 
 export type DisciplineId = typeof DISCIPLINES[number]['id']

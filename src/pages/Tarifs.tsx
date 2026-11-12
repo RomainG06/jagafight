@@ -21,7 +21,7 @@ const categories: Array<{ title: string; items: Subscription[] }> = [
         items: [
             { name: 'Cross training', detail: '3 cours / semaine', sixMonths: '250 €', oneYear: '380 €' },
             { name: 'Running', detail: '1 cours / semaine', sixMonths: '60 €', oneYear: '100 €' },
-            { name: 'Stretching', detail: '1 cours / semaine', sixMonths: '60 €', oneYear: '100 €' },
+            { name: 'Stretching', detail: '1 cours / semaine', sixMonths: '100 €', oneYear: '170 €' },
         ],
     },
 ]

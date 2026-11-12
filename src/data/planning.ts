@@ -23,6 +23,7 @@ export const courses: Course[] = [
     { id: 'ados', name: 'Muay Thaï Ados', audience: 'Adolescents', category: 'jeunes', days: ['Mercredi', 'Samedi'], start: '15:15', trial: true },
     { id: 'feminin', name: 'Muay Thaï féminin', audience: 'Femmes', category: 'muay', days: ['Vendredi'], start: '18:30', end: '19:30', trial: true },
     { id: 'footing', name: 'Footing', audience: 'Tous niveaux', category: 'fitness', days: ['Lundi', 'Mercredi', 'Vendredi'], start: '19:00', trial: false },
+    { id: 'stretching', name: 'Stretching', audience: 'Tous niveaux', category: 'fitness', days: ['Samedi'], start: '10:00', end: '11:00', trial: false },
     { id: 'self-defense', name: 'Self défense', audience: 'Adultes', category: 'self', days: ['Jeudi'], start: '19:00', end: '20:30', trial: true },
     { id: 'muay-thai', name: 'Muay Thaï', audience: 'Adultes', category: 'muay', days: ['Lundi', 'Mercredi', 'Vendredi'], start: '19:30', trial: true },
 ]

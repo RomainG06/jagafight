@@ -37,7 +37,7 @@ const planningSchema = {
             '@id': `${PAGE_URL}#webpage`,
             url: PAGE_URL,
             name: 'Planning des cours de Muay Thaï | Jaga Fight Saint-Laurent-du-Var',
-            description: 'Horaires des cours Jaga Fight : Muay Thaï adultes, féminin, enfants, ados, self défense et footing à Saint-Laurent-du-Var.',
+            description: 'Horaires des cours Jaga Fight : Muay Thaï adultes, féminin, enfants, ados, self défense, footing et stretching à Saint-Laurent-du-Var.',
             inLanguage: 'fr-FR',
             about: { '@id': CLUB_ID },
             mainEntity: { '@id': `${PAGE_URL}#cours` },
@@ -74,7 +74,7 @@ const planningSchema = {
 }
 
 const TITLE = 'Planning des cours de Muay Thaï à Saint-Laurent-du-Var | Jaga Fight'
-const DESCRIPTION = 'Horaires Jaga Fight : Muay Thaï adultes lun, mer, ven 19h30, féminin, enfants, ados, self défense et footing à Saint-Laurent-du-Var, près de Cagnes-sur-Mer.'
+const DESCRIPTION = 'Horaires Jaga Fight à Saint-Laurent-du-Var : Muay Thaï adultes, féminin, enfants, ados, self défense, footing et stretching (samedi 10h).'
 
 export default function Planning() {
     return (
@@ -101,7 +101,7 @@ export default function Planning() {
                     <p className="text-xs uppercase tracking-[0.2em] text-[#eb0071]">Saison 2026/2027</p>
                     <h1 className="mt-4 font-title text-6xl leading-[0.9] text-[#F5F5F0] sm:text-7xl lg:text-8xl">PLANNING</h1>
                     <p className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-[#F5F5F0]/70 sm:text-lg">
-                        Les horaires des cours de Muay Thaï, self défense et footing de Jaga Fight à Saint-Laurent-du-Var.
+                        Les horaires des cours de Muay Thaï, self défense, footing et stretching de Jaga Fight à Saint-Laurent-du-Var.
                         Adultes, femmes, enfants et ados : trouvez votre créneau.
                     </p>
                 </div>

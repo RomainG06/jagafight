@@ -7,7 +7,7 @@ const offers: Array<{ title: string; audience: string; ids: string[]; price: str
     { title: 'Muay Thaï féminin', audience: 'Un cours 100 % femmes, en confiance', ids: ['feminin'], price: 'dès 170 € / 6 mois', trialId: 'feminin' },
     { title: 'Enfants & ados', audience: 'Discipline, respect et confiance en soi', ids: ['kids', 'ados'], price: 'dès 180 € / 6 mois', trialId: 'kids' },
     { title: 'Self défense', audience: 'Se protéger et réagir, pour tous les adultes', ids: ['self-defense'], price: 'dès 180 € / 6 mois', trialId: 'self-defense' },
-    { title: 'Footing', audience: 'Cardio et endurance en groupe', ids: ['footing'], price: 'dès 60 € / 6 mois' },
+    { title: 'Footing & stretching', audience: 'Cardio, endurance et souplesse, tous niveaux', ids: ['footing', 'stretching'], price: 'dès 60 € / 6 mois' },
 ]
 
 const DAY_SHORT: Record<string, string> = { Lundi: 'Lun', Mardi: 'Mar', Mercredi: 'Mer', Jeudi: 'Jeu', Vendredi: 'Ven', Samedi: 'Sam' }
@@ -43,7 +43,7 @@ export default function CoursesSection() {
                             <ul className="mt-5 space-y-1.5 border-l-2 border-[#eb0071] pl-3 text-sm text-[#F5F5F0]/80">
                                 {offer.ids.map(byId).map(course => (
                                     <li key={course.id}>
-                                        {offer.ids.length > 1 ? <span className="text-[#F5F5F0]/50">{course.audience} · </span> : null}
+                                        {offer.ids.length > 1 ? <span className="text-[#F5F5F0]/50">{course.name} · </span> : null}
                                         {course.days.map(day => DAY_SHORT[day]).join(' · ')}
                                         <span className="font-title text-lg text-[#F5F5F0]"> — {formatSlot(course)}</span>
                                     </li>

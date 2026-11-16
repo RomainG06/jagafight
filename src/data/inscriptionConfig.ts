@@ -3,6 +3,7 @@ export const DISCIPLINES = [
     { id: 'muay-thai-feminin', label: 'Muay Thaï Féminin' },
     { id: 'enfants', label: 'Enfants (6–12 ans)' },
     { id: 'ados', label: 'Ados (13–17 ans)' },
+    { id: 'self-defense', label: 'Self-défense' },
     { id: 'footing', label: 'Footing' },
     { id: 'stretching', label: 'Stretching' },
 ] as const

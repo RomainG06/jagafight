@@ -14,7 +14,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const [isAdmin, setIsAdmin] = useState(false)
 
     useEffect(() => {
+        // getSession() et onAuthStateChange() peuvent lancer des vérifications qui se chevauchent
+        // (déconnexion/reconnexion rapide, rafraîchissement du jeton) : seule la plus récente fait foi.
+        let latestRequest = 0
+
         async function updateAuth(newSession: Session | null) {
+            const request = ++latestRequest
             setLoading(true)
             setSession(newSession)
 
@@ -30,6 +35,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 .eq('user_id', newSession.user.id)
                 .maybeSingle()
 
+            if (request !== latestRequest) return
             setIsAdmin(data?.role === 'admin')
             setLoading(false)
         }

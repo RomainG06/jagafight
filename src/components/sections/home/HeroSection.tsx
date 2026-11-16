@@ -3,7 +3,7 @@ import { useAuth } from '../../../contexts/auth-context'
 import GoogleReviewsBadge from '../../common/GoogleReviewsBadge'
 
 export default function HeroSection() {
-    const { session } = useAuth()
+    const { session, isAdmin } = useAuth()
     return (
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
             {/* Background */}
@@ -33,10 +33,10 @@ export default function HeroSection() {
                     )}
                     {session && (
                         <a
-                            href="/espace-membre"
+                            href={isAdmin ? '/admin' : '/espace-membre'}
                             className="px-8 py-4 bg-[#eb0071] text-[#F5F5F0] font-semibold tracking-widest uppercase text-sm rounded hover:bg-[#eb0071] transition-colors"
                         >
-                            Mon espace
+                            {isAdmin ? 'Administration' : 'Mon espace'}
                         </a>
                     )}
                     <a

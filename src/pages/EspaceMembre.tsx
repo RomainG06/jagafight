@@ -115,7 +115,7 @@ function NextStepCard({ completion, pct, onContinue }: {
 }
 
 function EspaceMembreInner() {
-    const { session } = useAuth()
+    const { session, isAdmin } = useAuth()
     const [activeSection, setActiveSection] = useState<SectionId>('profil')
     const [membre, setMembre] = useState<Membre | null>(null)
     const [adhesion, setAdhesion] = useState<Adhesion | null>(null)
@@ -227,6 +227,36 @@ function EspaceMembreInner() {
     async function handleSignOut() {
         await supabase.auth.signOut()
         await navigate('/')
+    }
+
+    // Un compte administrateur n'a pas de dossier adhérent : on l'oriente vers l'administration
+    // au lieu d'afficher un dossier vide (et d'éviter qu'il crée une fiche membre par erreur).
+    if (isAdmin && !membre) {
+        return (
+            <>
+                <Helmet>
+                    <title>Mon espace — Jaga Fight</title>
+                    <meta name="robots" content="noindex" />
+                </Helmet>
+                <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4 py-20">
+                    <div className="w-full max-w-md border border-white/10 bg-[#0d0d0d] p-7 text-center">
+                        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#eb0071]">Compte administrateur</p>
+                        <h1 className="mt-3 font-title text-3xl text-[#F5F5F0]">PAS DE DOSSIER ADHÉRENT</h1>
+                        <p className="mt-4 text-sm leading-relaxed text-[#F5F5F0]/60">
+                            Vous êtes connecté avec un compte administrateur. L’espace membre sert aux adhérents pour compléter leur dossier d’inscription : utilisez l’administration pour gérer les membres.
+                        </p>
+                        <div className="mt-7 flex flex-col gap-3">
+                            <a href="/admin" className="inline-flex justify-center rounded bg-[#eb0071] px-6 py-3 text-sm font-semibold uppercase tracking-widest text-white hover:opacity-90">
+                                Aller à l’administration
+                            </a>
+                            <button type="button" onClick={handleSignOut} className="py-2 text-sm text-[#F5F5F0]/50 hover:text-[#F5F5F0] cursor-pointer">
+                                Se déconnecter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </>
+        )
     }
 
     return (

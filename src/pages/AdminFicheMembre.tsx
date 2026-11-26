@@ -7,6 +7,8 @@ import AdminLayout from '../components/layout/AdminLayout'
 import MemberProfileForm from '../components/admin/MemberProfileForm'
 import type { MemberProfileValues } from '../components/admin/MemberProfileForm'
 import { isUnder18 } from '../lib/memberProfile'
+import { FEDERATIONS, normalizeFederations, type FederationId } from '../data/federations'
+import { BadgeCheck } from 'lucide-react'
 
 const MODE_LABELS: Record<string, string> = {
     especes: 'Espèces', cheque: 'Chèque', cb: 'CB', virement: 'Virement',
@@ -59,6 +61,7 @@ export default function AdminFicheMembre() {
     const [editingPaiementId, setEditingPaiementId] = useState<string | null>(null)
     const [deletingPaiementId, setDeletingPaiementId] = useState<string | null>(null)
     const [deletingMembre, setDeletingMembre] = useState(false)
+    const [savingValidation, setSavingValidation] = useState(false)
     const [showMemberForm, setShowMemberForm] = useState(false)
     const [savingMember, setSavingMember] = useState(false)
     const [documentType, setDocumentType] = useState<Document['type']>('certificat_medical')
@@ -313,6 +316,50 @@ export default function AdminFicheMembre() {
         await navigate('/admin/membres')
     }
 
+    async function toggleValidation() {
+        if (!id || !membre) return
+        const validating = !membre.valide_le
+        if (!validating && !window.confirm(`Retirer la validation de ${membre.prenom} ${membre.nom} ?`)) return
+
+        setSavingValidation(true)
+        setError('')
+        const { data, error: updateError } = await supabase
+            .from('membres')
+            .update({ valide_le: validating ? new Date().toISOString() : null })
+            .eq('id', id)
+            .select('valide_le, valide_par')
+            .single()
+        setSavingValidation(false)
+
+        if (updateError || !data) {
+            setError(updateError?.message ?? 'La validation n’a pas pu être enregistrée.')
+            return
+        }
+        setMembre(current => (current ? { ...current, valide_le: data.valide_le, valide_par: data.valide_par } : current))
+        setFeedback(validating ? 'Adhérent validé.' : 'Validation retirée.')
+        setTimeout(() => setFeedback(''), 3000)
+    }
+
+    async function saveFederations(federations: FederationId[]) {
+        if (!id) return false
+        setError('')
+        const { data, error: updateError } = await supabase
+            .from('membres')
+            .update({ federations })
+            .eq('id', id)
+            .select('federations')
+            .single()
+
+        if (updateError || !data) {
+            setError(updateError?.message ?? 'Les fédérations n’ont pas pu être enregistrées.')
+            return false
+        }
+        setMembre(current => (current ? { ...current, federations: data.federations as string[] } : current))
+        setFeedback('Fédérations enregistrées.')
+        setTimeout(() => setFeedback(''), 3000)
+        return true
+    }
+
     async function generatePDF() {
         if (!membre) return
         setError('')
@@ -358,8 +405,32 @@ export default function AdminFicheMembre() {
                             {membre?.profil_complet && (
                                 <span className="text-xs text-green-400 border border-green-500/20 bg-green-500/10 px-2 py-0.5">✓ Complet</span>
                             )}
+                            {membre?.valide_le ? (
+                                <span
+                                    className="inline-flex items-center gap-1 text-xs font-semibold text-white bg-[#eb0071] px-2 py-0.5"
+                                    title={`Validé le ${new Date(membre.valide_le).toLocaleDateString('fr-FR')}`}
+                                >
+                                    <BadgeCheck aria-hidden="true" className="h-3.5 w-3.5" /> Validé
+                                </span>
+                            ) : (
+                                <span className="text-xs text-amber-400 border border-amber-500/20 bg-amber-500/10 px-2 py-0.5">À valider</span>
+                            )}
                         </div>
                         <div className="flex flex-wrap gap-2">
+                            <button
+                                type="button"
+                                onClick={toggleValidation}
+                                disabled={savingValidation}
+                                className={membre?.valide_le
+                                    ? 'border border-white/20 px-3 py-2 text-xs uppercase tracking-widest text-[#F5F5F0]/60 transition-colors hover:border-white/40 hover:text-[#F5F5F0] disabled:opacity-50'
+                                    : 'inline-flex items-center gap-1.5 bg-[#eb0071] px-3 py-2 text-xs font-semibold uppercase tracking-widest text-white transition-opacity hover:opacity-90 disabled:opacity-50'}
+                            >
+                                {savingValidation
+                                    ? 'Enregistrement…'
+                                    : membre?.valide_le
+                                        ? 'Retirer la validation'
+                                        : <><BadgeCheck aria-hidden="true" className="h-4 w-4" /> Valider l’adhérent</>}
+                            </button>
                             <button
                                 type="button"
                                 onClick={() => { setShowMemberForm(value => !value); setError('') }}
@@ -445,6 +516,15 @@ export default function AdminFicheMembre() {
                     {adhesion?.signature_horodatee && (
                         <Row label="Signé le" value={new Date(adhesion.signature_horodatee).toLocaleString('fr-FR')} />
                     )}
+                </Section>
+
+                {/* Affiliation fédérale */}
+                <Section title="Affiliation fédérale">
+                    <FederationsEditor
+                        key={membre?.id ?? 'nouveau'}
+                        initial={normalizeFederations(membre?.federations)}
+                        onSave={saveFederations}
+                    />
                 </Section>
 
                 {/* Contact urgence */}
@@ -623,6 +703,66 @@ export default function AdminFicheMembre() {
                 </Section>
             </div>
         </AdminLayout>
+    )
+}
+
+function FederationsEditor({ initial, onSave }: { initial: FederationId[]; onSave: (federations: FederationId[]) => Promise<boolean> }) {
+    const [saved, setSaved] = useState<FederationId[]>(initial)
+    const [selected, setSelected] = useState<FederationId[]>(initial)
+    const [saving, setSaving] = useState(false)
+    const dirty = selected.join(',') !== saved.join(',')
+
+    function toggle(id: FederationId) {
+        setSelected(current => normalizeFederations(current.includes(id) ? current.filter(f => f !== id) : [...current, id]))
+    }
+
+    async function handleSave() {
+        setSaving(true)
+        const ok = await onSave(selected)
+        setSaving(false)
+        if (ok) setSaved(selected)
+    }
+
+    return (
+        <div className="space-y-4">
+            <p className="text-sm text-[#F5F5F0]/60">
+                {saved.length
+                    ? <>Licencié à : <span className="text-[#F5F5F0]">{saved.join(', ')}</span></>
+                    : 'Aucune fédération pour le moment.'}
+            </p>
+            <fieldset>
+                <legend className="sr-only">Fédérations de l’adhérent</legend>
+                <div className="flex flex-wrap gap-2">
+                    {FEDERATIONS.map(federation => {
+                        const checked = selected.includes(federation.id)
+                        return (
+                            <label
+                                key={federation.id}
+                                className={`flex cursor-pointer items-center gap-2 border px-4 py-2 text-sm transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[#eb0071] ${checked ? 'border-[#eb0071] bg-[#eb0071]/10 text-[#F5F5F0]' : 'border-white/15 text-[#F5F5F0]/60 hover:border-white/40'}`}
+                            >
+                                <input type="checkbox" checked={checked} onChange={() => toggle(federation.id)} className="accent-[#eb0071]" />
+                                {federation.id}
+                            </label>
+                        )
+                    })}
+                </div>
+            </fieldset>
+            <div className="flex flex-wrap items-center gap-3">
+                <button
+                    type="button"
+                    onClick={handleSave}
+                    disabled={!dirty || saving}
+                    className="px-5 py-2 bg-[#eb0071] text-[#F5F5F0] text-xs font-semibold tracking-widest uppercase hover:opacity-90 disabled:opacity-30 disabled:cursor-not-allowed rounded cursor-pointer"
+                >
+                    {saving ? 'Enregistrement…' : 'Enregistrer les fédérations'}
+                </button>
+                {dirty && !saving && (
+                    <button type="button" onClick={() => setSelected(saved)} className="text-xs text-[#F5F5F0]/40 hover:text-[#F5F5F0] cursor-pointer">
+                        Annuler
+                    </button>
+                )}
+            </div>
+        </div>
     )
 }
 

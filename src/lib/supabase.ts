@@ -39,6 +39,11 @@ export type Membre = {
   urgence_tel?: string
   sante_infos?: string
   profil_complet?: boolean
+  /** Fédérations de licence (AFMT, UFSC, FFKMDA), gérées par les admins */
+  federations?: string[]
+  /** Date de validation par un admin du club (null = à valider) */
+  valide_le?: string | null
+  valide_par?: string | null
   created_at?: string
 }
 

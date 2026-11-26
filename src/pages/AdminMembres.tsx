@@ -6,6 +6,15 @@ import AdminLayout from '../components/layout/AdminLayout'
 import MemberProfileForm from '../components/admin/MemberProfileForm'
 import type { MemberProfileValues } from '../components/admin/MemberProfileForm'
 import { isUnder18 } from '../lib/memberProfile'
+import { FEDERATIONS, normalizeFederations } from '../data/federations'
+import { BadgeCheck } from 'lucide-react'
+
+type Vue = 'a-valider' | 'valides' | 'tous'
+const VUES: Array<{ id: Vue; label: string }> = [
+    { id: 'a-valider', label: 'À valider' },
+    { id: 'valides', label: 'Validés' },
+    { id: 'tous', label: 'Tous' },
+]
 
 interface MembreRow extends Membre {
     documents?: Document[]
@@ -44,6 +53,8 @@ export default function AdminMembres() {
     const [search, setSearch] = useState('')
     const [filterCertif, setFilterCertif] = useState('')
     const [filterStatut, setFilterStatut] = useState('')
+    const [filterFederation, setFilterFederation] = useState('')
+    const [vue, setVue] = useState<Vue>('a-valider')
     const [currentPage, setCurrentPage] = useState(1)
     const [showCreateForm, setShowCreateForm] = useState(false)
     const [savingCreate, setSavingCreate] = useState(false)
@@ -83,13 +94,15 @@ export default function AdminMembres() {
     useEffect(() => { void fetchData() }, [])
 
     function exportCSV() {
-        const headers = ['Nom', 'Prénom', 'Email', 'Téléphone', 'Disciplines', 'Statut', 'Certif', 'Profil complet']
+        const headers = ['Nom', 'Prénom', 'Email', 'Téléphone', 'Disciplines', 'Statut', 'Fédérations', 'Certif', 'Profil complet', 'Validé le']
         const lines = filtered.map(r => [
             r.nom, r.prenom, r.email, r.telephone ?? '',
             (r.disciplines ?? []).join(' / '),
             r.statut_pratique ?? '',
+            normalizeFederations(r.federations).join(' / ') || 'Aucune',
             certifStatus(r.certif_date_validite),
             r.profil_complet ? 'Oui' : 'Non',
+            r.valide_le ? new Date(r.valide_le).toLocaleDateString('fr-FR') : 'Non validé',
         ].map(v => `"${String(v).replace(/"/g, '""')}"`).join(','))
         const csv = [headers.join(','), ...lines].join('\n')
         const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
@@ -127,7 +140,11 @@ export default function AdminMembres() {
         const matchSearch = !q || [r.nom, r.prenom, r.email].some(v => v?.toLowerCase().includes(q))
         const matchCertif = !filterCertif || certifStatus(r.certif_date_validite) === filterCertif
         const matchStatut = !filterStatut || r.statut_pratique === filterStatut
-        return matchSearch && matchCertif && matchStatut
+        const federations = normalizeFederations(r.federations)
+        const matchFederation = !filterFederation
+            || (filterFederation === 'aucune' ? federations.length === 0 : federations.some(f => f === filterFederation))
+        const matchVue = vue === 'tous' || (vue === 'valides' ? !!r.valide_le : !r.valide_le)
+        return matchSearch && matchCertif && matchStatut && matchFederation && matchVue
     })
 
     const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
@@ -176,6 +193,28 @@ export default function AdminMembres() {
                     </section>
                 )}
 
+                {/* Validés / à valider */}
+                <div className="mb-5 flex gap-1 border-b border-white/10" role="tablist" aria-label="Validation des adhérents">
+                    {VUES.map(v => {
+                        const count = v.id === 'tous' ? rows.length : rows.filter(r => (v.id === 'valides') === !!r.valide_le).length
+                        const active = vue === v.id
+                        return (
+                            <button
+                                key={v.id}
+                                type="button"
+                                role="tab"
+                                aria-selected={active}
+                                onClick={() => { setVue(v.id); setCurrentPage(1) }}
+                                className={`-mb-px flex items-center gap-2 border-b-2 px-4 py-2.5 text-xs uppercase tracking-widest transition-colors cursor-pointer ${active ? 'border-[#eb0071] text-[#F5F5F0]' : 'border-transparent text-[#F5F5F0]/40 hover:text-[#F5F5F0]'}`}
+                            >
+                                {v.id === 'valides' && <BadgeCheck aria-hidden="true" className="h-3.5 w-3.5 text-[#eb0071]" />}
+                                {v.label}
+                                <span className={`px-1.5 py-0.5 text-[10px] font-sans ${v.id === 'a-valider' && count > 0 ? 'bg-amber-500/15 text-amber-300' : 'bg-white/5 text-[#F5F5F0]/50'}`}>{count}</span>
+                            </button>
+                        )
+                    })}
+                </div>
+
                 {/* Filtres */}
                 <div className="flex flex-col gap-3 mb-6 sm:flex-row sm:flex-wrap sm:gap-4">
                     <div className="flex-1 min-w-0">
@@ -209,6 +248,14 @@ export default function AdminMembres() {
                             <option value="competiteur">Compétiteur</option>
                         </select>
                     </div>
+                    <div>
+                        <label htmlFor="membres-federation" className={LABEL_INPUT}>Fédération</label>
+                        <select id="membres-federation" value={filterFederation} onChange={e => { setFilterFederation(e.target.value); setCurrentPage(1) }} className={`w-full sm:w-auto ${SELECT}`}>
+                            <option value="">Toutes</option>
+                            <option value="aucune">Aucune</option>
+                            {FEDERATIONS.map(f => <option key={f.id} value={f.id}>{f.id}</option>)}
+                        </select>
+                    </div>
                 </div>
 
                 {loading ? (
@@ -234,6 +281,7 @@ export default function AdminMembres() {
                                                 <span className="text-sm text-[#F5F5F0] font-medium truncate">
                                                     {row.nom} {row.prenom}
                                                 </span>
+                                                {row.valide_le && <BadgeCheck aria-label="Validé" className="h-4 w-4 flex-shrink-0 text-[#eb0071]" />}
                                                 {row.profil_complet && (
                                                     <span className="text-xs text-green-400 flex-shrink-0">✓</span>
                                                 )}
@@ -246,6 +294,7 @@ export default function AdminMembres() {
                                                 {(row.disciplines ?? []).length > 0 && (
                                                     <span className="text-xs text-[#F5F5F0]/30">{(row.disciplines ?? []).join(', ')}</span>
                                                 )}
+                                                <FederationBadges values={row.federations} />
                                             </div>
                                         </div>
                                         <div className="flex flex-col items-end gap-1.5 flex-shrink-0">
@@ -268,6 +317,7 @@ export default function AdminMembres() {
                                         <th className="text-left py-3 px-3">Email</th>
                                         <th className="text-left py-3 px-3">Disciplines</th>
                                         <th className="text-left py-3 px-3">Statut</th>
+                                        <th className="text-left py-3 px-3">Fédérations</th>
                                         <th className="text-left py-3 px-3">Certificat</th>
                                         <th className="text-left py-3 px-3">Dossier</th>
                                         <th className="text-left py-3 px-3"></th>
@@ -276,7 +326,7 @@ export default function AdminMembres() {
                                 <tbody>
                                     {filtered.length === 0 ? (
                                         <tr>
-                                            <td colSpan={7} className="text-center text-[#F5F5F0]/30 py-16 text-sm">
+                                            <td colSpan={8} className="text-center text-[#F5F5F0]/30 py-16 text-sm">
                                                 Aucun adhérent trouvé.
                                             </td>
                                         </tr>
@@ -285,7 +335,10 @@ export default function AdminMembres() {
                                         return (
                                             <tr key={row.id} className="border-b border-white/5 hover:bg-white/2 transition-colors">
                                                 <td className="py-3 px-3">
-                                                    <span className="text-[#F5F5F0]">{row.nom} {row.prenom}</span>
+                                                    <span className="inline-flex items-center gap-1.5 text-[#F5F5F0]">
+                                                        {row.nom} {row.prenom}
+                                                        {row.valide_le && <BadgeCheck aria-label="Validé" className="h-4 w-4 text-[#eb0071]" />}
+                                                    </span>
                                                 </td>
                                                 <td className="py-3 px-3 text-[#F5F5F0]/60">
                                                     <a href={`mailto:${row.email}`} className="hover:text-[#eb0071] transition-colors">
@@ -299,6 +352,9 @@ export default function AdminMembres() {
                                                     {row.statut_pratique
                                                         ? <span className="text-xs capitalize text-[#F5F5F0]/60">{row.statut_pratique}</span>
                                                         : <span className="text-[#F5F5F0]/20">—</span>}
+                                                </td>
+                                                <td className="py-3 px-3">
+                                                    <FederationBadges values={row.federations} emptyLabel="—" />
                                                 </td>
                                                 <td className="py-3 px-3">
                                                     <span className={`text-xs border px-2 py-0.5 ${CERTIF_BADGE[cs]}`}>
@@ -357,5 +413,21 @@ export default function AdminMembres() {
                 )}
             </div>
         </AdminLayout>
+    )
+}
+
+function FederationBadges({ values, emptyLabel }: { values?: string[]; emptyLabel?: string }) {
+    const federations = normalizeFederations(values)
+    if (!federations.length) {
+        return emptyLabel ? <span className="text-[#F5F5F0]/20">{emptyLabel}</span> : null
+    }
+    return (
+        <span className="inline-flex flex-wrap gap-1">
+            {federations.map(f => (
+                <span key={f} className="border border-[#eb0071]/30 bg-[#eb0071]/10 px-1.5 py-0.5 text-[10px] font-semibold tracking-wider text-[#F5F5F0]/80">
+                    {f}
+                </span>
+            ))}
+        </span>
     )
 }

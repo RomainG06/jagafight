@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react'
-import { Lock } from 'lucide-react'
+import { BadgeCheck, Lock } from 'lucide-react'
 import { navigate } from 'vike/client/router'
 import { Helmet } from 'react-helmet-async'
 import { supabase } from '../lib/supabase'
@@ -68,13 +68,28 @@ const SECTION_HINTS: Record<SectionId, string> = {
     legal: 'Lisez le règlement intérieur et signez en ligne pour finaliser votre dossier.',
 }
 
-function NextStepCard({ completion, pct, onContinue }: {
+function NextStepCard({ completion, pct, onContinue, valideLe }: {
     completion: { id: SectionId; complete: boolean }[]
     pct: number
     onContinue: (id: SectionId) => void
+    valideLe?: string | null
 }) {
     const next = completion.find(section => !section.complete)
     const doneCount = completion.filter(section => section.complete).length
+
+    if (!next && valideLe) {
+        return (
+            <div className="mx-6 mt-4 flex items-start gap-3 border border-[#eb0071]/40 bg-[#eb0071]/10 px-5 py-4">
+                <BadgeCheck aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-[#eb0071]" />
+                <div>
+                    <p className="text-sm font-semibold text-[#F5F5F0]">Inscription validée par le club</p>
+                    <p className="mt-1 text-sm text-[#F5F5F0]/70">
+                        Votre dossier a été validé le {new Date(valideLe).toLocaleDateString('fr-FR')}. Bienvenue chez Jaga Fight, bon entraînement !
+                    </p>
+                </div>
+            </div>
+        )
+    }
 
     if (!next) {
         return (
@@ -309,6 +324,7 @@ function EspaceMembreInner() {
                 <NextStepCard
                     completion={completion}
                     pct={pct}
+                    valideLe={membre?.valide_le}
                     onContinue={id => {
                         setActiveSection(id)
                         document.getElementById('espace-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' })

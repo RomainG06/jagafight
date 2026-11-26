@@ -39,6 +39,8 @@ export type Membre = {
   urgence_tel?: string
   sante_infos?: string
   profil_complet?: boolean
+  /** Fédérations de licence (AFMT, UFSC, FFKMDA), gérées par les admins */
+  federations?: string[]
   created_at?: string
 }
 
